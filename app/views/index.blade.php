@@ -1,0 +1,1 @@
+<a href="{{URL::route('register')}}"> Registro</a>
