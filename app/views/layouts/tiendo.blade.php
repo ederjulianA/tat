@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta charset="utf-8">
   <!-- Title and other stuffs -->
-  <title>Admin - Tiendo</title>
+  <title>Admin - TAT</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
   <meta name="keywords" content="">
@@ -57,7 +57,7 @@
 			<span>Menu</span>
 		  </button>
 		  <!-- Site name for smallar screens -->
-		  <a href="/admin" class="navbar-brand hidden-lg">Tiendo</a>
+		  <a href="/admin" class="navbar-brand hidden-lg">TAT</a>
 		</div>
       
       

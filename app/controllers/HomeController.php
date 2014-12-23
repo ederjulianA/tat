@@ -17,17 +17,18 @@ class HomeController extends BaseController {
 
 	public function getIndex()
 	{
-		return View::make('index');
+		
+		return View::make('index')->with('products', Cart::contents());
 	}
 
 	public function getRegistger()
 	{
-		return View::make('register');
+		return View::make('register')->with('products', Cart::contents());
 	}
 
 	public function getLogin()
 	{
-		return View::make('login');
+		return View::make('login')->with('products', Cart::contents());
 	}
 
 	public function postLogin()

@@ -37,12 +37,14 @@ Route::group(['before' => 'guest'], function () {
 
 });
 
+Route::get('cart', array('as' => 'cart', 'uses' => 'CartController@getCart'));
+
 
 
 Route::group(['before' => 'auth'], function() {
 
-	Route::get('admin', ['as' => 'adminIndex', 'uses' => 'EmpresaController@getIndex']);
-	Route::get('logout', ['as' => 'logout', 'uses' => 'HomeController@logout']);
+	Route::get('admin', array('as' => 'adminIndex', 'uses' => 'EmpresaController@getIndex'));
+	Route::get('logout', array('as' => 'logout', 'uses' => 'HomeController@logout'));
 
 });
 
