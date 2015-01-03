@@ -2,33 +2,34 @@
 
 class HomeController extends BaseController {
 
-	/*
-	|--------------------------------------------------------------------------
-	| Default Home Controller
-	|--------------------------------------------------------------------------
-	|
-	| You may wish to use controllers instead of, or in addition to, Closure
-	| based routes. That's great! Here is an example controller method to
-	| get you started. To route to this controller, just add the route:
-	|
-	|	Route::get('/', 'HomeController@showWelcome');
-	|
-	*/
+
+	protected $producto;
+	protected $cat;
+
+	public function __construct(Producto $producto, Categoria $cat)
+	{
+		$this->producto = $producto;
+		$this->cat = $cat;
+	}
+
 
 	public function getIndex()
 	{
-		
-		return View::make('index')->with('products', Cart::contents());
+		$productos	= $this->producto->getSome();
+		$categorias =   $this->cat->getAllCat();
+		return View::make('index')->with('categorias',$categorias)->with('productos',$productos)->with('products', Cart::contents());
 	}
 
 	public function getRegistger()
 	{
-		return View::make('register')->with('products', Cart::contents());
+		$categorias =   $this->cat->getAllCat();
+		return View::make('register')->with('categorias',$categorias)->with('products', Cart::contents());
 	}
 
 	public function getLogin()
 	{
-		return View::make('login')->with('products', Cart::contents());
+		$categorias =   $this->cat->getAllCat();
+		return View::make('login')->with('categorias',$categorias)->with('products', Cart::contents());
 	}
 
 	public function postLogin()
@@ -45,9 +46,7 @@ class HomeController extends BaseController {
 			if($validator->fails()){
 
 				//redirigimos al usuario al log in
-				return Redirect::route('login')
-				->withErrors($validator)
-				->withInput();
+				return Redirect::back()->withInput()->with('message-alert','Errores en el formulario')->withErrors($validator->messages());
 			}else{
 				
 				  $remember = (Input::has('remember')) ? true : false;
@@ -59,9 +58,15 @@ class HomeController extends BaseController {
 					), $remember);
 
 				if($auth){
-					
+					if(Auth::user()->admin != 1)
 
-					return Redirect::intended('admin');
+						{
+						return Redirect::intended('/');
+
+						}
+						else {
+							return Redirect::intended('admin');
+						}
 				}else{
 					return Redirect::route('login')
 				->with('message-alert', 'El email o la contraseña no coinciden, o la cuenta no esta activada');

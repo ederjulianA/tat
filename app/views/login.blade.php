@@ -11,6 +11,27 @@
 				<li><a href="/">Home</a></li>
 				<li class="active">Registro</li>
 			</ol>
+
+					 @if(Session::has('message-alert'))
+				<div class="row">
+					<div class="col-md-5">
+						 
+
+			            <div class="alert alert-warning alert-dismissable">
+			              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			              <strong>Mensaje</strong> {{Session::get('message-alert')}}
+			            </div>
+
+			            <!--<p class="mensajes-flash" style="" data-dismiss="alert"id="mensaje-flash"> {{Session::get('message-alert')}}
+			                
+			            </p>-->
+			        
+						
+					</div>
+					
+				</div>
+			@endif
+			
 		<!-- Breadcrumb Ends -->
 		<!-- Main Heading Starts -->
 			<h2 class="main-heading text-center">
@@ -31,20 +52,24 @@
 									Por favor inicia sesión usando tu cuenta
 								</p>
 							<!-- Login Form Starts -->
-								<form class="form-inline" role="form">
+								<form class="form-inline" role="form" method="post" action="{{URL::route('postLogin')}}">
 									<div class="form-group">
 										<label class="sr-only" for="exampleInputEmail2">Email</label>
-										<input type="text" class="form-control" id="exampleInputEmail2" placeholder="Username">
+										
+										{{ Form::text('email','',array('class'=>'form-control','name'=>'email','placeholder'=>'Email','id'=>'exampleInputEmail2')) }}
+											{{ $errors->first('email','<p class="alert alert-danger">:message</p>') }}
+										</div>
 									</div>
 									<div class="form-group">
 										<label class="sr-only" for="exampleInputPassword2">Contraseña</label>
-										<input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password">
+										<input type="password" name="password" class="form-control" id="exampleInputPassword2" placeholder="Password">
 									</div>
 									<button type="submit" class="btn btn-warning">
 										Login
 									</button>
 								</form>
 							<!-- Login Form Ends -->
+					
 							</div>
 						</div>
 					<!-- Login Panel Ends -->

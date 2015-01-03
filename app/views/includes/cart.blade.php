@@ -18,44 +18,29 @@
 									<ul class="dropdown-menu pull-right">
 									<li>
 										<table class="table hcart">
-											<tr>
-												<td class="text-center">
-													<a href="product.html">
-														<img src="images/product-images/hcart-thumb1.jpg" alt="image" title="image" class="img-thumbnail img-responsive" />
-													</a>
-												</td>
-												<td class="text-left">
-													<a href="product-full.html">
-														Seeds
-													</a>
-												</td>
-												<td class="text-right">x 1</td>
-												<td class="text-right">$120.68</td>
-												<td class="text-center">
-													<a href="#">
-														<i class="fa fa-times"></i>
-													</a>
-												</td>
-											</tr>
-											<tr>
-												<td class="text-center">
-													<a href="product.html">
-														<img src="images/product-images/hcart-thumb2.jpg" alt="image" title="image" class="img-thumbnail img-responsive" />
-													</a>
-												</td>
-												<td class="text-left">
-													<a href="product-full.html">
-														Organic
-													</a>
-												</td>
-												<td class="text-right">x 2</td>
-												<td class="text-right">$240.00</td>
-												<td class="text-center">
-													<a href="#">
-														<i class="fa fa-times"></i>
-													</a>
-												</td>
-											</tr>
+											@if($products)
+												@foreach($products as $pro)		
+														<tr>
+															<td class="text-center">
+																<a href="product.html">
+																	<img src="{{asset($pro->image)}}" alt="image" title="image" class=""  height="80px" width="auto"/>
+																</a>
+															</td>
+															<td class="text-left">
+																<a href="product-full.html">
+																	{{$pro->name}}
+																</a>
+															</td>
+															<td class="text-right">x {{$pro->quantity}}</td>
+															<td class="text-right">${{number_format($pro->price, 0, '', '.')}}</td>
+															<td class="text-center">
+																<a href="#">
+																	<i class="fa fa-times"></i>
+																</a>
+															</td>
+														</tr>
+													@endforeach	
+											@endif	
 										</table>
 									</li>
 									<li>
@@ -63,28 +48,28 @@
 											<tbody>
 												<tr>
 													<td class="text-right"><strong>Sub-Total</strong></td>
-													<td class="text-left">$1,101.00</td>
+													<td class="text-left">${{number_format(Cart::total(), 0, '', '.')}}</td>
 												</tr>
-												<tr>
+												<!--<tr>
 													<td class="text-right"><strong>Eco Tax (-2.00)</strong></td>
 													<td class="text-left">$4.00</td>
 												</tr>
 												<tr>
 													<td class="text-right"><strong>VAT (17.5%)</strong></td>
 													<td class="text-left">$192.68</td>
-												</tr>
+												</tr>-->
 												<tr>
 													<td class="text-right"><strong>Total</strong></td>
-													<td class="text-left">$1,297.68</td>
+													<td class="text-left">${{number_format(Cart::total(), 0, '', '.')}}</td>
 												</tr>
 											</tbody>
 										</table>
 										<p class="text-right btn-block1">
-											<a href="cart.html">
-												View Cart
+											<a href="/cart">
+												Ver pedido
 											</a>
 											<a href="#">
-												Checkout
+												Ordenar
 											</a>
 										</p>
 									</li>									

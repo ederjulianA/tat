@@ -14,24 +14,17 @@
 								<a href="category-list.html" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="10">Menu categorias</a>
 								<div class="dropdown-menu">
 									<div class="dropdown-inner">
-										<ul class="list-unstyled">
-											<li class="dropdown-header">Sub Category</li>
-											<li><a tabindex="-1" href="#">item 1</a></li>
-											<li><a tabindex="-1" href="#">item 2</a></li>
-											<li><a tabindex="-1" href="#">item 3</a></li>
-										</ul>										
-										<ul class="list-unstyled">
-											<li class="dropdown-header">Sub Category</li>
-											<li><a tabindex="-1" href="#">item 1</a></li>
-											<li><a tabindex="-1" href="#">item 2</a></li>
-											<li><a tabindex="-1" href="#">item 3</a></li>
-										</ul>
-										<ul class="list-unstyled">
-											<li class="dropdown-header">Sub Category</li>
-											<li><a tabindex="-1" href="#">item 1</a></li>
-											<li><a tabindex="-1" href="#">item 2</a></li>
-											<li><a tabindex="-1" href="#">item 3</a></li>
-										</ul>
+										@foreach($categorias as $cat)
+											
+												<ul class="list-unstyled">
+													<li class="dropdown-header">{{$cat->cat_nom}}</li>
+													@foreach($cat->producto as $pro)
+														<li><a tabindex="-1" href="#">{{$pro->pro_nom}}</a></li>
+														
+													@endforeach	
+												</ul>
+																				
+										@endforeach
 									</div>
 								</div>
 							</li>

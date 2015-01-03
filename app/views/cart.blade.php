@@ -8,13 +8,30 @@
 @section('content')
 	<!-- Breadcrumb Starts -->
 			<ol class="breadcrumb">
-				<li><a href="index.html">Home</a></li>
-				<li class="active">Carrito de compras</li>
+				<li><a href="/">Home</a></li>
+				<li class="active">Mi pedido</li>
 			</ol>
+			<div class="row">
+			<div class="col-md-5">
+				  @if(Session::has('message-alert'))
+
+            <div class="alert alert-warning alert-dismissable">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+              <strong>Mensaje</strong> {{Session::get('message-alert')}}
+            </div>
+
+            <!--<p class="mensajes-flash" style="" data-dismiss="alert"id="mensaje-flash"> {{Session::get('message-alert')}}
+                
+            </p>-->
+        @endif
+				
+			</div>
+			
+		</div>
 		<!-- Breadcrumb Ends -->
 		<!-- Main Heading Starts -->
 			<h2 class="main-heading text-center">
-				Carrito de compras 
+				Mi pedido 
 			</h2>
 		<!-- Main Heading Ends -->
 		<!-- Shopping Cart Table Starts -->
@@ -43,64 +60,46 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td class="text-center">
-								<a href="product.html">
-									<img src="{{asset('tat/images/product-images/cart-thumb-img1.jpg')}}" alt="Product Name" title="Product Name" class="img-thumbnail" />
-								</a>
-							</td>
-							<td class="text-center">
-								<a href="#">Simply Organic seeds</a>
-							</td>							
-							<td class="text-center">
-								<div class="input-group btn-block">
-									<input type="text" name="quantity" value="1" size="1" class="form-control" />
-								</div>								
-							</td>
-							<td class="text-center">
-								$150.00
-							</td>
-							<td class="text-center">
-								$150.00
-							</td>
-							<td class="text-center">
-								<button type="submit" title="Update" class="btn btn-default tool-tip">
-									<i class="fa fa-refresh"></i>
-								</button>
-								<button type="button" title="Remove" class="btn btn-default tool-tip">
-									<i class="fa fa-times-circle"></i>
-								</button>
-							</td>
-						</tr>
-						<tr>
-							<td class="text-center">
-								<a href="product.html">
-									<img src="{{asset('tat/images/product-images/cart-thumb-img2.jpg')}}" alt="Product Name" title="Product Name" class="img-thumbnail" />
-								</a>
-							</td>
-							<td class="text-center">
-								<a href="#">Simply Organic seeds</a>
-							</td>							
-							<td class="text-center">
-								<div class="input-group btn-block">
-									<input type="text" name="quantity" value="1" size="1" class="form-control" />
-								</div>								
-							</td>
-							<td class="text-center">
-								$150.00
-							</td>
-							<td class="text-center">
-								$150.00
-							</td>
-							<td class="text-center">
-								<button type="submit" title="Update" class="btn btn-default tool-tip">
-									<i class="fa fa-refresh"></i>
-								</button>
-								<button type="button" title="Remove" class="btn btn-default tool-tip">
-									<i class="fa fa-times-circle"></i>
-								</button>
-							</td>
-						</tr>						
+						@if($products)
+							@foreach($products as $pro)
+								<tr>
+									<td class="text-center">
+										<a href="product.html">
+											<img src="{{asset($pro->image)}}" alt="Product Name" title="Product Name" class="" height="120px" width="auto" />
+										</a>
+									</td>
+									<td class="text-center">
+										<a href="#">{{$pro->name}}</a>
+									</td>	
+								<form method="post" action="{{URL::route('updateItem')}}">						
+									<td class="text-center">
+										<div class="input-group btn-block">
+											<input type="text" name="cantidad" value="{{$pro->quantity}}" size="1" class="form-control" />
+											<input type="hidden" name="id_producto" value="{{$pro->id}}">
+											<input type="hidden" name="identifier" value="{{$pro->identifier}}">
+										</div>								
+									</td>
+									<td class="text-center">
+										${{number_format($pro->price, 0, '', '.')}}
+									</td>
+									<td class="text-center">
+										${{number_format($pro->total(), 0, '', '.')}}
+									</td>
+									<td class="text-center">
+										<button type="submit" title="Actualizar" class="btn btn-default tool-tip">
+											<i class="fa fa-refresh"></i>
+										</button>
+								</form>
+									<form action="{{URL::route('removeItem', array('identifier'=>$pro->identifier))}}">		
+										<button type="submit" title="Remove" class="btn btn-default tool-tip">
+											<i class="fa fa-times-circle"></i>
+										</button>
+									</form>	
+									</td>
+								</tr>
+							@endforeach	
+						@endif		
+												
 					</tbody>
 					<tfoot>
 						<tr>
@@ -108,7 +107,7 @@
 							<strong>Total :</strong>
 						  </td>
 						  <td colspan="2" class="text-left">
-							$300
+							${{number_format(Cart::total(), 0, '', '.')}}
 						  </td>
 						</tr>
 					</tfoot>

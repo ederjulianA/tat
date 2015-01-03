@@ -39,20 +39,32 @@
 											</span>
 										</a>
 									</li>
-									<li>
-										<a href="/register">
-											<i class="fa fa-unlock" title="Register"></i>
-											<span class="hidden-sm hidden-xs">
-												Registrarse
-											</span>
-										</a>
-									</li>
-									<li>
-										<a href="/login">
-											<i class="fa fa-lock" title="Login"></i>
-											<span class="hidden-sm hidden-xs">
-												Login
-											</span>
-										</a>
-									</li>
+
+									@if(!Auth::check())
+										<li>
+											<a href="/register">
+												<i class="fa fa-unlock" title="Register"></i>
+												<span class="hidden-sm hidden-xs">
+													Registrarse
+												</span>
+											</a>
+										</li>
+										<li>
+											<a href="/login">
+												<i class="fa fa-lock" title="Login"></i>
+												<span class="hidden-sm hidden-xs">
+													Login
+												</span>
+											</a>
+										</li>
+									@else
+										<li>
+											<a href="/logout">
+												<i class="fa fa-lock" title="Login"></i>
+												<span class="hidden-sm hidden-xs">
+													Cerrar Sesión
+												</span>
+											</a>
+										</li>
+									@endif	
 								</ul>

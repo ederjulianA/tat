@@ -29,138 +29,46 @@
 							</div>
 							<div class="panel-body">
 							<!-- Registration Form Starts -->
-								<form class="form-horizontal" role="form">
+								<form class="form-horizontal" role="form" method="post" action="/register/new/user">
 								<!-- Personal Information Starts -->
-									<div class="form-group">
-										<label for="inputFname" class="col-sm-3 control-label">First Name :</label>
-										<div class="col-sm-9">
-											<input type="text" class="form-control" id="inputFname" placeholder="First Name">
-										</div>
-									</div>
-									<div class="form-group">
-										<label for="inputLname" class="col-sm-3 control-label">Last Name :</label>
-										<div class="col-sm-9">
-											<input type="text" class="form-control" id="inputLname" placeholder="Last Name">
-										</div>
-									</div>
+									
 									<div class="form-group">
 										<label for="inputEmail" class="col-sm-3 control-label">Email :</label>
 										<div class="col-sm-9">
-											<input type="email" class="form-control" id="inputEmail" placeholder="Email">
+											<!--<input type="email" class="form-control" id="inputEmail" placeholder="Email">-->
+											{{ Form::email('email','',array('class'=>'form-control','name'=>'email','placeholder'=>'Email')) }}
+											{{ $errors->first('email','<p class="alert alert-danger">:message</p>') }}
 										</div>
 									</div>
-									<div class="form-group">
-										<label for="inputPhone" class="col-sm-3 control-label">Phone :</label>
-										<div class="col-sm-9">
-											<input type="text" class="form-control" id="inputPhone" placeholder="Phone">
-										</div>
-									</div>
-									<div class="form-group">
-										<label for="inputFax" class="col-sm-3 control-label">Fax :</label>
-										<div class="col-sm-9">
-											<input type="text" class="form-control" id="inputFax" placeholder="Fax">
-										</div>
-									</div>
-								<!-- Personal Information Ends -->
+								
+								
+						
 									<h3 class="panel-heading inner">
-										Información de entrega
-									</h3>
-								<!-- Delivery Information Starts -->
-									<div class="form-group">
-										<label for="inputCompany" class="col-sm-3 control-label">Company :</label>
-										<div class="col-sm-9">
-											<input type="text" class="form-control" id="inputCompany" placeholder="Company">
-										</div>
-									</div>
-									<div class="form-group">
-										<label for="inputCompanyId" class="col-sm-3 control-label">Company ID :</label>
-										<div class="col-sm-9">
-											<input type="text" class="form-control" id="inputCompanyId" placeholder="Company ID">
-										</div>
-									</div>
-									<div class="form-group">
-										<label for="inputAddress1" class="col-sm-3 control-label">Address/1 :</label>
-										<div class="col-sm-9">
-											<input type="text" class="form-control" id="inputAddress1" placeholder="Address/1">
-										</div>
-									</div>
-									<div class="form-group">
-										<label for="inputAddress2" class="col-sm-3 control-label">Address/2 :</label>
-										<div class="col-sm-9">
-											<input type="text" class="form-control" id="inputAddress2" placeholder="Address/2">
-										</div>
-									</div>
-									<div class="form-group">
-										<label for="inputCity" class="col-sm-3 control-label">City :</label>
-										<div class="col-sm-9">
-											<input type="text" class="form-control" id="inputCity" placeholder="City">
-										</div>
-									</div>
-									<div class="form-group">
-										<label for="inputPostCode" class="col-sm-3 control-label">Postal Code :</label>
-										<div class="col-sm-9">
-											<input type="text" class="form-control" id="inputPostCode" placeholder="Postal Code">
-										</div>
-									</div>
-									<div class="form-group">
-										<label for="inputCountry" class="col-sm-3 control-label">Country :</label>
-										<div class="col-sm-9">
-											<select class="form-control" id="inputCountry">
-												<option>- All Countries -</option>
-												<option>India</option>
-												<option>USA</option>
-												<option>UK</option>
-												<option>China</option>
-											</select>
-										</div>
-									</div>
-									<div class="form-group">
-										<label for="inputRegion" class="col-sm-3 control-label">Region :</label>
-										<div class="col-sm-9">
-											<select class="form-control" id="inputRegion">
-												<option>- All Regions -</option>
-											</select>
-										</div>
-									</div>
-								<!-- Delivery Information Ends -->
-									<h3 class="panel-heading inner">
-										Password
+										Seguridad
 									</h3>
 								<!-- Password Area Starts -->
 									<div class="form-group">
-										<label for="inputPassword" class="col-sm-3 control-label">Password :</label>
+										<label for="inputPassword" class="col-sm-3 control-label">Contraseña :</label>
 										<div class="col-sm-9">
-											<input type="password" class="form-control" id="inputPassword" placeholder="Password">
+											<input type="password" class="form-control" name="password" id="inputPassword" placeholder="******">
+											{{ $errors->first('password','<p class="alert alert-danger">:message</p>') }}
 										</div>
 									</div>
 									<div class="form-group">
-										<label for="inputRePassword" class="col-sm-3 control-label">Re-Password :</label>
+										<label for="inputRePassword" class="col-sm-3 control-label">Re-Contaseña :</label>
 										<div class="col-sm-9">
-											<input type="password" class="form-control" id="inputRePassword" placeholder="Re-Password">
+											<input type="password" class="form-control" name="password_confirmation" id="inputRePassword" placeholder="******">
+											{{ $errors->first('password_confirmation','<p class="alert alert-danger">:message</p>') }}
 										</div>
 									</div>
-									<div class="form-group">
-										<span class="col-sm-3 control-label">Newsletter :</span>
-										<div class="col-sm-9">
-											<div class="radio">
-												<label>
-													<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-													Subscribe
-												</label>
-											</div>
-											<div class="radio">
-												<label>
-													<input type="radio" name="optionsRadios" id="optionsRadios2" value="option1">
-													Unsubscribe
-												</label>
-											</div>
-										</div>
-									</div>
+								
 									<div class="form-group">
 										<div class="col-sm-offset-3 col-sm-9">
 											<div class="checkbox">
 												<label>
-													<input type="checkbox"> I'v read and agreed on Conditions
+													<input type="checkbox" name="terminos"> He leído y acepto los términos y condiciones de servicio 
+
+													{{ $errors->first('terminos','<p class="alert alert-danger">:message</p>') }}
 												</label>
 											</div>
 										</div>
@@ -168,7 +76,7 @@
 									<div class="form-group">
 										<div class="col-sm-offset-3 col-sm-9">
 											<button type="submit" class="btn btn-warning">
-												Register
+												Crear cuenta 
 											</button>
 										</div>
 									</div>

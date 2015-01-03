@@ -97,7 +97,9 @@ return array(
 	'attributes' => array(
 		'username' => 'usuario',
 		'password' => 'contraseña',
-		'name'		=> 'Nombre de la tienda'
+		'name'		=> 'Nombre de la tienda',
+		'terminos'	=> 'Terminos y Condiciones',
+		'password_confirmation'=> 'Repite contraseña',
 	),
 
 );
