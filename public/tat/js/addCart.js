@@ -12,7 +12,10 @@ $(document).on('click','#btn_addCart', function(e){
 				if(data.estado.estado == 1)
 				{
 					var Ntotal = data.estado.totalCart.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-					$('#ModalCart').modal('show');
+					$('#ModalCart').modal({
+						show:true,
+						keyboard:false
+					});
 					$('.info-item').html('<p>Has agregado a tu lista :'+data.producto.pro_nom+' <img src="../'+data.producto.img+'" height="120px" width="auto"></p><br><strong>Total del Pedido: $'+Ntotal+'</strong>')
 					console.log(data);
 				}
@@ -49,7 +52,8 @@ $(document).on('change','#slc_envio', function(e){
 		}
 		else if( env == 1)
 		{
-			var r_total = (totalCart + 0);
+		
+			var r_total = parseInt(totalCart) + parseInt("0");
 			Ntotal = r_total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 			$('#slc_envio').removeClass('select_error');
 			$('#slc_envio').addClass('select_ok');
@@ -60,7 +64,9 @@ $(document).on('change','#slc_envio', function(e){
 		else if (env == 2)
 
 		{	
-			var r_total = (totalCart + 5000);
+			
+			var r_total = parseInt(totalCart) + parseInt("5000");
+			
 			Ntotal = r_total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 			
 			$('#slc_envio').removeClass('select_error');

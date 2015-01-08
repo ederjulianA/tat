@@ -65,7 +65,7 @@
 											</tbody>
 										</table>
 										<p class="text-right btn-block1">
-											<a href="/cart">
+											<a href="{{URL::route('cart')}}">
 												Ver pedido
 											</a>
 											<a href="#">
