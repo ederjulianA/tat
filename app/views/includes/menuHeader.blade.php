@@ -1,6 +1,6 @@
 <ul class="nav navbar-nav pull-left">
 									<li>
-										<a href="index.html">
+										<a href="{{URL::route('index')}}">
 											<i class="fa fa-home" title="Home"></i>
 											<span class="hidden-sm hidden-xs">
 												Home
@@ -32,10 +32,10 @@
 										</a>
 									</li>
 									<li>
-										<a href="#">
+										<a href="{{URL::route('checkout')}}">
 											<i class="fa fa-crosshairs" title="Checkout"></i>
 											<span class="hidden-sm hidden-xs">
-												Checkout
+												Mi pedido
 											</span>
 										</a>
 									</li>
@@ -53,7 +53,7 @@
 											<a href="/login">
 												<i class="fa fa-lock" title="Login"></i>
 												<span class="hidden-sm hidden-xs">
-													Login
+													Ingresar
 												</span>
 											</a>
 										</li>

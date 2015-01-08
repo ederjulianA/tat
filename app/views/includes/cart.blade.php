@@ -68,9 +68,9 @@
 											<a href="/cart">
 												Ver pedido
 											</a>
-											<a href="#">
+										<!--	<a href="#">
 												Ordenar
-											</a>
+											</a> -->
 										</p>
 									</li>									
 								</ul>
