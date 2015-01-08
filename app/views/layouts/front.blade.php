@@ -258,5 +258,6 @@
 	<script src="{{asset('tat/js/bootstrap-hover-dropdown.min.js')}}"></script>
     <script src="{{asset('tat/js/jquery.magnific-popup.min.js')}}"></script>
 	<script src="{{asset('tat/js/custom.js')}}"></script>
+	<script src="{{asset('tat/js/addCart.js')}}"></script>
 </body>
 </html>

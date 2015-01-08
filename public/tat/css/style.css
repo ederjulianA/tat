@@ -567,6 +567,47 @@ hr{
 		.registration-area .dl-horizontal.total dd{
 			margin-bottom:0;
 		}
+.sliderEder{
+	border: 2px solid red;
+	margin: 0 auto;
+	width: 60%;
+
+}	
+.select_envio{
+	max-width: 100%;
+	width: 90%;
+	text-align: center;
+	margin: 5px auto;
+	padding: 5px;
+
+}
+
+.select_ok{
+	border: 2px solid green;
+}
+
+.select_error{
+	border: 2px solid red;
+}
+.modalHeader
+{
+	background-color: #fcb500;
+	color: #fff;
+	font-weight: bold;
+}
+
+.info-item{
+	margin: 5% auto;
+
+	max-width: 100%;
+	width: 90%;
+
+}
+
+.inputQnt{
+
+	width: 15%;
+}	
 		
 /* Main Container Styles Starts */		
 

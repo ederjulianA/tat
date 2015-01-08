@@ -18,6 +18,18 @@ class CartController extends BaseController {
 		return View::make('cart')->with('categorias',$categorias)->with('products', Cart::contents());
 	}
 
+	public function getCheckout()
+	{
+		if(!Cart::contents())
+		{
+			return Redirect::to('/cart')->with('message-alert','No hay Items en tu pedido');
+		}
+		$categorias =   $this->cat->getAllCat();
+		return View::make('checkout')->with('categorias',$categorias)->with('products', Cart::contents());
+	}
+
+
+
 	public function addToCart()
 	{
 		$validator = Validator::make(Input::all(),

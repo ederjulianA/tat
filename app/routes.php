@@ -22,6 +22,11 @@ Route::get(	'/producto/{slug}', array(
 		'uses'=> 'ProductoController@getProducto'
 		));
 
+Route::get(	'/catalogo', array(
+		'as'=>'catalogo', 
+		'uses'=> 'CatalogoController@getCatalogo'
+		));
+
 //GRUPO DE RUTAS PARA ANTES DE ESTAR REGISTRADO
 Route::group(['before' => 'guest'], function () {
 		Route::get(	'/register', array(
@@ -46,6 +51,7 @@ Route::group(['before' => 'guest'], function () {
 });
 
 Route::get('cart', array('as' => 'cart', 'uses' => 'CartController@getCart'));
+Route::get('checkout', array('as' => 'checkout', 'uses' => 'CartController@getCheckout'));
 Route::get('/remove/cart/{identifier}', array('as' => 'removeItem','uses' => 'CartController@getRemoveitem'));
 
 
@@ -55,6 +61,8 @@ Route::post('addToCart', array('as' => 'addToCart', 'uses' => 'CartController@ad
 Route::post('updateItem', array('as' => 'updateItem', 'uses' => 'CartController@updateItem'));
 Route::post('register/new/user', array('as' => 'newUser', 'uses' => 'UserController@postNewUser'));
 Route::post('postlogin', array('as' => 'postlogin', 'uses' => 'UserController@postLogin'));
+
+Route::post('addcartAjax', array('as' => 'addcartAjax', 'uses' => 'AjaxController@addcartAjax'));
 
 
 

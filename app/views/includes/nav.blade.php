@@ -1,6 +1,7 @@
 <ul class="nav navbar-nav">
 							<li><a href="/">Home</a></li>
-							<li class="dropdown">
+							<li><a href="/catalogo">Todos los productos</a></li>
+							<!--<li class="dropdown">
 								<a href="category-list.html" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="10">
 									Sub menu simple 
 								</a>
@@ -19,7 +20,7 @@
 												<ul class="list-unstyled">
 													<li class="dropdown-header">{{$cat->cat_nom}}</li>
 													@foreach($cat->producto as $pro)
-														<li><a tabindex="-1" href="#">{{$pro->pro_nom}}</a></li>
+														<li><a tabindex="-1" href="/producto/{{$pro->slug}}">{{$pro->pro_nom}}</a></li>
 														
 													@endforeach	
 												</ul>
@@ -27,8 +28,11 @@
 										@endforeach
 									</div>
 								</div>
-							</li>
-							<li><a href="category-list.html">Menu item</a></li>
+							</li>-->
+							@foreach($categorias as $cat)
+								<li><a href="#">{{$cat->cat_nom}}</a></li>
+
+							@endforeach
 							
                             <!--<li class="dropdown">
 									<a href="category-list.html" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="10">

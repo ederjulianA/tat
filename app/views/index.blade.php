@@ -40,7 +40,7 @@
 						<div class="col-md-3 col-sm-6">
 							<div class="product-col">
 								<div class="image">
-									<img src="{{asset($pro->img)}}" alt="product" class="" height="200px" width="auto" />
+									<img src="{{asset($pro->img)}}" alt="product" class="" height="150px" width="auto" />
 								</div>
 								<div class="caption">
 									<h4><a href="/producto/{{$pro->slug}}">{{$pro->pro_nom}}</a></h4>

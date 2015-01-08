@@ -30,7 +30,7 @@
 				<!-- Breadcrumb Starts -->
 					<ol class="breadcrumb">
 						<li><a href="index.html">Home</a></li>
-						<li><a href="#"></a>{{ Funciones::getCat($producto->id)}}</li>
+						<li><a href="#"></a>{{ Funciones::getCat($producto->categoria_id)}}</li>
 						<li class="active">{{$producto->pro_nom}}</li>
 					</ol>
 				<!-- Breadcrumb Ends -->
@@ -66,10 +66,10 @@
 						<!-- Manufacturer Starts -->
 							<ul class="list-unstyled manufacturer">
 								<li>
-									<span>Categoria:</span> {{ Funciones::getCat($producto->id)}}
+									<span>Categoria:</span> {{ Funciones::getCat($producto->categoria_id)}}
 								</li>
-								<li><span>Uni. Disponibles:</span> {{$producto->cantidad}}</li>
-								<li>
+								<!--<li><span>Uni. Disponibles:</span> {{$producto->cantidad}}</li>-->
+								<!--<li>
 									<span>Disponible:</span> 
 
 										@if($producto->cantidad > 0)
@@ -78,7 +78,7 @@
 											<strong class="label label-danger"> No</strong>
 										@endif
 									
-								</li>
+								</li>-->
 							</ul>
 						<!-- Manufacturer Ends -->
 							<hr />
@@ -93,7 +93,7 @@
 							<div class="options">
 								<div class="form-group">
 									<label class="control-label text-uppercase" for="input-quantity">Cant:</label>
-									<input type="text" name="cantidad" value="1" size="2" id="input-quantity" class="form-control" />
+									<input type="number"  name="cantidad" value="1" size="2" id="input-quantity" class="form-control inputQnt" />
 								</div>
 								<div class="cart-button button-group">
 									<!--<button type="button" title="Wishlist" class="btn btn-wishlist">
@@ -102,9 +102,9 @@
 									<button type="button" title="Compare" class="btn btn-compare">
 										<i class="fa fa-bar-chart-o"></i>
 									</button>-->
-									<input type="hidden" name="id_producto" value="{{$producto->id}}">
+									<input type="hidden" name="id_producto" id="id_producto" value="{{$producto->id}}">
 									
-											<button type="submit" class="btn btn-cart">
+											<button type="button" class="btn btn-cart" id="btn_addCart">
 												Agregar
 												<i class="fa fa-shopping-cart"></i> 
 											</button>
@@ -156,4 +156,33 @@
 				</div>
 			<!-- Sidebar Ends -->
 			</div>
+
+
+
+<div class="modal signUpContent fade" id="ModalCart" tabindex="-1" role="dialog" >
+  <div class="modal-dialog ">
+    <div class="modal-content">
+      <div class="modal-header modalHeader">
+        <button type="button" id="closeModal" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
+        <h3 class="modal-title-site text-center" > PRODUCTO AGREGADO </h3>
+      </div>
+      <div class="modal-body">
+      	<div class="info-item">
+      		
+      	</div>
+      
+        
+      </div>
+      <div class="modal-footer">
+      	<a href="/catalogo" class="btn btn-info">Seguir Comprando</a> -- <a href="/cart" class="btn btn-danger">Terminar Pedido</a>
+        
+      </div>
+    </div>
+    <!-- /.modal-content --> 
+    
+  </div>
+  <!-- /.modal-dialog --> 
+  
+</div>
+<!-- /.Modal Login --> 
 @stop

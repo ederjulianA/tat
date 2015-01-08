@@ -1,7 +1,7 @@
 <!-- Slider Section Starts -->
-		<div class="slider">
+		<div class="slider " >
 			<div class="container">
-				<div id="main-carousel" class="carousel slide" data-ride="carousel">
+				<div id="main-carousel" class="carousel slide sliderEder" data-ride="carousel">
 					<!-- Wrapper For Slides Starts -->
 						<div class="carousel-inner">
 							<div class="item active">
