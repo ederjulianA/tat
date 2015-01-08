@@ -169,10 +169,9 @@
 						<div class="col-md-2 col-sm-6">
 							<h5>Información</h5>
 							<ul>
-								<li><a href="about.html">Sobre Nosotros</a></li>
-								<li><a href="#">Infornación de entrega</a></li>
-								<li><a href="#">Politica de privacidad</a></li>
-								<li><a href="#">Terminos y condiciones</a></li>
+								<li><a href="http://tatexpress.com.co/?page_id=2">Sobre Nosotros</a></li>
+								<li><a href="http://tatexpress.com.co/?page_id=4062">Noticias</a></li>
+								<li><a href="http://tatexpress.com.co/?page_id=4076">Vídeos</a></li>
 							</ul>
 						</div>
 					<!-- Information Links Ends -->
@@ -180,24 +179,24 @@
 						<div class="col-md-2 col-sm-6">
 							<h5>Mi cuenta</h5>
 							<ul>
-								<li><a href="#">Mis Ordenes</a></li>
-								<li><a href="#">My merchandise returns</a></li>
+								<li><a href="{{URL::route('cart')}}">Mis órdenes</a></li>
+								<li><a href="#">Mi Perfil</a></li>	
 								
 							</ul>
 						</div>
 					<!-- My Account Links Ends -->					
 					<!-- Customer Service Links Starts -->
-						<div class="col-md-2 col-sm-6">
+					<!--	<div class="col-md-2 col-sm-6">
 							<h5>Servicios</h5>
 							<ul>
 								<li><a href="contact.html">Contact Us</a></li>
 								<li><a href="#">Returns</a></li>
 								
-							</ul>
-						</div>
+							</ul> 
+						</div> -->
 					<!-- Customer Service Links Ends -->
 					<!-- Follow Us Links Starts -->
-						<div class="col-md-2 col-sm-6">
+					<!--	<div class="col-md-2 col-sm-6">
 							<h5>Follow Us</h5>
 							<ul>
 								<li><a href="#">Facebook</a></li>
@@ -205,13 +204,13 @@
 								<li><a href="#">RSS</a></li>
 								<li><a href="#">YouTube</a></li>
 							</ul>
-						</div>
+						</div> -->
 					<!-- Follow Us Links Ends -->
 					<!-- Contact Us Starts -->
-						<div class="col-md-4 col-sm-12 last">
-							<h5>Contactanos</h5>
+					<!--	<div class="col-md-4 col-sm-12 last">
+							<h5>Contáctanos</h5>
 							<ul>
-								<li>TAT express</li>
+								<li>TAT Express</li>
 								<li>
 									1247 LB Nagar Road, Hyderabad, Telangana - 35
 								</li>
@@ -222,7 +221,7 @@
 							<h4 class="lead">
 								Tel: <span>1(234) 567-9842</span>
 							</h4>
-						</div>
+						</div> -->
 					<!-- Contact Us Ends -->
 				</div>
 			<!-- Container Ends -->
@@ -234,7 +233,7 @@
 				<div class="container">
 				<!-- Starts -->
 					<p class="pull-left">
-						&nbsp; 2014 TAT express. <a href="#">TAT</a>
+						&nbsp; 2014 TAT Express <a href="http://www.tatexpress.com.co">TAT</a>
 					</p>
 				<!-- Ends -->
 				<!-- Payment Gateway Links Starts -->

@@ -86,7 +86,7 @@
 								<p>
 									Al estar registrado en TAT shop, te permite procesar tus pedidos de forma rapida
 								</p>
-								<a href="#" class="btn btn-warning">
+								<a href="{{URL::route('register')}}" class="btn btn-warning">
 									Registro
 								</a>
 							</div>

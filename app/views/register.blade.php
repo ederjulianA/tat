@@ -112,30 +112,9 @@
 							</div>
 							<div class="panel-body">
 								<p>
-									Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including  versions of Lorem Ipsum.
+								La información que registras en este formulario se utiliza para notificar los eventos correspondientes a los pedidos que realices. También se usuará como medio de contacto para dar a conocer novedades y promociones que pueden ser de tu interés.
 								</p>
-								<ol>
-								  <li>Lorem ipsum dolor sit amet</li>
-								  <li>Consectetur adipiscing elit</li>
-								  <li>Integer molestie lorem at massa</li>
-								  <li>Facilisis in pretium nisl aliquet</li>
-								  <li>Nulla volutpat aliquam velit</li>
-								  <li>Faucibus porta lacus fringilla vel</li>
-								  <li>Aenean sit amet erat nunc</li>
-								  <li>Eget porttitor lorem</li>
-								</ol>
-								<p>
-									HTML Nullam varius, turpis et commodo pharetra, est eros bibendum elit, nec luctus magna felis sollicitudin mauris. 
-								</p>
-								<p>
-									Integer in mauris eu nibh euismod gravida. Duis ac tellus et risus vulputate vehicula. Donec lobortis risus a elit. Etiam tempor. Ut ullamcorper, ligula eu tempor congue, eros est euismod turpis, id tincidunt sapien risus a quam. Maecenas fermentum consequat mi. Donec fermentum. Pellentesque malesuada nulla a mi. Duis sapien sem, aliquet nec, commodo eget, consequat quis, neque. 
-								</p>
-								<p>
-									Aliquam faucibus, elit ut dictum aliquet, felis nisl adipiscing sapien, sed malesuada diam lacus eget erat. Cras mollis scelerisque nunc. Nullam arcu. Aliquam consequat. Curabitur augue lorem, dapibus quis, laoreet et, pretium ac, nisi. 
-								</p>
-								<p>
-									Aenean magna nisl, mollis quis, molestie eu, feugiat in, orci. In hac habitasse platea dictumst. 
-								</p>
+								
 							</div>
 						</div>
 					<!-- Conditions Panel Ends -->

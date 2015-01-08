@@ -42,7 +42,7 @@
 		@else
 			<div class="row">
 				<div class="col-md-7">
-					<h2>Crear Cuenta TAT</h2>
+					<h2>Crear cuenta TAT</h2>
 						
 					
 				</div>
@@ -51,7 +51,7 @@
 						<div class="panel panel-smart">
 							<div class="panel-heading">
 								<h3 class="panel-title">
-									Metodo de envio
+									Método de envío
 								</h3>
 							</div>
 							<div class="panel-body">
@@ -98,7 +98,7 @@
 								</dl>
 								<hr />
 								<div class="text-uppercase clearfix">
-									<a href="#" class="btn btn-default pull-left">
+									<a href="{{URL::route('catalogo')}}" class="btn btn-default pull-left">
 										<span class="hidden-xs">Continue Shopping</span>
 										<span class="visible-xs">Continue</span>
 									</a>
