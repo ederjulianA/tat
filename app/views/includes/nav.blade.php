@@ -30,7 +30,7 @@
 								</div>
 							</li>-->
 							@foreach($categorias as $cat)
-								<li><a href="#">{{$cat->cat_nom}}</a></li>
+								<li><a href="/categoria/{{$cat->id}}">{{$cat->cat_nom}}</a></li>
 
 							@endforeach
 							

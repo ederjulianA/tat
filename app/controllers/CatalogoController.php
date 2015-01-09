@@ -17,4 +17,11 @@ class CatalogoController extends BaseController {
 		$productos 	=	$this->pro->getAllPro();
 		return View::make('catalogo.index')->with('categorias',$categorias)->with('productos',$productos)->with('products', Cart::contents());
 	}
+
+	public function getCategoria($id)
+	{
+		$categorias =   $this->cat->getAllCat();
+		$productos = $this->pro->getProCategorias($id);
+		return View::make('catalogo.categoria')->with('categorias',$categorias)->with('productos',$productos)->with('products', Cart::contents());
+	}
 }

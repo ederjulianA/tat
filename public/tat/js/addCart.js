@@ -73,6 +73,7 @@ $(document).on('change','#slc_envio', function(e){
 			$('#vlr_envio').text('5.000');
 			$('#slc_envio').addClass('select_ok');
 			$('#totalP').text(Ntotal);
+			$('#total_compra').val(r_total);
 			$('#msg-ajax').html('<p class="alert alert-success"> El envio será entregado de forma inmediata por medio de un mensajero.</p><P>Costo de entrega : $5.000<br>Tiempo de entrega : 60 Minutos</P>');
 		}
 });

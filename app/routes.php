@@ -52,6 +52,7 @@ Route::group(['before' => 'guest'], function () {
 
 Route::get('cart', array('as' => 'cart', 'uses' => 'CartController@getCart'));
 Route::get('checkout', array('as' => 'checkout', 'uses' => 'CartController@getCheckout'));
+Route::get('categoria/{id}', array('as' => 'categoria', 'uses' => 'CatalogoController@getCategoria'));
 Route::get('/remove/cart/{identifier}', array('as' => 'removeItem','uses' => 'CartController@getRemoveitem'));
 
 
@@ -60,7 +61,10 @@ Route::get('/remove/cart/{identifier}', array('as' => 'removeItem','uses' => 'Ca
 Route::post('addToCart', array('as' => 'addToCart', 'uses' => 'CartController@addToCart'));
 Route::post('updateItem', array('as' => 'updateItem', 'uses' => 'CartController@updateItem'));
 Route::post('register/new/user', array('as' => 'newUser', 'uses' => 'UserController@postNewUser'));
-Route::post('postlogin', array('as' => 'postlogin', 'uses' => 'UserController@postLogin'));
+//::post('postlogin', array('as' => 'postlogin', 'uses' => 'UserController@postLogin'));
+Route::post('postLoginCheckout', array('as' => 'postLoginCheckout', 'uses' => 'UserController@postLoginCheckout'));
+Route::post('postUpdateData', array('as' => 'postUpdateData', 'uses' => 'UserController@postUpdateData'));
+Route::post('postPedido', array('as' => 'postPedido', 'uses' => 'CartController@postPedido'));
 
 Route::post('addcartAjax', array('as' => 'addcartAjax', 'uses' => 'AjaxController@addcartAjax'));
 

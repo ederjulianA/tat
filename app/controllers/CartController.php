@@ -4,11 +4,13 @@ class CartController extends BaseController {
 
 	protected $producto;
 	protected $cat;
+	protected $barrio;
 
-	public function __construct(Producto $producto, Categoria $cat)
+	public function __construct(Producto $producto, Categoria $cat, Barrio $barrio)
 	{
-		$this->producto = $producto;
-		$this->cat = $cat;
+		$this->producto 	= $producto;
+		$this->cat 			= $cat;
+		$this->barrio 		= $barrio;
 	}
 
 
@@ -25,7 +27,62 @@ class CartController extends BaseController {
 			return Redirect::to('/cart')->with('message-alert','No hay Items en tu pedido');
 		}
 		$categorias =   $this->cat->getAllCat();
+
+		if(Auth::check())
+		{
+			$barrios = $this->barrio->getAllBarrios();
+			$user = User::where('id','=',Auth::user()->id)->first();
+			$datos = DB::table('user_datos as ud')->join('barrios as b','ud.barrio_id','=','b.id')
+					->select(
+					'ud.barrio_id',
+					'b.bar_nom AS barrioNombre',
+					'ud.direccion',
+					'ud.nombre',
+					'ud.apellido',
+					'ud.telefono',
+					'ud.comentarios'
+				)->where('ud.user_id','=',$user->id)->first();
+			return View::make('checkout')->with('barrios',$barrios)->with('datos',$datos)->with('categorias',$categorias)->with('products', Cart::contents());
+		}
+
 		return View::make('checkout')->with('categorias',$categorias)->with('products', Cart::contents());
+		
+	}
+
+	public function postPedido()
+	{
+
+		$compra = new Compra;
+		$compra->user_id 	=	Auth::user()->id;
+		$compra->totalCart  =   Input::get('totalCart');
+		$compra->total_compra  =   Input::get('total_compra');
+		$compra->num_items  =   Input::get('totalItems');
+		$compra->tipo_compra = 	Input::get('tipo_compra');
+			if($compra->save())
+			{
+				foreach (Cart::contents() as $item) {
+					$citem = new Item;
+					$citem->compra_id 			=	$compra->id;
+
+	   			 	$citem->id_producto			=	$item->id;
+	   			 	$citem->nombre 				=	$item->name;
+	   			 	$citem->valor_unitario 		=	$item->price;
+	   			 	$citem->image               =   $item->image;
+	   			 	$citem->cantidad 			= 	$item->quantity;
+	   			 	$citem->valor_total			=	$item->total();
+
+	   			 	$citem->save();
+
+				}
+				Cart::destroy();
+
+				return Redirect::to('/')->with('message-alert','Se ha hecho la solicitud de tu pedido exitosamente');
+				
+
+			}
+
+		dd($compra);
+
 	}
 
 

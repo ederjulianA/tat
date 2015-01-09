@@ -28,93 +28,33 @@
 
 		@if(Auth::check())
 			<div class="row">
-				<div class="col-md-9">
-					<h2>Confirma tus datos</h2>
-
+				<div class="col-md-7">
+					@if($datos)
+						@include('includes.forms.datos')
+					@else
+						@include('includes.forms.noDatos')
+					@endif
+					 
 					
 				</div>
-				<div class="col-md-3">
-
-					
-				</div>
+				<!--INCLUIR EL RESUMEN DEL CHECKOUT######################################-->
+				@include('includes.resumenCheckout')
 				
 			</div>
 		@else
 			<div class="row">
 				<div class="col-md-7">
-					<h2>Crear cuenta TAT</h2>
+							<!-- Form registro y login  Panel Starts -->
+								@include('includes.forms.formRegLog')
+							<!-- Form registro y login Panel Ends -->
+
 						
 					
 				</div>
-				<div class="col-md-5">
-				<!-- Medoto envio Panel Starts -->
-						<div class="panel panel-smart">
-							<div class="panel-heading">
-								<h3 class="panel-title">
-									Método de envío
-								</h3>
-							</div>
-							<div class="panel-body">
-								<select class="select_envio select_error" id="slc_envio">
-									<option value="0">ESCOJA UNA OPCIÓN </option>
-									<option value="1"> RUTA TAT</option>
-									<option value="2"> INMEDIATA</option>
-								</select>
-								<hr />
-							
-								
-								<div class="text-uppercase clearfix" id="msg-ajax">
-									
-								</div>
-							</div>
-						</div>
-					<!-- Total Panel Ends -->
 
-					<!-- Total Panel Starts -->
-						<div class="panel panel-smart">
-							<div class="panel-heading">
-								<h3 class="panel-title">
-									Total de mi pedido
-								</h3>
-							</div>
-							<div class="panel-body">
-								<dl class="dl-horizontal">
-									<dt>Total No. Items :</dt>
-									<dd>{{Cart::totalItems()}}</dd>
-									<dt>Subtotal Items :</dt>
-									<dd>${{number_format(Cart::total(), 0, '', '.')}}</dd>
-									<dt>Valor envio :</dt>
-									<dd>$ <span id="vlr_envio"></span></dd>
-									<dt>Shipment Fee :</dt>
-									<input type="hidden" id="totalCart" value="{{Cart::total()}}">
-									<dd>$15.00</dd>
-									<dt>Tax Total :</dt>
-									<dd>$315.00</dd>
-								</dl>
-								<hr />
-								<dl class="dl-horizontal total">
-									<dt>Total :</dt>
-									<dd>$ <span id="totalP">{{number_format(Cart::total(), 0, '', '.')}}</span></dd>
-								</dl>
-								<hr />
-								<div class="text-uppercase clearfix">
-									<a href="{{URL::route('catalogo')}}" class="btn btn-default pull-left">
-										<span class="hidden-xs">Continue Shopping</span>
-										<span class="visible-xs">Continue</span>
-									</a>
-									<a href="#" class="btn btn-default pull-right">		
-										Checkout
-									</a>
-								</div>
-							</div>
-						</div>
-					<!-- Total Panel Ends -->
-
-
-					
-				</div>
+				<!--INCLUIR EL RESUMEN DEL CHECKOUT######################################-->
+				@include('includes.resumenCheckout')
 				
-			</div>
 		@endif
 	
 

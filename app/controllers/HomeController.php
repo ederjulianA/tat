@@ -26,6 +26,8 @@ class HomeController extends BaseController {
 		return View::make('register')->with('categorias',$categorias)->with('products', Cart::contents());
 	}
 
+	
+
 	public function getLogin()
 	{
 		$categorias =   $this->cat->getAllCat();
@@ -61,7 +63,7 @@ class HomeController extends BaseController {
 					if(Auth::user()->admin != 1)
 
 						{
-						return Redirect::intended('/');
+						return Redirect::back();
 
 						}
 						else {
