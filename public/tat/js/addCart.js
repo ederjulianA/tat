@@ -59,6 +59,7 @@ $(document).on('change','#slc_envio', function(e){
 			$('#slc_envio').addClass('select_ok');
 			$('#vlr_envio').text('0');
 			$('#totalP').text(Ntotal);
+			$('#msg-ajax2').html('');
 			$('#msg-ajax').html('<p class="alert alert-success"> El envio del pedido se hara segun las rutas de entrega dispuestas por TAT</p><P>Costo de entrega : $0</P>');
 		}
 		else if (env == 2)
@@ -74,6 +75,66 @@ $(document).on('change','#slc_envio', function(e){
 			$('#slc_envio').addClass('select_ok');
 			$('#totalP').text(Ntotal);
 			$('#total_compra').val(r_total);
+			$('#msg-ajax2').html('');
 			$('#msg-ajax').html('<p class="alert alert-success"> El envio será entregado de forma inmediata por medio de un mensajero.</p><P>Costo de entrega : $5.000<br>Tiempo de entrega : 60 Minutos</P>');
 		}
+});
+
+
+$(document).on('click','#alert-datos', function(e){
+
+	$('#msg-ajax2').html('<p class="alert alert-danger"> Por favor actualiza tus datos</p>');
+	e.preventDefault;
+});
+$(document).on('submit','#form-pedido', function(){
+	var tipo = $('#slc_envio').val();
+
+		if(tipo == 0)
+		{
+			$('#msg-ajax2').html('<p class="alert alert-danger"> Por favor escaja un Metodo de envio</p>');
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+});
+
+$(document).on('click','#d_entrega', function(e){
+			var barrio_id = $('#barrio_id').val();
+			$.ajax({
+
+			url : "/DiasAjax",
+			dataType: "json",
+			type : "post",
+			data : { barrio_id : barrio_id},
+			success : function(data){
+
+				if(data.estado.estado == 1)
+				{
+					console.log(data);
+					$('#nom_barrio').text(data.barrio.bar_nom);
+
+					for (var i in data.diasv){
+							//console.log("dia:"+data.diasv[i].id);
+						
+							var diasvisita = "<div class='diaV'> Dia:"+data.diasv[i].dia_nom+"</div>";
+							$('#con_dias').append(diasvisita);
+
+					}
+				}
+				
+				
+			}
+
+				
+
+
+		});
+
+	$('#ModalDias').modal({
+						show:true,
+						keyboard:false
+					});
+	e.preventDefault();
 });

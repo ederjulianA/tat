@@ -58,10 +58,10 @@
 										<button type="button" title="Compare" class="btn btn-compare">
 											<i class="fa fa-bar-chart-o"></i>
 										</button>-->
-										<button type="button" class="btn btn-cart">
+										<a  class="btn btn-cart" href="/producto/{{$pro->slug}}">
 											Agregar
 											<i class="fa fa-shopping-cart"></i> 
-										</button>									
+										</a>									
 									</div>
 								</div>
 							</div>

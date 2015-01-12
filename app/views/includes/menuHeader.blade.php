@@ -16,7 +16,7 @@
 										</a>
 									</li>-->
 									<li>
-										<a href="#">
+										<a href="{{URL::route('micuenta')}}">
 											<i class="fa fa-user" title="My Account"></i>
 											<span class="hidden-sm hidden-xs">
 												Mi Cuenta

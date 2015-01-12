@@ -11,6 +11,24 @@ class AjaxController extends BaseController {
 			$this->cat = $cat;
 	}
 
+
+	public function getDias()
+	{
+		header('Content-type: text/javascript');
+
+ 			if(isset($_POST['barrio_id']) )
+ 			{
+ 				$barrio = Barrio::where('id','=',$_POST['barrio_id'])->first();
+ 				$diasv  = DB::table('dia_barrio as db')->join('dias as d','db.dia_id','=','d.id')
+ 							->select(
+ 									'd.dia_nom',
+ 									'd.id'
+ 								)->where('db.barrio_id','=',$barrio->id)->orderBy('d.dia_nom','ASC')->get();
+ 				$estado = array('estado'=>'1');
+ 				return Response::json(array('estado'=>$estado,'barrio'=>$barrio,'diasv'=>$diasv));
+ 			}
+	}
+
 	public function addcartAjax()
 	{
 			header('Content-type: text/javascript');

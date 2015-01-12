@@ -61,12 +61,13 @@ Route::get('/remove/cart/{identifier}', array('as' => 'removeItem','uses' => 'Ca
 Route::post('addToCart', array('as' => 'addToCart', 'uses' => 'CartController@addToCart'));
 Route::post('updateItem', array('as' => 'updateItem', 'uses' => 'CartController@updateItem'));
 Route::post('register/new/user', array('as' => 'newUser', 'uses' => 'UserController@postNewUser'));
-//::post('postlogin', array('as' => 'postlogin', 'uses' => 'UserController@postLogin'));
+Route::post('postlogin', array('as' => 'postlogin', 'uses' => 'HomeController@postLogin'));
 Route::post('postLoginCheckout', array('as' => 'postLoginCheckout', 'uses' => 'UserController@postLoginCheckout'));
 Route::post('postUpdateData', array('as' => 'postUpdateData', 'uses' => 'UserController@postUpdateData'));
 Route::post('postPedido', array('as' => 'postPedido', 'uses' => 'CartController@postPedido'));
 
 Route::post('addcartAjax', array('as' => 'addcartAjax', 'uses' => 'AjaxController@addcartAjax'));
+Route::post('DiasAjax', array('as' => 'DiasAjax', 'uses' => 'AjaxController@getDias'));
 
 
 
@@ -75,6 +76,8 @@ Route::group(['before' => 'auth'], function() {
 
 	Route::get('admin', array('as' => 'adminIndex', 'uses' => 'EmpresaController@getIndex'));
 	Route::get('logout', array('as' => 'logout', 'uses' => 'HomeController@logout'));
+	Route::get('micuenta', array('as' => 'micuenta', 'uses' => 'CuentaController@getIndex'));
+	Route::get('micuenta/orden/{id}', array('as' => 'micuentaorden', 'uses' => 'CuentaController@getDetalleCuenta'));
 
 });
 
