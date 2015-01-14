@@ -68,41 +68,7 @@
         <ul class="nav navbar-nav">  
 
           <!-- Upload to server link. Class "dropdown-big" creates big dropdown -->
-    <li class="dropdown dropdown-big">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="label label-success"><i class="fa fa-cloud-upload"></i></span> Upload to Cloud</a>
-            <!-- Dropdown -->
-            <ul class="dropdown-menu">
-              <li>
-                <!-- Progress bar -->
-                <p>Photo Upload in Progress</p>
-                <!-- Bootstrap progress bar -->
-                <div class="progress progress-striped active">
-					<div class="progress-bar progress-bar-info"  role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-						<span class="sr-only">40% Complete</span>
-					</div>
-			    </div>
-
-                <hr />
-
-                <!-- Progress bar -->
-                <p>Video Upload in Progress</p>
-                <!-- Bootstrap progress bar -->
-                <div class="progress progress-striped active">
-					<div class="progress-bar progress-bar-success"  role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-						<span class="sr-only">80% Complete</span>
-					</div>
-			    </div> 
-
-                <hr />             
-
-                <!-- Dropdown menu footer -->
-                <div class="drop-foot">
-                  <a href="#">View All</a>
-                </div>
-
-              </li>
-            </ul>
-    </li>
+ 
 
           <!-- Sync to server link -->
           <!--<li class="dropdown dropdown-big">
@@ -165,8 +131,8 @@
         <div class="col-md-4">
           <!-- Logo. -->
           <div class="logo">
-            <h1><a href="#"><span class="bold">Tiendo</span></a></h1>
-            <p class="meta">Tu tienda online</p>
+            <h1><a href="#"><span class="bold">Admin TAT</span></a></h1>
+            <p class="meta">Tienda online</p>
           </div>
           <!-- Logo ends -->
         </div>
@@ -243,11 +209,11 @@
       
 	    <!-- Page heading -->
 	    <div class="page-head">
-	      <h2 class="pull-left"><i class="fa fa-home"></i> Dashboard yeah</h2>
+	      <h2 class="pull-left"><i class="fa fa-home"></i> @yield('titulo1')</h2>
 
         <!-- Breadcrumb -->
         <div class="bread-crumb pull-right">
-          <a href="index.html"><i class="fa fa-home"></i> Home</a> 
+          <a href="/admin"><i class="fa fa-home"></i> Home</a> 
           <!-- Divider -->
           <span class="divider">/</span> 
           <a href="#" class="bread-current">Dashboard</a>
@@ -262,7 +228,7 @@
 
 	    <!-- Matter ##########################################################################-->
 
-	    ksiohnios
+	     @yield('content')
 
 		<!-- Matter ends #########################################################################-->
 

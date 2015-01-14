@@ -58,6 +58,7 @@ $(document).on('change','#slc_envio', function(e){
 			$('#slc_envio').removeClass('select_error');
 			$('#slc_envio').addClass('select_ok');
 			$('#vlr_envio').text('0');
+			$('#vlr_envio_a').val('0');
 			$('#totalP').text(Ntotal);
 			$('#msg-ajax2').html('');
 			$('#msg-ajax').html('<p class="alert alert-success"> El envio del pedido se hara segun las rutas de entrega dispuestas por TAT</p><P>Costo de entrega : $0</P>');
@@ -72,6 +73,7 @@ $(document).on('change','#slc_envio', function(e){
 			
 			$('#slc_envio').removeClass('select_error');
 			$('#vlr_envio').text('5.000');
+			$('#vlr_envio_a').val('5000');
 			$('#slc_envio').addClass('select_ok');
 			$('#totalP').text(Ntotal);
 			$('#total_compra').val(r_total);

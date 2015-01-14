@@ -35,7 +35,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		 											'c.totalCart',
 		 											'c.total_compra',
 		 											'c.num_items',
-		 											'c.tipo_compra')->where('c.user_id','=',$iduser)->orderBy('c.id','ASC')->get();
+		 											'c.tipo_compra')->where('c.user_id','=',$iduser)->orderBy('c.id','DESC')->get();
 
 		 return $pedidos;
 		 									
@@ -44,13 +44,16 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 	public function getDetallePedido($id)
 	{
-		$pedido = DB::table('compra as c')
+		$pedido = DB::table('compra as c')->join('estados as e','c.estado_id','=','e.id')
 			->select(
 					'c.id',
 		 			'c.totalCart',
 		 			'c.total_compra',
 		 			'c.num_items',
-		 			'c.tipo_compra'
+		 			'c.tipo_compra',
+		 			'c.vlr_envio',
+		 			'e.nom_est',
+		 			'c.estado_id'
 		 			
 				)->where('c.id','=',$id)->first();
 

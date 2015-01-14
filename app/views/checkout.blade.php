@@ -29,7 +29,7 @@
 		@if(Auth::check())
 			<div class="row">
 				<div class="col-md-7">
-					@if($datos)
+					@if($datos != null)
 						@include('includes.forms.datos')
 					@else
 						@include('includes.forms.noDatos')

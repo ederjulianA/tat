@@ -1,29 +1,79 @@
 @extends('layouts.tiendo')
 
 
+
 @section('menu-left')
-		<!-- Sidebar -->
-    <div class="sidebar">
-        <div class="sidebar-dropdown"><a href="#">Navegación</a></div>
+		@include('includes.admin.menuLeft')
+@stop
 
-        <!--- Sidebar navigation -->
-        <!-- If the main navigation has sub navigation, then add the class "has_sub" to "li" of main navigation. -->
-        <ul id="nav">
-          <!-- Main menu with font awesome icon -->
-          <li class="open"><a href="/admin"><i class="fa fa-tag"></i> Home</a>
-            <!-- Sub menu markup 
-            <ul>
-              <li><a href="#">Submenu #1</a></li>
-              <li><a href="#">Submenu #2</a></li>
-              <li><a href="#">Submenu #3</a></li>
-            </ul>-->
-          </li>
-        	  
-              <li><a href="charts.html"><i class="fa fa-bar-chart-o"></i> Charts</a></li> 
-              <li><a href="forms.html"><i class="fa fa-tasks"></i> Forms</a></li>
-              <li><a href="ui.html"><i class="fa fa-magic"></i> User Interface</a></li>
-          </ul>
+<style type="text/css">
+  .contenedor
+  {
+    max-width: 100%;
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .pedidoItem{
+    max-width: 100%;
+    width: 90%;
+    margin: 5% auto;
+    border-bottom: 2px solid #415A75;
+    background-color: #648CB7;
+    color: #fff;
+  }
+  .pedidoItem h4, .pedidoItemRuta h4  {
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 1px 2px 2px rgba(0,0,0,.5);
+  }
+  .pedidoItemRuta {
+     max-width: 100%;
+    width: 90%;
+    margin: 5% auto;
+    border-bottom: 2px solid #971E30;
+    background-color: #BB2138;
+    color: #fff;
+  }
+
+</style>
+
+@section('titulo1')
+  HOME
+@stop
+
+@section('content')
+  <div class="contenedor">
+    
+  
+    <div class="row">
+        <div class="col-md-4">
+          <h2>Pedidos Inmediatos</h2>
+
+          @foreach($pedidosYa as $pedido)
+          <a href="/admin/pedido/{{$pedido->id}}"><div class="pedidoItem">
+            <h4>{{$pedido->nombre}} {{$pedido->apellido}}</h4>
+            <P>Valor : ${{number_format($pedido->total_compra, 0, '', '.')}}</P>
+            
+          </div></a>
+          @endforeach
+        
+          
+        </div>
+
+        <div class="col-md-4">
+          <h2>Pedidos Ruta</h2>
+          @foreach($pedidosRuta as $pruta)
+          <a href="/admin/pedido/{{$pruta->id}}"><div class="pedidoItemRuta">
+            <h4>{{$pruta->nombre}} {{$pruta->apellido}}</h4>
+            <P>Valor : ${{number_format($pruta->total_compra, 0, '', '.')}}</P>
+            
+          </div></a>
+          @endforeach
+        </div>
+      
+  
     </div>
-
-    <!-- Sidebar ends -->
+  </div>  
 @stop

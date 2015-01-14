@@ -27,11 +27,12 @@ class CartController extends BaseController {
 			return Redirect::to('/cart')->with('message-alert','No hay Items en tu pedido');
 		}
 		$categorias =   $this->cat->getAllCat();
-
+		$barrios = $this->barrio->getAllBarrios();
+			
 		if(Auth::check())
 		{
-			$barrios = $this->barrio->getAllBarrios();
 			$user = User::where('id','=',Auth::user()->id)->first();
+
 			$datos = DB::table('user_datos as ud')->join('barrios as b','ud.barrio_id','=','b.id')
 					->select(
 					'ud.barrio_id',
@@ -44,8 +45,9 @@ class CartController extends BaseController {
 				)->where('ud.user_id','=',$user->id)->first();
 			return View::make('checkout')->with('barrios',$barrios)->with('datos',$datos)->with('categorias',$categorias)->with('products', Cart::contents());
 		}
+		$datos = NULL;
 
-		return View::make('checkout')->with('categorias',$categorias)->with('products', Cart::contents());
+		return View::make('checkout')->with('datos',$datos)->with('barrios',$barrios)->with('categorias',$categorias)->with('products', Cart::contents());
 		
 	}
 
@@ -58,6 +60,7 @@ class CartController extends BaseController {
 		$compra->total_compra  =   Input::get('total_compra');
 		$compra->num_items  =   Input::get('totalItems');
 		$compra->tipo_compra = 	Input::get('tipo_compra');
+		$compra->vlr_envio   =  Input::get('vlr_envio_a');
 			if($compra->save())
 			{
 				foreach (Cart::contents() as $item) {
@@ -76,7 +79,7 @@ class CartController extends BaseController {
 				}
 				Cart::destroy();
 
-				return Redirect::to('/')->with('message-alert','Se ha hecho la solicitud de tu pedido exitosamente');
+				return Redirect::to('/micuenta')->with('message-alert','Se ha hecho la solicitud de tu pedido exitosamente');
 				
 
 			}

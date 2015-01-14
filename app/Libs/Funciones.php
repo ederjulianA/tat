@@ -7,4 +7,39 @@
 			$cat = Categoria::where('id','=',$id)->first();
 			return $cat->cat_nom;
 		}
+
+		public static function tipoPedido($tipo)
+		{
+			if($tipo == 1)
+			{
+				$pe = "<p class='alert alert-info'>Entrega ruta Camión TAT Express</p>";
+			}else if($tipo == 2)
+			{
+				$pe = "<p class='alert alert-info'>Entrega Inmediata via mensajero</p>";
+			}
+
+			return $pe;
+		}
+
+		public static function getEstado($id)
+		{
+			$est = DB::table('estados as e')->select(
+					'e.id',
+					'e.nom_est'
+				)->where('e.id','=',$id)->first();
+
+			if($id == 1)
+			{
+				$res = "<span class='label label-danger'>".$est->nom_est."</span>";
+			}
+
+			if($id == 2)
+			{
+				$res = "<span class='label label-info'>".$est->nom_est."</span>";
+			}
+
+			return $res;
+		}
+
+
 	}
