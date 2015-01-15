@@ -42,6 +42,25 @@
 		}
 
 
+		public function getDiasVis()
+		{
+			/*$dias = DB::table('barrios as b')
+									->select(
+											
+											'b.bar_nom',
+											'b.cod',
+											'b.id'
+										)->distinct()->get();*/
+			$barrios = Barrio::where('id','>',0)->get();
+				
+							
+
+								return $barrios;	
+		}
+
+
+
+
 		public function getItems($id)
 	{
 		$items = DB::table('compra_items as ci')->select(

@@ -26,7 +26,42 @@ class EmpresaController extends BaseController {
 		return View::make('tiendo.admin.index',compact('user','pedidosYa','pedidosRuta'));
 	}
 
+	public function getBarrios()
+	{
+		$user = Auth::user()->id;
+		$barrios = $this->empresa->getDiasVis();
+		$dias = Dias::lists('dia_nom', 'id');
+		return View::make('tiendo.admin.barrios',compact('user','barrios','dias'));
+	}
 
+
+	public function addDia()
+	{
+		$diabarrio = Diabarrio::where('barrio_id','=',Input::get('barrio_id'))->where('dia_id','=',Input::get('ndia'))->first();
+			if($diabarrio)
+			{
+				return Redirect::back()->with('message-alert','El día que intentaste agregar ya ha sido asignado al barrio');
+			}
+			else{	
+			$ndia = new Diabarrio;
+			$ndia->dia_id = Input::get('ndia');
+			$ndia->barrio_id =Input::get('barrio_id');
+				if($ndia->save())
+				{
+					return Redirect::back()->with('message-alert','Se ha agregado el nuevo día de visita');
+				}
+			}	
+	}
+
+	public function deleteDay()
+	{
+		$diabarrio = Diabarrio::where('barrio_id','=',Input::get('barrio_id'))->where('dia_id','=',Input::get('dia_id'))->first();
+		if($diabarrio->count())
+		{
+			$diabarrio->delete();
+			return Redirect::back()->with('message-alert','Se ha Eliminado el día de visita');
+		}
+	}
 
 	public function postConfPedido()
 

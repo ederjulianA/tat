@@ -21,6 +21,17 @@
 			return $pe;
 		}
 
+
+		public static function getDiasV($id)
+			{
+				$diasV = DB::table('dia_barrio as db')->join('dias as d','db.dia_id','=','d.id')
+					->select(
+							'd.dia_nom'
+						)->where('db.barrio_id','=',$id)->get();
+
+					return $diasV;
+			}
+
 		public static function getEstado($id)
 		{
 			$est = DB::table('estados as e')->select(

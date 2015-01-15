@@ -72,15 +72,28 @@ Route::post('DiasAjax', array('as' => 'DiasAjax', 'uses' => 'AjaxController@getD
 
 
 
-Route::group(['before' => 'auth'], function() {
 
-	Route::get('admin', array('as' => 'adminIndex', 'uses' => 'EmpresaController@getIndex'));
-	Route::get('admin/pedido/{id}', array('as' => 'adminPedidoDetalle', 'uses' => 'EmpresaController@getAdminPedidoDetalle'));
+
+Route::group(['before' => 'auth'], function() {
 	Route::get('logout', array('as' => 'logout', 'uses' => 'HomeController@logout'));
 
-	Route::get('micuenta', array('as' => 'micuenta', 'uses' => 'CuentaController@getIndex'));
-	Route::get('micuenta/orden/{id}', array('as' => 'micuentaorden', 'uses' => 'CuentaController@getDetalleCuenta'));
-	Route::post('postConfPedido', array('as' => 'postConfPedido', 'uses' => 'EmpresaController@postConfPedido'));
+		Route::get('micuenta', array('as' => 'micuenta', 'uses' => 'CuentaController@getIndex'));
+		Route::get('micuenta/orden/{id}', array('as' => 'micuentaorden', 'uses' => 'CuentaController@getDetalleCuenta'));
+		Route::post('postConfPedido', array('as' => 'postConfPedido', 'uses' => 'EmpresaController@postConfPedido'));
+
+	 Route::group(['before' => 'is_admin'], function () {
+
+        Route::get('admin', array('as' => 'adminIndex', 'uses' => 'EmpresaController@getIndex'));
+        Route::post('addDia', array('as' => 'addDia', 'uses' => 'EmpresaController@addDia'));
+        Route::post('deleteDay', array('as' => 'deleteDay', 'uses' => 'EmpresaController@deleteDay'));
+        Route::get('admin/barrios', array('as' => 'adminBarrios', 'uses' => 'EmpresaController@getBarrios'));
+
+		Route::get('admin/pedido/{id}', array('as' => 'adminPedidoDetalle', 'uses' => 'EmpresaController@getAdminPedidoDetalle'));
+		
+
+    });
+
+	
 
 });
 
