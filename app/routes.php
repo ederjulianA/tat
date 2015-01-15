@@ -84,11 +84,14 @@ Route::group(['before' => 'auth'], function() {
 	 Route::group(['before' => 'is_admin'], function () {
 
         Route::get('admin', array('as' => 'adminIndex', 'uses' => 'EmpresaController@getIndex'));
-        Route::post('addDia', array('as' => 'addDia', 'uses' => 'EmpresaController@addDia'));
-        Route::post('deleteDay', array('as' => 'deleteDay', 'uses' => 'EmpresaController@deleteDay'));
+        Route::get('admin/pedidos', array('as' => 'adminPedidos', 'uses' => 'EmpresaController@getPedidos'));
+        Route::get('admin/pedido/{id}', array('as' => 'adminPedidoDetalle', 'uses' => 'EmpresaController@getAdminPedidoDetalle'));
         Route::get('admin/barrios', array('as' => 'adminBarrios', 'uses' => 'EmpresaController@getBarrios'));
 
-		Route::get('admin/pedido/{id}', array('as' => 'adminPedidoDetalle', 'uses' => 'EmpresaController@getAdminPedidoDetalle'));
+        Route::post('addDia', array('as' => 'addDia', 'uses' => 'EmpresaController@addDia'));
+        Route::post('deleteDay', array('as' => 'deleteDay', 'uses' => 'EmpresaController@deleteDay'));
+
+		
 		
 
     });

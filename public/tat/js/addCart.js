@@ -103,7 +103,9 @@ $(document).on('submit','#form-pedido', function(){
 });
 
 $(document).on('click','#d_entrega', function(e){
+
 			var barrio_id = $('#barrio_id').val();
+			
 			$.ajax({
 
 			url : "/DiasAjax",

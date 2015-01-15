@@ -91,15 +91,36 @@
 			return $pedidosYa;
 		}
 
-		public function getPedidosRuta()
+		public function getPedidos()
 		{
-			$pedidosRuta = DB::table('compra as c')->join('users as u','c.user_id','=','u.id')
+			$pedidos = DB::table('compra as c')->join('users as u','c.user_id','=','u.id')
 												 ->join('user_datos as ud','ud.user_id','=','u.id')
+												  ->join('estados as e','c.estado_id','=','e.id')
 			->select(
 					'ud.nombre',
 					'ud.apellido',
 					'c.total_compra',
 					'c.num_items',
+					'e.nom_est',
+					'c.estado_id',
+					'c.id'
+
+				)->get();
+
+			return $pedidos;
+		}
+
+		public function getPedidosRuta()
+		{
+			$pedidosRuta = DB::table('compra as c')->join('users as u','c.user_id','=','u.id')
+												 ->join('user_datos as ud','ud.user_id','=','u.id')
+												 ->join('estados as e','c.estado_id','=','e.id')
+			->select(
+					'ud.nombre',
+					'ud.apellido',
+					'c.total_compra',
+					'c.num_items',
+					'e.nom_est',
 					'c.id'
 
 				)->where('c.tipo_compra','=',1)->where('c.estado_id','=',1)->get();

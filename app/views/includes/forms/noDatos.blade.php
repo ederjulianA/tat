@@ -29,7 +29,7 @@
 										<div class="form-group">
 											<label for="direccion" class="col-sm-3 control-label">Barrio:</label>
 											<div class="col-sm-9">
-												{{ Form::select('barrio_id', $barrios,['class'=>'form-control']) }}
+												{{ Form::select('barrio_id', $barrios, '', ['class'=>'form-control','id'=>'barrio_id']) }}
 												<a id="d_entrega">Consultar dias de entrega </a>
 												{{ $errors->first('direccion','<p class="alert alert-danger">:message</p>') }}
 											</div>
@@ -70,3 +70,34 @@
 								
 							</div>
 					</div>
+
+
+
+
+					<!--##########################MODAL CARGAR DIAS DE ENTREGA-->
+
+					<div class="modal signUpContent fade" id="ModalDias" tabindex="-1" role="dialog" >
+  <div class="modal-dialog ">
+    <div class="modal-content">
+      <div class="modal-header modalHeader">
+        <button type="button" id="closeModal" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
+        <h3 class="modal-title-site text-center" > DIAS DE ENTREGA PARA EL BARRIO <br><span id="nom_barrio"></span></h3>
+      </div>
+      <div class="modal-body" id="con_dias">
+
+      	
+      
+        
+      </div>
+      <div class="modal-footer">
+      	
+        
+      </div>
+    </div>
+    <!-- /.modal-content --> 
+    
+  </div>
+  <!-- /.modal-dialog --> 
+  
+</div>
+<!-- /.Modal Login --> 

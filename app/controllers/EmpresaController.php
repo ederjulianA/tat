@@ -16,7 +16,11 @@ class EmpresaController extends BaseController {
 	}
 
 
-
+	public function getPedidos()
+	{
+		$pedidos = $this->empresa->getPedidos();
+		return View::make('tiendo.admin.adminPedidos',compact('pedidos'));
+	}
 
 	public function getIndex()
 	{
