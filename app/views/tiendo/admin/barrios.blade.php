@@ -38,7 +38,7 @@
       
     </div>
     @endif
-    <div class="container">
+    <!--<div class="container">
          <div class="row">
             @foreach($barrios as $barrio)
               <div class="col-md-4 item">
@@ -78,6 +78,75 @@
 
 
       </div>
+    </div>-->
+
+    <div class="row">
+      <div class="col-md-12">
+          <!--<table class="table">
+              <th>
+                Barrio
+              </th>
+              <th>
+                Lun
+              </th>
+              <th>
+                Mar
+              </th>
+              <th>
+                Mier
+              </th>
+              <th>
+                Jue
+              </th>
+              <th>
+                Vie
+              </th>
+              <th>
+                Sab
+              </th>
+              <th>
+                Dom
+              </th>
+
+              
+              @foreach($b as $barrio)
+                <tr>
+                  <td>{{$barrio->bar_nom}}</td>
+                  <td>
+                    {{Form::checkbox('lun', $barrio->lunes, $barrio->lunes, array('class' => 'conf','data'=>$barrio->id,'id'=>'conf-'.$barrio->id))}}
+                  </td>
+                </tr>
+              @endforeach
+            
+          </table>-->
+
+          <table class="table">
+              <th>
+                Barrio
+              </th>
+              @foreach($d as $dia)
+                <th>
+                  {{$dia->dia_nom}}
+                </th>
+              @endforeach
+
+              @foreach($b as $ba)
+                <tr>
+                  <td>
+                    {{$ba->bar_nom}}
+                  </td>
+                       @foreach($d as $dia)
+                          <td>
+                           {{Form::checkbox($dia->dia_nom, Funciones::getCheck($dia->id,$ba->id) , Funciones::getCheck($dia->id,$ba->id), array('class' => Funciones::classDia($dia->id,$ba->id),'data'=>$dia->id,'id'=>'dia-'.$dia->id.'-'.$ba->id,'dataBarrio'=>$ba->id))}}
+                          </td>
+                        @endforeach
+                </tr>
+              @endforeach
+            
+          </table>
+        
+      </div>
+      
     </div>
      
 @stop

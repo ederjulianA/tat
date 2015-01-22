@@ -22,6 +22,35 @@
 		}
 
 
+		public  static function getCheck($dia_id, $bar_id)
+		{
+			$dia = Diabarrio::where('dia_id','=',$dia_id)->where('barrio_id','=',$bar_id)->first();
+			if(!$dia)
+			{
+				$est = 0;
+				return $est;
+			}else
+			{
+				$est = 1;
+				return $est;
+			}
+		}
+
+		public static function classDia($dia_id, $bar_id)
+		{
+			$dia = Diabarrio::where('dia_id','=',$dia_id)->where('barrio_id','=',$bar_id)->first();
+			if(!$dia)
+			{
+				$clase = 'noDia';
+				return $clase;
+			}else
+			{
+				$clase = 'Dia';
+				return $clase;
+			}
+		}
+
+
 		public static function getDiasV($id)
 			{
 				$diasV = DB::table('dia_barrio as db')->join('dias as d','db.dia_id','=','d.id')

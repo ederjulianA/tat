@@ -30,8 +30,15 @@
 											<label for="direccion" class="col-sm-3 control-label">Barrio:</label>
 											<div class="col-sm-9">
 												{{ Form::select('barrio_id', $barrios,$datos->barrio_id,['class'=>'form-control','id'=>'barrio_id']) }}
-												<a id="d_entrega">Consultar dias de entrega </a>
+												<!--<a id="d_entrega">Consultar dias de entrega </a>-->
 												{{ $errors->first('direccion','<p class="alert alert-danger">:message</p>') }}
+												<div class="diasVis">
+														<h4>Dias de Entrega</h4>
+														<ul id="ulDiasV">
+															
+														</ul>
+													
+												</div>
 											</div>
 
 										</div>

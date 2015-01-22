@@ -67,7 +67,12 @@ Route::post('postUpdateData', array('as' => 'postUpdateData', 'uses' => 'UserCon
 Route::post('postPedido', array('as' => 'postPedido', 'uses' => 'CartController@postPedido'));
 
 Route::post('addcartAjax', array('as' => 'addcartAjax', 'uses' => 'AjaxController@addcartAjax'));
+Route::post('confAjax', array('as' => 'confAjax', 'uses' => 'AjaxController@confAjax'));
+Route::post('confAjaxf', array('as' => 'confAjaxf', 'uses' => 'AjaxController@confAjaxf'));
+Route::post('barrioAjax', array('as' => 'barrioAjax', 'uses' => 'AjaxController@barrioAjax'));
+Route::post('barrioAjaxNo', array('as' => 'barrioAjaxNo', 'uses' => 'AjaxController@barrioAjaxNo'));
 Route::post('DiasAjax', array('as' => 'DiasAjax', 'uses' => 'AjaxController@getDias'));
+Route::post('CarroAjax', array('as' => 'CarroAjax', 'uses' => 'AjaxController@CarroAjax'));
 
 
 

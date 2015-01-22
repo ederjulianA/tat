@@ -1,4 +1,11 @@
+$(document).ready(function(){
+
+	cargarDias();
+});
+
 $(document).on('click','#btn_addCart', function(e){
+
+	
 	var id_pro = $('#id_producto').val();
 	var cantidad = $('#input-quantity').val();
 
@@ -102,9 +109,9 @@ $(document).on('submit','#form-pedido', function(){
 		}
 });
 
-$(document).on('click','#d_entrega', function(e){
-
-			var barrio_id = $('#barrio_id').val();
+$(document).on('change','#barrio_id', function(e){
+			cargarDias();
+			/*var barrio_id = $('#barrio_id').val();
 			
 			$.ajax({
 
@@ -140,5 +147,88 @@ $(document).on('click','#d_entrega', function(e){
 						show:true,
 						keyboard:false
 					});
+	e.preventDefault();*/
+});
+
+$(document).on('change','.cant', function(e){
+	var id = $(this).attr('data');
+	var identifier = $(this).attr('togle');
+	var can = $('#cant-'+id).val();
+
+		$.ajax({
+
+			url : "/CarroAjax",
+			dataType: "json",
+			type : "post",
+			data : { id_pro : id, identifier: identifier, cantidad:can},
+			success : function(data){
+
+				if(data.estado.estado == 1)
+				{
+					var NtotalItem = data.estado.itemTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+					var Ntotal = data.estado.totalCart.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+					$('.totalCart').text(Ntotal);
+					$('.itemTotal-'+id).text(NtotalItem);
+					console.log(data);
+					
+							//console.log("dia:"+data.diasv[i].id);
+						
+							
+
+					
+				}
+				
+				
+			}
+
+				
+
+
+		});
+
 	e.preventDefault();
 });
+
+
+
+
+
+//FUNCIONES 
+
+
+function cargarDias()
+{
+	var barrio_id = $('#barrio_id').val();
+			
+			$.ajax({
+
+			url : "/DiasAjax",
+			dataType: "json",
+			type : "post",
+			data : { barrio_id : barrio_id},
+			success : function(data){
+
+				if(data.estado.estado == 1)
+				{
+					console.log(data);
+					//$('#nom_barrio').text(data.barrio.bar_nom);
+					$('#ulDiasV').html('');
+
+					for (var i in data.diasv){
+							//console.log("dia:"+data.diasv[i].id);
+						
+							var diasvisita = "<li> "+data.diasv[i].dia_nom+"</li>";
+							$('#ulDiasV').append(diasvisita);
+
+					}
+				}
+				
+				
+			}
+
+				
+
+
+		});
+}

@@ -11,6 +11,39 @@ class AjaxController extends BaseController {
 			$this->cat = $cat;
 	}
 
+	public function barrioAjax()
+	{
+		header('Content-type: text/javascript');
+
+ 			if(isset($_POST['id_dia']) && isset($_POST['id_barrio']))
+ 			{
+ 				$dia = Diabarrio::where('dia_id','=',$_POST['id_dia'])->where('barrio_id','=',$_POST['id_barrio'])->first();
+ 				if($dia->delete())
+ 				{
+ 					$estado = array('estado'=>'1');
+ 				return Response::json(array('estado'=>$estado));
+ 				}
+ 			}
+	}
+
+
+	public function barrioAjaxNo()
+	{
+		header('Content-type: text/javascript');
+
+ 			if(isset($_POST['id_dia']) && isset($_POST['id_barrio']))
+ 			{
+ 				$dia = new Diabarrio;
+ 				$dia->dia_id = $_POST['id_dia'];
+ 				$dia->barrio_id = $_POST['id_barrio'];
+ 				if($dia->save())
+ 				{
+ 					$estado = array('estado'=>'1');
+ 				return Response::json(array('estado'=>$estado));
+ 				}
+ 			}
+	}
+
 
 	public function getDias()
 	{
@@ -27,6 +60,103 @@ class AjaxController extends BaseController {
  				$estado = array('estado'=>'1');
  				return Response::json(array('estado'=>$estado,'barrio'=>$barrio,'diasv'=>$diasv));
  			}
+	}
+
+	public function  confAjax()
+	{
+		header('Content-type: text/javascript');
+
+		if(isset($_POST['id_pedido']) && isset($_POST['c']))
+		{
+			//return Response::json($_POST['c']);
+			//$estado = array($_POST['id_pedido'],$_POST['isChecked']);
+
+			/*if($_POST['c']== false)
+			{
+					$compra = Compra::where('id','=',$_POST['id_pedido'])->first();
+					$compra->conf = false;
+					$compra->save();
+					return Response::json($compra);
+
+			}
+
+
+			if($_POST['c']== true)
+			{
+				$estado = "eder";
+				return Response::json($estado);
+			}*/
+			//return Response::json($estado);
+			//($check = $_POST['c'];
+			
+			
+
+			/*if($_POST['c'] == false){
+				$compra = Compra::where('id','=',$_POST['id_pedido'])->first();
+				$compra->conf = false;
+				$compra->estado_id =1;
+				if($compra->save())
+				{
+					
+					$estado = array('estado'=>'1');
+ 					return Response::json(array('estado'=>$estado,'compra'=>$compra));	
+				}
+			}*/
+			
+			if($_POST['c'] == true)
+			{
+
+				$compra = Compra::where('id','=',$_POST['id_pedido'])->first();
+				$compra->conf = true;
+				$compra->estado_id =2;
+				if($compra->save())
+				{
+					$estado = array('estado'=>'1');
+ 					return Response::json(array('estado'=>$estado,'compra'=>$compra));	
+				}
+				
+			}
+
+		}
+	}
+
+
+	public function confAjaxf()
+	{
+		header('Content-type: text/javascript');
+
+		if(isset($_POST['id_pedido']))
+		{
+			$compra = Compra::where('id','=',$_POST['id_pedido'])->first();
+				$compra->conf = false;
+				$compra->estado_id =1;
+				if($compra->save())
+				{
+					$estado = array('estado'=>'1');
+ 					return Response::json(array('estado'=>$estado,'compra'=>$compra));	
+				}
+		}
+	}
+
+	public function CarroAjax()
+	{
+		header('Content-type: text/javascript');
+
+			if(isset($_POST['id_pro']) && isset($_POST['identifier']) && isset($_POST['cantidad']))
+			{
+					$producto = Producto::where('id','=',$_POST['id_pro'])->first();
+					if($producto->count())
+					{
+						 
+						 			$item = Cart::item($_POST['identifier']);
+						 			$nuevaCantidad = $_POST['cantidad'];
+						 			$item->quantity = $nuevaCantidad;
+
+						 			$estado = array('estado'=>'1','itemTotal'=>$item->total(),'totalCart'=>Cart::total());
+ 									return Response::json(array('estado'=>$estado,'item'=>$item));
+						
+					}
+			}
 	}
 
 	public function addcartAjax()

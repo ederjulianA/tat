@@ -151,17 +151,17 @@
           <div class="header-data">
 
             <!-- Traffic data -->
-            <div class="hdata">
+           <!-- <div class="hdata">
               <div class="mcol-left">
-                <!-- Icon with red background -->
+                
                 <i class="fa fa-signal bred"></i> 
               </div>
               <div class="mcol-right">
-                <!-- Number of visitors -->
+               
                 <p><a href="#">7000</a> <em>visits</em></p>
               </div>
               <div class="clearfix"></div>
-            </div>
+            </div>-->
 
             <!-- Members data -->
             <div class="hdata">
@@ -216,7 +216,7 @@
           <a href="/admin"><i class="fa fa-home"></i> Home</a> 
           <!-- Divider -->
           <span class="divider">/</span> 
-          <a href="#" class="bread-current">Dashboard</a>
+          <a href="/admin/pedidos" class="bread-current">Pedidos</a>
         </div>
 
         <div class="clearfix"></div>
@@ -289,6 +289,7 @@
 <script src="{{asset('admin2/js/filter.js')}}"></script> <!-- Filter for support page -->
 <script src="{{asset('admin2/js/custom.js')}}"></script> <!-- Custom codes -->
 <script src="{{asset('admin2/js/charts.js')}}"></script> <!-- Charts & Graphs -->
+<script src="{{asset('tat/js/Estados.js')}}"></script> <!-- Charts & Graphs -->
 
 <!-- Script for this page -->
 <script type="text/javascript">

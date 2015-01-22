@@ -6,6 +6,15 @@
 @stop
 
 @section('content')
+<style type="text/css">
+	.btn-finalizar{
+		position: absolute;
+		right: 5px;
+		bottom: 5px;
+
+	}
+
+</style>
 	<!-- Breadcrumb Starts -->
 			<ol class="breadcrumb">
 				<li><a href="/">Home</a></li>
@@ -74,16 +83,16 @@
 								<form method="post" action="{{URL::route('updateItem')}}">						
 									<td class="text-center">
 										<div class="input-group btn-block">
-											<input type="text" name="cantidad" value="{{$pro->quantity}}" size="1" class="form-control" />
+											<input type="number" name="cantidad" width="10%" class="cant" togle="{{$pro->identifier}}" id="cant-{{$pro->id}}" data="{{$pro->id}}" value="{{$pro->quantity}}" size="1" class="form-control" />
 											<input type="hidden" name="id_producto" value="{{$pro->id}}">
 											<input type="hidden" name="identifier" value="{{$pro->identifier}}">
 										</div>								
 									</td>
 									<td class="text-center">
-										${{number_format($pro->price, 0, '', '.')}}
+										$<span id="precio-{{$pro->id}}">{{number_format($pro->price, 0, '', '.')}}</span>
 									</td>
 									<td class="text-center">
-										${{number_format($pro->total(), 0, '', '.')}}
+										$ <span class="itemTotal-{{$pro->id}}">{{number_format($pro->total(), 0, '', '.')}}</span>
 									</td>
 									<td class="text-center">
 										<button type="submit" title="Actualizar" class="btn btn-default tool-tip">
@@ -107,7 +116,7 @@
 							<strong>Sub-total :</strong>
 						  </td>
 						  <td colspan="2" class="text-left">
-							${{number_format(Cart::total(), 0, '', '.')}}
+							$<span class="totalCart">{{number_format(Cart::total(), 0, '', '.')}}</span>
 						  </td>
 						</tr>
 						
@@ -116,12 +125,20 @@
 							<strong>Total :</strong>
 						  </td>
 						  <td colspan="2" class="text-left">
-							${{number_format(Cart::total(), 0, '', '.')}}
+							$<span class="totalCart">{{number_format(Cart::total(), 0, '', '.')}}</span>
 						  </td>
+						</tr>
+						<tr>
+							<td colspan="4">
+								
+							</td>
+							<td colspan="2">
+								<a class="btn btn-warning btn-lg text-right" href="{{URL::route('checkout')}}"> FINALIZAR MI PEDIDO!</a>
+							</td>
 						</tr>
 					</tfoot>
 				</table>				
 			</div>
 		<!-- Shopping Cart Table Ends -->
-		<a class="btn btn-warning btn-lg" href="{{URL::route('checkout')}}"> FINALIZAR MI PEDIDO!</a>
+		
 @stop

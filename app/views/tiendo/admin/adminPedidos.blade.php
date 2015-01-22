@@ -40,6 +40,7 @@
         <th>Valor Pedido</th>
         <th>Cliente</th>
         <th>Estado</th>
+        <th>Confirmar</th>
         <th>Detalle</th>
       </thead>
       <tbody>
@@ -50,13 +51,18 @@
             <td>{{$pedido->nombre}} {{$pedido->apellido}}</td>
             <td>
               @if($pedido->estado_id == 1)
-                <span class="label label-danger">  {{$pedido->nom_est}}</span>
+                <span class="label label-danger" id="est-{{$pedido->id}}">  {{$pedido->nom_est}}</span>
               @else
-                <span class="label label-info">  {{$pedido->nom_est}}</span>
+                <span class="label label-info" id="est-{{$pedido->id}}">  {{$pedido->nom_est}}</span>
 
               @endif
               
             </td>
+            <td>
+              {{Form::checkbox('conf', $pedido->conf, $pedido->conf, array('class' => 'conf','data'=>$pedido->id,'id'=>'conf-'.$pedido->id))}}
+             
+
+              </td>
             <td><a href="/admin/pedido/{{$pedido->id}}" class="btn btn-success">Ver</a></td>
           </tr>
         @endforeach

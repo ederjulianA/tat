@@ -25,6 +25,7 @@
 		 			'c.num_items',
 		 			'c.tipo_compra',
 		 			'c.vlr_envio',
+		 			'c.conf',
 		 			'e.nom_est',
 		 			'ud.nombre',
 		 			'ud.direccion',
@@ -101,6 +102,7 @@
 					'ud.apellido',
 					'c.total_compra',
 					'c.num_items',
+					'c.conf',
 					'e.nom_est',
 					'c.estado_id',
 					'c.id'
@@ -120,6 +122,7 @@
 					'ud.apellido',
 					'c.total_compra',
 					'c.num_items',
+					'c.conf',
 					'e.nom_est',
 					'c.id'
 

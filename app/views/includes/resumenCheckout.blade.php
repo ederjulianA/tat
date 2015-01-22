@@ -13,15 +13,17 @@
 									<option value="1"> RUTA TAT</option>
 									<option value="2"> INMEDIATA</option>
 								</select>
+								<!--RUTA TAT{{Form::radio('tipo_compra', '1','',array('id'=>'slc_envio'))}}
+								inmediata{{Form::radio('tipo_compra', '2','',array('id'=>'slc_envio'))}}-->
 								<hr />
 							
 								
 								
 							</div>
-							<div class="panel-footer" id="msg-ajax">
+							<!--<div class="panel-footer" id="msg-ajax">
 							
 								
-							</div>
+							</div>-->
 						</div>
 					<!-- Total Panel Ends -->
 
@@ -70,9 +72,9 @@
 									</button>
 									@endif
 								</div>
-								<div id="msg-ajax2">
+								<!--<div id="msg-ajax2">
 									
-								</div>
+								</div>-->
 							</div>
 						</div>
 						</form>
