@@ -16,6 +16,7 @@
           </li>
         	  
               <li><a href="/admin/pedidos"><i class="fa fa-bar-chart-o"></i> Pedidos</a></li> 
+              <li><a href="/admin/productos"><i class="fa fa-bar-chart-o"></i> Productos</a></li> 
               <li><a href="/admin/barrios"><i class="fa fa-bar-chart-o"></i> Barrios</a></li> 
               
           </ul>

@@ -3,9 +3,11 @@
 class EmpresaController extends BaseController {
 
 	protected $empresa;
-	public function __construct(Empresa $empresa)
+	protected $pro;
+	public function __construct(Empresa $empresa, Producto $pro)
 	{
 		$this->empresa = $empresa;
+		$this->pro 	   = $pro;	
 	}
 
 	public function getAdminPedidoDetalle($id)
@@ -38,6 +40,13 @@ class EmpresaController extends BaseController {
 		$d = Dias::all();
 		$b = Barrio::all();
 		return View::make('tiendo.admin.barrios',compact('user','barrios','dias','d','b'));
+	}
+
+	public function getProductos()
+	{
+		$user = Auth::user()->id;
+		$productos = $this->pro->getAllPro();
+		return View::make('tiendo.admin.productos',compact('user','productos'));
 	}
 
 
@@ -79,6 +88,7 @@ class EmpresaController extends BaseController {
 		if($pedido->count())
 		{
 			$pedido->estado_id = 2;
+			$pedido->conf = true;
 			if($pedido->save())
 			{
 				return Redirect::back()->with('message-alert','Se ha Confirmado el pedido');

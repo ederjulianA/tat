@@ -26,6 +26,22 @@ class AjaxController extends BaseController {
  			}
 	}
 
+	public function barrioAjaxSearch()
+	{
+		header('Content-type: text/javascript');
+
+		if(isset($_POST['bar_nom']))
+		{
+			$barrio = $_POST['bar_nom'];
+
+			$bar = Barrio::where('bar_nom', 'LIKE', '%'.$barrio.'%')->get();
+			$num_bar = count($bar);
+			$estado = array('estado'=>'1');
+ 			return Response::json(array('estado'=>$estado,'bar'=>$bar,'num_bar'=>$num_bar));
+
+		}
+	}
+
 
 	public function barrioAjaxNo()
 	{
@@ -109,6 +125,7 @@ class AjaxController extends BaseController {
 				$compra = Compra::where('id','=',$_POST['id_pedido'])->first();
 				$compra->conf = true;
 				$compra->estado_id =2;
+						
 				if($compra->save())
 				{
 					$estado = array('estado'=>'1');

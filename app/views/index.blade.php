@@ -25,13 +25,13 @@
 			
 		</div>
 		@endif
-	@include('includes.slider')
+
 
 		<!-- Latest Products Starts -->
 		<section class="products-list">			
 			<div class="container">
 			<!-- Heading Starts -->
-				<h2 class="product-head">Nuestros productos</h2>
+				<!--<h2 class="product-head">Nuestross productos</h2>-->
 			<!-- Heading Ends -->
 			<!-- Products Row Starts -->
 				<div class="row">

@@ -38,87 +38,11 @@
       
     </div>
     @endif
-    <!--<div class="container">
-         <div class="row">
-            @foreach($barrios as $barrio)
-              <div class="col-md-4 item">
-                <h2>{{$barrio->bar_nom}}</h2>
-                <P>
-                  <form method="post" action="{{URL::route('addDia')}}">
-                  {{ Form::select('ndia', $dias,['class'=>'Ndia']) }}                  
-                  <input type="hidden" name="barrio_id" value="{{$barrio->id}}">
-                  <input type="submit" class="btn btn-success" value="Agregar Dia">
-                 </form>
-                </P>
 
-                <p>
-                  <h2>Dias de visita</h2>
-
-                  <ul>
-                    
-                  
-                    @foreach($barrio->dias as $dia)
-                      <li>{{$dia->dia_nom}} -
-
-
-
-                      <form method="post" action="{{URL::route('deleteDay')}}">
-                          <input type="hidden" name="dia_id" value="{{$dia->id}}">
-                          <input type="hidden" name="barrio_id" value="{{$barrio->id}}">
-                          <input type="submit" class="" value="Eliminar Dia">
-                       </form> -</li>
-
-                    @endforeach
-                  </ul>  
-                </p>
-                
-              </div>
-
-             @endforeach 
-
-
-      </div>
-    </div>-->
 
     <div class="row">
       <div class="col-md-12">
-          <!--<table class="table">
-              <th>
-                Barrio
-              </th>
-              <th>
-                Lun
-              </th>
-              <th>
-                Mar
-              </th>
-              <th>
-                Mier
-              </th>
-              <th>
-                Jue
-              </th>
-              <th>
-                Vie
-              </th>
-              <th>
-                Sab
-              </th>
-              <th>
-                Dom
-              </th>
-
-              
-              @foreach($b as $barrio)
-                <tr>
-                  <td>{{$barrio->bar_nom}}</td>
-                  <td>
-                    {{Form::checkbox('lun', $barrio->lunes, $barrio->lunes, array('class' => 'conf','data'=>$barrio->id,'id'=>'conf-'.$barrio->id))}}
-                  </td>
-                </tr>
-              @endforeach
-            
-          </table>-->
+ 
 
           <table class="table">
               <th>
@@ -146,6 +70,34 @@
           </table>
         
       </div>
+      
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+          
+          <h2>Buscar barrio por nombre</h2>
+            <div class="form-group has-success has-feedback">
+                 <input type="text" id="bar_nom">
+                 <button type="button" class="btn btn-info" id="btn_b_barrio">Buscar Barrio</button>
+               
+            </div>
+            <div class="row">
+              <div class="col-md-5">
+                <h3>Resultados</h3>
+                <div class="r_ajax" id="r_ajax">
+                  
+                </div>
+              </div>
+
+              <div class="col-md-7">
+                
+              </div>
+              
+
+              
+            </div>
+        </div>  
       
     </div>
      

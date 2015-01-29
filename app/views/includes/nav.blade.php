@@ -29,29 +29,26 @@
 									</div>
 								</div>
 							</li>-->
-							@foreach($categorias as $cat)
-								<li><a href="/categoria/{{$cat->id}}">{{$cat->cat_nom}}</a></li>
+							<!--@foreach($categorias as $cat)
+								<li class="dropdown"><a href="/categoria/{{$cat->id}}" class="dropdown-toggle" data-toggle="	dropdown" data-hover="dropdown" data-delay="10">{{$cat->cat_nom}}</a>
 
-							@endforeach
-							
-                            <!--<li class="dropdown">
+								</li>
+								<ul class="dropdown-menu" role="menu">
+									@foreach($cat->producto as $pro)
+										<li><a tabindex="-1" href="index.html">Home</a></li>
+									@endforeach	
+								</ul>
+							@endforeach-->
+							@foreach($categorias as $cat)
+                            <li class="dropdown">
 									<a href="category-list.html" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="10">
-										Pages
+										{{$cat->cat_nom}}
 									</a>
 									<ul class="dropdown-menu" role="menu">
-										<li><a tabindex="-1" href="index.html">Home</a></li>
-			                            <li><a tabindex="-1" href="about.html">About</a></li>
-										<li><a tabindex="-1" href="category-list.html">Category List</a></li>
-										<li><a tabindex="-1" href="category-grid.html">Category Grid</a></li>
-										<li><a tabindex="-1" href="product.html">Product</a></li>
-										<li><a tabindex="-1" href="product-full.html">Product Full Width</a></li>
-			                            <li><a tabindex="-1" href="cart.html">Cart</a></li>
-			                            <li><a tabindex="-1" href="login.html">Login</a></li>
-			                            <li><a tabindex="-1" href="compare.html">Compare Products</a></li>
-										<li><a tabindex="-1" href="typography.html">Typography</a></li>
-										<li><a tabindex="-1" href="register.html">Register</a></li>
-			                            <li><a tabindex="-1" href="contact.html">Contact</a></li>
-										<li><a tabindex="-1" href="404.html">404</a></li>
+										@foreach($cat->producto as $pro)
+											<li><a tabindex="-1" href="/producto/{{$pro->slug}}">{{$pro->pro_nom}}</a></li>
+			                            @endforeach	
 									</ul>
-								</li>-->
+								</li>
+								@endforeach
 						</ul>

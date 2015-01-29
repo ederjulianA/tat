@@ -173,3 +173,48 @@ $(document).on('change','.noDia', function(e){
 		});
 		e.preventDefault();
 });
+
+
+$(document).on('click','#btn_b_barrio', function(e){
+
+	var bar_nom = $('#bar_nom').val();
+
+	$.ajax({
+
+			url : "../barrioAjaxSearch",
+			dataType: "json",
+			type : "post",
+			data : { bar_nom : bar_nom},
+			success : function(data){
+				
+				if(data.estado.estado == 1)
+				{
+						if(data.num_bar == 0)
+						{
+							alert("NO HAY BARRIOS");
+						}
+
+						for (var i in data.bar)
+
+						{
+							var nBarrio = '<div class="barrioA"><div>'+data.bar[i].bar_nom+'<a class="btn btn-success Nbar" id="Nbar-'+data.bar[i].id+'" href="'+data.bar[i].id+'">Editar</a></div> </div>';
+
+							$('#r_ajax').append(nBarrio);
+						}
+					
+				}
+				
+			}
+
+				
+
+
+		});
+
+	e.preventDefault();
+});
+
+$(document).on('click','.Nbar', function(e){
+	alert("ONE");
+	e.preventDefault();
+})
