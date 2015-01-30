@@ -110,7 +110,48 @@ $(document).on('change','.cA', function(e){
 		});
 
 		e.preventDefault();
+
 });
+
+//FUNCIÓN PARA BORRAR TODOS LOS DIAS DE VISITAS ASIGNADOS
+
+$(document).on('click','#btn_borrar_dias', function(e){
+	$('#ModalEliminar').modal({
+						show:true,
+						keyboard:false
+					});
+
+	e.preventDefault();
+});
+
+$(document).on('click','#btn_conf_eli', function(e){
+
+		$.ajax({
+
+			url : "../confEliDiasV",
+			dataType: "json",
+			type : "post",
+			
+			success : function(data){
+				//console.log(data);
+				if(data.estado.estado == 1)
+				{
+					
+					location.reload();
+					//console.log(data);
+				}
+				
+			}
+
+				
+
+
+		});
+
+	e.preventDefault();
+});
+
+
 
 //FUNCIÓN PARA DESMARCAR UN DIA DE VISITA
 $(document).on('change','.Dia', function(e){
@@ -174,11 +215,11 @@ $(document).on('change','.noDia', function(e){
 		e.preventDefault();
 });
 
-
+//FUNCIÓN PARA BUSCAR UN BARRIO VIA AJAX EN LA LISTA DE BARRIOS
 $(document).on('click','#btn_b_barrio', function(e){
 
 	var bar_nom = $('#bar_nom').val();
-
+	$('#r_ajax').html('');
 	$.ajax({
 
 			url : "../barrioAjaxSearch",

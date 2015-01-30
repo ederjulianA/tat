@@ -11,6 +11,15 @@ class AjaxController extends BaseController {
 			$this->cat = $cat;
 	}
 
+	public function confEliDiasV()
+	{
+		header('Content-type: text/javascript');
+
+		$diasv = Diabarrio::where('dia_id','>',0)->delete();
+		$estado = array('estado'=>'1');
+		 return Response::json(array('estado'=>$estado));
+	}
+
 	public function barrioAjax()
 	{
 		header('Content-type: text/javascript');

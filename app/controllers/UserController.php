@@ -42,10 +42,15 @@ class UserController extends BaseController {
 				{
 						$datos->nombre = Input::get('nombre');
 				$datos->apellido = Input::get('apellido');
+				$datos->cedula = Input::get('nit');
+				$datos->nombre_negocio = Input::get('nom_neg');
+				$datos->ciudad = Input::get('ciudad_id');
+				$datos->canal = Input::get('canal_id');
 				$datos->barrio_id = Input::get('barrio_id');
 				$datos->direccion = Input::get('direccion');
 				$datos->telefono = Input::get('telefono');
 				$datos->comentarios = Input::get('comentarios');
+
 					if($datos->save())
 					{
 						return Redirect::back()->with('message-alert','Se han actualizado tus datos');
@@ -57,6 +62,10 @@ class UserController extends BaseController {
 				$ship->user_id = Auth::user()->id;
 				$ship->nombre = Input::get('nombre');
 				$ship->apellido = Input::get('apellido');
+				$ship->cedula = Input::get('nit');
+				$ship->nombre_negocio = Input::get('nom_neg');
+				$ship->ciudad = Input::get('ciudad_id');
+				$ship->canal = Input::get('canal_id');
 				$ship->barrio_id = Input::get('barrio_id');
 				$ship->direccion = Input::get('direccion');
 				$ship->telefono = Input::get('telefono');

@@ -8,7 +8,7 @@
 
 
 @section('titulo1')
-  <h1>BARRIOS</h1>
+  <h1> Busqueda Barrios</h1>
 @stop
 <style type="text/css">
   
@@ -48,7 +48,9 @@
                    <input type="text" id="bar_nom" name="bar_nom">
                    <button type="submit" class="btn btn-info" id="">Buscar Barrio</button>
                 </form> 
-               <a href="#" class="btn btn-danger" id="btn_borrar_dias">Borrar todos los días de visitas</a>
+                <br>
+                <a href="{{URL::route('adminBarrios')}}" class="btn btn-warning">Volver al listado de barrios</a>
+               
             </div>
             <div class="row">
               <div class="col-md-5">
@@ -68,7 +70,6 @@
         </div>  
       
     </div>
-
     <div class="row">
       <div class="col-md-12">
  
@@ -102,34 +103,6 @@
       
     </div>
 
-    <div class="modal signUpContent fade" id="ModalEliminar" tabindex="-1" role="dialog" >
-  <div class="modal-dialog ">
-    <div class="modal-content">
-      <div class="modal-header modalHeader">
-        <button type="button" id="closeModal" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
-        <h3 class="modal-title-site text-center" > ALERTA </h3>
-      </div>
-      <div class="modal-body">
-        <div class="info-item">
-          <h2>Si le da click a continuar se eliminaran los días de visita asignados</h2>
-          <h4>
-            desea continuar ???
-          </h4>
-        </div>
-      
-        
-      </div>
-      <div class="modal-footer">
-        <a href="#"id="btn_conf_eli" class="btn btn-info">Continuar</a> -- <a href="#" class="btn btn-danger" id="btn_canc_eli">Cancelar</a>
-        
-      </div>
-    </div>
-    <!-- /.modal-content --> 
     
-  </div>
-  <!-- /.modal-dialog --> 
-  
-</div>
-<!-- /.Modal Login --> 
      
 @stop

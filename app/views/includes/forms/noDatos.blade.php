@@ -27,11 +27,39 @@
 										</div>
 
 										<div class="form-group">
+											<label for="apeelido" class="col-sm-3 control-label">CC o NIT:</label>
+											<div class="col-sm-9">
+												{{ Form::text('nit','',array('class'=>'form-control','name'=>'nit','placeholder'=>'')) }}
+												{{ $errors->first('nit','<p class="alert alert-danger">:message</p>') }}
+											</div>
+											
+										</div>
+
+										<div class="form-group">
+											<label for="apeelido" class="col-sm-3 control-label">Nombre Negocio:</label>
+											<div class="col-sm-9">
+												{{ Form::text('nom_neg','',array('class'=>'form-control','name'=>'nom_neg','placeholder'=>'')) }}
+												{{ $errors->first('nom_neg','<p class="alert alert-danger">:message</p>') }}
+											</div>
+											
+										</div>
+										<div class="form-group">
+											<label for="direccion" class="col-sm-3 control-label">Ciudad:</label>
+											<div class="col-sm-9">
+												{{ Form::select('ciudad_id', $ciudades, '', ['class'=>'form-control','id'=>'ciudad_id']) }}
+												<!--<a id="d_entrega">Consultar dias de entrega </a>-->
+												{{ $errors->first('ciudad_id','<p class="alert alert-danger">:message</p>') }}
+												
+											</div>
+
+										</div>
+
+										<div class="form-group">
 											<label for="direccion" class="col-sm-3 control-label">Barrio:</label>
 											<div class="col-sm-9">
 												{{ Form::select('barrio_id', $barrios, '', ['class'=>'form-control','id'=>'barrio_id']) }}
 												<!--<a id="d_entrega">Consultar dias de entrega </a>-->
-												{{ $errors->first('direccion','<p class="alert alert-danger">:message</p>') }}
+												{{ $errors->first('barrio_id','<p class="alert alert-danger">:message</p>') }}
 												<div class="diasVis">
 														<h4>Dias de Entrega</h4>
 														<ul id="ulDiasV">
@@ -39,6 +67,18 @@
 														</ul>
 													
 												</div>
+											</div>
+
+										</div>
+
+
+										<div class="form-group">
+											<label for="direccion" class="col-sm-3 control-label">Canal:</label>
+											<div class="col-sm-9">
+												{{ Form::select('canal_id', $canales, '', ['class'=>'form-control','id'=>'canal_id']) }}
+												<!--<a id="d_entrega">Consultar dias de entrega </a>-->
+												{{ $errors->first('canal_id','<p class="alert alert-danger">:message</p>') }}
+												
 											</div>
 
 										</div>

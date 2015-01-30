@@ -17,6 +17,14 @@ class EmpresaController extends BaseController {
 		return View::make('tiendo.admin.adminPedidoDetalle',compact('user','pedido','items'));
 	}
 
+	public function searchBarrio()
+	{
+		$barrio = $_GET['bar_nom'];
+		$d = Dias::all();
+		$b = Barrio::where('bar_nom', 'LIKE', '%'.$barrio.'%')->get();
+		return View::make('tiendo.admin.buscarBarrio',compact('d','b'));
+	}
+
 
 	public function getPedidos()
 	{

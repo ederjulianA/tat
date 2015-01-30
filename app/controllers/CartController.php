@@ -28,22 +28,32 @@ class CartController extends BaseController {
 		}
 		$categorias =   $this->cat->getAllCat();
 		$barrios = $this->barrio->getAllBarrios();
+		$ciudades = $this->barrio->getAllCities();
+		$canales =  $this->barrio->getAllCanales();
 			
 		if(Auth::check())
 		{
 			$user = User::where('id','=',Auth::user()->id)->first();
 
 			$datos = DB::table('user_datos as ud')->join('barrios as b','ud.barrio_id','=','b.id')
+												  ->join('canales as c' ,'ud.canal','=', 'c.id')
+												  ->join('ciudades as ci','ud.ciudad','=','ci.id')
 					->select(
 					'ud.barrio_id',
 					'b.bar_nom AS barrioNombre',
+					'ci.ciu_nom',
+					'c.can_nom',
 					'ud.direccion',
 					'ud.nombre',
 					'ud.apellido',
+					'ud.cedula',
+					'ud.nombre_negocio',
+					'ud.ciudad',
+					'ud.canal',
 					'ud.telefono',
 					'ud.comentarios'
 				)->where('ud.user_id','=',$user->id)->first();
-			return View::make('checkout')->with('barrios',$barrios)->with('datos',$datos)->with('categorias',$categorias)->with('products', Cart::contents());
+			return View::make('checkout')->with('barrios',$barrios)->with('canales',$canales)->with('ciudades',$ciudades)->with('datos',$datos)->with('categorias',$categorias)->with('products', Cart::contents());
 		}
 		$datos = NULL;
 

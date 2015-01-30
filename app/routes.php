@@ -74,6 +74,7 @@ Route::post('barrioAjaxSearch', array('as' => 'barrioAjaxSearch', 'uses' => 'Aja
 Route::post('barrioAjaxNo', array('as' => 'barrioAjaxNo', 'uses' => 'AjaxController@barrioAjaxNo'));
 Route::post('DiasAjax', array('as' => 'DiasAjax', 'uses' => 'AjaxController@getDias'));
 Route::post('CarroAjax', array('as' => 'CarroAjax', 'uses' => 'AjaxController@CarroAjax'));
+Route::post('confEliDiasV', array('as' => 'confEliDiasV', 'uses' => 'AjaxController@confEliDiasV'));
 
 
 
@@ -96,6 +97,7 @@ Route::group(['before' => 'auth'], function() {
         Route::get('admin/productos', array('as' => 'adminProductos', 'uses' => 'EmpresaController@getProductos'));
 
         Route::post('addDia', array('as' => 'addDia', 'uses' => 'EmpresaController@addDia'));
+        Route::get('admin/searchBarrio', array('as' => 'searchBarrio', 'uses' => 'EmpresaController@searchBarrio'));
         Route::post('deleteDay', array('as' => 'deleteDay', 'uses' => 'EmpresaController@deleteDay'));
 
 		
