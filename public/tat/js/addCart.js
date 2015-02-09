@@ -147,7 +147,7 @@ $(document).on('change','#barrio_id', function(e){
 						show:true,
 						keyboard:false
 					});
-	e.preventDefault();*/
+	e.preventDefault();*/ 
 });
 
 $(document).on('change','.cant', function(e){
