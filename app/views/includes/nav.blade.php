@@ -41,7 +41,7 @@
 							@endforeach-->
 							@foreach($categorias as $cat)
                             <li class="dropdown">
-									<a href="category-list.html" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="10">
+									<a href="{{ URL::route('categoria',array('id'=>$cat->id))}}" target="_blank" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="10">
 										{{$cat->cat_nom}}
 									</a>
 									<ul class="dropdown-menu" role="menu">

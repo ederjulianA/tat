@@ -1,3 +1,5 @@
+$(document).ready(function () { $("#input").cleditor(); });
+
 $(document).on('change','.conf', function(e){
 
 		var id = $(this).attr('data');
@@ -111,6 +113,37 @@ $(document).on('change','.cA', function(e){
 
 		e.preventDefault();
 
+});
+
+$(document).on('click','#btn-editar',function(e){
+	var cont = $('#input').val();
+	var id  = $('#id_prod').val();
+
+	$('#btn-editar').text('Guardando cambios...');
+
+		$.ajax({
+
+			url : "../../addDescriptionAjax",
+			dataType: "json",
+			type : "post",
+			data : { cont : cont, id:id},
+			success : function(data){
+				console.log(data);
+				if(data.estado.estado == 1)
+				{
+					$('#btn-editar').text('Guardar Cambios');
+
+					
+				}
+				
+			}
+
+				
+
+
+		});
+	//alert(cant);
+	e.preventDefault();
 });
 
 //FUNCIÓN PARA BORRAR TODOS LOS DIAS DE VISITAS ASIGNADOS

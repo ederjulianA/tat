@@ -50,6 +50,14 @@ class EmpresaController extends BaseController {
 		return View::make('tiendo.admin.barrios',compact('user','barrios','dias','d','b'));
 	}
 
+
+	public function getAdminArticulo($id)
+	{
+		$user = Auth::user()->id;
+		$producto = $this->pro->getProductoById($id);
+		return View::make('tiendo.admin.productoDetalle',compact('user','producto'));
+	}
+
 	public function getProductos()
 	{
 		$user = Auth::user()->id;

@@ -13,6 +13,7 @@
 
   <!-- Stylesheets -->
   <link href="{{asset('admin2/css/bootstrap.min.css')}}" rel="stylesheet">
+  <link href="{{asset('tat/cleditor/jquery.cleditor.css')}}" rel="stylesheet">
   <!-- Font awesome icon -->
   <link rel="stylesheet" href="{{asset('admin2/css/font-awesome.min.css')}}"> 
   <link rel="stylesheet" href="{{asset('admin2/css/font-awesome.min2.css')}}"> 
@@ -291,8 +292,10 @@
 <script src="{{asset('admin2/js/charts.js')}}"></script> <!-- Charts & Graphs -->
 <script src="{{asset('tat/js/Estados.js')}}"></script> <!-- Charts & Graphs -->
 
+@yield('scripts')
+
 <!-- Script for this page -->
-<script type="text/javascript">
+<!--<script type="text/javascript">
 $(function () {
 
     /* Bar Chart starts */
@@ -417,7 +420,7 @@ $(function () {
 });
 
 /* Curve chart ends */
-</script>
+</script>-->
 
 </body>
 </html>

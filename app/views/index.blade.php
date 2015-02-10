@@ -45,7 +45,7 @@
 								<div class="caption">
 									<h4><a href="/producto/{{$pro->slug}}">{{$pro->pro_nom}}</a></h4>
 									<div class="description">
-										{{$pro->descripcion}}
+										<!--{{$pro->descripcion}}-->
 									</div>
 									<div class="price">
 										<span class="price-new">${{number_format($pro->precio, 0, '', '.')}}</span> 

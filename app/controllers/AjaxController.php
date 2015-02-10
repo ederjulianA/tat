@@ -20,6 +20,29 @@ class AjaxController extends BaseController {
 		 return Response::json(array('estado'=>$estado));
 	}
 
+	public function addDescriptionAjax()
+	{
+		header('Content-type: text/javascript');
+		if(isset($_POST['cont']) && isset($_POST['id']))
+		{
+			$detalle = $_POST['cont'];
+			$id      = $_POST['id'];
+
+			$producto = Producto::where('id','=',$id)->first();
+			if($producto->count())
+			{
+				$producto->descripcion = $detalle;
+				$estado = array('estado'=>'1');
+
+				if($producto->save())
+				{
+					return Response::json(array('estado'=>$estado));
+				}
+
+			}
+		}
+	}
+
 	public function barrioAjax()
 	{
 		header('Content-type: text/javascript');

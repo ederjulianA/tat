@@ -17,6 +17,13 @@
 			return $productos;
 		}
 
+
+		public function getProductoById($id)
+		{
+			$producto = Producto::where('id','=',$id)->first();
+			return $producto;
+		}
+
 		public function getProCategorias($id)
 		{
 			$productos = Producto::where('categoria_id','=',$id)->get();

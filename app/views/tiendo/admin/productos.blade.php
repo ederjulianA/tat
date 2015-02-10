@@ -49,7 +49,7 @@
             <td>{{$pro->pro_nom}} </td>
           
           
-            <td><a href="/admin/pedido/{{$pro->id}}" class="btn btn-success">Editar Descripción</a></td>
+            <td><a href="/admin/articulo/{{$pro->id}}" class="btn btn-success">Editar Descripción</a></td>
           </tr>
         @endforeach
       </tbody>
