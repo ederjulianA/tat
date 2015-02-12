@@ -11,11 +11,49 @@
   <h1>BARRIOS</h1>
 @stop
 <style type="text/css">
+
+  #btn-volver{
+    text-decoration: none;
+    background-color: #AEAEAE;
+    border-bottom: 3px solid #818181;
+    color: #fff;
+    margin: 5px;
+    font-weight: bold;
+    padding: .2em 1em;
+    font-size: 20px;
+    border-radius: 3px;
+  }
+  #btn-editar{
+    text-decoration: none;
+    background-color: #ff4842;
+    border-bottom: 3px solid #d0272a;
+    color: #fff;
+    font-weight: bold;
+    margin: 5px;
+    padding: .3em 1em;
+    font-size: 20px;
+    border-radius: 3px;
+  }
   
   .item{
     text-align: center;
     padding: 5px;
     box-shadow: 1px 2px 2px rgba(0,0,0,.5);
+  }
+  .cont-busc{
+    width: 80%;
+    margin: 0 auto;
+    padding: 5px;
+    max-width: 100%;
+  }
+  .formB{
+    width: 90%;
+  }
+  .formB input {
+    width: 60%;
+  }
+  .formB button {
+    width: 25%;
   }
 </style>
 @section('content')
@@ -39,6 +77,17 @@
     </div>
     @endif
 
+    <!--<div class="cont-busc">
+      <div class="formB">
+             <form method="get" action="{{URL::route('searchBarrio')}}">
+                   <input type="text" id="bar_nom" name="bar_nom">
+                   <button type="submit" class="btn btn-info" id="">Buscar Barrio</button>
+                </form> 
+        
+      </div>
+      
+    </div>-->
+
     <div class="row">
         <div class="col-md-12">
           
@@ -50,21 +99,7 @@
                 </form> 
                <a href="#" class="btn btn-danger" id="btn_borrar_dias">Borrar todos los días de visitas</a>
             </div>
-            <div class="row">
-              <div class="col-md-5">
-                <h3>Resultados</h3>
-                <div class="r_ajax" id="r_ajax">
-                  
-                </div>
-              </div>
-
-              <div class="col-md-7">
-                
-              </div>
-              
-
-              
-            </div>
+           
         </div>  
       
     </div>
@@ -102,7 +137,7 @@
       
     </div>
 
-    <div class="modal signUpContent fade" id="ModalEliminar" tabindex="-1" role="dialog" >
+<div class="modal signUpContent fade" id="ModalEliminar" tabindex="-1" role="dialog" >
   <div class="modal-dialog ">
     <div class="modal-content">
       <div class="modal-header modalHeader">

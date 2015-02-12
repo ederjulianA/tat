@@ -41,6 +41,7 @@
   .contenedor{
     max-width: 100%;
     width: 95%;
+    position: relative;
     margin: 10px auto;
     background-color: #fff;
     border: 1px solid #333;
@@ -58,6 +59,19 @@
     letter-spacing: 1px;
     font-size: 20px;
     padding: 10px;
+  }
+
+  .ajaxR {
+    border:.5px solid #F08521;
+    position: absolute;
+    width: 250px;
+    font-size: 20px;
+    font-weight: bold;
+    text-shadow: 2px 2px 1px rgba(0,0,0,.4);
+    color: #fff;
+    background-color: #f90;
+    padding: 5px;
+    display: none;
   }
 </style>
 @if(Session::has('message-alert'))
@@ -80,6 +94,10 @@
     </div>
     @endif
   <div class="contenedor">
+    <div class="ajaxR">
+      Producto actualizado
+      
+    </div>
     <h2>{{$producto->pro_nom}}</h2>
     <p>
       A continuación podrás editar la descripción del artículo seleccionado

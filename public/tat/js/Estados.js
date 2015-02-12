@@ -132,6 +132,8 @@ $(document).on('click','#btn-editar',function(e){
 				if(data.estado.estado == 1)
 				{
 					$('#btn-editar').text('Guardar Cambios');
+					$('.ajaxR').fadeToggle(2000);
+					$('.ajaxR').fadeToggle('slow');
 
 					
 				}
