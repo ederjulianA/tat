@@ -57,7 +57,7 @@ return array(
 			'host'      => 'localhost',
 			'database'  => 'tat',
 			'username'  => 'root',
-			'password'  => '',
+			'password'  => 'my65285cavp',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
