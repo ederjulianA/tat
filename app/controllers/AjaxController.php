@@ -222,6 +222,7 @@ class AjaxController extends BaseController {
 						'name' => $producto->pro_nom,
 						'price' => $producto->precio,
 						'quantity' => Input::get('cantidad'),
+						'tax'=>$producto->por_iva,
 						
 						'image' => $producto->img
 						));

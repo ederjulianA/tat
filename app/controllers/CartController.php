@@ -124,7 +124,7 @@ class CartController extends BaseController {
 				'name' => $producto->pro_nom,
 				'price' => $producto->precio,
 				'quantity' => Input::get('cantidad'),
-				
+				'tax'	=>$producto->por_iva,
 				'image' => $producto->img
 			));
 			 			 return Redirect::back()->with('message-alert','Se ha agregado el producto a tu pedido');
