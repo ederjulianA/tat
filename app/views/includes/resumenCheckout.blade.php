@@ -70,6 +70,10 @@
 										<button type="button" id="alert-datos" class="btn btn-default pull-right">		
 										Hacer pedido
 									</button>
+									<br>
+									<div class="ajax-val-datos">
+										
+									</div>
 									@endif
 								</div>
 								<!--<div id="msg-ajax2">

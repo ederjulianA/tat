@@ -103,7 +103,7 @@
 					<!-- Logo Starts -->
 						<div class="col-md-6">
 							<div id="logo">
-								<a href="index.html"><img src="{{asset('tat/images/tat-logo.png')}}" title="Spice Shoppe" alt="Spice Shoppe" class="img-responsive" /></a>
+								<a href="/"><img src="{{asset('tat/images/tat-logo.png')}}" title="Spice Shoppe" alt="Spice Shoppe" class="img-responsive" /></a>
 							</div>
 						</div>
 					<!-- Logo Starts -->
@@ -258,5 +258,6 @@
     <script src="{{asset('tat/js/jquery.magnific-popup.min.js')}}"></script>
 	<script src="{{asset('tat/js/custom.js')}}"></script>
 	<script src="{{asset('tat/js/addCart.js')}}"></script>
+	@yield('ajax-val')
 </body>
 </html>

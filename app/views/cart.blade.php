@@ -61,6 +61,9 @@
 								Precio
 							</td>
 							<td class="text-center">
+								% IVA
+							</td>
+							<td class="text-center">
 								Total
 							</td>
 							<td class="text-center">
@@ -90,6 +93,9 @@
 									</td>
 									<td class="text-center">
 										$<span id="precio-{{$pro->id}}">{{number_format($pro->price, 0, '', '.')}}</span>
+									</td>
+									<td class="text-center">
+										{{$pro->tax}} %
 									</td>
 									<td class="text-center">
 										$ <span class="itemTotal-{{$pro->id}}">{{number_format($pro->total(), 0, '', '.')}}</span>
