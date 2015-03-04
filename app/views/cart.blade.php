@@ -122,7 +122,7 @@
 							<strong>Sub-total :</strong>
 						  </td>
 						  <td colspan="2" class="text-left">
-							$<span class="totalCart">{{number_format(Cart::total(), 0, '', '.')}}</span>
+							$<span class="totalCart">{{number_format(Cart::total(false), 0, '', '.')}}</span>
 						  </td>
 						</tr>
 						

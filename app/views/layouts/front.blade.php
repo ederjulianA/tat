@@ -109,16 +109,20 @@
 					<!-- Logo Starts -->
 					<!-- Search Starts -->
 						<div class="col-md-3">
+						<form method="get" action="{{URL::route('buscador')}}">
 							<div id="search">
 								<div class="input-group">
-								  <input type="text" class="form-control input-lg" placeholder="Search">
-								  <span class="input-group-btn">
-									<button class="btn btn-lg" type="button">
-										<i class="fa fa-search"></i>
-									</button>
-								  </span>
+									
+									  <input type="text" class="form-control input-lg" placeholder="search" name="keyword" required>
+									  <span class="input-group-btn">
+										<button type="submit" class="btn btn-lg" type="button">
+											<i class="fa fa-search"></i>
+										</button>
+									  </span>
+									 
 								</div>
-							</div>	
+							</div>
+						</form> 		
 						</div>
 					<!-- Search Ends -->
 					<!-- Shopping Cart Starts -->

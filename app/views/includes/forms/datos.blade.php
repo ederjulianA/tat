@@ -66,6 +66,7 @@
 														</ul>
 													
 												</div>
+												<input type="hidden" id="urlBarriosAjax" value="{{ URL::route('urlBarriosAjax')}}">
 											</div>
 
 										</div>

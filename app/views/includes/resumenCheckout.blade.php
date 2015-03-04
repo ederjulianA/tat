@@ -7,11 +7,11 @@
 								</h3>
 							</div>
 							<form method="post" action="{{URL::route('postPedido')}}" id="form-pedido">
+							<input type="hidden"id="urlEnvAjax" value="{{URL::route('urlEnvAjax')}}">
 							<div class="panel-body">
 								<select class="select_envio select_error" name="tipo_compra" id="slc_envio">
 									<option value="0">ESCOJA UNA OPCIÓN </option>
-									<option value="1"> RUTA TAT</option>
-									<option value="2"> INMEDIATA</option>
+									
 								</select>
 								<!--RUTA TAT{{Form::radio('tipo_compra', '1','',array('id'=>'slc_envio'))}}
 								inmediata{{Form::radio('tipo_compra', '2','',array('id'=>'slc_envio'))}}-->
@@ -20,10 +20,9 @@
 								
 								
 							</div>
-							<!--<div class="panel-footer" id="msg-ajax">
-							
-								
-							</div>-->
+							<div class="text-uppercase clearfix" id="msg-ajax">
+									
+								</div>
 						</div>
 					<!-- Total Panel Ends -->
 

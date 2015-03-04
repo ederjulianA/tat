@@ -42,5 +42,29 @@
 			return $productos;
 		}
 
+		public function getProBuscador($keyword)
+		{
+			 $productos = DB::table('productos as p')
+		 ->join('categorias as c','p.categoria_id','=','c.id')
+		 
+		 ->select(
+				 'c.cat_nom',
+				 
+				 'p.pro_nom',
+				 'p.img',
+				 'p.slug',
+				 'p.id',
+				 'p.precio',
+				'p.descripcion AS producto_descripcion'
+				 
+			 )
+		 ->where('p.pro_nom', 'LIKE', '%'.$keyword.'%')->get();
+		 
+		 
+		
+
+			return $productos;
+		}
+
 
 	}

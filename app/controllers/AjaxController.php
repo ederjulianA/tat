@@ -4,11 +4,51 @@ class AjaxController extends BaseController {
 
 	protected $pro;
 	protected $cat;
+	protected $envio;
 
-	public function __construct(Producto $pro, Categoria $cat)
+	public function __construct(Producto $pro, Categoria $cat, Envio $envio)
 	{
-			$this->pro = $pro;
-			$this->cat = $cat;
+			$this->pro 		= $pro;
+			$this->cat 		= $cat;
+			$this->envio 	= $envio;
+	}
+
+	public function getEnvAjax()
+	{
+		header('Content-type: text/javascript');
+
+		$envios = $this->envio->getEnvios();
+
+		$estado = array('estado'=>'1');
+		$num_envios = count($envios);
+		if($num_envios > 0){
+
+		 return Response::json(array('estado'=>$estado,'envios'=>$envios));
+		}
+
+	}
+
+
+	public function getBarriosAjax()
+	{
+		header('Content-type: text/javascript');
+
+		if (isset($_POST['id_ciudad']))
+		{
+			$barrios = Barrio::where('ciu_id','=',$_POST['id_ciudad'])->get();
+			$estado = array('estado'=>'1');
+			$num_bar = count($barrios);
+			if($num_bar != 0){
+
+			 return Response::json(array('estado'=>$estado,'barrios'=>$barrios,'num_bar'=>$num_bar));
+			}else{
+				$num_bar = 0;
+				return Response::json(array('estado'=>$estado,'barrios'=>$barrios,'num_bar'=>$num_bar));
+			}
+		}else{
+			$estado = array('estado'=>'2','msg'=>'ERROR---NO SE ENVIO LA VARIABLE');
+			return Response::json(array('estado'=>$estado));
+		}
 	}
 
 	public function confEliDiasV()

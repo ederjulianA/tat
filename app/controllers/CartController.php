@@ -81,6 +81,7 @@ class CartController extends BaseController {
 	   			 	$citem->nombre 				=	$item->name;
 	   			 	$citem->valor_unitario 		=	$item->price;
 	   			 	$citem->image               =   $item->image;
+	   			 	$citem->iva 				=	$item->tax;
 	   			 	$citem->cantidad 			= 	$item->quantity;
 	   			 	$citem->valor_total			=	$item->total();
 

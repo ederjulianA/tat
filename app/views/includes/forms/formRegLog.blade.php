@@ -40,9 +40,7 @@
 								<hr />
 							
 								
-								<div class="text-uppercase clearfix" id="msg-ajax">
-									
-								</div>
+								
 							</div>
 			</div>
 

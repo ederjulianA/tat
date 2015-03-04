@@ -32,7 +32,7 @@
 				<!-- Breadcrumb Starts -->
 					<ol class="breadcrumb">
 						<li><a href="/">Home</a></li>
-						<li class="active">Catalogo</li>
+						<li class="active">Categoria</li>
 					</ol>
 				<!-- Breadcrumb Ends -->
 				<!-- Main Heading Starts -->
@@ -85,7 +85,7 @@
 									<div class="caption">
 										<h4><a href="{{URL::route('proDetalle',array('slug'=>$producto->slug))}}">{{$producto->pro_nom}}</a></h4>
 										<div class="description">
-											Producto TAT
+											We are so lucky living in such a wonderful time. Our almost unlimited ...
 										</div>
 										<div class="price">
 											<span class="price-new">${{number_format($producto->precio, 0, '', '.')}}</span> 
