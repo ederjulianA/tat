@@ -28,6 +28,24 @@ class AjaxController extends BaseController {
 
 	}
 
+	public function urlBarriosVajax()
+	{
+		header('Content-type: text/javascript');
+		if (isset($_POST['id_ciudad']))
+		{
+
+			$d = Dias::all();
+			$b = Barrio::where('ciu_id','=',$_POST['id_ciudad'])->get();
+			$estado = array('estado'=>'1');
+			$num_barrios = count($b);
+			if($num_barrios > 0){
+
+			 return Response::json(array('estado'=>$estado,'b'=>$b,'d'=>$d));
+			}
+
+		}
+	}
+
 
 	public function getBarriosAjax()
 	{

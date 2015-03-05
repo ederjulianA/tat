@@ -110,8 +110,8 @@
             
             <!-- Dropdown menu -->
             <ul class="dropdown-menu">
-              <li><a href="#"><i class="fa fa-user"></i> Profile</a></li>
-              <li><a href="#"><i class="fa fa-cogs"></i> Settings</a></li>
+              <!--<li><a href="#"><i class="fa fa-user"></i> Profile</a></li>
+              <li><a href="#"><i class="fa fa-cogs"></i> Settings</a></li>-->
               <li><a href="{{URL::route('logout')}}"><i class="fa fa-sign-out"></i> Logout</a></li>
             </ul>
           </li>

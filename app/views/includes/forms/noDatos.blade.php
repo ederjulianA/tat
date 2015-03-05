@@ -150,3 +150,7 @@
   
 </div>
 <!-- /.Modal Login --> 
+
+@section('ajax-val')
+	<script src="{{asset('tat/js/val-ajax-datos.js')}}"></script>
+@stop

@@ -43,11 +43,12 @@ class EmpresaController extends BaseController {
 	public function getBarrios()
 	{
 		$user = Auth::user()->id;
+		$ciudades = Ciudad::all();
 		$barrios = $this->empresa->getDiasVis();
 		$dias = Dias::lists('dia_nom', 'id');
 		$d = Dias::all();
 		$b = Barrio::all();
-		return View::make('tiendo.admin.barrios',compact('user','barrios','dias','d','b'));
+		return View::make('tiendo.admin.barrios',compact('user','barrios','dias','d','b','ciudades'));
 	}
 
 

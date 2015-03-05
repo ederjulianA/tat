@@ -95,6 +95,15 @@
             <div class="form-group has-success has-feedback">
                 <form method="get" action="{{URL::route('searchBarrio')}}">
                    <input type="text" id="bar_nom" name="bar_nom">
+                   <input type="hidden" id="urlBarriosVajax" value="{{URL::route('urlBarriosVajax')}}">
+                  <!-- <select name="sel_ciudad" id="sel_ciudad" >
+
+                      <option value="0">Todas</option>
+                      @foreach($ciudades as $ciu)
+                        <option value="{{$ciu->id}}">{{$ciu->ciu_nom}}</option>
+                     @endforeach
+                   
+                   </select>-->
                    <button type="submit" class="btn btn-info" id="">Buscar Barrio</button>
                 </form> 
                <a href="#" class="btn btn-danger" id="btn_borrar_dias">Borrar todos los días de visitas</a>
@@ -117,7 +126,9 @@
                   {{$dia->dia_nom}}
                 </th>
               @endforeach
-
+              <tbody id="contenedor_barrios">
+               
+              
               @foreach($b as $ba)
                 <tr>
                   <td>
@@ -130,6 +141,7 @@
                         @endforeach
                 </tr>
               @endforeach
+              </tbody>
             
           </table>
         

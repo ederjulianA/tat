@@ -78,6 +78,7 @@ Route::post('barrioAjaxSearch', array('as' => 'barrioAjaxSearch', 'uses' => 'Aja
 Route::post('barrioAjaxNo', array('as' => 'barrioAjaxNo', 'uses' => 'AjaxController@barrioAjaxNo'));
 Route::post('DiasAjax', array('as' => 'DiasAjax', 'uses' => 'AjaxController@getDias'));
 Route::post('urlEnvAjax', array('as' => 'urlEnvAjax', 'uses' => 'AjaxController@getEnvAjax'));
+Route::post('urlBarriosVajax', array('as' => 'urlBarriosVajax', 'uses' => 'AjaxController@urlBarriosVajax'));
 Route::post('urlBarriosAjax', array('as' => 'urlBarriosAjax', 'uses' => 'AjaxController@getBarriosAjax'));
 Route::post('CarroAjax', array('as' => 'CarroAjax', 'uses' => 'AjaxController@CarroAjax'));
 Route::post('addDescriptionAjax', array('as' => 'addDescriptionAjax', 'uses' => 'AjaxController@addDescriptionAjax'));

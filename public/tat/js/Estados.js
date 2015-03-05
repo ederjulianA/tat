@@ -294,3 +294,52 @@ $(document).on('click','.Nbar', function(e){
 	alert("ONE");
 	e.preventDefault();
 })
+
+$(document).on('change','#sel_ciudad', function(e){
+	$('#contenedor_barrios').html('');
+	var id_ciudad = $('#sel_ciudad').val();
+	loadBarriosV(id_ciudad);
+
+	e.preventDefault();
+});
+
+function loadBarriosV(id_ciudad)
+{
+	var url = $('#urlBarriosVajax').val();
+	$.ajax({
+
+			url : url,
+			dataType: "json",
+			type : "post",
+			data : { id_ciudad : id_ciudad},
+			success : function(data){
+
+				if(data.estado.estado == 1)
+				{
+					for (j in data.d)
+					{
+						var check2 = ' <td><input class="Dia" data="1" id="dia-1-1" dataBarrio="1" checked="checked" name="Lunes" type="checkbox" value="1"> </td> ';
+						
+						
+					};
+					
+					for( i in data.b)
+					{
+						
+						var check = '<tr> <td id="col">'+data.b[i].bar_nom+'</td>'+check2+' </tr>';
+						$('#contenedor_barrios').append(check);
+
+						
+						
+					}
+					console.log(data);
+				}
+				
+					
+			}
+
+				
+
+
+		});
+}

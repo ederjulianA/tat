@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	var id_ciudad = $('#ciudad_id').val();
-	loadBarrios(id_ciudad);
+	//loadBarrios(id_ciudad);
 	cargarDias();
 });
 
