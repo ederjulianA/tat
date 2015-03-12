@@ -58,6 +58,17 @@
               @endforeach
             </table>
 
+            <!--<a href="" title="" class="btn btn-info" data-toggle="modal" data-target="#modalAddItems">Agregar Item</a>-->
+            <a href="" title="" id="loadProd" class="btn btn-info">Cargar</a>
+            <input type="hidden" id="urlLoadProd" value="{{URL::route('ajaxLoadProductos')}}">
+            <input type="hidden" id="urlAddProd" value="{{URL::route('urlAddProd')}}">
+            <input type="hidden" id="idPedido" value="{{$pedido->id}}">
+
+            @include('includes/modals/items')
+
+
+
+
           </div>
         </div>
         <div class="panel-footer">
@@ -91,6 +102,8 @@
         </div>
         
       </div>
+
+
       
    </div>
 
@@ -128,4 +141,8 @@
       </div>
      
    </div>
+@stop
+
+@section('scripts')
+  <script src="{{asset('tat/js/loads.js')}}"></script>
 @stop

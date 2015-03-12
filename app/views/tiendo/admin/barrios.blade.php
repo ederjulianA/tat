@@ -12,49 +12,7 @@
 @stop
 <style type="text/css">
 
-  #btn-volver{
-    text-decoration: none;
-    background-color: #AEAEAE;
-    border-bottom: 3px solid #818181;
-    color: #fff;
-    margin: 5px;
-    font-weight: bold;
-    padding: .2em 1em;
-    font-size: 20px;
-    border-radius: 3px;
-  }
-  #btn-editar{
-    text-decoration: none;
-    background-color: #ff4842;
-    border-bottom: 3px solid #d0272a;
-    color: #fff;
-    font-weight: bold;
-    margin: 5px;
-    padding: .3em 1em;
-    font-size: 20px;
-    border-radius: 3px;
-  }
   
-  .item{
-    text-align: center;
-    padding: 5px;
-    box-shadow: 1px 2px 2px rgba(0,0,0,.5);
-  }
-  .cont-busc{
-    width: 80%;
-    margin: 0 auto;
-    padding: 5px;
-    max-width: 100%;
-  }
-  .formB{
-    width: 90%;
-  }
-  .formB input {
-    width: 60%;
-  }
-  .formB button {
-    width: 25%;
-  }
 </style>
 @section('content')
 @if(Session::has('message-alert'))
@@ -93,20 +51,29 @@
           
           <h2>Buscar barrio por nombre</h2>
             <div class="form-group has-success has-feedback">
-                <form method="get" action="{{URL::route('searchBarrio')}}">
-                   <input type="text" id="bar_nom" name="bar_nom">
-                   <input type="hidden" id="urlBarriosVajax" value="{{URL::route('urlBarriosVajax')}}">
-                  <!-- <select name="sel_ciudad" id="sel_ciudad" >
+                <form method="get" class="form-horizontal" action="{{URL::route('searchBarrio')}}">
+                <div class="form-group">
+                    <label for="bar_nom" class="col-sm-3 control-label">Nombre del barrio :</label>
+                      <div class="col-sm-6">
+                       <input type="text" id="bar_nom" name="bar_nom" class="form-control">
+                       <input type="hidden" id="urlBarriosVajax" value="{{URL::route('urlBarriosVajax')}}">
+                        <!-- <select name="sel_ciudad" id="sel_ciudad" >
 
-                      <option value="0">Todas</option>
-                      @foreach($ciudades as $ciu)
-                        <option value="{{$ciu->id}}">{{$ciu->ciu_nom}}</option>
-                     @endforeach
+                            <option value="0">Todas</option>
+                            @foreach($ciudades as $ciu)
+                              <option value="{{$ciu->id}}">{{$ciu->ciu_nom}}</option>
+                           @endforeach
+                         
+                         </select>-->
+                      </div> 
+                </div>
+                <div class="btn-footer">
+                  <button type="submit" class="btn-ok" id="">Buscar Barrio <i class="fa fa-sign-out"></i></button>
+                  <button href="#" class="btn-borrar" id="btn_borrar_dias">Borrar todos los días de visitas <i class="fa fa-exclamation-triangle"></i></button>
+                </div>
                    
-                   </select>-->
-                   <button type="submit" class="btn btn-info" id="">Buscar Barrio</button>
                 </form> 
-               <a href="#" class="btn btn-danger" id="btn_borrar_dias">Borrar todos los días de visitas</a>
+               
             </div>
            
         </div>  
@@ -179,4 +146,8 @@
 </div>
 <!-- /.Modal Login --> 
      
+@stop
+
+@section('estilos')
+<link rel="stylesheet" href="{{asset('tat/css/barrios.css')}}">
 @stop

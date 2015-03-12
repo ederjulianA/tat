@@ -113,7 +113,7 @@
 							<div id="search">
 								<div class="input-group">
 									
-									  <input type="text" class="form-control input-lg" placeholder="search" name="keyword" required>
+									  <input type="text" class="form-control input-lg" placeholder="Buscar" name="keyword" required>
 									  <span class="input-group-btn">
 										<button type="submit" class="btn btn-lg" type="button">
 											<i class="fa fa-search"></i>

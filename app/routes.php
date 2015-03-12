@@ -83,6 +83,7 @@ Route::post('urlBarriosAjax', array('as' => 'urlBarriosAjax', 'uses' => 'AjaxCon
 Route::post('CarroAjax', array('as' => 'CarroAjax', 'uses' => 'AjaxController@CarroAjax'));
 Route::post('addDescriptionAjax', array('as' => 'addDescriptionAjax', 'uses' => 'AjaxController@addDescriptionAjax'));
 Route::post('confEliDiasV', array('as' => 'confEliDiasV', 'uses' => 'AjaxController@confEliDiasV'));
+Route::post('urlAddProd', array('as' => 'urlAddProd', 'uses' => 'Ajax2Controller@urlAddProd'));
 
 
 
@@ -108,6 +109,11 @@ Route::group(['before' => 'auth'], function() {
         Route::post('addDia', array('as' => 'addDia', 'uses' => 'EmpresaController@addDia'));
         Route::get('admin/searchBarrio', array('as' => 'searchBarrio', 'uses' => 'EmpresaController@searchBarrio'));
         Route::post('deleteDay', array('as' => 'deleteDay', 'uses' => 'EmpresaController@deleteDay'));
+
+
+        //RUTAS LOAD AJAX HTML
+
+        Route::get('ajax/load/productos', array('as' => 'ajaxLoadProductos', 'uses' => 'Ajax2Controller@getLoadProductos'));
 
 		
 		

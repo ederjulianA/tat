@@ -44,12 +44,22 @@
           
           <h2>Buscar barrio por nombre</h2>
             <div class="form-group has-success has-feedback">
-                <form method="get" action="{{URL::route('searchBarrio')}}">
-                   <input type="text" id="bar_nom" name="bar_nom">
-                   <button type="submit" class="btn btn-info" id="">Buscar Barrio</button>
+                <form method="get" action="{{URL::route('searchBarrio')}}" class="form-horizontal">
+                   <div class="form-group">
+                    <label for="bar_nom" class="col-sm-3 control-label">Nombre del barrio :</label>
+                      <div class="col-sm-6">
+                       <input type="text" id="bar_nom" name="bar_nom" class="form-control">
+                       <input type="hidden" id="urlBarriosVajax" value="{{URL::route('urlBarriosVajax')}}">
+                      
+                      </div> 
+                </div>
+                <div class="btn-footer">
+                  <button type="submit" class="btn-ok" id="">Buscar Barrio <i class="fa fa-sign-out"></i></button>
+            
+                </div>
                 </form> 
                 <br>
-                <a href="{{URL::route('adminBarrios')}}" class="btn btn-warning">Volver al listado de barrios</a>
+                
                
             </div>
             <div class="row">
@@ -70,6 +80,7 @@
         </div>  
       
     </div>
+    <a href="{{URL::route('adminBarrios')}}" class="btn btn-warning">Volver al listado de barrios</a>
     <div class="row">
       <div class="col-md-12">
  
@@ -105,4 +116,9 @@
 
     
      
+@stop
+
+
+@section('estilos')
+<link rel="stylesheet" href="{{asset('tat/css/barrios.css')}}">
 @stop

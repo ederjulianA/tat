@@ -33,6 +33,8 @@
   <link rel="stylesheet" href="{{asset('admin2/css/jquery.dataTables.css')}}"> 
   <!-- Bootstrap toggle -->
   <link rel="stylesheet" href="{{asset('admin2/css/jquery.onoff.css')}}">
+
+  @yield('estilos')
   <!-- Main stylesheet -->
   <link href="{{asset('admin2/css/style.css')}}" rel="stylesheet">
   <!-- Widgets stylesheet -->

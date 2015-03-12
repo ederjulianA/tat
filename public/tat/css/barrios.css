@@ -1,0 +1,73 @@
+#btn-volver{
+    background-color: #AEAEAE;
+    border-bottom: 3px solid #818181;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 5px;
+    padding: .2em 1em;
+    text-decoration: none;
+  }
+
+  .btn-footer{
+    text-align: center;
+    width: 90%;
+  }
+  #btn-editar{
+    text-decoration: none;
+    background-color: #ff4842;
+    border-bottom: 3px solid #d0272a;
+    color: #fff;
+    font-weight: bold;
+    margin: 5px;
+    padding: .3em 1em;
+    font-size: 20px;
+    border-radius: 3px;
+  }
+  .btn-ok{
+    background-color: #512EDA;
+    border-bottom: 4px solid #4025AC;
+    border-radius: 4px;
+    border: 0;
+    color: #fff;
+    font-size: 1.5em;
+    font-weight: bold;
+    padding: 10px;
+    text-shadow: 2px 2px 1px rgba(0,0,0,.5);
+    width: 200px;
+  }
+
+  .btn-borrar{
+    background-color: #DB0C2F;
+    border-bottom: 4px solid #970019;
+    border-radius: 4px;
+    border: 0;
+    color: #fff;
+    font-size: 1.5em;
+    font-weight: bold;
+    padding: 10px;
+    text-shadow: 2px 2px 1px rgba(0,0,0,.5);
+    width: 200px;
+  }
+  
+  .item{
+    text-align: center;
+    padding: 5px;
+    box-shadow: 1px 2px 2px rgba(0,0,0,.5);
+  }
+  .cont-busc{
+    width: 80%;
+    margin: 0 auto;
+    padding: 5px;
+    max-width: 100%;
+  }
+  .formB{
+    width: 90%;
+  }
+  .formB input {
+    width: 60%;
+  }
+  .formB button {
+    width: 25%;
+  }
