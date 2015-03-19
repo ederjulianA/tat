@@ -20,8 +20,37 @@ class EmpresaController extends BaseController {
 	public function searchBarrio()
 	{
 		$barrio = $_GET['bar_nom'];
+		if(isset($_GET['dia']))
+		{
+			$dia = $_GET['dia'];
+		}else
+		{
+			$dia = null;
+		}
 		$d = Dias::all();
-		$b = Barrio::where('bar_nom', 'LIKE', '%'.$barrio.'%')->get();
+		if($dia != null)
+		{
+			$b = DB::table('barrios as b')->join('dia_barrio as dv','dv.barrio_id','=','b.id')->distinct()
+			->select(
+					'b.id',
+					'b.cod',
+					'b.ciu_id',
+					'b.bar_nom',
+					'dv.dia_id'
+				)->where('b.bar_nom', 'LIKE', '%'.$barrio.'%')->where('dv.dia_id','=',$dia)->get();
+		}else{
+			$b = DB::table('barrios as b')
+			->select(
+					'b.id',
+					'b.cod',
+					'b.ciu_id',
+					'b.bar_nom'
+					//'dv.dia_id'
+				)->where('b.bar_nom', 'LIKE', '%'.$barrio.'%')->get();
+
+		}
+		
+		//$b = Barrio::where('bar_nom', 'LIKE', '%'.$barrio.'%')->get();
 		return View::make('tiendo.admin.buscarBarrio',compact('d','b'));
 	}
 

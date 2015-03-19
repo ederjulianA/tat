@@ -16,6 +16,8 @@ class BuscadorController extends BaseController {
 	public function getBuscador()
 	{
 		$keyword = Input::get('keyword');
+
+		$dia     = 1;
 		
 		$productos = $this->producto->getProBuscador($keyword);
 

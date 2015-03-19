@@ -56,6 +56,7 @@
                     <label for="bar_nom" class="col-sm-3 control-label">Nombre del barrio :</label>
                       <div class="col-sm-6">
                        <input type="text" id="bar_nom" name="bar_nom" class="form-control">
+
                        <input type="hidden" id="urlBarriosVajax" value="{{URL::route('urlBarriosVajax')}}">
                         <!-- <select name="sel_ciudad" id="sel_ciudad" >
 
@@ -66,6 +67,20 @@
                          
                          </select>-->
                       </div> 
+                </div>
+                <div class="form-group">
+                  <label for="bar_nom" class="col-sm-3 control-label">Dia de visita :</label>
+                   <div class="col-sm-6">
+                          
+                          <select name="dia"  class="form-control">
+                            <option value="0">Escoge un dia</option>
+                              @foreach($d as $dv)
+                                <option value="{{$dv->id}}">{{$dv->dia_nom}}</option>
+                                
+                              @endforeach
+                          </select>
+                        </div>
+                  
                 </div>
                 <div class="btn-footer">
                   <button type="submit" class="btn-ok" id="">Buscar Barrio <i class="fa fa-sign-out"></i></button>
