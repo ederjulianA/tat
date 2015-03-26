@@ -20,15 +20,16 @@ class EmpresaController extends BaseController {
 	public function searchBarrio()
 	{
 		$barrio = $_GET['bar_nom'];
-		if(isset($_GET['dia']))
+		$dia = Input::get('dia');
+		/*if(isset($_GET['dia']))
 		{
 			$dia = $_GET['dia'];
 		}else
 		{
 			$dia = null;
-		}
+		}*/
 		$d = Dias::all();
-		if($dia != null)
+		if($dia != 0)
 		{
 			$b = DB::table('barrios as b')->join('dia_barrio as dv','dv.barrio_id','=','b.id')->distinct()
 			->select(

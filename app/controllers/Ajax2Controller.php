@@ -32,12 +32,16 @@ class Ajax2Controller extends BaseController {
 			{
 				$pro_pre        =    $producto->precio;
 				$pro_iva        =    $producto->por_iva;
+				
 				if($pro_iva == NULL)
 				{
 					$totalProducto  = $pro_pre;
+				}else {
+					$precioIva   	=	($pro_pre * $pro_iva)/100;
+					$totalProducto  =    $pro_pre + $precioIva;
 				}
-				$precioIva   	=	($pro_pre * $pro_iva)/100;
-				$totalProducto  =    $pro_pre + $precioIva;
+				
+				
 				
 				$pedido->totalCart = $pedido->totalCart + $totalProducto;
 				$pedido->total_compra = $pedido->total_compra + $totalProducto;

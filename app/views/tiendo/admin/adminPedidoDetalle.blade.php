@@ -47,8 +47,9 @@
               <th>IVA</th>
               <th>Valor Total</th>
               <th colspan="" rowspan="" headers="" scope="">Acciones</th>
+              <tbody id="contenedor-productos">
               @foreach($items as $item)
-                <tbody id="contenedor-productos">
+                
                   <tr id="fila-prod-{{$item->id_producto}}">
                     <td>{{$item->id_producto}}</td>
                     <td>{{$item->nombre}}</td>
@@ -58,8 +59,9 @@
                     <td id="val_total-{{$item->id_producto}}">${{number_format($item->valor_total, 0, '', '.')}}</td>
                     <td colspan="" rowspan="" headers=""><a href="{{$item->id_producto}}" title="" class="btn-eli-item" id="eliminar-{{$item->id_producto}}">Eliminar</a></td>
                   </tr>
-                 </tbody> 
+                
               @endforeach
+               </tbody> 
             </table>
 
             <!--<a href="" title="" class="btn btn-info" data-toggle="modal" data-target="#modalAddItems">Agregar Item</a>-->
