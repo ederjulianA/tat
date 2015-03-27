@@ -13,11 +13,48 @@ class Ajax2Controller extends BaseController {
 			$this->envio 	= $envio;
 	}
 
+
+	public function getLoadProductosSearch($search)
+	{
+		header('Content-type: text/javascript');
+
+		//$nombre = Input::get('seach');
+
+		$producto = DB::table('productos as p')
+			->select(
+					'p.id',
+					'p.pro_nom',
+					'p.slug',
+					'p.precio'
+					
+				)->where('p.pro_nom', 'LIKE', '%'.$search.'%')->get();
+		return Response::json($producto);
+	}
+
 	public function getLoadProductos()
 	{
 		$productos = Producto::all();
 
 		return View::make('load.productos',compact('productos'));
+	}
+
+	public function urlBuscarProd()
+	{
+		if(isset($_POST['name']) && $_POST['name'] == null)
+		{
+			$estado = array('estado'=>'1');
+			$pro = Producto::where('id','>',0)->orderBy('id','asc')->get();
+			return Response::json(array('estado'=>$estado, 'productos'=>$pro));
+		}
+		if(isset($_POST['name']))
+		{
+			$name = $_POST['name'];
+			$pro = Producto::where('pro_nom','LIKE','%'.$name.'%')->take(20)->get();
+			$estado = array('estado'=>'2');
+			return Response::json(array('estado'=>$estado,'productos'=>$pro));
+
+		}
+		
 	}
 
 	public function urlAddProd()

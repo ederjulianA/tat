@@ -84,6 +84,7 @@ Route::post('CarroAjax', array('as' => 'CarroAjax', 'uses' => 'AjaxController@Ca
 Route::post('addDescriptionAjax', array('as' => 'addDescriptionAjax', 'uses' => 'AjaxController@addDescriptionAjax'));
 Route::post('confEliDiasV', array('as' => 'confEliDiasV', 'uses' => 'AjaxController@confEliDiasV'));
 Route::post('urlAddProd', array('as' => 'urlAddProd', 'uses' => 'Ajax2Controller@urlAddProd'));
+Route::post('urlBuscarProd', array('as' => 'urlBuscarProd', 'uses' => 'Ajax2Controller@urlBuscarProd'));
 Route::post('urlDeleteProd', array('as' => 'urlDeleteProd', 'uses' => 'Ajax2Controller@urlDeleteProd'));
 Route::post('urlSync', array('as' => 'urlSync', 'uses' => 'Ajax2Controller@urlSync'));
 
@@ -117,6 +118,16 @@ Route::group(['before' => 'auth'], function() {
 
         Route::get('ajax/load/productos', array('as' => 'ajaxLoadProductos', 'uses' => 'Ajax2Controller@getLoadProductos'));
 
+        //RUTA QUE DEVUELVE LOS ARTICULOS POR EL FILTRO DEL NOMBRE EN FORMATO JSON
+        Route::get('ajax/load/productos/{search}', array('as' => 'ajaxLoadProductosSearch', 'uses' => 'Ajax2Controller@getLoadProductosSearch'));
+        //RUTA TEMPORAL DE LA BUSQUEDA
+
+        Route::get('ajax/load/results', function(){
+        	$name = Input::get('name');
+
+        	$pro = Producto::where('pro_nom','LIKE','%'.$name.'%')->take(20)->get();
+        	return Response::json($pro);
+        });
 		
 		
 

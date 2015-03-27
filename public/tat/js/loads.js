@@ -39,7 +39,7 @@ $(document).on('click','.itemP',function(e){
 					
 					var n_iva = '';
 					var n_cantidad 			= data.item.cantidad;
-					var n_val_total			= data.item.valor_total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");;
+					var n_val_total			= data.item.valor_total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 					var n_num_items 		= data.pedido.num_items;
 					var n_valor_unitario	= data.item.valor_unitario.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 					var n_total_compra		= data.pedido.total_compra.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -93,6 +93,82 @@ $(document).on('click','.itemP',function(e){
 		});
 	e.preventDefault();
 });
+
+//función para buscar productos por el nombre
+
+$(document).on('change','#inputSearch', function(e){
+	var url = $('#urlBuscarProd').val();
+	var inputSearch = $('#inputSearch').val();
+	$.ajax({
+
+			url : url,
+			dataType: "json",
+			type : "post",
+			data: {name: inputSearch},
+			success : function(data){
+				if(data.estado.estado == 1)
+				{
+					console.log(data);
+					$('#contenedor-prod').html('');
+					for (var i in data.productos)
+					{
+							if(data.productos[i].por_iva == null)
+							{
+								var n_iva = '';
+							}else
+							{
+								var n_iva = data.productos[i].por_iva;
+							}
+							var n_precio			= data.productos[i].precio.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+							var html = '';
+							html +='<tr>';
+							html +='<td>'+data.productos[i].id+'</td>';
+							html +='<td>'+data.productos[i].pro_nom+'</td>';
+							html +='<td>$'+n_precio+'</td>';
+							html +='<td>'+n_iva+'</td>';
+							html +='<td colspan="" rowspan="" headers=""><a href="#" class="itemP btn btn-info" id="itemP-'+data.productos[i].id+'" data="'+data.productos[i].id+'" title="">Agregar</a></td>';
+						html +='</tr>';
+						$('#contenedor-prod').append(html);
+					}
+					//console.log(data);
+				}
+
+				if(data.estado.estado == 2)
+				{
+
+					$('#contenedor-prod').html('');
+					for (var i in data.productos)
+					{
+							if(data.productos[i].por_iva == null)
+							{
+								var n_iva = '';
+							}else
+							{
+								var n_iva = data.productos[i].por_iva;
+							}
+							var n_precio			= data.productos[i].precio.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+							var html = '';
+							html +='<tr>';
+							html +='<td>'+data.productos[i].id+'</td>';
+							html +='<td>'+data.productos[i].pro_nom+'</td>';
+							html +='<td>$'+n_precio+'</td>';
+							html +='<td>'+n_iva+'</td>';
+							html +='<td colspan="" rowspan="" headers=""><a href="#" class="itemP btn btn-info" id="itemP-'+data.productos[i].id+'" data="'+data.productos[i].id+'" title="">Agregar</a></td>';
+						html +='</tr>';
+						$('#contenedor-prod').append(html);
+					}
+					//console.log(data);
+				}
+				
+				
+			}
+
+				
+
+
+		});
+
+}) ;
 
 //funcion para eliminar un articulo del pedido
 $(document).on('click','.btn-eli-item', function(e){
