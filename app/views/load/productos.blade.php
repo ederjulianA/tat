@@ -60,6 +60,7 @@
               <th>Precio</th>
               
               <th>IVA</th>
+              <th>Cantidad</th>
               <th>Acción</th>
               <tbody id="contenedor-prod">
               @foreach($productos as $pro)
@@ -69,6 +70,7 @@
                 
                   <td>${{number_format($pro->precio, 0, '', '.')}}</td>
                   <td>{{$pro->por_iva}}</td>
+                  <td colspan="" rowspan="" headers=""><input type="number" value="1" id="cant-{{$pro->id}}" /></td>
                   <td colspan="" rowspan="" headers=""><a href="#" class="itemP btn btn-info" id="itemP-{{$pro->id}}" data="{{$pro->id}}" title="">Agregar</a></td>
                   
                 </tr>

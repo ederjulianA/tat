@@ -18,6 +18,7 @@ $(document).on('click','.itemP',function(e){
 	var urlProd = $('#urlAddProd').val();
 	var idArt = $(this).attr('data');
 	var idPedido = $('#idPedido').val();
+	var cantidad_envio = $('#cant-'+idArt).val();
 
 	
 
@@ -26,7 +27,7 @@ $(document).on('click','.itemP',function(e){
 			url : urlProd,
 			dataType: "json",
 			type : "post",
-			data : { idPedido : idPedido, idArt: idArt},
+			data : { idPedido : idPedido, idArt: idArt, ctd:cantidad_envio},
 			success : function(data){
 				console.log(data);
 
@@ -58,6 +59,7 @@ $(document).on('click','.itemP',function(e){
 							html +='<td>$'+n_valor_unitario+'</td>';
 							html +='<td>'+n_iva+'</td>';
 							html +='<td id="val_total-'+idArt+'">$'+n_val_total+'</td>';
+							//html +='<td colspan="" rowspan="" headers=""><input type="number" value="1" id="cant-'+idArt+'" /></td>';
 							html +='<td><a href="'+idArt+'" title="" class="btn-eli-item" id="eliminar-'+idArt+'">Eliminar</a></td>';
 						html +='</tr>';
 					$('#modalAddItems').modal('hide');
@@ -108,6 +110,7 @@ $(document).on('change','#inputSearch', function(e){
 			success : function(data){
 				if(data.estado.estado == 1)
 				{
+					alert("1");
 					console.log(data);
 					$('#contenedor-prod').html('');
 					for (var i in data.productos)
@@ -126,6 +129,7 @@ $(document).on('change','#inputSearch', function(e){
 							html +='<td>'+data.productos[i].pro_nom+'</td>';
 							html +='<td>$'+n_precio+'</td>';
 							html +='<td>'+n_iva+'</td>';
+							html +='<td colspan="" rowspan="" headers=""><input type="number" value="1" id="cant-'+idArt+'" /></td>';
 							html +='<td colspan="" rowspan="" headers=""><a href="#" class="itemP btn btn-info" id="itemP-'+data.productos[i].id+'" data="'+data.productos[i].id+'" title="">Agregar</a></td>';
 						html +='</tr>';
 						$('#contenedor-prod').append(html);
@@ -135,7 +139,7 @@ $(document).on('change','#inputSearch', function(e){
 
 				if(data.estado.estado == 2)
 				{
-
+					
 					$('#contenedor-prod').html('');
 					for (var i in data.productos)
 					{
@@ -153,6 +157,7 @@ $(document).on('change','#inputSearch', function(e){
 							html +='<td>'+data.productos[i].pro_nom+'</td>';
 							html +='<td>$'+n_precio+'</td>';
 							html +='<td>'+n_iva+'</td>';
+							html +='<td colspan="" rowspan="" headers=""><input type="number" value="1" id="cant-'+data.productos[i].id+'" /></td>';
 							html +='<td colspan="" rowspan="" headers=""><a href="#" class="itemP btn btn-info" id="itemP-'+data.productos[i].id+'" data="'+data.productos[i].id+'" title="">Agregar</a></td>';
 						html +='</tr>';
 						$('#contenedor-prod').append(html);
@@ -175,6 +180,7 @@ $(document).on('click','.btn-eli-item', function(e){
 	var idArt = $(this).attr('href');
 	var urlDeleteProd = $('#urlDeleteProd').val();
 	var idPedido = $('#idPedido').val();
+	var cantidad_envio = $('#cant-'+idArt).val();
 
 	//alert("idArt"+idArt);
 
@@ -185,7 +191,7 @@ $(document).on('click','.btn-eli-item', function(e){
 			url : urlDeleteProd,
 			dataType: "json",
 			type : "post",
-			data : { idPedido : idPedido, idArt: idArt},
+			data : { idPedido : idPedido, idArt: idArt,ctd:cantidad_envio},
 			success : function(data){
 				
 				if(data.estado.estado == 1){

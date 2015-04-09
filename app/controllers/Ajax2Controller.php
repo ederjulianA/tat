@@ -65,6 +65,7 @@ class Ajax2Controller extends BaseController {
 		{
 			$pedido   = Compra::where('id','=',$_POST['idPedido'])->first();
 			$producto = Producto::where('id','=',$_POST['idArt'])->first();
+			$cant     = $_POST['ctd'];
 			if($pedido)
 			{
 				$pro_pre        =    $producto->precio;
@@ -72,22 +73,22 @@ class Ajax2Controller extends BaseController {
 				
 				if($pro_iva == NULL)
 				{
-					$totalProducto  = $pro_pre;
+					$totalProducto  = $pro_pre*$cant;
 				}else {
 					$precioIva   	=	($pro_pre * $pro_iva)/100;
-					$totalProducto  =    $pro_pre + $precioIva;
+					$totalProducto  =    ($pro_pre + $precioIva)*$cant;
 				}
 				
 				
 				
 				$pedido->totalCart = $pedido->totalCart + $totalProducto;
 				$pedido->total_compra = $pedido->total_compra + $totalProducto;
-				$pedido->num_items = $pedido->num_items +1;
+				$pedido->num_items = $pedido->num_items +$cant;
 				if($pedido->save())
 				{
 					//$estado = array('estado'=>'0');
 					//return Response::json($pedido);
-					$item = Item::where('id_producto','=',$producto->id)->first();
+					$item = Item::where('compra_id','=',$pedido->id)->where('id_producto','=',$producto->id)->first();
 					if($item)
 					{
 						
@@ -99,15 +100,18 @@ class Ajax2Controller extends BaseController {
 						//$producto->iva   			=	$pro_iva;
 
 						
-						$item->cantidad			=	$item->cantidad +1;
+						$item->cantidad			=	$item->cantidad +$cant;
 						//$producto->id_producto	 	=	$producto->id;
 						
 						$item->valor_total 		=	$item->valor_total + $totalProducto;
 
-						$item->save();	
-						$estado = array('estado'=>'2');
+						
+						if($item->save()){
+							$estado = array('estado'=>'2','mensaje'=>'Se ha guardado el producto');
 
 						return Response::json(array('estado'=>$estado,'pedido'=>$pedido,'producto'=>$producto,'item'=>$item));
+						}	
+						
 					}
 					else{
 						$item = new Item;
@@ -116,15 +120,17 @@ class Ajax2Controller extends BaseController {
 						$item->image 			=	$producto->img;
 						$item->valor_unitario	=	$pro_pre;
 						$item->iva   			=	$pro_iva;
-						$item->cantidad			=	1;
+						$item->cantidad			=	$cant;
 						$item->id_producto	 	=	$producto->id;
 						$precioIva   			=	($pro_pre * $pro_iva)/100;
-						$item->valor_total 		=	$pro_pre + $precioIva;
+						$item->valor_total 		=	($pro_pre + $precioIva)*$cant;
 
-						$item->save();
-						$estado = array('estado'=>'1');
+						if($item->save()){
+							$estado = array('estado'=>'1','mensaje'=>'Se ha creado el nuevo producto');
 
-					return Response::json(array('estado'=>$estado,'pedido'=>$pedido,'producto'=>$producto,'item'=>$item));
+							return Response::json(array('estado'=>$estado,'pedido'=>$pedido,'producto'=>$producto,'item'=>$item));
+						}
+						
 					}
 				}
 			}
@@ -142,13 +148,14 @@ class Ajax2Controller extends BaseController {
 		{
 			$pedido   = Compra::where('id','=',$_POST['idPedido'])->first();
 			$producto = Producto::where('id','=',$_POST['idArt'])->first();
+			$cant     = $_POST['ctd'];
 			if($pedido)
 			{
 
-				$item = Item::where('id_producto','=',$producto->id)->first();
+				$item = Item::where('compra_id','=',$pedido->id)->where('id_producto','=',$producto->id)->first();
 				if($item)
 				{
-					$pedido->totalCart 		= $pedido->totalCart	 - $item->valor_total;
+					$pedido->totalCart 		= ($pedido->totalCart	 - $item->valor_total);
 					$pedido->total_compra 	= $pedido->total_compra  - $item->valor_total;
 					$pedido->num_items		= $pedido->num_items	 - $item->cantidad;
 

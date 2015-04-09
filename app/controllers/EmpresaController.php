@@ -13,6 +13,10 @@ class EmpresaController extends BaseController {
 	public function getAdminPedidoDetalle($id)
 	{
 		$pedido = $this->empresa->getPedidoDetalle($id);
+		if(!$pedido)
+		{
+			return Redirect::to('/admin/pedidos');
+		}
 		$items = $this->empresa->getItems($id);
 		return View::make('tiendo.admin.adminPedidoDetalle',compact('user','pedido','items'));
 	}
