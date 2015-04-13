@@ -33,7 +33,8 @@
     @endif
   <div class="contenedor">
     
-  
+  <a href="" title="" id="loadProdApi" class="btn btn-info"> Sincronizar Productos</a>
+  <input type="hidden" id="urlSync" value="{{URL::route('urlSync')}}">
     <table class="table">
       <thead>
         <th>Id producto</th>
@@ -56,4 +57,8 @@
       
     </table>
   </div>  
+@stop
+
+@section('scripts')
+  <script src="{{asset('tat/js/loads.js')}}"></script>
 @stop

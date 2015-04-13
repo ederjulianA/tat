@@ -14,6 +14,30 @@ class Ajax2Controller extends BaseController {
 	}
 
 
+	public function urlReparto()
+	{
+		header('Content-type: text/javascript');
+
+		if(isset($_POST['id_pedido']))
+		{
+			$idpedido = $_POST['id_pedido'];
+
+			$compra = Compra::where('id','=',$idpedido)->first();
+			if($compra)
+			{
+				$compra->estado_id = 3;
+				if($compra->save())
+				{
+					$estado = array('estado'=>1,'mensaje'=>'Se actualizado el estado del pedido');
+
+					return Response::json(array('estado'=>$estado,'compra'=>$compra));
+				}
+			}
+
+		}
+	}
+
+
 	public function getLoadProductosSearch($search)
 	{
 		header('Content-type: text/javascript');

@@ -65,12 +65,17 @@
             </table>
 
             <!--<a href="" title="" class="btn btn-info" data-toggle="modal" data-target="#modalAddItems">Agregar Item</a>-->
-            <a href="" title="" id="loadProd" class="btn btn-info">Cargar</a>
-            <a href="" title="" id="loadProdApi" class="btn btn-info">Productos</a>
+            @if($pedido->estado_id > 1)
+              <span class="alert alert-warning">El pedido ya ha sido confirmado</span>
+            @else
+              <a href="" title="" id="loadProd" class="btn btn-info">Agregar Item</a>
+            @endif
+            
+            <!--<a href="" title="" id="loadProdApi" class="btn btn-info">Productos</a>-->
             <input type="hidden" id="urlLoadProd" value="{{URL::route('ajaxLoadProductos')}}">
             <input type="hidden" id="urlAddProd" value="{{URL::route('urlAddProd')}}">
             <input type="hidden" id="urlDeleteProd" value="{{URL::route('urlDeleteProd')}}">
-            <input type="hidden" id="urlSync" value="{{URL::route('urlSync')}}">
+            
             <input type="hidden" id="idPedido" value="{{$pedido->id}}">
 
             @include('includes/modals/items')
@@ -84,6 +89,7 @@
           <div class="row">
             <div class="col-md-4">
               Numero de Items: <span id="num_items">{{$pedido->num_items}}<span><br>
+              
             <!--  <p id="tipo_entrega">Tipoo de entrega: {{ Funciones::tipoPedido($pedido->tipo_compra)}} </p>-->
               
             </div>
@@ -95,15 +101,22 @@
             </div>
             <div class="col-md-4">
               ESTADO DEL PEDIDO:<br> 
-              {{Funciones::getEstado($pedido->estado_id)}}<br>
+              <span class="label label-danger"> {{$pedido->nom_est}}</span>
+              <!--{{Funciones::getEstado($pedido->estado_id)}}--><br>
               @if($pedido->estado_id == 1)
               <form method="post" action="{{URL::route('postConfPedido')}}">
-                <input type="hidden" name="pedido_id" value="{{$pedido->id}}">
+                <input type="hidden" name="pedido_id" id="pedido_id" value="{{$pedido->id}}">
                 <input type="submit" class="btn btn-success btn-lg" value="Confirmar pedido">
               </form>
-              @else
-
               @endif
+
+              @if($pedido->estado_id == 2)
+                <input type="hidden" id="urlReparto" value="{{URL::route('urlReparto')}}">
+                 <input type="hidden" name="pedido_id" id="pedido_id" value="{{$pedido->id}}">
+                <a href="#" title="" id="btnReparto" class="btn btn-warning">Confirmar pedido en reparto</a>
+              @endif
+
+
             </div>
             
           </div>

@@ -70,12 +70,17 @@
 
 			if($id == 1)
 			{
-				$res = "<span class='label label-danger'>".$est->nom_est."</span>";
+				$res = "<span class='label label-danger' id='estadoP'>".$est->nom_est."</span>";
 			}
 
 			if($id == 2)
 			{
-				$res = "<span class='label label-info'>".$est->nom_est."</span>";
+				$res = "<span class='label label-info' id='estadoP'>".$est->nom_est."</span>";
+			}
+
+			if($id == 3)
+			{
+				$res = "<span class='label label-warning' id='estadoP'>".$est->nom_est."</span>";
 			}
 
 			return $res;

@@ -18,6 +18,7 @@
 											->join('users as u','c.user_id','=','u.id')
 											->join('user_datos as ud','ud.user_id','=','u.id')
 											->join('barrios as b','ud.barrio_id','=','b.id')
+											
 			->select(
 					'c.id',
 		 			'c.totalCart',

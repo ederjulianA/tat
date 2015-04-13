@@ -343,3 +343,39 @@ function loadBarriosV(id_ciudad)
 
 		});
 }
+
+
+//FUNCIÓN PEDIDO EN REPARTO
+
+$(document).on('click','#btnReparto', function(e){
+
+	var url = $('#urlReparto').val();
+	var id_pedido = $('#pedido_id').val();
+
+	$('#btnReparto').text('Confirmando...');
+
+
+	$.ajax({
+
+			url : url,
+			dataType: "json",
+			type : "post",
+			data: {id_pedido: id_pedido},
+			success : function(data){
+
+				console.log(data);
+				$('#btnReparto').text('Confirmado');
+				$('#estadoP').removeClass('label-info');
+				$('#estadoP').addClass('label-warning');
+				$('#estadoP').text('En reparto');
+				$('#btnReparto').fadeOut(1000);
+
+				
+			}
+
+				
+
+
+		});
+	e.preventDefault();
+});

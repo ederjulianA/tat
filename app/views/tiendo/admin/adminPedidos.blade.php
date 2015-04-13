@@ -8,7 +8,7 @@
 
 
 @section('titulo1')
-  HOME
+  Lista de pedidos
 @stop
 
 @section('content')
