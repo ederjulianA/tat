@@ -95,13 +95,13 @@ Route::post('urlSync', array('as' => 'urlSync', 'uses' => 'Ajax2Controller@urlSy
 
 
 Route::group(['before' => 'auth'], function() {
-	Route::get('logout', array('as' => 'logout', 'uses' => 'HomeController@logout'));
+		Route::get('logout', array('as' => 'logout', 'uses' => 'HomeController@logout'));
 
 		Route::get('micuenta', array('as' => 'micuenta', 'uses' => 'CuentaController@getIndex'));
 		Route::get('micuenta/orden/{id}', array('as' => 'micuentaorden', 'uses' => 'CuentaController@getDetalleCuenta'));
 		Route::post('postConfPedido', array('as' => 'postConfPedido', 'uses' => 'EmpresaController@postConfPedido'));
 
-	 Route::group(['before' => 'is_admin'], function () {
+	 	Route::group(['before' => 'is_admin'], function () {
 
         Route::get('admin', array('as' => 'adminIndex', 'uses' => 'EmpresaController@getIndex'));
         Route::get('admin/pedidos', array('as' => 'adminPedidos', 'uses' => 'EmpresaController@getPedidos'));
@@ -113,7 +113,12 @@ Route::group(['before' => 'auth'], function() {
         Route::post('addDia', array('as' => 'addDia', 'uses' => 'EmpresaController@addDia'));
         Route::get('admin/searchBarrio', array('as' => 'searchBarrio', 'uses' => 'EmpresaController@searchBarrio'));
         Route::post('deleteDay', array('as' => 'deleteDay', 'uses' => 'EmpresaController@deleteDay'));
+        //RUTAS PARA CONFIGURAR DATOS GENERALES. ################################
 
+        	require (__DIR__ . '/routes/rut_generales.php');
+
+
+        //##########################################################################
 
         //RUTAS LOAD AJAX HTML
 

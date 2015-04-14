@@ -57,7 +57,13 @@
                     <td>${{number_format($item->valor_unitario, 0, '', '.')}}</td>
                     <td>{{$item->iva}}</td>
                     <td id="val_total-{{$item->id_producto}}">${{number_format($item->valor_total, 0, '', '.')}}</td>
+                    @if($pedido->estado_id > 1)
+                      <td colspan="" rowspan="" headers=""> <a>Eliminar</a></td>
+                    @else
                     <td colspan="" rowspan="" headers=""><a href="{{$item->id_producto}}" title="" class="btn-eli-item" id="eliminar-{{$item->id_producto}}">Eliminar</a></td>
+                    @endif
+                    
+                    
                   </tr>
                 
               @endforeach
