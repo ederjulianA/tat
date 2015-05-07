@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	alert("hola");
+	
 });
 
 $( "#formTipEnv" ).on( "submit", function(e) {
@@ -77,3 +77,9 @@ $(document).on("click",'.tipos', function(e){
 		});
 	
 });
+
+
+
+
+
+

@@ -51,6 +51,7 @@ class HomeController extends BaseController {
 				return Redirect::back()->withInput()->with('message-alert','Errores en el formulario')->withErrors($validator->messages());
 			}else{
 				
+				
 				  $remember = (Input::has('remember')) ? true : false;
 				//creamos la sesion del usuario
 				$auth = Auth::attempt(array(
