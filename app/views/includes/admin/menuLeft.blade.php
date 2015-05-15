@@ -1,3 +1,4 @@
+
 <!-- Sidebar -->
     <div class="sidebar">
         <div class="sidebar-dropdown"><a href="#">Navegación</a></div>
@@ -15,9 +16,19 @@
             </ul>-->
           </li>
         	  
-              <li><a href="/admin/pedidos"><i class="fa fa-bar-chart-o"></i> Pedidos</a></li> 
-              <li><a href="/admin/productos"><i class="fa fa-bar-chart-o"></i> Productos</a></li> 
-              <li><a href="/admin/barrios"><i class="fa fa-bar-chart-o"></i> Barrios</a></li> 
+              <li><a href="/admin/pedidos"><i class="fa fa-cubes"></i> Pedidos</a></li> 
+              <li><a href="/admin/productos"><i class="fa fa-shopping-cart"></i> Productos</a></li> 
+              <li><a href="/admin/barrios"><i class="fa fa-bus"></i> Barrios</a></li>
+             
+
+               <li class="has_sub">
+                  <a href="#"><i class="fa fa-cogs"></i> Generales  <span class="pull-right"><i class="fa fa-sort-desc" id="g"></i></span></a>
+            <ul>
+              <li><a href="{{ URL::route('adminTipEnt')}}">Tipos de entrega</a></li>
+              <li><a href="{{ URL::route('adminpromociones')}}">Promociones</a></li>
+              
+            </ul>
+          </li> 
               
           </ul>
     </div>

@@ -51,6 +51,7 @@ class GeneralesController extends BaseController {
 			$img = 'img/promos/'.$filename;
 			$registerData = array(
 		        'titulo'    =>    Input::get('titulo'),
+		        'valor'		=>    Input::get('valor'),
 		        'descripcion'       =>    Input::get('desc'),
 		        'imgC'    =>    'img/promos/crop/'.$filenameC,
 		        'img'     =>    'img/promos/'.$filename

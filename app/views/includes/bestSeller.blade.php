@@ -1,18 +1,21 @@
-<h3 class="side-heading">Bestsellers</h3>
+<h3 class="side-heading">Promociones</h3>
+					@foreach($promo as $p)
+						
+					
 					<div class="product-col">
 						<div class="image">
-							<img src="images/product-images/pimg1.jpg" alt="product" class="img-responsive" />
+							<img src="{{asset($p->imgC)}}" alt="product" class="img-responsive" />
 						</div>
 						<div class="caption">
 							<h4>
-								<a href="product-full.html">Simply Organic Seeds</a>
+								<a href="">{{$p->titulo}}</a>
 							</h4>
 							<div class="description">
-								We are so lucky living in such a wonderful time. Our almost unlimited ...
+								
 							</div>
 							<div class="price">
-								<span class="price-new">$199.50</span> 
-								<span class="price-old">$249.50</span>
+								<span class="price-new">${{number_format($p->valor, 0, '', '.')}}</span> 
+								<!--<span class="price-old">$249.50</span>-->
 							</div>
 							<div class="cart-button button-group">
 								<button type="button" title="Wishlist" class="btn btn-wishlist">
@@ -22,9 +25,11 @@
 									<i class="fa fa-bar-chart-o"></i>
 								</button>
 								<button type="button" class="btn btn-cart">
-									Add to cart
+									Ver
 									<i class="fa fa-shopping-cart"></i> 
 								</button>									
 							</div>
 						</div>
 					</div>
+
+					@endforeach

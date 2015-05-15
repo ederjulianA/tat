@@ -18,6 +18,7 @@
 											->join('users as u','c.user_id','=','u.id')
 											->join('user_datos as ud','ud.user_id','=','u.id')
 											->join('barrios as b','ud.barrio_id','=','b.id')
+											->join('metodo_envio as me','c.tipo_compra','=','me.id')
 											
 			->select(
 					'c.id',
@@ -34,6 +35,7 @@
 		 			'ud.comentarios',
 		 			'ud.barrio_id',
 					'ud.apellido',
+					'me.nom_metodo',
 		 			'c.estado_id',
 		 			'u.email',
 		 			'b.bar_nom'

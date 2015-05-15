@@ -79,6 +79,64 @@ $(document).on("click",'.tipos', function(e){
 });
 
 
+//
+$(document).on("click",".fa-sort-desc", function(e){
+	var id = $(this).attr('id');
+
+	$('#'+id).removeClass('fa-sort-desc');
+	$('#'+id).addClass('fa-sort-up');
+});
+
+
+$(document).on("click",".fa-sort-up", function(e){
+	var id = $(this).attr('id');
+
+	$('#'+id).removeClass('fa-sort-up');
+	$('#'+id).addClass('fa-sort-desc');
+});
+
+
+//FUNCIÓN PARA ELIMINAR UNA PROMOCIÓN
+
+$(document).on("click",'#btnDeletePromo', function(e){
+	
+
+	var idPromo = $(this).attr('href');
+	$('#idPromo').val(idPromo);
+
+
+	$('#ModalDelPromo').modal('show');
+				
+
+	
+	e.preventDefault();
+});
+
+$(document).on("click","#confDelete", function(e){
+	$('#ModalDelPromo').modal('show');
+				$.ajax({
+
+			url: form.attr('action'),
+	        data: form.serialize(),
+	         type: form.attr('method'),
+	            beforeSend: function(){
+	            	$('.before').append('<h3>Eliminando...</h3>');
+	            },
+	            complete: function(data){
+	            	
+	            },
+				success : function(data){
+								
+
+					
+
+				
+				}
+
+		});
+});
+
+
 
 
 

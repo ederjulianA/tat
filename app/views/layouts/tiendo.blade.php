@@ -33,6 +33,7 @@
   <link rel="stylesheet" href="{{asset('admin2/css/jquery.dataTables.css')}}"> 
   <!-- Bootstrap toggle -->
   <link rel="stylesheet" href="{{asset('admin2/css/jquery.onoff.css')}}">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
   @yield('estilos')
   <!-- Main stylesheet -->

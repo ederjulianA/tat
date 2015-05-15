@@ -59,7 +59,7 @@
 					<div class="row">
 						<div class="col-md-4">
 							Numero de Items: {{$pedido->num_items}}<br>
-							Tipo de entrega: {{ Funciones::tipoPedido($pedido->tipo_compra)}} 
+							Tipo de entrega: {{$pedido->nom_metodo}}   
 							
 						</div>
 						<div class="col-md-4">
@@ -69,7 +69,7 @@
 						</div>
 						<div class="col-md-4">
 							ESTADO DEL PEDIDO:<br> 
-							{{Funciones::getEstado($pedido->estado_id)}}
+							{{$pedido->nom_est}}   
 						</div>
 						
 					</div>

@@ -96,19 +96,19 @@
             <div class="col-md-4">
               Numero de Items: <span id="num_items">{{$pedido->num_items}}<span><br>
               
-            <!--  <p id="tipo_entrega">Tipoo de entrega: {{ Funciones::tipoPedido($pedido->tipo_compra)}} </p>-->
+            
               
             </div>
             <div class="col-md-4">
               ENVIO : <STRONG>${{number_format($pedido->vlr_envio, 0, '', '.')}}</STRONG><br>
               TOTAL COMPRA : <strong id="total_compra"> ${{number_format($pedido->total_compra, 0, '', '.')}}</strong>
-              <p id="tipo_entrega">Tipoo de entrega: {{ Funciones::tipoPedido($pedido->tipo_compra)}} </p>
+              <p id="tipo_entrega">Tipo de entrega: {{$pedido->nom_metodo}}  </p>
               
             </div>
             <div class="col-md-4">
               ESTADO DEL PEDIDO:<br> 
               <span class="label label-danger"> {{$pedido->nom_est}}</span>
-              <!--{{Funciones::getEstado($pedido->estado_id)}}--><br>
+              <br>
               @if($pedido->estado_id == 1)
               <form method="post" action="{{URL::route('postConfPedido')}}">
                 <input type="hidden" name="pedido_id" id="pedido_id" value="{{$pedido->id}}">
