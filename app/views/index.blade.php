@@ -35,6 +35,7 @@
 			<!-- Heading Ends -->
 			<!-- Products Row Starts -->
 				<div class="row">
+				
 				@foreach($productos as $pro)
 					<!-- Product #1 Starts -->
 						<div class="col-md-3 col-sm-6">

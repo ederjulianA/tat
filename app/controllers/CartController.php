@@ -5,19 +5,22 @@ class CartController extends BaseController {
 	protected $producto;
 	protected $cat;
 	protected $barrio;
+	protected $grupo;
 
-	public function __construct(Producto $producto, Categoria $cat, Barrio $barrio)
+	public function __construct(Producto $producto, Categoria $cat, Barrio $barrio,Grupo $grupo)
 	{
 		$this->producto 	= $producto;
 		$this->cat 			= $cat;
 		$this->barrio 		= $barrio;
+		$this->grupo 	= $grupo;
 	}
 
 
 	public function getCart()
 	{
 		$categorias =   $this->cat->getAllCat();
-		return View::make('cart')->with('categorias',$categorias)->with('products', Cart::contents());
+		$grupos 		=   $this->grupo->getAllGrupos();
+		return View::make('cart')->with('grupos',$grupos)->with('categorias',$categorias)->with('products', Cart::contents());
 	}
 
 	public function getCheckout()
@@ -27,9 +30,11 @@ class CartController extends BaseController {
 			return Redirect::to('/cart')->with('message-alert','No hay Items en tu pedido');
 		}
 		$categorias =   $this->cat->getAllCat();
-		$barrios = $this->barrio->getAllBarrios();
-		$ciudades = $this->barrio->getAllCities();
-		$canales =  $this->barrio->getAllCanales();
+		$barrios 	=	$this->barrio->getAllBarrios();
+		$ciudades 	= 	$this->barrio->getAllCities();
+		$canales    =  	$this->barrio->getAllCanales();
+		$grupos 	=   $this->grupo->getAllGrupos();
+		$pagos   	= 	Mpagos::all();
 			
 		if(Auth::check())
 		{
@@ -53,11 +58,11 @@ class CartController extends BaseController {
 					'ud.telefono',
 					'ud.comentarios'
 				)->where('ud.user_id','=',$user->id)->first();
-			return View::make('checkout')->with('barrios',$barrios)->with('canales',$canales)->with('ciudades',$ciudades)->with('datos',$datos)->with('categorias',$categorias)->with('products', Cart::contents());
+			return View::make('checkout')->with('pagos',$pagos)->with('grupos',$grupos)->with('barrios',$barrios)->with('canales',$canales)->with('ciudades',$ciudades)->with('datos',$datos)->with('categorias',$categorias)->with('products', Cart::contents());
 		}
 		$datos = NULL;
 
-		return View::make('checkout')->with('datos',$datos)->with('barrios',$barrios)->with('categorias',$categorias)->with('products', Cart::contents());
+		return View::make('checkout')->with('pagos',$pagos)->with('grupos',$grupos)->with('datos',$datos)->with('barrios',$barrios)->with('categorias',$categorias)->with('products', Cart::contents());
 		
 	}
 

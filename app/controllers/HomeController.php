@@ -5,33 +5,64 @@ class HomeController extends BaseController {
 
 	protected $producto;
 	protected $cat;
-
-	public function __construct(Producto $producto, Categoria $cat)
+	protected $grupo;
+	protected $promo;
+	public function __construct(Producto $producto, Categoria $cat, Grupo $grupo,Promo $promo)
 	{
 		$this->producto = $producto;
 		$this->cat = $cat;
+		$this->grupo = $grupo;
+		$this->promo = $promo;
+	}
+
+
+	public function android()
+	{
+		if (isset($_POST['data']) and isset($_POST['info']))
+		{
+			$dato = $_POST['data'];
+			$info = $_POST['info'];
+			echo $data."\n".$info;
+		}else
+		{
+			echo"NOTHING TO SHOW";
+		}
+		
 	}
 
 
 	public function getIndex()
 	{
-		$productos	= $this->producto->getSome();
-		$categorias =   $this->cat->getAllCat();
-		return View::make('index')->with('categorias',$categorias)->with('productos',$productos)->with('products', Cart::contents());
+		
+		
+			
+		/*$productos			= 	$this->producto->getSome();
+		//$promo      		=   $this->promo->getPromo();
+		$grupos 			=   $this->grupo->getAllGrupos();
+		$categorias 		= 	$this->cat->getAllCat();
+		return View::make('index')->with('grupos',$grupos)->with('categorias',$categorias)->with('productos',$productos)->with('products', Cart::contents());*/
+
+		$productos 	=	$this->producto->getSome();
+		$promo      =   $this->promo->getPromo();
+		$grupos 		=   $this->grupo->getAllGrupos();
+		$categorias = $this->cat->getAllCat();
+		return View::make('index')->with('grupos',$grupos)->with('categorias',$categorias)->with('promo',$promo)->with('productos',$productos)->with('products', Cart::contents());
 	}
 
 	public function getRegistger()
 	{
+		$grupos 		=   $this->grupo->getAllGrupos();
 		$categorias =   $this->cat->getAllCat();
-		return View::make('register')->with('categorias',$categorias)->with('products', Cart::contents());
+		return View::make('register')->with('grupos',$grupos)->with('categorias',$categorias)->with('products', Cart::contents());
 	}
 
 	
 
 	public function getLogin()
 	{
+		$grupos 		=   $this->grupo->getAllGrupos();
 		$categorias =   $this->cat->getAllCat();
-		return View::make('login')->with('categorias',$categorias)->with('products', Cart::contents());
+		return View::make('login')->with('grupos',$grupos)->with('categorias',$categorias)->with('products', Cart::contents());
 	}
 
 	public function postLogin()

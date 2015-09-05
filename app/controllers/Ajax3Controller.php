@@ -13,6 +13,34 @@ class Ajax3Controller extends BaseController {
 			$this->envio 	= $envio;
 	}
 
+	public function urlTipPag()
+	{
+			//header('Content-type: text/javascript');
+		
+/*			$d = Dias::all();
+			$b = Barrio::all();
+			
+			$num_barrios = count($b);*/
+		
+			$estado = array('estado'=>'1');
+			 return Response::json($estado)
+		
+	
+
+
+	
+		
+		
+	}
+
+
+	public function prueba()
+	{
+		$estado = array('estado'=>'1');
+		return Response::json($estado)
+		
+	}
+
 	public function urlTipEnv()
 	{
 			if(Request::ajax()){

@@ -23,6 +23,7 @@
 	<link href="{{asset('tat/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
 	<link href="{{asset('tat/css/style.css')}}" rel="stylesheet">
 	<link href="{{asset('tat/css/responsive.css')}}" rel="stylesheet">
+	<link href="{{asset('tat/css/validationJS.css')}}" rel="stylesheet">
 	
 	<!--[if lt IE 9]>
 		<script src="js/ie8-responsive-file-warning.js"></script>
@@ -262,6 +263,8 @@
     <script src="{{asset('tat/js/jquery.magnific-popup.min.js')}}"></script>
 	<script src="{{asset('tat/js/custom.js')}}"></script>
 	<script src="{{asset('tat/js/addCart.js')}}"></script>
+	<script src="{{asset('tat/js/jquery.numeric.js')}}"></script>
+	<script src="{{asset('tat/js/tipopago.js')}}"></script>
 	@yield('ajax-val')
 </body>
 </html>

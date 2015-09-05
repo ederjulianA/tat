@@ -4,8 +4,11 @@
 
 		public static  function getCat($id)
 		{ 
-			$cat = Categoria::where('id','=',$id)->first();
-			return $cat->cat_nom;
+			//dd($id);
+			//$cat = Categoria::where('InvSubGruCod','=',$id)->first();
+			$cat = Familia::where('InvFamCod','=',$id)->first();
+			//dd($cat->InvFamNom);
+			return $cat->InvFamNom;
 		}
 
 		public static function tipoPedido($tipo)

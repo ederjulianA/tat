@@ -93,7 +93,7 @@
 							<div class="options">
 								<div class="form-group">
 									<label class="control-label text-uppercase" for="input-quantity">Cant:</label>
-									<input type="number"  name="cantidad" value="1" size="2" id="input-quantity" class="form-control inputQnt" />
+									<input type="number"  name="cantidad" value="1" size="2" id="input-quantity" class="form-control inputQnt soloNum" />
 								</div>
 								<div class="cart-button button-group">
 									<!--<button type="button" title="Wishlist" class="btn btn-wishlist">

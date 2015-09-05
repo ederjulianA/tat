@@ -123,6 +123,7 @@ return array(
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 		'Intervention\Image\ImageServiceProvider',
 		'Moltin\Cart\CartServiceProvider',
+		'Thujohn\Pdf\PdfServiceProvider',
 
 	),
 
@@ -191,7 +192,8 @@ return array(
 		'Validator'         => 'Illuminate\Support\Facades\Validator',
 		'View'              => 'Illuminate\Support\Facades\View',
 		'Cart' 				=> 'Moltin\Cart\Facade',
-		'Image' 		    => 'Intervention\Image\Facades\Image'
+		'Image' 		    => 'Intervention\Image\Facades\Image',
+		'PDF' 				=> 'Thujohn\Pdf\PdfFacade',
 
 	),
 

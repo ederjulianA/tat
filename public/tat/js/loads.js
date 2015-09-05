@@ -217,6 +217,7 @@ $(document).on('click','.btn-eli-item', function(e){
 
 $(document).on('click','#loadProdApi',function(e){
 	sync();
+	$('#loadProdApi').text('Sincronizando...');
 	e.preventDefault();
 });
 
@@ -253,7 +254,10 @@ function guardar(data)
 			data: {data: data},
 			success : function(data){
 
+				var html = '<div class="alert alert-warning alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><strong>Actualización terminada</strong></div>';
 				console.log(data);
+				$('.ajax2').append(html);
+				location.reload();
 				
 			}
 

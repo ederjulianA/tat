@@ -60,7 +60,7 @@
                     @if($pedido->estado_id > 1)
                       <td colspan="" rowspan="" headers=""> <a>Eliminar</a></td>
                     @else
-                    <td colspan="" rowspan="" headers=""><a href="{{$item->id_producto}}" title="" class="btn-eli-item" id="eliminar-{{$item->id_producto}}">Eliminar</a></td>
+                    <td colspan="" rowspan="" headers=""><a href="{{$item->id_producto}}" title="" class="btn-eli-item" id="eliminar-{{$item->id_producto}}" >Eliminar</a></td>
                     @endif
                     
                     
@@ -73,6 +73,7 @@
             <!--<a href="" title="" class="btn btn-info" data-toggle="modal" data-target="#modalAddItems">Agregar Item</a>-->
             @if($pedido->estado_id > 1)
               <span class="alert alert-warning">El pedido ya ha sido confirmado</span>
+              <a href="{{URL::route('pedidopdf',array('id'=>$pedido->id))}} "target="_blank" title="">Generar PDF</a>
             @else
               <a href="" title="" id="loadProd" class="btn btn-info">Agregar Item</a>
             @endif

@@ -27,6 +27,11 @@ Route::get(	'/catalogo', array(
 		'uses'=> 'CatalogoController@getCatalogo'
 		));
 
+Route::get(	'/PedidoPdf/{id}', array(
+		'as'=>'pedidopdf', 
+		'uses'=> 'EmpresaController@getPdfPedido'
+		));
+
 //GRUPO DE RUTAS PARA ANTES DE ESTAR REGISTRADO
 Route::group(['before' => 'guest'], function () {
 		Route::get(	'/register', array(
@@ -54,6 +59,10 @@ Route::get('cart', array('as' => 'cart', 'uses' => 'CartController@getCart'));
 Route::get('checkout', array('as' => 'checkout', 'uses' => 'CartController@getCheckout'));
 Route::get('categoria/{id}', array('as' => 'categoria', 'uses' => 'CatalogoController@getCategoria'));
 Route::get('/remove/cart/{identifier}', array('as' => 'removeItem','uses' => 'CartController@getRemoveitem'));
+
+//android
+
+Route::any('/android', array('as' => 'android', 'uses' => 'HomeController@android'));
 
 //BUSCADOR
 
@@ -88,6 +97,12 @@ Route::post('urlBuscarProd', array('as' => 'urlBuscarProd', 'uses' => 'Ajax2Cont
 Route::post('urlDeleteProd', array('as' => 'urlDeleteProd', 'uses' => 'Ajax2Controller@urlDeleteProd'));
 Route::post('urlReparto', array('as' => 'urlReparto', 'uses' => 'Ajax2Controller@urlReparto'));
 Route::post('urlSync', array('as' => 'urlSync', 'uses' => 'Ajax2Controller@urlSync'));
+
+
+Route::any('UrlLoadPro', array('as' => 'UrlLoadPro', 'uses' => 'Ajax2Controller@UrlLoadPro'));
+
+
+ Route::post('urlTipPag', array('as' => 'urlTipPag', 'uses' => 'Ajax3Controller@prueba'));
 
 
 

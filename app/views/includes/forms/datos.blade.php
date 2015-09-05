@@ -14,6 +14,7 @@
 											
 												{{ Form::text('nombre',$datos->nombre,array('class'=>'form-control','name'=>'nombre','placeholder'=>'')) }}
 												{{ $errors->first('nombre','<p class="alert alert-danger">:message</p>') }}
+												<input type="hidden" id="NitSec" value="{{Auth::user()->NitSec}}">
 											</div>
 										</div>
 
@@ -147,4 +148,5 @@
 @section('ajax-val')
 <!--<script src="{{asset('tat/js/val-ajax-datos.js')}}"></script>-->
 		<script src="{{asset('tat/js/loadBarrios.js')}}"></script>
+		
 @stop

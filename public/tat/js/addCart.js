@@ -1,14 +1,32 @@
 $(document).ready(function(){
+
 	var id_ciudad = $('#ciudad_id').val();
 	//loadBarrios(id_ciudad);
 	cargarDias();
+
+	$('#input-quantity').numeric();
+	$('.input-quantity').numeric();
+
 });
 
+
+
+
+
+
+
 $(document).on('click','#btn_addCart', function(e){
+
 
 	
 	var id_pro = $('#id_producto').val();
 	var cantidad = $('#input-quantity').val();
+
+	if( cantidad <= 0)
+	{
+		$('#input-quantity').addClass("alert");
+		return false;
+	}
 
 				$.ajax({
 
@@ -24,7 +42,7 @@ $(document).on('click','#btn_addCart', function(e){
 						show:true,
 						keyboard:false
 					});
-					$('.info-item').html('<p>Has agregado a tu lista :'+data.producto.pro_nom+' <img src="../'+data.producto.img+'" height="120px" width="auto"></p><br><strong>Total del Pedido: $'+Ntotal+'</strong>')
+					$('.info-item').html('<p>Has agregado a tu lista :'+data.producto.pro_nom+' <img src="'+data.producto.img+'" height="120px" width="auto"></p><br><strong>Total del Pedido: $'+Ntotal+'</strong>')
 					console.log(data);
 				}
 				
@@ -195,7 +213,7 @@ $(document).on('change','.cant', function(e){
 
 
 
-//FUNCIONES 
+
 
 
 function cargarDias()

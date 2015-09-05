@@ -10,6 +10,49 @@ class EmpresaController extends BaseController {
 		$this->pro 	   = $pro;	
 	}
 
+	public function getPdfPedido($id)
+	{
+		$pedido = $this->empresa->getPedidoDetalle($id);
+		$items = $this->empresa->getItems($id);
+		$rt = '';
+		foreach ($items as $item) {
+			$r = '<tr><td>'.$item->id_producto.'</td> <td>'.$item->nombre.'</td>  <td> '.$item->cantidad.'</td> <td>'.number_format($item->valor_unitario, 0, '', '.').'</td><td>'.$item->iva.'</td> <td>'.number_format($item->valor_total, 0, '', '.').'</td>   </tr>';
+			$rt = $rt.$r;
+		}
+		$html = View::make('pdf.pedido',compact('pedido','items'));
+		//dd($items);
+		/*$html = 
+					'<html>'
+					.'<head>'
+						.'<title></title>'
+						
+					.'</head>'
+					.'<body >'
+					.'<header >'
+							.'<div><img src="'.asset('tat/images/product-images/1.jpg').'">  <h1>Pedido TAT</h1></div>'
+							.'<div>'.$pedido->nombre.'</div>'
+						.'</header><!-- /header -->'
+						.'<div> '
+						.'<table class="table">'
+						.'<tr>'
+							.'<th>id</th>'
+							.'<th>Detalle</th>'
+							.'<th>Cantidad</th>'
+							.'<th>Valor Unitario</th>'
+							.'<th>Iva</th>'
+							.'<th>Valor Total</th>'
+
+						.'</tr>'
+						.$rt
+					
+						.'</table>'
+							
+						.'</div>'
+					.'</body>'
+					.'</html>';*/
+    		return PDF::load($html, 'A4', 'portrait')->show();
+	}
+
 	public function getAdminPedidoDetalle($id)
 	{
 		$pedido = $this->empresa->getPedidoDetalle($id);
@@ -97,7 +140,8 @@ class EmpresaController extends BaseController {
 	{
 		$user = Auth::user()->id;
 		$productos = $this->pro->getAllPro();
-		return View::make('tiendo.admin.productos',compact('user','productos'));
+		$numPros  = count($productos);
+		return View::make('tiendo.admin.productos',compact('user','productos','numPros'));
 	}
 
 

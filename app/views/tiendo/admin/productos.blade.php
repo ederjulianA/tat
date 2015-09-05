@@ -32,12 +32,20 @@
     </div>
     @endif
   <div class="contenedor">
+    <div class="ajax2">
+      
+    </div>
+  <!--<a href="" title="" id="loadProdApi" class="btn btn-info"> Sincronizar Productos</a>-->
+  <a href="{{URL::route('mantisSync')}}"class="btn btn-info"  title="">Sincronizar Productos</a>
+  <div>
+    <p>Total de productos: {{$numPros}}</p>
     
-  <a href="" title="" id="loadProdApi" class="btn btn-info"> Sincronizar Productos</a>
+  </div>
   <input type="hidden" id="urlSync" value="{{URL::route('urlSync')}}">
     <table class="table">
       <thead>
         <th>Id producto</th>
+        <th>ArtCod</th>
         <th>Nombre</th>
         
         <th>Acciones</th>
@@ -45,8 +53,9 @@
       <tbody>
         @foreach($productos as $pro)
           <tr>
-            <td>{{$pro->id}}</td>
             
+            <td>{{$pro->id}}</td>
+            <td>{{$pro->id_mantis}}</td>
             <td>{{$pro->pro_nom}} </td>
           
           

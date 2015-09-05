@@ -26,6 +26,42 @@
 						</div>
 					<!-- Total Panel Ends -->
 
+
+					<!-- Medoto envio Panel Starts -->
+						<div class="panel panel-smart">
+							<div class="panel-heading">
+								<h3 class="panel-title">
+									Método de Pago
+								</h3>
+							</div>
+							<!--<form method="post" action="{{URL::route('postPedido')}}" id="form-pedido">-->
+							<input type="hidden"id="urlTipPag" value="{{URL::route('urlTipPag')}}">
+							<input type="hidden" id="carval" value="{{Cart::total()}}">
+							<div class="panel-body">
+								<select class="select_envio select_error" name="tipo_pago" id="slc_TipPag">
+									@foreach($pagos as $pago)
+									
+										<option value="{{$pago->id}}">{{$pago->TipPagNom}} </option>
+									@endforeach	
+									
+								</select>
+								<!--RUTA TAT{{Form::radio('tipo_compra', '1','',array('id'=>'slc_envio'))}}
+								inmediata{{Form::radio('tipo_compra', '2','',array('id'=>'slc_envio'))}}-->
+								<hr />
+							
+								
+								
+							</div>
+							<div class="text-uppercase clearfix" id="msg-ajax">
+									
+								</div>
+						</div>
+					<!-- Total Panel Ends -->
+
+
+
+
+
 					<!-- Total Panel Starts -->
 						<div class="panel panel-smart">
 							<div class="panel-heading">

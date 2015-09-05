@@ -86,7 +86,7 @@
 								<form method="post" action="{{URL::route('updateItem')}}">						
 									<td class="text-center">
 										<div class="input-group btn-block">
-											<input type="number" name="cantidad" width="10%" class="cant" togle="{{$pro->identifier}}" id="cant-{{$pro->id}}" data="{{$pro->id}}" value="{{$pro->quantity}}" size="1" class="form-control" />
+											<input type="number" name="cantidad" width="10%" class="cant input-quantity" togle="{{$pro->identifier}}" id="cant-{{$pro->id}}" data="{{$pro->id}}" value="{{$pro->quantity}}" size="1" class="form-control" />
 											<input type="hidden" name="id_producto" value="{{$pro->id}}">
 											<input type="hidden" name="identifier" value="{{$pro->identifier}}">
 										</div>								
@@ -105,7 +105,7 @@
 											<i class="fa fa-refresh"></i>
 										</button>
 								</form>
-									<form action="{{URL::route('removeItem', array('identifier'=>$pro->identifier))}}">		
+									<form  method="post" action="{{URL::route('removeItem', array('identifier'=>$pro->identifier))}}">		
 										<button type="submit" title="Remove" class="btn btn-default tool-tip">
 											<i class="fa fa-times-circle"></i>
 										</button>

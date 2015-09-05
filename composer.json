@@ -8,7 +8,8 @@
 		"laravel/framework": "4.2.*",
 		"intervention/image": "1.*",
 		"goodby/csv": "*",
-		"moltin/laravel-cart": "dev-master"
+		"moltin/laravel-cart": "dev-master",
+		"thujohn/pdf": "dev-master"
 	},
 	"autoload": {
 		"classmap": [

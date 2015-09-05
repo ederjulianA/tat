@@ -74,7 +74,8 @@
 				<!-- Product Filter Ends -->
 				<!-- Product Grid Display Starts -->
 				
-					<div class="row">
+					<div class="row" id="rowProd">
+					<input type="hidden" id="UrlLoadPro" value="{{URL::route('UrlLoadPro')}}">
 						@foreach($productos as $producto)
 						<!-- Product #1 Starts -->
 							<div class="col-md-4 col-sm-6">
@@ -108,7 +109,10 @@
 							</div>
 						<!-- Product #1 Ends -->
 						@endforeach	
+
 					</div>
+					<br>
+						{{$productos->links()}}
 				
 				<!-- Product Grid Display Ends -->
 				</div>
@@ -128,4 +132,8 @@
 			<!-- Sidebar Ends -->
 			</div>
 
+@stop
+
+@section('ajax-val')
+	<script src="{{asset('tat/js/loadPro.js')}}"></script>
 @stop

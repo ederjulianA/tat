@@ -39,15 +39,15 @@
 									@endforeach	
 								</ul>
 							@endforeach-->
-							@foreach($categorias as $cat)
+							@foreach($grupos as $gru)
                             <li class="dropdown">
-									<a href="{{ URL::route('categoria',array('id'=>$cat->id))}}" target="_blank" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="10">
-										{{$cat->cat_nom}}
+									<a href="{{ URL::route('categoria',array('id'=>$gru->InvGruCod))}}" target="_blank" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="10">
+										{{$gru->InvGruNom}}
 									</a>
 									<ul class="dropdown-menu" role="menu">
-										@foreach($cat->producto as $pro)
+										<!--@foreach($cat->producto as $pro)
 											<li><a tabindex="-1" href="/producto/{{$pro->slug}}">{{$pro->pro_nom}}</a></li>
-			                            @endforeach	
+			                            @endforeach	-->
 									</ul>
 								</li>
 								@endforeach
