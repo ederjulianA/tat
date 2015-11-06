@@ -2,6 +2,13 @@ $(document).ready(function(){
 	
 });
 
+$(document).on('click','.sync', function(e){
+	
+	$('#tSync').text("Sincronizando...");
+
+	
+});
+
 $( "#formTipEnv" ).on( "submit", function(e) {
  	var form=$("#formTipEnv");
 
@@ -126,11 +133,6 @@ $(document).on("click","#confDelete", function(e){
 	            	
 	            },
 				success : function(data){
-								
-
-					
-
-				
 				}
 
 		});

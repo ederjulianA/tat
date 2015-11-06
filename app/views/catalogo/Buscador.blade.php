@@ -77,7 +77,7 @@
 					<div class="row">
 						@foreach($productos as $producto)
 						<!-- Product #1 Starts -->
-							<div class="col-md-4 col-sm-6">
+								<div class="col-md-4 col-sm-6">
 								<div class="product-col">
 									<div class="image">
 										<img src="{{asset($producto->img)}}" alt="product" class="" height="150px" width="auto" />

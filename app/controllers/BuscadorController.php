@@ -17,18 +17,19 @@ class BuscadorController extends BaseController {
 		$this->grupo        = $grupo;
 	}
 
-	public function getBuscador()
+	public function getBuscador($f,$o)
 	{
+
 		$keyword = Input::get('keyword');
 
 		$dia     = 1;
 		
-		$productos = $this->producto->getProBuscador($keyword);
+		$productos = $this->producto->getProBuscador($keyword,$f,$o);
 		$grupos 		=   $this->grupo->getAllGrupos();
 		$categorias =   $this->cat->getAllCat();
 		$promo      =   $this->promo->getPromo();
 		
-		return View::make('catalogo.Buscador')->with('grupos',$grupos)->with('promo',$promo)->with('categorias',$categorias)->with('productos',$productos)->with('products', Cart::contents());
+		return View::make('catalogo.Buscador')->with('grupos',$grupos)->with('promo',$promo)->with('categorias',$categorias)->with('productos',$productos)->with('keyword',$keyword)->with('products', Cart::contents());
 
 
 	}

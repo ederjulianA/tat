@@ -66,7 +66,7 @@ Route::any('/android', array('as' => 'android', 'uses' => 'HomeController@androi
 
 //BUSCADOR
 
-Route::get('buscador', array('as' => 'buscador', 'uses' => 'BuscadorController@getBuscador'));
+Route::get('buscador/{f?}/{o?}', array('as' => 'buscador', 'uses' => 'BuscadorController@getBuscador'));
 
 
 //RUTAS POST
@@ -97,6 +97,7 @@ Route::post('urlBuscarProd', array('as' => 'urlBuscarProd', 'uses' => 'Ajax2Cont
 Route::post('urlDeleteProd', array('as' => 'urlDeleteProd', 'uses' => 'Ajax2Controller@urlDeleteProd'));
 Route::post('urlReparto', array('as' => 'urlReparto', 'uses' => 'Ajax2Controller@urlReparto'));
 Route::post('urlSync', array('as' => 'urlSync', 'uses' => 'Ajax2Controller@urlSync'));
+
 
 
 Route::any('UrlLoadPro', array('as' => 'UrlLoadPro', 'uses' => 'Ajax2Controller@UrlLoadPro'));

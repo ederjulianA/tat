@@ -12,6 +12,8 @@
 @stop
 
 @section('content')
+<input type="hidden" id="urlSeaCod" value="{{URL::route('urlSeaCod')}}">
+  <input type="hidden" id="urlSync" value="{{URL::route('urlSync')}}">
 @if(Session::has('message-alert'))
       <div class="row">
       <div class="col-md-5">
@@ -39,9 +41,31 @@
   <a href="{{URL::route('mantisSync')}}"class="btn btn-info"  title="">Sincronizar Productos</a>
   <div>
     <p>Total de productos: {{$numPros}}</p>
+      <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                 <div class="form-group">
+                    <label> Artcod</label>
+                    <input type="text" class="form-control filters" id="seaCod">
+                    
+                 </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                    <label> Nombre</label>
+                    <input type="text" class="form-control filters" id="seaNom">
+                    
+                 </div>
+            </div>
+            <div class="col-md-4">
+              aa
+            </div>
+          
+        </div>
+      </div>
     
   </div>
-  <input type="hidden" id="urlSync" value="{{URL::route('urlSync')}}">
+  
     <table class="table">
       <thead>
         <th>Id producto</th>
@@ -50,7 +74,7 @@
         
         <th>Acciones</th>
       </thead>
-      <tbody>
+      <tbody id="cont-pro">
         @foreach($productos as $pro)
           <tr>
             

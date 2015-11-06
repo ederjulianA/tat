@@ -26,6 +26,7 @@
             <ul>
               <li><a href="{{ URL::route('adminTipEnt')}}">Tipos de entrega</a></li>
               <li><a href="{{ URL::route('adminpromociones')}}">Promociones</a></li>
+              <li><a href="{{ URL::route('adminGenSync')}}">Sincronización</a></li>
               
             </ul>
           </li> 

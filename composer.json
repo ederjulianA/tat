@@ -9,7 +9,8 @@
 		"intervention/image": "1.*",
 		"goodby/csv": "*",
 		"moltin/laravel-cart": "dev-master",
-		"thujohn/pdf": "dev-master"
+		"thujohn/pdf": "dev-master",
+		"paypal/rest-api-sdk-php": "*"
 	},
 	"autoload": {
 		"classmap": [

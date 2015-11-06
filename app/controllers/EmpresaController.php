@@ -139,7 +139,8 @@ class EmpresaController extends BaseController {
 	public function getProductos()
 	{
 		$user = Auth::user()->id;
-		$productos = $this->pro->getAllPro();
+		//$productos = $this->pro->getAllPro();
+		$productos = Producto::all();
 		$numPros  = count($productos);
 		return View::make('tiendo.admin.productos',compact('user','productos','numPros'));
 	}

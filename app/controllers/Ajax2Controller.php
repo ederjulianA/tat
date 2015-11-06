@@ -13,6 +13,30 @@ class Ajax2Controller extends BaseController {
 			$this->envio 	= $envio;
 	}
 
+	public function urlSeaCod()
+	{
+		if(isset($_POST['cod']) || isset($_POST['nom']))
+		{
+			$cod = $_POST['cod'];
+			$nom = $_POST['nom'];
+			
+
+			$pros = Producto::where('id_mantis', 'LIKE', $cod.'%')->where('pro_nom', 'LIKE', $nom.'%')->get();
+			$numPro = count($pros);
+			$estado = array('estado'=>1,'msg'=>'Productos encontrados');
+				return Response::json(array('estado'=>$estado,'pros'=>$pros));
+			
+			if($numPro > 0)
+			{
+				$estado = array('estado'=>1,'msg'=>'Productos encontrados');
+				return Response::json(array('estado'=>$estado,'pros'=>$pros));
+			}else{
+				$estado = array('estado'=>2,'msg'=>'No hay productos');
+				return Response::json(array('estado'=>$estado));
+			}
+		}
+	}
+
 
 
 	public function UrlLoadPro()

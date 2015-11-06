@@ -36,19 +36,21 @@
 								<ul class="dropdown-menu" role="menu">
 									@foreach($cat->producto as $pro)
 										<li><a tabindex="-1" href="index.html">Home</a></li>
+										3178070245 oscar lizcano intendente
 									@endforeach	
 								</ul>
 							@endforeach-->
 							@foreach($grupos as $gru)
-                            <li class="dropdown">
-									<a href="{{ URL::route('categoria',array('id'=>$gru->InvGruCod))}}" target="_blank" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="10">
+                            <li class="">
+									<!--<a href="{{ URL::route('categoria',array('id'=>$gru->InvGruCod))}}" target="_blank" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="10">-->
+									<a  href="{{ URL::route('categoria',array('id'=>$gru->InvGruCod))}}">
 										{{$gru->InvGruNom}}
 									</a>
-									<ul class="dropdown-menu" role="menu">
-										<!--@foreach($cat->producto as $pro)
+									<!--<ul class="dropdown-menu" role="menu">
+										@foreach($cat->producto as $pro)
 											<li><a tabindex="-1" href="/producto/{{$pro->slug}}">{{$pro->pro_nom}}</a></li>
-			                            @endforeach	-->
-									</ul>
+			                            @endforeach	3108751793
+									</ul>-->
 								</li>
 								@endforeach
 						</ul>

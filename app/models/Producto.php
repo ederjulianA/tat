@@ -60,9 +60,21 @@ public function limpiar($String){
 
 		public function getProCategorias($id)
 		{
-			/*$productos = DB::table('productos as p')->join('categorias as c','c.InvGruCod','=','p.categoria_id')
-													->join('')*/
-			$productos = Producto::where('categoria_id','=',$id)->paginate(9);
+			$productos = DB::table('productos as p')->join('inventariofamilia as f','f.InvFamCod','=','p.categoria_id')
+													->join('categorias as c','c.InvSubGruCod','=','f.fam_InvSubGruCod')
+													->join('inventariogrupo as g','g.InvGruCod','=','c.InvGruCod')
+													->select(
+															'c.cat_nom',
+				 											 'p.id_mantis',
+															 'p.pro_nom',
+															 'p.img',
+															 'p.slug',
+															 'p.id',
+															 'p.precio',
+															 'p.descripcion AS producto_descripcion'
+														)->where('g.InvGruCod','=',$id)->paginate(18);
+													
+			//$productos = Producto::where('categoria_id','=',$id)->paginate(9);
 			return $productos;
 		}
 
@@ -82,9 +94,105 @@ public function limpiar($String){
 			return $productos;
 		}
 
-		public function getProBuscador($keyword)
+		public function getProBuscador($keyword,$f,$o)
 		{
-			 $productos = DB::table('productos as p')
+			if($f == 'p')
+			{
+				$filter = 'p.precio';
+			}
+			$query = explode(" ", $keyword);
+			
+			$todos = array();
+			$ids  = array();
+			foreach ($query as $q) {
+				$n = count($todos);
+				if ($q != ''){
+
+				
+					if($todos){
+						foreach ($todos as $t) {
+							$ids[] = $t; 	
+							$productos = DB::table('productos as p')->distinct()->join('inventariofamilia as f','f.InvFamCod','=','p.categoria_id')
+				->select(
+						'p.id',
+						'p.id_mantis',
+						'p.pro_nom',
+						'p.categoria_id',
+						'p.descripcion',
+						'p.slug',
+						'p.img',
+						'p.precio',
+						'p.Estado',
+						'p.por_iva',
+						'p.cantidad',
+						'f.InvFamNom',
+						'f.InvFamCod'
+
+					)->where('p.pro_nom','REGEXP','[[:<:]]'.$q.'*')->orderBy($filter,$o)->groupBy('p.id')->whereNotBetween('p.id', $ids)->get();
+				
+							foreach($productos as $p)
+							{
+								$todos[] = array('id'=>$p->id,'id_mantis'=>$p->id_mantis,'pro_nom'=>$p->pro_nom,'categoria_id'=>$p->categoria_id,'descripcion'=>$p->descripcion,'slug'=>$p->slug,'img'=>$p->img,'precio'=>$p->precio,'Estado'=>$p->Estado,'por_iva'=>$p->por_iva,'cantidad'=>$p->cantidad,'InvFamCod'=>$p->InvFamCod,'InvFamNom'=>$p->InvFamNom);
+
+							}
+									}
+						
+						
+					}
+				$productos = DB::table('productos as p')->distinct()->join('inventariofamilia as f','f.InvFamCod','=','p.categoria_id')
+				->select(
+						'p.id',
+						'p.id_mantis',
+						'p.pro_nom',
+						'p.categoria_id',
+						'p.descripcion',
+						'p.slug',
+						'p.img',
+						'p.precio',
+						'p.Estado',
+						'p.por_iva',
+						'p.cantidad',
+						'f.InvFamNom',
+						'f.InvFamCod'
+
+					)->where('p.pro_nom','REGEXP','[[:<:]]'.$q.'*')->orderBy($filter,$o)->groupBy('p.id')->get();
+				
+				foreach($productos as $p)
+				{
+					$todos[] = array('id'=>$p->id,'id_mantis'=>$p->id_mantis,'pro_nom'=>$p->pro_nom,'categoria_id'=>$p->categoria_id,'descripcion'=>$p->descripcion,'slug'=>$p->slug,'img'=>$p->img,'precio'=>$p->precio,'Estado'=>$p->Estado,'por_iva'=>$p->por_iva,'cantidad'=>$p->cantidad,'InvFamCod'=>$p->InvFamCod,'InvFamNom'=>$p->InvFamNom);
+
+				}
+				
+				/*$productos = DB::table('productos as p')->distinct()->join('inventariofamilia as f','f.InvFamCod','=','p.categoria_id')
+				->select(
+						'p.id',
+						'p.id_mantis',
+						'p.pro_nom',
+						'p.categoria_id',
+						'p.descripcion',
+						'p.slug',
+						'p.img',
+						'p.precio',
+						'p.Estado',
+						'p.por_iva',
+						'p.cantidad',
+						'f.InvFamNom',
+						'f.InvFamCod'
+
+					)->where('p.pro_nom','REGEXP','[[:<:]]'.$q.'*')->groupBy('p.id')->get();
+				
+				foreach($productos as $p)
+				{
+					$todos[] = array('id'=>$p->id,'id_mantis'=>$p->id_mantis,'pro_nom'=>$p->pro_nom,'categoria_id'=>$p->categoria_id,'descripcion'=>$p->descripcion,'slug'=>$p->slug,'img'=>$p->img,'precio'=>$p->precio,'Estado'=>$p->Estado,'por_iva'=>$p->por_iva,'cantidad'=>$p->cantidad,'InvFamCod'=>$p->InvFamCod,'InvFamNom'=>$p->InvFamNom);
+
+				}*/
+
+			}
+		
+		}//END FOREACH
+			//dd($todos);
+			
+			/* $productos = DB::table('productos as p')
 		 ->join('categorias as c','p.categoria_id','=','c.id')
 		 
 		 ->select(
@@ -98,11 +206,11 @@ public function limpiar($String){
 				'p.descripcion AS producto_descripcion'
 				 
 			 )
-		 ->where('p.pro_nom', 'LIKE', '%'.$keyword.'%')->get();
+		 ->where('p.id', '=', 269)->get();*/
 		 
 		 
-		
-
+		 
+			//dd($productos);
 			return $productos;
 		}
 

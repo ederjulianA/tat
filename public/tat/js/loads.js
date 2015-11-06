@@ -2,6 +2,93 @@ $(document).ready(function(){
 	
 });
 
+$(document).on('keyup','.filters', function(e){
+	var cod = $('#seaCod').val();
+	var url = $('#urlSeaCod').val();
+	var nom = $('#seaNom').val();
+
+	$.ajax({
+
+				url : url,
+				dataType: "json",
+				type : "post",
+				data : { cod: cod,nom:nom},
+				beforeSend: function(){
+					swal({   title: "Sending message...",   text: "please wait.",   showConfirmButton: false });
+				},
+				success : function(data){
+					console.log(data);
+					if(data.estado.estado == 1)
+					{
+						 $('#cont-pro').html('');
+						console.log(data);
+						for (var i in data.pros) {
+							var html = '';
+								html += '<tr>';
+							            html += '<td>'+data.pros[i].id+'</td>';
+							            html += '<td>'+data.pros[i].id_mantis+'</td>';
+							            html += '<td>'+data.pros[i].pro_nom+'</td>';
+							          
+							          
+							            html += '<td><a href="/admin/articulo/'+data.pros[i].id+'" class="btn btn-success">Editar Descripción</a></td>';
+							      html += '</tr>';
+
+							      $('#cont-pro').append(html);
+						}
+						//swal("Done!", "The users were invited", "success");
+						//location.reload();
+						
+
+					}
+					
+				}
+
+			});
+	/*if(cod.length == 0 || nom.length == 0)
+	{
+		
+	}else{
+		$.ajax({
+
+				url : url,
+				dataType: "json",
+				type : "post",
+				data : { cod: cod,nom:nom},
+				beforeSend: function(){
+					swal({   title: "Sending message...",   text: "please wait.",   showConfirmButton: false });
+				},
+				success : function(data){
+					console.log(data);
+					if(data.estado.estado == 1)
+					{
+						 $('#cont-pro').html('');
+						console.log(data);
+						for (var i in data.pros) {
+							var html = '';
+								html += '<tr>';
+							            html += '<td>'+data.pros[i].id+'</td>';
+							            html += '<td>'+data.pros[i].id_mantis+'</td>';
+							            html += '<td>'+data.pros[i].pro_nom+'</td>';
+							          
+							          
+							            html += '<td><a href="/admin/articulo/'+data.pros[i].id+'" class="btn btn-success">Editar Descripción</a></td>';
+							      html += '</tr>';
+
+							      $('#cont-pro').append(html);
+						}
+						//swal("Done!", "The users were invited", "success");
+						//location.reload();
+						
+
+					}
+					
+				}
+
+			});
+	}*/
+	
+});
+
 $(document).on('click','#loadProd',function(e){
 
 	var url = $('#urlLoadProd').val();

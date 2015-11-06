@@ -5,12 +5,46 @@ class GeneralesController extends BaseController {
 	protected $producto;
 	protected $cat;
 	protected $barrio;
+	protected $conn;
 
-	public function __construct(Producto $producto, Categoria $cat, Barrio $barrio)
+	public function __construct(Producto $producto, Categoria $cat, Barrio $barrio, Conn $conn)
 	{
 		$this->producto 	= $producto;
 		$this->cat 			= $cat;
 		$this->barrio 		= $barrio;
+		$this->conn         = $conn;
+	}
+
+
+	public function adminServerEdit()
+	{
+		$par = Conn::where('id','=',Input::get('idPar'))->first();
+		if ($par){
+			$par->ip = Input::get('ip');
+		$par->db = Input::get('db');
+		$par->user = Input::get('user');
+		$par->pass = Input::get('pass');
+		$par->urlImg = Input::get('urlImg');
+		if($par->save())
+		{
+			return Redirect::back()->with('message-alert','Parametros de conexión actualizados, prueba la conexion al ERP');
+		}
+		}
+	}
+
+	public function adminServer()
+	{
+		
+		$par = new Conn;
+		$par->ip = Input::get('ip');
+		$par->db = Input::get('db');
+		$par->user = Input::get('user');
+		$par->pass = Input::get('pass');
+		$par->urlImg = Input::get('urlImg');
+		if($par->save())
+		{
+			return Redirect::back()->with('message-alert','Servidor configurado, ahora prueba la conexion');
+		}
 	}
 
 	//VISTA ADMIN TIPOS DE ENTREGA
@@ -25,6 +59,21 @@ class GeneralesController extends BaseController {
 		$envios = Envio::all();
 		$promos = Promo::all();
 		return View::make('tiendo.admin.generales.promociones',compact('envios','promos'));
+	}
+
+
+	public function getSync()
+	{
+		$fam      = Familia::all();
+		$subG     = Categoria::all();
+		$gru      = Grupo::all();
+		$art      = Producto::all();
+		$AllFam   = count($fam);
+		$AllSubG  = count($subG);
+		$AllGru   = count($gru);
+		$AllArt   = count($art);
+		$para     = $this->conn->getParameters();
+		return View::make('tiendo.admin.generales.sync',compact('AllArt','AllGru','AllFam','AllSubG','para'));
 	}
 
 

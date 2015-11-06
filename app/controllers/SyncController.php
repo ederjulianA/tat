@@ -6,12 +6,66 @@ class 	SyncController extends BaseController {
 	protected $producto;
 	protected $cat;
 	protected $barrio;
-
-	public function __construct(Producto $producto, Categoria $cat, Barrio $barrio)
+	protected $conn;
+	protected $server;
+	protected $db;
+	protected $user;
+	protected $pass;
+	protected $urlMantis;
+	public function __construct(Producto $producto, Categoria $cat, Barrio $barrio, Conn $conn)
 	{
 		$this->producto 	= $producto;
 		$this->cat 			= $cat;
 		$this->barrio 		= $barrio;
+		$this->conn         = $conn;
+		$this->server       = $this->conn->getServer();
+		$this->user         = $this->conn->getUser();
+		$this->pass         = $this->conn->getPass();
+		$this->db           = $this->conn->getDb();
+		$this->urlMantis       = $this->conn->getUrlImg();
+		
+	}
+
+
+	public function testConn()
+
+	{
+		 if ($conn_access  = odbc_connect("Driver={SQL Server Native Client 10.0};Server=".$this->server.",1433;Database=".$this->db.";", ''.$this->user.'', ''.$this->pass.'')){ 
+					   	echo "Conectado correctamente"; 
+					   	if(!$conn_access)
+					   	{
+					   		dd("ERROR");
+					   	}
+					   	
+					        			        $ssql = "select * from InventarioFamilia"; 
+
+					   	if($rs_access = odbc_exec ($conn_access, $ssql)){ 
+					   		
+					   		while ($info = odbc_fetch_array($rs_access)) {
+					 		   //$content[] = $info;
+					   			//$ciudades = new Ciudad;
+					   			$empresa = $info;
+								}// END WHILE############################
+
+							} ############END RS_ACCESS##############	
+							if($empresa)
+							{
+								return Redirect::back()->with('message-alert','ERP CONECTADO');
+							}else{
+								return Redirect::back()->with('message-alert','ERP NO CONECTADO');
+							}
+						}###### END IF CON_ACCESS
+						else{
+							return Redirect::back()->with('message-alert','ERP NO CONECTADO');
+						}
+
+
+
+						
+
+						
+
+						
 	}
 
 
@@ -22,11 +76,10 @@ class 	SyncController extends BaseController {
 
 
 
-
-			if ($conn_access  = odbc_connect("Driver={SQL Server Native Client 10.0};Server=Eder-pc,1433;Database=erpweb;", 'sa', 'Somic321')){ 
+			if ($conn_access  = odbc_connect("Driver={SQL Server Native Client 10.0};Server=".$this->server.",1433;Database=".$this->db.";", ''.$this->user.'', ''.$this->pass.'')){ 
 					   	echo "Conectado correctamente"; 
 					   	
-					        			        $ssql = "select top 100 ArtImg_GXI,ArtFicTec,ArtCod,artsec,f.InvFamCod as InvFamCod,f.InvFamNom , artnom,parconiva,cast(ArtBalBas*(1+((select LisPreRen from  ListasPrecios where LisPreCod=1) /100)) as int) precio1,cast(ArtBalBas*(1+(  (select LisPreRen from  ListasPrecios where LisPreCod=2) /100)) as int) precio2,cast(ArtBalBas*(1+(  (select LisPreRen from  ListasPrecios where LisPreCod=3) /100)) as int) precio3,cast(ArtBalBas*(1+(  (select LisPreRen from  ListasPrecios where LisPreCod=4) /100)) as int) precio4,cast(ArtBalBas*(1+(  (select LisPreRen from  ListasPrecios where LisPreCod=5) /100)) as int) precio5,cast(ArtBalBas*(1+(  (select LisPreRen from  ListasPrecios where LisPreCod=6) /100)) as int) precio6,cast(ArtBalBas*(1+(  (select LisPreRen from  ListasPrecios where LisPreCod=7) /100)) as int) precio7,cast(ArtBalBas*(1+((select LisPreRen from  ListasPrecios where LisPreCod=8) /100)) as int) precio8,SG.InvSubGruCod,isnull((select SUM((karcaj+karuni)*(case when (karnat='+') then 1 else -1 end)) saldo
+					        			        $ssql = "select top 1000 ArtImg_GXI,ArtFicTec,ArtCod,artsec,f.InvFamCod as InvFamCod,f.InvFamNom , artnom,parconiva,cast(ArtBalBas*(1+((select LisPreRen from  ListasPrecios where LisPreCod=1) /100)) as int) precio1,cast(ArtBalBas*(1+(  (select LisPreRen from  ListasPrecios where LisPreCod=2) /100)) as int) precio2,cast(ArtBalBas*(1+(  (select LisPreRen from  ListasPrecios where LisPreCod=3) /100)) as int) precio3,cast(ArtBalBas*(1+(  (select LisPreRen from  ListasPrecios where LisPreCod=4) /100)) as int) precio4,cast(ArtBalBas*(1+(  (select LisPreRen from  ListasPrecios where LisPreCod=5) /100)) as int) precio5,cast(ArtBalBas*(1+(  (select LisPreRen from  ListasPrecios where LisPreCod=6) /100)) as int) precio6,cast(ArtBalBas*(1+(  (select LisPreRen from  ListasPrecios where LisPreCod=7) /100)) as int) precio7,cast(ArtBalBas*(1+((select LisPreRen from  ListasPrecios where LisPreCod=8) /100)) as int) precio8,SG.InvSubGruCod,isnull((select SUM((karcaj+karuni)*(case when (karnat='+') then 1 else -1 end)) saldo
 	from Kardex k inner join Factura f on f.FacSec=k.facsec where facest='A' and k.ArtSec=a.ArtSec),0) saldo from articulos a left join ListasPrecios on LisPreCod=1 left join ParametroContable p on p.parconcod=a.ParConCod
 								left join InventarioFamilia f on f.InvFamCod=a.InvFamCod left join InventarioSubgrupo sg on sg.InvSubGruCod=f.InvSubGruCod 
 "; 
@@ -51,7 +104,7 @@ class 	SyncController extends BaseController {
 										if($pro['ArtImg_GXI'] != NULL)
 								   			{
 								   				$nombre = Str_replace('gxdbfile:','',$pro['ArtImg_GXI']);
-								   				$urlImg = 'http://localhost:8080/MantisWeb20erpappweb/PublicTempStorage/multimedia/'.$nombre;
+								   				$urlImg = $this->urlMantis.$nombre;
 								   				$prod->img = $urlImg;
 								   			}else
 								   			{
@@ -167,7 +220,7 @@ class 	SyncController extends BaseController {
 									}
 								}#######################END FOREACH
 
-								return Redirect::to('/admin/productos')->with('message-alert','Productos Mantis Sincronizado');
+								return Redirect::back()->with('message-alert','Productos Mantis Sincronizado');
 	}
 
 
@@ -175,7 +228,8 @@ class 	SyncController extends BaseController {
 	public function syncCateMantis()
 	{
 			//if ($conn_access  = odbc_connect("Driver={SQL Server Native Client 10.0};Server=192.168.1.52,1433;Database=proherp;", 'sa', 'Somic321')){ 
-				if ($conn_access  = odbc_connect("Driver={SQL Server Native Client 10.0};Server=Eder-Pc,1433;Database=erpweb;", 'sa', 'Somic321')){ 
+				if ($conn_access  = odbc_connect("Driver={SQL Server Native Client 10.0};Server=".$this->server.",1433;Database=".$this->db.";", ''.$this->user.'', ''.$this->pass.'')){ 
+				//if ($conn_access  = odbc_connect("Driver={SQL Server Native Client 10.0};Server=Eder-Pc,1433;Database=erpweb;", 'sa', 'Somic321')){ 
 					   	echo "Conectado correctamente"; 
 					   	
 					        			        $ssql = "select * from InventarioSubgrupo"; 
@@ -200,6 +254,7 @@ class 	SyncController extends BaseController {
 							{
 								$VarSlug = Str::slug($cate['InvSubGruNom']);
 								$cat->InvSubGruId = $cate['InvSubGruId'];
+								$cat->InvSubGruCod = $cate['InvSubGruCod'];
 								$cat->InvGruCod = $cate['InvGruCod'];
 								$cat->cat_nom = $cate['InvSubGruNom'];
 								$cat->cat_slug = $VarSlug;
@@ -231,14 +286,15 @@ class 	SyncController extends BaseController {
 							}
 						}
 
-						return Redirect::to('/admin')->with('message-alert','Categorias Sincronizadas');
+						return Redirect::back()->with('message-alert','Categorias Sincronizadas');
 	}
 
 
 
 	public function syncFamiliaMantis()
 	{
-				if ($conn_access  = odbc_connect("Driver={SQL Server Native Client 10.0};Server=Eder-pc,1433;Database=erpweb;", 'sa', 'Somic321')){ 
+				//if ($conn_access  = odbc_connect("Driver={SQL Server Native Client 10.0};Server=Eder-pc,1433;Database=erpweb;", 'sa', 'Somic321')){ 
+				  if ($conn_access  = odbc_connect("Driver={SQL Server Native Client 10.0};Server=".$this->server.",1433;Database=".$this->db.";", ''.$this->user.'', ''.$this->pass.'')){ 
 					   	echo "Conectado correctamente"; 
 					   	
 					        			        $ssql = "select * from InventarioFamilia"; 
@@ -299,7 +355,7 @@ class 	SyncController extends BaseController {
 							}
 						}
 
-						return Redirect::to('/admin')->with('message-alert','Familias Sincronizadas');
+						return Redirect::back()->with('message-alert','Familias Sincronizadas');
 	}
 
 
@@ -307,7 +363,8 @@ class 	SyncController extends BaseController {
 	public function syncGrupoMantis()
 	{
 
-			if ($conn_access  = odbc_connect("Driver={SQL Server Native Client 10.0};Server=Eder-pc,1433;Database=erpweb;", 'sa', 'Somic321')){ 
+			//if ($conn_access  = odbc_connect("Driver={SQL Server Native Client 10.0};Server=Eder-pc,1433;Database=erpweb;", 'sa', 'Somic321')){ 
+			 if ($conn_access  = odbc_connect("Driver={SQL Server Native Client 10.0};Server=".$this->server.",1433;Database=".$this->db.";", ''.$this->user.'', ''.$this->pass.'')){ 
 					   	echo "Conectado correctamente"; 
 					   	
 					        			        $ssql = "select * from InventarioGrupo"; 
@@ -362,7 +419,7 @@ class 	SyncController extends BaseController {
 							}
 						}
 
-						return Redirect::to('/admin')->with('message-alert','Grupos Sincronizadas');
+						return Redirect::back()->with('message-alert','Grupos Sincronizadas');
 	}
 
 

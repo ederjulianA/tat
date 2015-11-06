@@ -110,11 +110,13 @@
 					<!-- Logo Starts -->
 					<!-- Search Starts -->
 						<div class="col-md-3">
-						<form method="get" action="{{URL::route('buscador')}}">
+						<form method="get" action="{{URL::route('buscador',array('f'=>'p','o'=>'asc'))}}">
 							<div id="search">
 								<div class="input-group">
+										
+										 <input type="text" class="form-control input-lg" placeholder="Buscar" name="keyword" value="" required>
 									
-									  <input type="text" class="form-control input-lg" placeholder="Buscar" name="keyword" required>
+									 
 									  <span class="input-group-btn">
 										<button type="submit" class="btn btn-lg" type="button">
 											<i class="fa fa-search"></i>
