@@ -1,6 +1,7 @@
 <?php
 
 class ProductoController extends BaseController {
+	
 
 	protected $pro;
 	protected $cat;

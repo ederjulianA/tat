@@ -8,7 +8,7 @@
 		"laravel/framework": "4.2.*",
 		"intervention/image": "1.*",
 		"goodby/csv": "*",
-		"moltin/laravel-cart": "dev-master",
+		"moltin/laravel-cart": "*",
 		"thujohn/pdf": "dev-master",
 		"paypal/rest-api-sdk-php": "*"
 	},

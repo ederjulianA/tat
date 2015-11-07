@@ -15,6 +15,23 @@ Route::get(	'/', array(
 		'uses'=> 'HomeController@getIndex'
 		));
 
+
+
+//RUTAS PAYPAL
+
+Route::post('payment', array(
+    'as' => 'payment',
+    'uses' => 'CartController@postPayment',
+));
+
+// this is after make the payment, PayPal redirect back to your site
+Route::get('payment/status', array(
+    'as' => 'payment.status',
+    'uses' => 'CartController@getPaymentStatus',
+));
+
+
+
 //DETALLE DE PRODUCTO
 
 Route::get(	'/producto/{slug}', array(
@@ -58,7 +75,7 @@ Route::group(['before' => 'guest'], function () {
 Route::get('cart', array('as' => 'cart', 'uses' => 'CartController@getCart'));
 Route::get('checkout', array('as' => 'checkout', 'uses' => 'CartController@getCheckout'));
 Route::get('categoria/{id}', array('as' => 'categoria', 'uses' => 'CatalogoController@getCategoria'));
-Route::get('/remove/cart/{identifier}', array('as' => 'removeItem','uses' => 'CartController@getRemoveitem'));
+Route::any('/remove/cart/{identifier}', array('as' => 'removeItem','uses' => 'CartController@getRemoveitem'));
 
 //android
 
