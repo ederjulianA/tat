@@ -140,10 +140,7 @@
 							</td>
 							<td colspan="2">
 								<a class="btn btn-warning btn-lg text-right" href="{{URL::route('checkout')}}"> FINALIZAR MI PEDIDO!</a>
-								<form action="{{URL::route('payment')}}" method="post" accept-charset="utf-8">
-									<input type="submit" name="" value="PAYPAL">
-									
-								</form>
+								
 							</td>
 						</tr>
 					</tfoot>

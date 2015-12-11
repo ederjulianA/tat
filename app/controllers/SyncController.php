@@ -27,6 +27,33 @@ class 	SyncController extends BaseController {
 	}
 
 
+	public function insertPais()
+	{
+		if ($conn_access = odbc_connect ( "Driver={SQL Server Native Client 10.0};Server=".$this->server.",1433;Database=".$this->db.";", ''.$this->user.'', ''.$this->pass.'')){ 
+   	echo "Conectado correctamente<br>"; 
+   	
+        $ssql = "insert into Pais(PaiSec,PaiCod,PaiNom) values('','EDE','EDER')"; 
+   	
+
+//$rs_access = odbc_exec ($conn_access, $ssql);
+
+
+if($rs_access = odbc_exec ($conn_access, $ssql))
+        { 
+      	 
+        echo "<br>La sentencia se ejecutó correctamente"; 
+
+   	   }else
+           { 
+      	    echo "Error al ejecutar la sentencia SQL"; 
+   	   }
+} else{ 
+   	echo "Error en la conexión con la base de datos"; 
+} //die( print_r( sqlsrv_errors(), true));
+
+	}
+
+
 	public function testConn()
 
 	{
@@ -149,7 +176,7 @@ class 	SyncController extends BaseController {
 										$prod->descripcion	= $pro['ArtFicTec'];
 										$prod->slug = $VarSlug;
 										
-										$prod->precio = round($pro['precio2']);
+										$prod->precio = $pro['precio2'];
 										$prod->por_iva = $pro['parconiva'];
 										$prod->cantidad = 100;
 										$prod->save();
@@ -213,7 +240,7 @@ class 	SyncController extends BaseController {
 										$producto->descripcion = $prod['ArtFicTec'];
 										$producto->slug = $VarSlug;
 										//$producto->img = 'img/Mantis/'.$filename;
-										$producto->precio = round($pro['precio2']);
+										$producto->precio = $pro['precio2'];
 										$producto->por_iva = $pro['parconiva'];
 										$producto->cantidad = '';
 										$producto->save();

@@ -8,6 +8,7 @@ class Envio extends Eloquent {
 		public function getEnvios()
 		{
 			$envios = Envio::all();
+			
 			return $envios;
 		}
 	

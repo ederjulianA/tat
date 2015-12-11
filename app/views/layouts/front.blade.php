@@ -266,7 +266,7 @@
 	<script src="{{asset('tat/js/custom.js')}}"></script>
 	<script src="{{asset('tat/js/addCart.js')}}"></script>
 	<script src="{{asset('tat/js/jquery.numeric.js')}}"></script>
-	<script src="{{asset('tat/js/tipopago.js')}}"></script>
+	
 	@yield('ajax-val')
 </body>
 </html>

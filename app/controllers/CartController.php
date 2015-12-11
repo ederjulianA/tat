@@ -23,13 +23,15 @@ class CartController extends BaseController {
 	protected $barrio;
 	protected $grupo;
 	 private $_api_context;
+	protected $envios;
 
-	public function __construct(Producto $producto, Categoria $cat, Barrio $barrio,Grupo $grupo)
+	public function __construct(Producto $producto, Categoria $cat, Barrio $barrio,Grupo $grupo, Envio $envios)
 	{
 		$this->producto 	= $producto;
 		$this->cat 			= $cat;
 		$this->barrio 		= $barrio;
-		$this->grupo 	= $grupo;
+		$this->grupo 		= $grupo;
+		$this->envios   	= $envios;
 
 
 		// setup PayPal api context
@@ -37,7 +39,19 @@ class CartController extends BaseController {
         $this->_api_context = new ApiContext(new OAuthTokenCredential($paypal_conf['client_id'], $paypal_conf['secret']));
         $this->_api_context->setConfig($paypal_conf['settings']);
 	}
+	public function getLoadPayment()
+	{
+		$envi  = $this->envios->getEnvios();
 
+		return View::make('load.paypal',compact('envi'));
+	}
+
+	public function getLoadPaymentU()
+	{
+		$envi  = $this->envios->getEnvios();
+
+		return View::make('load.payu',compact('envi'));
+	}
 
 	public function getCart()
 	{
@@ -102,7 +116,7 @@ class CartController extends BaseController {
 			if($compra->save())
 			{
 				foreach (Cart::contents() as $item) {
-					$citem = new Item;
+					$citem = new Ite;
 					$citem->compra_id 			=	$compra->id;
 
 	   			 	$citem->id_producto			=	$item->id;
@@ -210,29 +224,36 @@ class CartController extends BaseController {
 
 	public function postPayment()
 {
+	$data = Input::all();
+	Session::put('data', $data);
+	
     
 
     $payer = new Payer();
     $payer->setPaymentMethod('paypal');
     //$totItems =  array();
 
-    $dollar = 2800;
+    $dollar = 2896.19	;
     $x = 0;
     foreach (Cart::contents() as $i) {
     	
-    	$precio = ($i->total()/$dollar);
-    	$pre = round($precio,1);
-    	$x = $x+$pre;
-    	$val = (Int)$i->quantity;
+    	$precio = (($i->price*(1+($i->tax/100))) /$dollar);
+
+    	$pre = round($precio,2);
+    	//dd($pre);
+    	//$x = $x+$pre;
+    	$val = (Int)trim($i->quantity);
     	
-    	
+    	$x  += ($val*$pre);
+
     	$item = new Item();
     	 $item->setName($i->name) // item name
         ->setCurrency('USD')
+        //->setQuantity($val)
         ->setQuantity($val)
         ->setPrice($pre); // unit price
 
-        
+       
         
         $totItems[] = $item;
     }
@@ -272,15 +293,17 @@ class CartController extends BaseController {
     $item_list = new ItemList();
     $item_list->setItems($totItems);
     $totCart = Cart::total();
-    $totDol  = ($totCart/$dollar);
+    $totDol  = ($x);
+   
 
-    $t = round($totDol,1);
 
-    //dd('totItems: '.$x.'totCart: '.$t);
+    $t = round($totDol,2);
+    //dd($t);
+   // dd('totItems: '.$x.'totCart: '.$t);
     $amount = new Amount();
     $amount->setCurrency('USD')
-        ->setTotal($t);
-
+        ->setTotal($x);
+        
     $transaction = new Transaction();
     $transaction->setAmount($amount)
         ->setItemList($item_list)
@@ -329,19 +352,21 @@ class CartController extends BaseController {
 
 
 
-
+	
 
 
 	public function getPaymentStatus()
 {
     // Get the payment ID before session clear
     $payment_id = Session::get('paypal_payment_id');
+    $data       = Session::get('data');
+    //dd($data['totalCart']);
 
     // clear the session payment ID
     Session::forget('paypal_payment_id');
 
     if (empty(Input::get('PayerID')) || empty(Input::get('token'))) {
-        return Redirect::route('original.route')
+        return Redirect::route('cart')
             ->with('error', 'Payment failed');
     }
 
@@ -360,8 +385,40 @@ class CartController extends BaseController {
     //echo '<pre>';print_r($result);echo '</pre>';exit; // DEBUG RESULT, remove it later
 
     if ($result->getState() == 'approved') { // payment made
-        return Redirect::route('micuenta')
+    			$compra = new Compra;
+		$compra->user_id 	=	Auth::user()->id;
+		$compra->totalCart  =   $data['totalCart'];
+		$compra->total_compra  =  $data['total_compra'];
+		$compra->num_items  =   $data['totalItems'];
+		$compra->tipo_compra = 	$data['tipo_compra'];
+		$compra->vlr_envio   =  $data['vlr_envio_a'];
+			if($compra->save())
+			{
+				foreach (Cart::contents() as $item) {
+					$citem = new Ite;
+					$citem->compra_id 			=	$compra->id;
+
+	   			 	$citem->id_producto			=	$item->id;
+	   			 	$citem->nombre 				=	$item->name;
+	   			 	$citem->valor_unitario 		=	$item->price;
+	   			 	$citem->image               =   $item->image;
+	   			 	$citem->iva 				=	$item->tax;
+	   			 	$citem->cantidad 			= 	$item->quantity;
+	   			 	$citem->valor_total			=	$item->total();
+
+	   			 	$citem->save();
+
+				}
+				Cart::destroy();
+				Session::forget('data');
+
+				
+				return Redirect::route('micuenta')
             ->with('message-alert', 'Payment success');
+
+			}
+
+        
     }
     return Redirect::route('cart')
         ->with('message-alert', 'Payment failed');

@@ -148,5 +148,6 @@
 @section('ajax-val')
 <!--<script src="{{asset('tat/js/val-ajax-datos.js')}}"></script>-->
 		<script src="{{asset('tat/js/loadBarrios.js')}}"></script>
+		<script src="{{asset('tat/js/tipopago.js')}}"></script>
 		
 @stop

@@ -31,6 +31,13 @@ Route::get('payment/status', array(
 ));
 
 
+//RUTAS LOAD AJAX HTML
+
+        Route::get('ajax/load/productos', array('as' => 'ajaxLoadProductos', 'uses' => 'Ajax2Controller@getLoadProductos'));
+
+         Route::any('ajax/load/payment', array('as' => 'ajaxLoadPayment', 'uses' => 'CartController@getLoadPayment'));
+         Route::any('ajax/load/paymentU', array('as' => 'ajaxLoadPaymentU', 'uses' => 'CartController@getLoadPaymentU'));
+
 
 //DETALLE DE PRODUCTO
 
@@ -153,9 +160,7 @@ Route::group(['before' => 'auth'], function() {
 
         //##########################################################################
 
-        //RUTAS LOAD AJAX HTML
-
-        Route::get('ajax/load/productos', array('as' => 'ajaxLoadProductos', 'uses' => 'Ajax2Controller@getLoadProductos'));
+        
 
         //RUTA QUE DEVUELVE LOS ARTICULOS POR EL FILTRO DEL NOMBRE EN FORMATO JSON
         Route::get('ajax/load/productos/{search}', array('as' => 'ajaxLoadProductosSearch', 'uses' => 'Ajax2Controller@getLoadProductosSearch'));
