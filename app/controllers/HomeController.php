@@ -43,6 +43,9 @@ class HomeController extends BaseController {
 		return View::make('index')->with('grupos',$grupos)->with('categorias',$categorias)->with('productos',$productos)->with('products', Cart::contents());*/
 
 		$productos 	=	$this->producto->getSome();
+		/*foreach($productos as $p){
+			dd($p);
+		}*/
 		$promo      =   $this->promo->getPromo();
 		$grupos 		=   $this->grupo->getAllGrupos();
 		$categorias = $this->cat->getAllCat();

@@ -92,7 +92,8 @@
 										</div>								
 									</td>
 									<td class="text-center">
-										$<span id="precio-{{$pro->id}}">{{number_format($pro->price, 0, '', '.')}}</span>
+										$<span id="precio-{{$pro->id}}">{{number_format($pro->price, 0, '', '.')}}</span><br>
+										{{Funciones::getPriceIva($pro->price,$pro->tax)}}
 									</td>
 									<td class="text-center">
 										{{$pro->tax}} %

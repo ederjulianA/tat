@@ -20,8 +20,28 @@
 		<!-- Main Heading Ends -->
 		<!-- Registration Section Starts -->
 			<section class="registration-area">
+			 @if(Session::has('message-alert'))
 				<div class="row">
-					<div class="col-sm-6">
+					<div class="col-md-5">
+						 
+
+			            <div class="alert alert-warning alert-dismissable">
+			              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			              <strong>Mensaje</strong> {{Session::get('message-alert')}}
+			            </div>
+
+			            <!--<p class="mensajes-flash" style="" data-dismiss="alert"id="mensaje-flash"> {{Session::get('message-alert')}}
+			                
+			            </p>-->
+			        
+						
+					</div>
+					
+				</div>
+			@endif
+			
+				<div class="row">
+					<div class="col-sm-9">
 					<!-- Registration Block Starts -->
 						<div class="panel panel-smart">
 							<div class="panel-heading">
@@ -31,8 +51,16 @@
 							<!-- Registration Form Starts -->
 								<form class="form-horizontal" role="form" method="post" action="/register/new/user">
 								<!-- Personal Information Starts -->
-									
-									<div class="form-group">
+								<div class="row">
+									<div class="col-md-6 form-group">
+										<label for="inputEmail" class="col-sm-3 control-label">Cedula :</label>
+										<div class="col-sm-9">
+											<!--<input type="email" class="form-control" id="inputEmail" placeholder="Email">-->
+											{{ Form::text('NitSec','',array('class'=>'form-control','name'=>'NitSec','placeholder'=>'Cedula')) }}
+											{{ $errors->first('NitSec','<p class="alert alert-danger">:message</p>') }}
+										</div>
+									</div>
+									<div class="col-md-6 form-group">
 										<label for="inputEmail" class="col-sm-3 control-label">Email :</label>
 										<div class="col-sm-9">
 											<!--<input type="email" class="form-control" id="inputEmail" placeholder="Email">-->
@@ -40,9 +68,42 @@
 											{{ $errors->first('email','<p class="alert alert-danger">:message</p>') }}
 										</div>
 									</div>
+
+								</div>
+
+								<div class="row">
+									<div class="col-md-6 form-group">
+										<label for="inputEmail" class="col-sm-3 control-label">Nombre :</label>
+										<div class="col-sm-9">
+											<!--<input type="email" class="form-control" id="inputEmail" placeholder="Email">-->
+											{{ Form::text('nombre','',array('class'=>'form-control','name'=>'nombre','placeholder'=>'nombre')) }}
+											{{ $errors->first('nombre','<p class="alert alert-danger">:message</p>') }}
+										</div>
+									</div>
+									<div class="col-md-6 form-group">
+										<label for="inputEmail" class="col-sm-3 control-label">apellido :</label>
+										<div class="col-sm-9">
+											<!--<input type="email" class="form-control" id="inputEmail" placeholder="Email">-->
+											{{ Form::text('apellido','',array('class'=>'form-control','name'=>'apellido','placeholder'=>'apellido')) }}
+											{{ $errors->first('apellido','<p class="alert alert-danger">:message</p>') }}
+										</div>
+									</div>
+
+								</div>
+								<div class="row">
+									<div class="col-md-6 form-group">
+										<label for="inputEmail" class="col-sm-3 control-label">Telefono :</label>
+										<div class="col-sm-9">
+											<!--<input type="email" class="form-control" id="inputEmail" placeholder="Email">-->
+											{{ Form::text('telefono','',array('class'=>'form-control','name'=>'telefono','placeholder'=>'telefono')) }}
+											{{ $errors->first('telefono','<p class="alert alert-danger">:message</p>') }}
+										</div>
+									</div>
+								</div>
+									
 								
 								
-						
+								<br>
 									<h3 class="panel-heading inner">
 										Seguridad
 									</h3>
@@ -87,7 +148,7 @@
 						</div>
 					<!-- Registration Block Ends -->
 					</div>
-					<div class="col-sm-6">
+					<div class="col-sm-3">
 					<!-- Guest Checkout Panel Starts -->
 						<!--<div class="panel panel-smart">
 							<div class="panel-heading">

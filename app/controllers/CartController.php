@@ -72,10 +72,12 @@ class CartController extends BaseController {
 		$canales    =  	$this->barrio->getAllCanales();
 		$grupos 	=   $this->grupo->getAllGrupos();
 		$pagos   	= 	Mpagos::all();
+		$datos = NULL;
 			
 		if(Auth::check())
 		{
 			$user = User::where('id','=',Auth::user()->id)->first();
+			$dat = Shipping::where('user_id','=',Auth::user()->id)->first();
 
 			$datos = DB::table('user_datos as ud')->join('barrios as b','ud.barrio_id','=','b.id')
 												  ->join('canales as c' ,'ud.canal','=', 'c.id')
@@ -94,10 +96,11 @@ class CartController extends BaseController {
 					'ud.canal',
 					'ud.telefono',
 					'ud.comentarios'
-				)->where('ud.user_id','=',$user->id)->first();
+				)->where('ud.user_id','=',Auth::user()->id)->first();
+					
 			return View::make('checkout')->with('pagos',$pagos)->with('grupos',$grupos)->with('barrios',$barrios)->with('canales',$canales)->with('ciudades',$ciudades)->with('datos',$datos)->with('categorias',$categorias)->with('products', Cart::contents());
 		}
-		$datos = NULL;
+		
 
 		return View::make('checkout')->with('pagos',$pagos)->with('grupos',$grupos)->with('datos',$datos)->with('barrios',$barrios)->with('categorias',$categorias)->with('products', Cart::contents());
 		

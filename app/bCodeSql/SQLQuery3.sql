@@ -6,10 +6,11 @@ SELECT TABLENAME a,REFERENCETABLENAME b,* FROM (
        COL_NAME(fc.referenced_object_id, fc.referenced_column_id) AS ReferenceColumnName
  FROM sys.foreign_keys AS fk
  INNER JOIN sys.foreign_key_columns AS fc ON fk.OBJECT_ID = fc.constraint_object_id
- ) AS AA where TableName='Nit' ORDER BY TABLENAME
+ ) AS AA where TableName='ClientesVendedores' ORDER BY TABLENAME
  
  select top 1 ActComCod from ActividadComercial
- 
+ Select top 1 CenCod from CentrosPoblados
+ select DocCod,NitPerCod, * from Nit
  select top 1 * from GruConNit
   
  

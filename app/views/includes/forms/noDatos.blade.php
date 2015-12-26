@@ -1,7 +1,7 @@
 <div class="panel panel-smart">
 							<div class="panel-heading">
 								<h3 class="panel-title">
-									Ingresa Tus datos de Envio
+									Ingresa Tus datos de Envioo
 								</h3>
 							</div>
 							<div class="panel-body">

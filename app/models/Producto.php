@@ -17,6 +17,23 @@
 			return $productos;
 		}
 
+		public function actProd($art,$id)
+		{
+			$pro = Producto::where('id_mantis','=',$art['ArtCod'])->first();
+			if($pro)
+			{
+				
+				$pro->precio = $art['precio3'];
+				$pro->cantidad = $art['saldo'];
+				if($pro->save())
+				{
+					$est = 1;
+					return $est;
+				}
+			}
+			
+		}
+
 
 
 public function limpiar($String){

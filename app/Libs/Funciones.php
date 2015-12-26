@@ -1,6 +1,28 @@
 <?php
 
 	class Funciones {
+	protected $producto;
+	protected $cat;
+	protected $barrio;
+	protected $conn;
+	protected $server;
+	protected $db;
+	protected $user;
+	protected $pass;
+	protected $urlMantis;
+	public function __construct(Producto $producto, Categoria $cat, Barrio $barrio, Conn $conn)
+	{
+		$this->producto 	= $producto;
+		$this->cat 			= $cat;
+		$this->barrio 		= $barrio;
+		$this->conn         = $conn;
+		$this->server       = $this->conn->getServer();
+		$this->user         = $this->conn->getUser();
+		$this->pass         = $this->conn->getPass();
+		$this->db           = $this->conn->getDb();
+		$this->urlMantis       = $this->conn->getUrlImg();
+		
+	}
 
 		public static  function getCat($id)
 		{ 
@@ -10,6 +32,16 @@
 			//dd($cat->InvFamNom);
 			return $cat->InvFamNom;
 		}
+
+
+		public static function getPriceIva($precio,$iva)
+		{
+			$nval = $precio +(($precio*$iva)/100);
+			return $nval;
+			dd($nval);
+		}
+
+	
 
 		public static function tipoPedido($tipo)
 		{

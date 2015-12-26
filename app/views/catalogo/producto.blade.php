@@ -31,7 +31,7 @@
 					<ol class="breadcrumb">
 						<li><a href="index.html">Home</a></li>
 						<li><a href="#"></a>{{ Funciones::getCat($producto->categoria_id)}}</li>
-						<li class="active">{{$producto->pro_nom}}</li>
+						<li class="active">{{$producto->id_mantis}}-{{$producto->pro_nom}}</li>
 					</ol>
 				<!-- Breadcrumb Ends -->
 				<!-- Product Info Starts -->
@@ -85,7 +85,12 @@
 						<!-- Price Starts -->
 							<div class="price">
 								<span class="price-head">Precio :</span>
-								<span class="price-new">${{number_format($producto->precio, 0, '', '.')}}</span> 
+								{{--<span class="price-new">${{number_format($producto->precio, 0, '', '.')}}</span> --}}
+								<span class="price-new">${{ number_format(App::make('UserController')->getPrice($producto->id_mantis), 0, '', '.') }}</span>
+								<div>
+									<span class="price-head">Inventario:</span>
+									<span class="price-new">{{$producto->cantidad}}</span>
+								</div>
 							</div>
 						<!-- Price Ends -->
 							<hr />
