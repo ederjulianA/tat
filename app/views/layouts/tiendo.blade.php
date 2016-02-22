@@ -40,6 +40,7 @@
   <link href="{{asset('admin2/css/style.css')}}" rel="stylesheet">
   <!-- Widgets stylesheet -->
   <link href="{{asset('admin2/css/widgets.css')}}" rel="stylesheet">   
+  <link rel="stylesheet" type="text/css" href="{{asset('sweetalert-master/dist/sweetalert.css')}}">
   
   <script src="{{asset('admin2/js/respond.min.js')}}"></script>
   <!--[if lt IE 9]>

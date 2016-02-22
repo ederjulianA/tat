@@ -89,7 +89,8 @@
 								<span class="price-new">${{ number_format(App::make('UserController')->getPrice($producto->id_mantis), 0, '', '.') }}</span>
 								<div>
 									<span class="price-head">Inventario:</span>
-									<span class="price-new">{{$producto->cantidad}}</span>
+									<span class="price-new">{{ round($producto->cantidad)}}</span>
+									<input type="hidden" id="cant-dis" value="{{ round($producto->cantidad)}}">
 								</div>
 							</div>
 						<!-- Price Ends -->
@@ -108,11 +109,18 @@
 										<i class="fa fa-bar-chart-o"></i>
 									</button>-->
 									<input type="hidden" name="id_producto" id="id_producto" value="{{$producto->id}}">
-									
-											<button type="button" class="btn btn-cart" id="btn_addCart">
-												Agregar
-												<i class="fa fa-shopping-cart"></i> 
-											</button>
+											@if($producto->cantidad > 0)
+												<button type="button" class="btn btn-cart" id="btn_addCart">
+													Agregar
+													<i class="fa fa-shopping-cart"></i> 
+												</button>
+											@else
+												<button type="button" class="btn btn-cart" id="btn_addCartDis" disabled>
+													Agregar
+													<i class="fa fa-shopping-cart"></i> 
+												</button>
+											@endif	
+
 									</form>											
 								</div>
 							</div>

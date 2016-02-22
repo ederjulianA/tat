@@ -34,6 +34,7 @@ class CuentaController extends BaseController {
 		$grupos 		=   $this->grupo->getAllGrupos();
 		$categorias =   $this->cat->getAllCat();
 		$pedido   =	$this->empresa->getPedidoDetalle($id);
+		
 		$items  =	$this->user->getItems($id);
 		
 		return View::make('user.detallePedido',compact('user','pedido','items'))->with('grupos',$grupos)->with('categorias',$categorias)->with('products', Cart::contents());

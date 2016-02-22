@@ -99,6 +99,14 @@
 											{{ $errors->first('telefono','<p class="alert alert-danger">:message</p>') }}
 										</div>
 									</div>
+									<div class="col-md-6 form-group">
+										<label for="inputEmail" class="col-sm-3 control-label">Dirección :</label>
+										<div class="col-sm-9">
+											<!--<input type="email" class="form-control" id="inputEmail" placeholder="Email">-->
+											{{ Form::text('dir','',array('class'=>'form-control','name'=>'dir','placeholder'=>'Dirección')) }}
+											{{ $errors->first('dir','<p class="alert alert-danger">:message</p>') }}
+										</div>
+									</div>
 								</div>
 									
 								

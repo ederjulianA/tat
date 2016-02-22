@@ -14,6 +14,8 @@
 
 		public function getPedidoDetalle($id)
 		{
+
+			/*$pedido = Compra::where('id','=',$id)->first();*/
 			$pedido = DB::table('compra as c')->join('estados as e','c.estado_id','=','e.id')
 											->join('users as u','c.user_id','=','u.id')
 											->join('user_datos as ud','ud.user_id','=','u.id')
@@ -28,6 +30,7 @@
 		 			'c.tipo_compra',
 		 			'c.vlr_envio',
 		 			'c.conf',
+		 			'c.user_id',
 		 			'e.nom_est',
 		 			'ud.nombre',
 		 			'ud.direccion',
@@ -41,6 +44,7 @@
 		 			'b.bar_nom'
 		 			
 				)->where('c.id','=',$id)->first();
+			
 
 			return $pedido;
 		}

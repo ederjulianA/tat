@@ -6,6 +6,8 @@
 @stop
 
 @section('content')
+
+<input type="hidden" id="urlValDis" value="{{URL::route('urlValDis')}}">;
 <style type="text/css">
 	.btn-finalizar{
 		position: absolute;
@@ -58,10 +60,13 @@
 								Cantidad
 							</td>
 							<td class="text-center">
-								Precio
+								Antes de iva
 							</td>
 							<td class="text-center">
 								% IVA
+							</td>
+							<td class="text-center">
+								PRECIO
 							</td>
 							<td class="text-center">
 								Total
@@ -72,6 +77,7 @@
 						</tr>
 					</thead>
 					<tbody>
+
 						@if($products)
 							@foreach($products as $pro)
 								<tr>
@@ -93,10 +99,14 @@
 									</td>
 									<td class="text-center">
 										$<span id="precio-{{$pro->id}}">{{number_format($pro->price, 0, '', '.')}}</span><br>
-										{{Funciones::getPriceIva($pro->price,$pro->tax)}}
+										
 									</td>
 									<td class="text-center">
 										{{$pro->tax}} %
+									</td>
+										<td class="text-center">
+										$<span id="precio-{{$pro->id}}">{{number_format(Funciones::getPriceIva($pro->price,$pro->tax), 0, '', '.')}}</span><br>
+										
 									</td>
 									<td class="text-center">
 										$ <span class="itemTotal-{{$pro->id}}">{{number_format($pro->total(), 0, '', '.')}}</span>

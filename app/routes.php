@@ -15,6 +15,22 @@ Route::get(	'/', array(
 		'uses'=> 'HomeController@getIndex'
 		));
 
+Route::any(	'/payu/response', array(
+		'as'=>'pur', 
+		'uses'=> 'HomeController@getPayUr'
+		));
+
+
+
+
+//ruta pedidos
+
+
+Route::any(	'/pedMantis', array(
+		'as'=>'pedMantis', 
+		'uses'=> 'SyncController@pedMantis'
+		));
+
 
 
 //RUTAS PAYPAL
@@ -87,6 +103,8 @@ Route::any('/remove/cart/{identifier}', array('as' => 'removeItem','uses' => 'Ca
 //android
 
 Route::any('/android', array('as' => 'android', 'uses' => 'HomeController@android'));
+Route::any('/android/users', array('as' => 'androidUsers', 'uses' => 'HomeController@androidUsers'));
+Route::any('/android/detalle', array('as' => 'androidDetalle', 'uses' => 'HomeController@androidDetalle'));
 
 //BUSCADOR
 
@@ -102,6 +120,7 @@ Route::post('postlogin', array('as' => 'postlogin', 'uses' => 'HomeController@po
 Route::post('postLoginCheckout', array('as' => 'postLoginCheckout', 'uses' => 'UserController@postLoginCheckout'));
 Route::post('postUpdateData', array('as' => 'postUpdateData', 'uses' => 'UserController@postUpdateData'));
 Route::post('postPedido', array('as' => 'postPedido', 'uses' => 'CartController@postPedido'));
+Route::post('urlValDis', array('as' => 'urlValDis', 'uses' => 'SyncController@urlValDis'));
 
 Route::post('addcartAjax', array('as' => 'addcartAjax', 'uses' => 'AjaxController@addcartAjax'));
 Route::post('confAjax', array('as' => 'confAjax', 'uses' => 'AjaxController@confAjax'));
@@ -128,6 +147,18 @@ Route::any('UrlLoadPro', array('as' => 'UrlLoadPro', 'uses' => 'Ajax2Controller@
 
 
  Route::post('urlTipPag', array('as' => 'urlTipPag', 'uses' => 'Ajax3Controller@prueba'));
+/*$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$rutas&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&*/
+
+ 	Route::group(['prefix' => 'api', 'after' => 'allowOrigin'], function() {
+
+ 			Route::any('categorias', array('as' => 'apiCategorias', 'uses' => 'ApiController@getCategorias'));
+ 			Route::any('login', array('as' => 'login', 'uses' => 'ApiController@apiLogin'));
+ 			Route::any('addFav', array('as' => 'addFav', 'uses' => 'ApiController@addFav'));
+
+ 			Route::any('/android', array('as' => 'android', 'uses' => 'ApiController@android'));
+
+ 
+    });
 
 
 

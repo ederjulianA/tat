@@ -24,6 +24,8 @@
 	<link href="{{asset('tat/css/style.css')}}" rel="stylesheet">
 	<link href="{{asset('tat/css/responsive.css')}}" rel="stylesheet">
 	<link href="{{asset('tat/css/validationJS.css')}}" rel="stylesheet">
+	<link href="{{asset('sweetalert-master/dist/sweetalert.css')}}" rel="stylesheet">
+	{{--<link rel="stylesheet" type="text/css" href="{{asset('sweetalert-master/dist/sweetalert.css')">--}}
 	
 	<!--[if lt IE 9]>
 		<script src="js/ie8-responsive-file-warning.js"></script>
@@ -104,7 +106,8 @@
 					<!-- Logo Starts -->
 						<div class="col-md-6">
 							<div id="logo">
-								<a href="/"><img src="{{asset('tat/images/tat-logo.png')}}" title="Spice Shoppe" alt="Spice Shoppe" class="img-responsive" /></a>
+								{{--<a href="/"><img src="{{asset('tat/images/tat-logo.png')}}" title="Spice Shoppe" alt="Spice Shoppe" class="img-responsive" /></a>--}}
+									<a href="/"><img src="http://localhost:8000/tat/images/tat-logo.png" title="Spice Shoppe" alt="Spice Shoppe" class="img-responsive" /></a>
 							</div>
 						</div>
 					<!-- Logo Starts -->
@@ -263,9 +266,12 @@
 	<script src="{{asset('tat/js/bootstrap.min.js')}}"></script>
 	<script src="{{asset('tat/js/bootstrap-hover-dropdown.min.js')}}"></script>
     <script src="{{asset('tat/js/jquery.magnific-popup.min.js')}}"></script>
+    <script src="{{asset('sweetalert-master/dist/sweetalert.min.js')}}"></script>
+    <script src="{{asset('tat/js/notie.js')}}"></script>
 	<script src="{{asset('tat/js/custom.js')}}"></script>
 	<script src="{{asset('tat/js/addCart.js')}}"></script>
 	<script src="{{asset('tat/js/jquery.numeric.js')}}"></script>
+	<script src="{{asset('tat/js/jquery.notie.js')}}"></script>
 	
 	@yield('ajax-val')
 </body>

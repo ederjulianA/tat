@@ -16,9 +16,45 @@ class HomeController extends BaseController {
 	}
 
 
+	public function getPayUr()
+	{
+		return View::make('PayRes.payu');
+	}
+
+
+	public function androidDetalle()
+	{
+		if(!isset($_REQUEST['idmantis']))
+		{
+			$idmantis = '000276';
+			//$tipo  ="listaaaaaa";
+		}else{
+			$idmantis = $_REQUEST['idmantis'];
+			//$tipo     = $_REQUEST['name'];
+
+
+		}
+
+
+			$productos = DB::table('productos as p')
+							->select(
+									'p.pro_nom',
+									'p.precio',
+									'p.img',
+									'p.id_mantis')->where('p.id_mantis','=',$idmantis)->get();
+
+							
+			/*$ti = new Tipopago();
+							$ti->TipPagNom = $tipo;
+							$ti->save();*/
+
+							return Response::json($productos);
+	}
+
+
 	public function android()
 	{
-		if (isset($_POST['data']) and isset($_POST['info']))
+		/*if (isset($_POST['data']) and isset($_POST['info']))
 		{
 			$dato = $_POST['data'];
 			$info = $_POST['info'];
@@ -26,8 +62,52 @@ class HomeController extends BaseController {
 		}else
 		{
 			echo"NOTHING TO SHOW";
+		}*/
+
+		if(!isset($_REQUEST['precio']))
+		{
+			$precio = 100000;
+			$tipo  ="defectooooo";
+			
+		}else{
+					$precio = $_REQUEST['precio'];
+					$tipo     = $_REQUEST['name'];
+					
 		}
+		$productos = DB::table('productos as p')
+							->select(
+									'p.pro_nom',
+									'p.precio',
+									'p.img',
+									'p.id_mantis'
+								)->orderBy(DB::raw('RAND()'))->where('p.precio','<=',$precio)->get();
+
+							//dd($productos);
+
+							$ti = new Tipopago();
+							$ti->TipPagNom = $tipo;
+							$ti->save();
+
+
+							
+
+							return Response::json($productos);
 		
+	}
+
+	public function androidUsers()
+	{
+		/*$users = DB::table('users as u')->join('compra as c','u.id','=','c.user_id')->select('u.email','c.total_compra')->sum('c.total_compra');*/
+		$users = User::leftJoin('compra', 'compra.user_id', '=', 'users.id')
+   ->selectRaw('users.email, sum(compra.total_compra) as total_compra')
+   ->orderBy('total_compra', 'desc')
+   ->get();
+
+   //dd($users);
+
+
+
+		return Response::json($users);
 	}
 
 

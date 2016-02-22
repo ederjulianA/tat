@@ -6,6 +6,17 @@
 @stop
 
 @section('content')
+
+	<style type="text/css" media="screen">
+
+		.frmEde{
+			margin: 10px auto;
+		}
+		.frmEde input {
+			width: 90%;
+		}
+		
+	</style>
 	<!-- Breadcrumb Starts -->
 			<ol class="breadcrumb">
 				<li><a href="/">Home</a></li>
@@ -39,49 +50,48 @@
 			</h2>
 		<!-- Main Heading Ends -->
 		<!-- Login Form Section Starts -->
-			<section class="login-area">
-				<div class="row">
-					<div class="col-sm-6">
-					<!-- Login Panel Starts -->
+			<div class="row">
+				<div class="col-md-4">
 						<div class="panel panel-smart">
 							<div class="panel-heading">
 								<h3 class="panel-title">Login</h3>
 							</div>
 							<div class="panel-body">
 								<p>
-									Por favor inicia sesión usando tu cuenta
+									Ingresa con tus credenciales
 								</p>
-							<!-- Login Form Starts -->
-								<form class="form-inline" role="form" method="post" action="{{URL::route('postLogin')}}">
-									<div class="form-group">
-										<label class="sr-only" for="exampleInputEmail2">Email</label>
-										
-										{{ Form::text('email','',array('class'=>'form-control','name'=>'email','placeholder'=>'Email','id'=>'exampleInputEmail2')) }}
-											{{ $errors->first('email','<p class="alert alert-danger">:message</p>') }}
-										</div>
+
+							<form class="form-inline" role="form" method="post" action="{{URL::route('postLogin')}}">
+									<div class="form-group frmEde">
+										<label class="sr-only" for="email">Email</label>
+										 	
+												{{ Form::text('email','',array('class'=>'form-control','name'=>'email','placeholder'=>'Email','id'=>'email')) }}
+													{{ $errors->first('email','<p class="alert alert-danger">:message</p>') }}
+												
 									</div>
-									<div class="form-group">
+									<br>
+
+									<div class="form-group frmEde">
 										<label class="sr-only" for="exampleInputPassword2">Contraseña</label>
 										<input type="password" name="password" class="form-control" id="exampleInputPassword2" placeholder="Password">
 									</div>
-									<button type="submit" class="btn btn-warning">
+									<br>
+
+									<div class="form-group frmEde">
+										<button type="submit" class="btn btn-warning">
 										Login
 									</button>
-								</form>
-							<!-- Login Form Ends -->
-					
+									</div>	
+							</form>	
 							</div>
-						</div>
-					<!-- Login Panel Ends -->
-					</div>
-					<div class="col-sm-6">
-					<!-- Account Panel Starts -->
-						<div class="panel panel-smart">
+						</div>	
+				</div>
+				<div class="col-md-4">
+					    <div class="panel panel-smart">
 							<div class="panel-heading">
-								<h3 class="panel-title">
-									Crear Cuenta nueva
-								</h3>
+								<h3 class="panel-title">Crear cuenta</h3>
 							</div>
+
 							<div class="panel-body">
 								<p>
 									Al estar registrado en TAT shop, te permite procesar tus pedidos de forma rapida
@@ -90,26 +100,16 @@
 									Registro
 								</a>
 							</div>
-						</div>
-					<!-- Account Panel Ends -->
-					<!-- Guest Checkout Panel Starts -->
-						<!--<div class="panel panel-smart">
-							<div class="panel-heading">
-								<h3 class="panel-title">
-									Checkout as Guest
-								</h3>
-							</div>
-							<div class="panel-body">
-								<p>
-									Checkout as a guest instead!
-								</p>
-								<button class="btn btn-warning">As Guest</button>
-							</div>
-						</div>-->
-					<!-- Guest Checkout Panel Ends -->
-					</div>
+						</div>	
 				</div>
-			</section>
+				<div class="col-md-4">
+							<div class="panel panel-smart">
+							<div class="panel-heading">
+								<h3 class="panel-title">Olvido contraseña ?</h3>
+							</div>
+						</div>	
+				</div>
+			</div>
 		<!-- Login Form Section Ends -->
-		</div>
+		{{--</div>--}}
 @stop

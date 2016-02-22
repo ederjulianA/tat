@@ -89,7 +89,7 @@
 												
 											</div>
 											<div class="price">
-												<span class="price-new">${{number_format($producto->precio, 0, '', '.')}}</span> 
+												<span class="price-new">${{ number_format(App::make('UserController')->getPrice($producto->id_mantis), 0, '', '.') }}</span> 
 												<!--<span class="price-old">$249.50</span>-->
 											</div>
 											<div class="cart-button button-group">

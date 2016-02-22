@@ -63,6 +63,17 @@ return array(
 			'prefix'    => '',
 		),
 
+		/*	'mysql' => array(
+			'driver'    => 'mysql',
+			'host'      => 'localhost',
+			'database'  => 'moreno_db',
+			'username'  => 'moreno_user',
+			'password'  => 'eder4EVER',
+			'charset'   => 'utf8',
+			'collation' => 'utf8_unicode_ci',
+			'prefix'    => '',
+		),*/
+
 		'pgsql' => array(
 			'driver'   => 'pgsql',
 			'host'     => 'localhost',
@@ -106,6 +117,22 @@ return array(
 	| Redis is an open source, fast, and advanced key-value store that also
 	| provides a richer set of commands than a typical key-value systems
 	| such as APC or Memcached. Laravel makes it easy to dig right in.
+
+	Usuario: moreno
+Clave: dQLYPIyhzeDlEZJ
+Panel Administrativo:
+http://www.morenoyalvarez.com/cpanel
+SAU-736-20685
+
+Eder-pc
+erpweb
+Somic321
+
+
+DELETE FROM `productos` WHERE `id` > 0
+DELETE FROM `inventariogrupo` WHERE `id` > 0
+DELETE FROM `inventariofamilia` WHERE `id` > 0
+DELETE FROM `categorias` WHERE `id` > 0
 	|
 	*/
 

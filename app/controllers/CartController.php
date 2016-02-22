@@ -25,13 +25,27 @@ class CartController extends BaseController {
 	 private $_api_context;
 	protected $envios;
 
-	public function __construct(Producto $producto, Categoria $cat, Barrio $barrio,Grupo $grupo, Envio $envios)
+	protected $conn;
+	protected $server;
+	protected $db;
+	protected $user;
+	protected $pass;
+	protected $urlMantis;
+
+	public function __construct(Producto $producto, Categoria $cat, Barrio $barrio,Grupo $grupo, Envio $envios, Conn $conn)
 	{
 		$this->producto 	= $producto;
 		$this->cat 			= $cat;
 		$this->barrio 		= $barrio;
 		$this->grupo 		= $grupo;
 		$this->envios   	= $envios;
+
+		$this->conn         = $conn;
+		$this->server       = $this->conn->getServer();
+		$this->user         = $this->conn->getUser();
+		$this->pass         = $this->conn->getPass();
+		$this->db           = $this->conn->getDb();
+		$this->urlMantis       = $this->conn->getUrlImg();
 
 
 		// setup PayPal api context
@@ -171,6 +185,8 @@ class CartController extends BaseController {
 				'price' => $producto->precio,
 				'quantity' => Input::get('cantidad'),
 				'tax'	=>$producto->por_iva,
+				'conIva'=> $producto->precio + (($producto->precio * $producto->por_iva)/100),
+				'ArtSec'=> $producto->ArtSec,
 				'image' => $producto->img
 			));
 			 			 return Redirect::back()->with('message-alert','Se ha agregado el producto a tu pedido');
@@ -230,14 +246,17 @@ class CartController extends BaseController {
 	$data = Input::all();
 	Session::put('data', $data);
 	
-    
+	$dollar = 3300	;
+    $x = 0;
+    $valorEnvio = Input::get('vlr_envio_a');
+    $nVlrEnvvio  = round(($valorEnvio/$dollar),2);
+    //dd($nVlrEnvvio);
 
     $payer = new Payer();
     $payer->setPaymentMethod('paypal');
     //$totItems =  array();
 
-    $dollar = 2896.19	;
-    $x = 0;
+    
     foreach (Cart::contents() as $i) {
     	
     	$precio = (($i->price*(1+($i->tax/100))) /$dollar);
@@ -256,10 +275,22 @@ class CartController extends BaseController {
         ->setQuantity($val)
         ->setPrice($pre); // unit price
 
-       
+      // dd($item);
         
         $totItems[] = $item;
     }
+
+    $item1 = new Item();
+    $item1->setName('Envio') // item name
+        ->setCurrency('USD')
+        ->setQuantity(1)
+        ->setPrice($nVlrEnvvio);
+
+        $totItems[] = $item1;
+        
+
+        $x = round(($x+$nVlrEnvvio),2);
+        //dd($x);
     
     //dd($totItems);
     
@@ -294,7 +325,9 @@ class CartController extends BaseController {
     $item_list->setItems(array($item_1, $item_2, $item_3));*/
     //dd($item_list);
     $item_list = new ItemList();
+    //$item_list->setItems($totItems);
     $item_list->setItems($totItems);
+    //dd($item_list);
     $totCart = Cart::total();
     $totDol  = ($x);
    
@@ -310,7 +343,7 @@ class CartController extends BaseController {
     $transaction = new Transaction();
     $transaction->setAmount($amount)
         ->setItemList($item_list)
-        ->setDescription('Your transaction description');
+        ->setDescription('Compra en TAT Shop');
 
     $redirect_urls = new RedirectUrls();
     $redirect_urls->setReturnUrl(URL::route('payment.status'))
@@ -388,7 +421,80 @@ class CartController extends BaseController {
     //echo '<pre>';print_r($result);echo '</pre>';exit; // DEBUG RESULT, remove it later
 
     if ($result->getState() == 'approved') { // payment made
-    			$compra = new Compra;
+
+
+
+
+    	if ($conn_access = odbc_connect ( "Driver={SQL Server Native Client 10.0};Server=".$this->server.",1433;Database=".$this->db.";", ''.$this->user.'', ''.$this->pass.'')){ 
+			 $ssql = "select * from Secuencia where SecCod='PEDIDO'"; 
+			if($rs_access = odbc_exec ($conn_access, $ssql)){ 
+						while ($info = odbc_fetch_array($rs_access)) {
+					 		   //$content[] = $info;
+					   			//$ciudades = new Ciudad;
+					   			$SecNum = $info['SecNum'];
+					   			
+								}// END WHILE############################
+									$NitIde = Auth::user()->NitSec;
+									$ssql2 = "select n.NitIde,n.NitSec, c.Vencod From Nit n
+inner join ClientesVendedores c on c.NitSec = n.NitSec
+where n.NitIde = '$NitIde'";
+									if($rs_access = odbc_exec($conn_access, $ssql2)){ 
+												while ($info2 = odbc_fetch_array($rs_access)) {
+					 		  
+					   							$NitSec = $info2['NitSec'];
+					   							$Vencod = $info2['Vencod'];
+					   			
+												}// END WHILE############################
+												$id_pedido = 'PED-WEB-'.date('Ymd-Hms');
+												//dd($id_pedido,$SecNum,$NitSec);
+												$totalCompra =  $data['totalCart'];
+												
+												$ssql3 ="INSERT INTO Cotizaciones1(CotTip,CotSec,TipCod,EmpCod,CotFecha,CotObs,CotUsuCod,CotCliConPag,CotSecConCon,CotLisPreCod,CotSubVenCod,CotSubNitSec,CotSubCliSec,CotNum,CotSumCot,BodSucCCSec,CotEst,CotSubCotSec,AnuFueSec,CotAnuObs,CotEstado)
+                   								 VALUES('P','$SecNum','PED',1,'16-01-2016','miobs','admin',1/*cliConPag*/,1/*numItems*/,1/*lisprecod*/,$Vencod/*vencod*/,'$NitSec'/*nitsec*/,1/*clisec*/,'$id_pedido','$totalCompra',1/*BODsUCCSEC*/,2/*CotEst*/,NULL,NULL,NULL,'A')";
+
+                   								 if($rs_access = odbc_exec($conn_access, $ssql3)){ 
+                   								 		$ssql4 = "UPDATE Secuencia SET SecNum=SecNum+1 where SecCod='PEDIDO'";
+                   								 		if($rs_access = odbc_exec($conn_access, $ssql4)){
+$num = 1;
+foreach (Cart::contents() as $item) {   
+					               								 			
+                  $artSec = $item->ArtSec;
+                  $price  = $item->price;
+                  $CotArtNom = $item->name;
+                  $uni    = $item->quantity ;
+                  $CotSubPrecio = Cart::total(false);								 			
+  $ssql5 = "insert into CotizacionesDetalle1(CotTip,CotSec,CotSecCon,CotObsequio,ArtSec,CotArtEmb,CotArtLot,CotArtLotFec
+,CotArtCaj,CotArtUni,CotArtDesUno,CotArtDesDos,CotArtDesTre,CotArtDesCua,CotArtDesVal,CotArtConIva,CotArtPrecio,
+CotSumDes,CotArtSubTotDesUno,CotArtSubTotDesDos,CotArtSubTotDesTre,CotArtSubTotDesCua,CotSubLisPreCod,
+CotSubPreArtCod,SubBodSucCCSec,PedArtCaj,PedArtUni,CotSecEst,CotPre,cotdesuni,CotPreFacCon,CotArtNom,CotArtValImp,CotPorIva,CotSubPrecio)
+values('P','$SecNum',$num,'N',$artSec/*ArtSec*/,1 /*ArtEmb*/,'S/L','1999-01-01 00:00:00.000',0.000000,$uni/*CotArtUni*/,0.00,0.00,0.00,0.00,0.00000,
+(select top 1 ParConIva from Articulos a left join ParametroContable p on a.ParConCod=p.ParConCod where ArtSec='$artSec'),
+'$price'/*CotArtPrecio*/,0.00000,0.00000,0.00000,0.00000,0.00000,isnull((select lisprecod from clientes where nitsec='$NitSec' and clisec=1),0)
+,(select top 1 PreArtCod from ArtPre where artsec=$artSec),1,0,0,'A',0,0.00000,1.00000,'$CotArtNom',0.00000
+,(select top 1 ParConIva from Articulos a left join ParametroContable p on a.ParConCod=p.ParConCod where ArtSec=$artSec),'$CotSubPrecio')
+";
+															if($rs_access = odbc_exec($conn_access, $ssql5)){
+
+																$num = $num +1;
+															}
+
+
+														}//end for each Cart
+                   								 	}
+
+                   								 }//END SSQL3
+									}//end if ssql2
+
+
+					 
+			}//END IF SSQL############################
+		}// END IF SQL CONN
+
+
+    	/*---------------------------------------------------*/
+
+
+    	$compra = new Compra;
 		$compra->user_id 	=	Auth::user()->id;
 		$compra->totalCart  =   $data['totalCart'];
 		$compra->total_compra  =  $data['total_compra'];
@@ -422,9 +528,16 @@ class CartController extends BaseController {
 			}
 
         
-    }
+    }//SI EL PAGO FUE APROVADO POR PAYPAL
     return Redirect::route('cart')
         ->with('message-alert', 'Payment failed');
+}
+
+
+public function pedMantis()
+{
+
+
 }
 
 

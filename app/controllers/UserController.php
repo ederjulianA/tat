@@ -51,6 +51,7 @@ class UserController extends BaseController {
 		$NitIde = Input::get('NitSec');
 		$Nom    = Input::get('nombre');
 		$Ape    = Input::get('apellido');
+		$dir    = Input::get('dir');
 		$FullNom = $Nom.' '.$Ape;
 
 		$tel    = Input::get('telefono');
@@ -89,7 +90,7 @@ class UserController extends BaseController {
 																 nitprocom ,nitprocob ,nitprocon ,    protel ,    propordes ,    provestado ,
 																 nitactcomcod1 ,nitactcomcod2 ,nitactcomcod3 ,    nitindacr) 
 																 values ($SecNum ,    '13' ,  $NitIde ,    '0' ,    'N' , '$Nom' ,  
-																 '',   '$Ape', '','$FullNom','Calle 20 # 24-27',
+																 '',   '$Ape', '','$FullNom','$dir',
 																 (select top 1 nitCiuCod from Empresa e left join Nit n on e.NitSec=n.NitSec ) ,
 																     0 , NULL , NULL , NULL , 'A' ,null ,
 																 null ,  'S',  'N' ,'N' ,'N' ,  'N' ,  'N' ,  'N' ,
@@ -127,9 +128,15 @@ class UserController extends BaseController {
 				{
 					$ship = new Shipping;
 					$ship->user_id = $user->id;
+					$ship->barrio_id = 1;
 					$ship->nombre = Input::get('nombre');
 					$ship->apellido = Input::get('apellido');
-					$ship->cedula = Input::get('NitSec');
+					$ship->nombre_negocio = 'DEFAULT';
+					$ship->ciudad =1;
+					$ship->canal = 0;
+					$ship->direccion = $dir;
+					$ship->cedula = $NitIde;
+					$ship->comentarios = "Sin comentarios";
 					$ship->telefono = Input::get('telefono');
 					if($ship->save())
 					{
@@ -292,9 +299,9 @@ cast(isnull((p3.PrePreFijVal),0)/(1-((isnull(p3.preporval,0))/100)) as int) prec
  left join PresentacionArticulos pres on pres.preartcod=p3.preartcod
  left join ParametroContable p on p.parconcod=a.ParConCod
  left join InventarioFamilia f on f.InvFamCod=a.InvFamCod left join InventarioSubgrupo sg on sg.InvSubGruCod=f.InvSubGruCod 
- where a.ArtCod = $id and artdes='N'"; 
+ where a.ArtCod = '$id' and artdes='N'"; 
 
-					   	if($rs_access = odbc_exec ($conn_access, $ssql)){ 
+					   	if($rs_access = odbc_exec($conn_access, $ssql)){ 
 					   		
 					   		while ($info = odbc_fetch_array($rs_access)) {
 					 		   //$content[] = $info;

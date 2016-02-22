@@ -4,6 +4,7 @@ $(document).ready(function(){
 	//loadBarrios(id_ciudad);
 	cargarDias();
 
+
 	$('#input-quantity').numeric();
 	$('.input-quantity').numeric();
 
@@ -19,14 +20,24 @@ $(document).on('click','#btn_addCart', function(e){
 
 
 	
-	var id_pro = $('#id_producto').val();
-	var cantidad = $('#input-quantity').val();
+	var id_pro 		= $('#id_producto').val();
+	var cantidad 	= $('#input-quantity').val();
+	var dis 		= $('#cant-dis').val();
+	//alert(dis+'---'+cantidad);
+	var tot 		= parseInt(dis-cantidad);
+			
+	
+
 
 	if( cantidad <= 0)
 	{
-		$('#input-quantity').addClass("alert");
+		swal({   title: "Cantidad no valida!",   text: "Ingrese un valor valido",   timer: 2000,   showConfirmButton: false });
 		return false;
-	}
+	}else{
+		if(parseInt(dis) < parseInt(cantidad))
+		{
+			swal("Cantidad no disponible.", "Unidades disponiblesss: "+dis);
+		}else{
 
 				$.ajax({
 
@@ -52,6 +63,36 @@ $(document).on('click','#btn_addCart', function(e){
 
 
 		});
+		}
+		
+	}
+	
+
+				/*$.ajax({
+
+			url : "../addcartAjax",
+			dataType: "json",
+			type : "post",
+			data : { id_producto : id_pro, cantidad:cantidad},
+			success : function(data){
+				if(data.estado.estado == 1)
+				{
+					var Ntotal = data.estado.totalCart.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+					$('#ModalCart').modal({
+						show:true,
+						keyboard:false
+					});
+					$('.info-item').html('<p>Has agregado a tu lista :'+data.producto.pro_nom+' <img src="'+data.producto.img+'" height="120px" width="auto"></p><br><strong>Total del Pedido: $'+Ntotal+'</strong>')
+					console.log(data);
+				}
+				
+			}
+
+				
+
+
+		});*/
+		//end ajax call
 
 
 	//alert('id : '+id_pro+'Cantidad :'+cantidad);
@@ -173,6 +214,27 @@ $(document).on('change','.cant', function(e){
 	var id = $(this).attr('data');
 	var identifier = $(this).attr('togle');
 	var can = $('#cant-'+id).val();
+ 	
+ 	var url = $('#urlValDis').val();
+ 	var dis = getDis(id,url);
+	
+ 	console.log(dis);
+ 	
+	
+
+	if (can <= 0)
+	{
+		notie.alert(3, 'Ingrese un valor valido', 2);
+		return false;
+	}
+
+	if(parseInt(dis) < parseInt(can))
+	{
+		
+		swal("Cantidad no disponible.", "Unidades disponibles: "+dis);
+		$("#cant-"+id).focus();
+		return false;
+	}
 
 		$.ajax({
 
@@ -186,10 +248,10 @@ $(document).on('change','.cant', function(e){
 				{
 					var NtotalItem = data.estado.itemTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 					var Ntotal = data.estado.totalCart.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-
+					console.log(data);
 					$('.totalCart').text(Ntotal);
 					$('.itemTotal-'+id).text(NtotalItem);
-					console.log(data);
+					notie.alert(1, 'Cantidad actualizada!', 1.8);
 					
 							//console.log("dia:"+data.diasv[i].id);
 						
@@ -210,8 +272,40 @@ $(document).on('change','.cant', function(e){
 });
 
 
+//funcion para consultar la cantidad disponible
+function getDis(id,url)
+{
+	
+var d = 0;
 
 
+	$.ajax({
+
+			url : url,
+			dataType: "json",
+			type : "post",
+			async:false,
+			data : { id : id},
+			success : function(data){
+
+				if(data.estado.estado == 1)
+				{
+					//var dis = parseInt(data.pro.saldo);
+					d = parseInt(data.pro.saldo);
+					/*console.log(dis);
+					console.log(data);*/
+					
+				}	
+					
+					
+
+		}
+
+			});
+	
+	
+	return d;
+}
 
 
 
@@ -246,8 +340,5 @@ function cargarDias()
 				
 			}
 
-				
-
-
-		});
+			});
 }

@@ -1,13 +1,38 @@
 <div class="panel panel-smart">
 							<div class="panel-heading">
 								<h3 class="panel-title">
-									Crear cuenta 
+									Inicia sesión o crea una cuenta <a href="{{url::route('register')}}">aqui</a>
 								</h3>
 							</div>
 							<div class="panel-body">
+
+								    	<form method="post" action="{{URL::route('postLogin')}}">
+       										<div class="form-group">
+											<label for="email" class=" control-label">Email :</label>
+											<div class="">
+											
+												{{ Form::email('email','',array('class'=>'form-control','name'=>'email','placeholder'=>'ejemplo@ejemplo.com')) }}
+												{{ $errors->first('email','<p class="alert alert-danger">:message</p>') }}
+											</div>
+										</div>
+
+										<div class="form-group">
+											<label for="password" class=" control-label">Contraseña :</label>
+											<div class="">
+												<input type="password" name="password" class="form-control" placeholder="******">
+												{{ $errors->first('password','<p class="alert alert-danger">:message</p>') }}
+											</div>
+											
+
+											
+										</div>	
+										<div class="form-group">
+												<button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+											</div>
+							</form>	
 								
 
-								<form class="form-horizontal" role="form" method="post" action="{{URL::route('postLoginCheckout')}}">
+								{{--<form class="form-horizontal" role="form" method="post" action="{{URL::route('postLoginCheckout')}}">
 										<div class="form-group">
 											<label for="email" class="col-sm-3 control-label">Email :</label>
 											<div class="col-sm-9">
@@ -36,7 +61,7 @@
 										</div>
 
 										<button type="submit" class="btn btn-warning">Registrarme</button> o <a href="" class="btn btn-info"data-toggle="modal" data-target="#ModalLogin">Inicia Sesión</a>	
-								</form>
+								</form>--}}
 								<hr />
 							
 								
@@ -74,8 +99,9 @@
 												<input type="password" name="password" class="form-control" placeholder="******">
 												{{ $errors->first('password','<p class="alert alert-danger">:message</p>') }}
 											</div>
-											
-										</div>		
+											<button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+										</div>	
+							</form>				
 										
 											
 						
