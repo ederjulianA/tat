@@ -30,7 +30,8 @@
 				<div class="panel panel-smart">
 					<div class="panel-heading">
 								<h3 class="panel-title">
-									Mis ordenes 
+									Mis ordenes  <a href="#" title="" id="loadProdApi">Load products</a>
+									<input type="hidden" name="" id="urlSync" value="{{URL::route('saveproducts')}}">
 								</h3>
 					</div>
 					<div class="panel-body">

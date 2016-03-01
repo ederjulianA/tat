@@ -15,9 +15,20 @@ Route::get(	'/', array(
 		'uses'=> 'HomeController@getIndex'
 		));
 
+
+Route::get(	'/converter', array(
+		'as'=>'converter', 
+		'uses'=> 'HomeController@converter'
+		));
+
 Route::any(	'/payu/response', array(
 		'as'=>'pur', 
 		'uses'=> 'HomeController@getPayUr'
+		));
+
+Route::any('/payu/confirmation', array(
+		'as'=>'purconfirmation', 
+		'uses'=> 'HomeController@confirmation'
 		));
 
 
@@ -37,13 +48,13 @@ Route::any(	'/pedMantis', array(
 
 Route::post('payment', array(
     'as' => 'payment',
-    'uses' => 'CartController@postPayment',
+    'uses' => 'PaypalController@postPayment',
 ));
 
 // this is after make the payment, PayPal redirect back to your site
 Route::get('payment/status', array(
     'as' => 'payment.status',
-    'uses' => 'CartController@getPaymentStatus',
+    'uses' => 'PaypalController@paymentNoMantis',
 ));
 
 
@@ -152,10 +163,17 @@ Route::any('UrlLoadPro', array('as' => 'UrlLoadPro', 'uses' => 'Ajax2Controller@
  	Route::group(['prefix' => 'api', 'after' => 'allowOrigin'], function() {
 
  			Route::any('categorias', array('as' => 'apiCategorias', 'uses' => 'ApiController@getCategorias'));
- 			Route::any('login', array('as' => 'login', 'uses' => 'ApiController@apiLogin'));
+ 			Route::any('login', array('as' => 'apilogin', 'uses' => 'ApiController@apiLogin'));
  			Route::any('addFav', array('as' => 'addFav', 'uses' => 'ApiController@addFav'));
 
  			Route::any('/android', array('as' => 'android', 'uses' => 'ApiController@android'));
+
+
+
+
+ 			Route::any('/saveproducts', array('as' => 'saveproducts', 'uses' => 'Ajax2Controller@saveproducts'));
+ 			Route::any('/prueba', array('as' => 'android', 'uses' => 'Ajax2Controller@prueba'));
+
 
  
     });

@@ -242,7 +242,8 @@ cast(isnull((p3.PrePreFijVal),0)/(1-((isnull(p3.preporval,0))/100)) as int) prec
 								   			{
 								   				$nombre = Str_replace('gxdbfile:','',$pro['ArtImg_GXI']);
 								   				$urlImg = 'http://192.168.1.56:8080/MantisWeb20erpappweb22/PublicTempStorage/multimedia/'.$nombre;
-								   				Image::make($urlImg)->resize(300, null, function ($constraint) {$constraint->aspectRatio();})->save(public_path().'/img/Mantis/'.$nombre);
+								   				//Image::make($urlImg)->resize(300, null, function ($constraint) {$constraint->aspectRatio();})->save(public_path().'/img/Mantis/'.$nombre);
+								   				Image::make($urlImg)->save(public_path().'/img/Mantis/'.$nombre);
 								   				//$urlImg = $this->urlMantis.$nombre;
 								   				$prod->img = 'img/Mantis/'.$nombre;
 
@@ -303,7 +304,8 @@ cast(isnull((p3.PrePreFijVal),0)/(1-((isnull(p3.preporval,0))/100)) as int) prec
 								   				$nombre = Str_replace('gxdbfile:','',$pro['ArtImg_GXI']);
 
 								   				$urlImg = 'http://192.168.1.56:8080/MantisWeb20erpappweb22/PublicTempStorage/multimedia/'.$nombre;
-								   				Image::make($urlImg)->resizeCanvas(400, 400, null, true, '#fff')->save(public_path().'/img/Mantis/'.$nombre);
+								   				//Image::make($urlImg)->resizeCanvas(400, 400, null, true, '#fff')->save(public_path().'/img/Mantis/'.$nombre);
+								   				Image::make($urlImg)->save(public_path().'/img/Mantis/'.$nombre);
 								   				$producto->img = 'img/Mantis/'.$nombre;
 								   			}else
 								   			{

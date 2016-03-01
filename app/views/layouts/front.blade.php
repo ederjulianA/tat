@@ -272,6 +272,7 @@
 	<script src="{{asset('tat/js/addCart.js')}}"></script>
 	<script src="{{asset('tat/js/jquery.numeric.js')}}"></script>
 	<script src="{{asset('tat/js/jquery.notie.js')}}"></script>
+	<script src="{{asset('tat/js/Sync.js')}}"></script>
 	
 	@yield('ajax-val')
 </body>

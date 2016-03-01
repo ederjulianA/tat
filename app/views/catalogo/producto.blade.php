@@ -85,8 +85,8 @@
 						<!-- Price Starts -->
 							<div class="price">
 								<span class="price-head">Precio :</span>
-								{{--<span class="price-new">${{number_format($producto->precio, 0, '', '.')}}</span> --}}
-								<span class="price-new">${{ number_format(App::make('UserController')->getPrice($producto->id_mantis), 0, '', '.') }}</span>
+								<span class="price-new">${{number_format($producto->precio, 0, '', '.')}}</span> 
+								{{--<span class="price-new">${{ number_format(App::make('UserController')->getPrice($producto->id_mantis), 0, '', '.') }}</span>--}}
 								<div>
 									<span class="price-head">Inventario:</span>
 									<span class="price-new">{{ round($producto->cantidad)}}</span>

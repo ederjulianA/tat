@@ -123,7 +123,33 @@
    <input name="confirmationUrl"    type="hidden"  value="http://localhost:8000" >
 </form>
 
-{{--http://localhost:8000/checkout?merchantId=553848&merchant_name=ivan+jose+rojas+cabrales&merchant_address=cll+22+n+21-37+apto+906&telephone=3015673205&merchant_url=&transactionState=4&lapTransactionState=APPROVED&message=APPROVED&referenceCode=TestEder&reference_pol=102385282&transactionId=79991a13-ae86-4380-986d-70f5d0505a52&description=Pago+1&trazabilityCode=345744429&cus=345744429&orderLanguage=es&extra1=&extra2=&extra3=&polTransactionState=4&signature=95c7def631b35a40291750157cd16093&polResponseCode=1&lapResponseCode=APPROVED&risk=.00&polPaymentMethod=28&lapPaymentMethod=MASTERCARD&polPaymentMethodType=2&lapPaymentMethodType=CREDIT_CARD&installmentsNumber=1&TX_VALUE=9999.20&TX_TAX=.00&currency=COP&lng=es&pseCycle=&buyerEmail=ederalvarez2009%40hotmail.com&pseBank=&pseReference1=&pseReference2=&pseReference3=&authorizationCode=930001&processingDate=2016-01-09--}}
+
+
+<?php  $refCod = "eder-".date('YmdHms');$sig = "6u39nqhq8ftd0hlvnjfs66eh8c~500238~".$refCod."~".Cart::total()."~COP"; $e = md5($sig);?>
+	<form method="post" action="https://stg.gateway.payulatam.com/ppp-web-gateway/">
+  <input name="merchantId"    type="hidden"  value="500238"   >
+  <input name="accountId"     type="hidden"  value="500537" >
+  <input name="description"   type="hidden"  value="Test PAYU"  >
+  <input name="referenceCode" type="hidden"  value="{{$refCod}}" >
+  <input name="amount"        type="hidden"  value="{{Cart::total()}}"   >
+  <input name="tax"           type="hidden"  value="0"  >
+  <input name="taxReturnBase" type="hidden"  value="0" >
+  <input name="currency"      type="hidden"  value="COP" >
+  <input name="signature"     type="hidden"  value="{{$e}}"  >
+  <input name="test"          type="hidden"  value="1" >
+  <input name="buyerEmail"    type="hidden"  value="{{Auth::user()->email}}" >
+  <input name="responseUrl"    type="hidden"  value="{{URL::route('pur')}}" >
+  <input name="confirmationUrl"    type="hidden"  value="http://www.morenoyalvarez.com/payu/confirmation" >
+  <input name="Submit"        type="submit"  value="PAGAR PAYU" >
+</form>
+{{--http://localhost:8000/checkout?merchantId=553848&merchant_name=ivan+jose+rojas+cabrales&merchant_address=cll+22+n+21-37+apto+906&telephone=3015673205&merchant_url=&transactionState=4&lapTransactionState=APPROVED&message=APPROVED&referenceCode=TestEder&reference_pol=102385282&transactionId=79991a13-ae86-4380-986d-70f5d0505a52&description=Pago+1&trazabilityCode=345744429&cus=345744429&orderLanguage=es&extra1=&extra2=&extra3=&polTransactionState=4&signature=95c7def631b35a40291750157cd16093&polResponseCode=1&lapResponseCode=APPROVED&risk=.00&polPaymentMethod=28&lapPaymentMethod=MASTERCARD&polPaymentMethodType=2&lapPaymentMethodType=CREDIT_CARD&installmentsNumber=1&TX_VALUE=9999.20&TX_TAX=.00&currency=COP&lng=es&pseCycle=&buyerEmail=ederalvarez2009%40hotmail.com&pseBank=&pseReference1=&pseReference2=&pseReference3=&authorizationCode=930001&processingDate=2016-01-09
+
+
+
+local
+
+http://localhost:8000/payu/response?merchantId=500238&merchant_name=Test+PayU+Test&merchant_address=Av+123+Calle+12&telephone=7512354&merchant_url=http%3A%2F%2Fpruebaslapv.xtrweb.com&transactionState=4&lapTransactionState=APPROVED&message=Aprobada&referenceCode=Testeder&reference_pol=7731673&transactionId=d39af30d-aebd-4e61-8e87-24a6b9576289&description=Test+PAYU&trazabilityCode=00000000&cus=00000000&orderLanguage=es&extra1=&extra2=&extra3=&polTransactionState=4&signature=4f68fdab6c1768727508048b3a34aa3a&polResponseCode=1&lapResponseCode=APPROVED&risk=1.00&polPaymentMethod=229&lapPaymentMethod=MASTERCARD&polPaymentMethodType=2&lapPaymentMethodType=CREDIT_CARD&installmentsNumber=1&TX_VALUE=3.00&TX_TAX=.00&currency=USD&lng=es&pseCycle=&buyerEmail=test%40test.com&pseBank=&pseReference1=&pseReference2=&pseReference3=&authorizationCode=00000000&processingDate=2016-02-26
+--}}
 
 		</div>
 

@@ -272,6 +272,75 @@ left join InventarioFamilia f on f.InvFamCod=a.InvFamCod left join InventarioSub
 		}
 	}
 
+
+	public function saveproducts()
+	{
+
+		//header('Content-type: text/javascript');
+		if(isset($_POST['data'])){
+
+			$data = $_POST['data'];
+			$dd   = json_decode( json_encode($data,true));
+
+			foreach ($dd as  $gru) {//objeto que contiene más objetos
+				
+				
+					
+					$grup = Grupo::where('InvGruCod','=','$gru->InvGruCod')->first();
+						
+						if($grup)
+						{
+										$VarSlug = Str::slug($gru->InvGruNom);
+										$grup->InvGruId = $gru->InvGruId;
+										$grup->InvGruCod = $gru->InvGruCod;
+										$grup->InvGruNom = $gru->InvGruNom;
+										$grup->slug_grupo = $VarSlug;
+										$grup->save();
+											
+										
+
+						}else{
+
+										$grupo = new Grupo();
+										
+										
+										$VarSlug = Str::slug($gru->InvGruNom);
+
+										
+				
+
+										$VarSlug = Str::slug($gru->InvGruNom);
+										$grupo->InvGruId = $gru->InvGruId;
+										$grupo->InvGruCod = $gru->InvGruCod;
+										$grupo->InvGruNom = $gru->InvGruNom;
+										$grupo->slug_grupo = $VarSlug;
+										
+
+										$grupo->save();
+										
+
+						}
+					
+				
+				
+						
+			}
+
+
+			$estado = array('estado'=>1,'msg'=>'Se ha terminado la sincronizacion exitosamente 2');
+			return Response::json(array('estado'=>$estado)); 
+		}
+	}
+
+	public function prueba()
+	{
+		$env = new Envio();
+		$env->nom_metodo = "hfhfhf";
+		$env->tiempo_entrega = "40";
+		$env->valor    ="3000";
+		$env->save();
+	}
+
 	public function urlSync()
 	{
 		header('Content-type: text/javascript');
