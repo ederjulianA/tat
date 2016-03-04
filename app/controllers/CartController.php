@@ -159,6 +159,37 @@ class CartController extends BaseController {
 	}
 
 
+		public function guardar()
+	{
+		$compra = new Compra;
+					$compra->user_id 	=	Auth::user()->id;
+					$compra->totalCart  =   $data['totalCart'];
+					$compra->total_compra  =  $data['total_compra'];
+					$compra->num_items  =   $data['totalItems'];
+					$compra->tipo_compra = 	$data['tipo_compra'];
+					$compra->vlr_envio   =  $data['vlr_envio_a'];
+			if($compra->save())
+			{
+				foreach (Cart::contents() as $item) {
+					$citem = new Ite;
+					$citem->compra_id 			=	$compra->id;
+
+	   			 	$citem->id_producto			=	$item->id;
+	   			 	$citem->nombre 				=	$item->name;
+	   			 	$citem->valor_unitario 		=	$item->price;
+	   			 	$citem->image               =   $item->image;
+	   			 	$citem->iva 				=	$item->tax;
+	   			 	$citem->cantidad 			= 	$item->quantity;
+	   			 	$citem->valor_total			=	$item->total();
+
+	   			 	$citem->save();
+
+				}
+			}	
+				
+	}
+
+
 
 	public function addToCart()
 	{

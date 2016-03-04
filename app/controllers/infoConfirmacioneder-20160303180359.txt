@@ -1,0 +1,14 @@
+Informacion de confirmacion
+-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+Estado de la transaccion: 4
+Codigo de respuesta de PayU: 1
+Riesgo de la transaccion: 0.0
+Referencia de la venta: eder-20160303180359
+Tipo de medio de pago: 2
+Valor de la compra: 20195.60
+Moneda de la transaccion: COP
+IP del comprador: 190.240.38.186
+Nombre corto del comprador: 
+Descripcion de la compra: Test PAYU
+¿Estamos haciendo pruebas? 1

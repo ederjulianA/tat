@@ -26,7 +26,7 @@ Route::any(	'/payu/response', array(
 		'uses'=> 'HomeController@getPayUr'
 		));
 
-Route::any('/payu/confirmation', array(
+Route::post('/payu/confirmation', array(
 		'as'=>'purconfirmation', 
 		'uses'=> 'HomeController@confirmation'
 		));
@@ -54,7 +54,8 @@ Route::post('payment', array(
 // this is after make the payment, PayPal redirect back to your site
 Route::get('payment/status', array(
     'as' => 'payment.status',
-    'uses' => 'PaypalController@paymentNoMantis',
+    //'uses' => 'PaypalController@paymentNoMantis',
+    'uses' => 'PaypalController@getPaymentStatus',
 ));
 
 

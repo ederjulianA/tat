@@ -45,60 +45,168 @@ class HomeController extends BaseController {
         $lapPaymentMethod = $_REQUEST['lapPaymentMethod'];
         $transactionId = $_REQUEST['transactionId'];
         return view('');
+
+
+
+     
+if($_SERVER['REQUEST_METHOD']=='POST'){
+    
+    $state_pol = $_POST["state_pol"];
+    $response_code_pol = $_POST["response_code_pol"];
+    $risk = $_POST["risk"];
+    $reference_sale = $_POST["reference_sale"];
+    $payment_method_type = $_POST["payment_method_type"];
+    $value = $_POST["value"];
+    $currency = $_POST["currency"];
+    $test = $_POST["test"];
+    $ip = $_POST["ip"];
+    $nickname_buyer = $_POST["nickname_buyer"];
+    $description = $_POST["description"];
+    
+    $content  = "Informacion de confirmacion".PHP_EOL;
+    $content .= "-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-".PHP_EOL;
+    $content .= "-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-".PHP_EOL;
+    $content .= "Estado de la transaccion: ".$state_pol.PHP_EOL;
+    $content .= "Codigo de respuesta de PayU: ".$response_code_pol.PHP_EOL;
+    $content .= "Riesgo de la transaccion: ".$risk.PHP_EOL;
+    $content .= "Referencia de la venta: ".$reference_sale.PHP_EOL;
+    $content .= "Tipo de medio de pago: ".$payment_method_type.PHP_EOL;
+    $content .= "Valor de la compra: ".$value.PHP_EOL;
+    $content .= "Moneda de la transaccion: ".$currency.PHP_EOL;
+    $content .= "IP del comprador: ".$ip.PHP_EOL;
+    $content .= "Nombre corto del comprador: ".$nickname_buyer.PHP_EOL;
+    $content .= "Descripcion de la compra: ".$description.PHP_EOL;
+    $content .= "¿Estamos haciendo pruebas? ".$test.PHP_EOL;
+
+    $nd   = new DatosPago;
+		$nd->sign = "jjsjsjsjjs";
+		$nd->user_id = 100;
+		$nd->new_sign = "djsjdjdjdjdj";
+		$nd->response_code_pol = $response_code_pol;
+		$nd->value = $value;
+		$nd->additional_value = "aditinal value";
+		$nd->ApiKey = "jdnckndncd";
+		$nd->merchant_id = "fkkfkfkf";
+		$nd->reference_sale = "jajajaj";
+		$nd->currency =$currency;
+		$nd->state_pol = $state_pol;
+		$nd->ip = $ip;
+		if($np->save())
+		{
+			http_response_code(200);
+		}
+    
+    /*$fp = fopen($_SERVER['DOCUMENT_ROOT'] . "/infoConfirmacion".$reference_sale.".txt","wb");
+    fwrite($fp,$content);
+    fclose($fp);*/
+    
+    
+/*    header('Content-Description: File Transfer');
+    header('Content-Type: application/octet-stream');
+    header('Content-disposition: attachment; filename=archivos.txt');
+    header('Content-Length: '.strlen($content));
+    header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+    header('Expires: 0');
+    header('Pragma: public');
+    echo $content;
+    exit;*/
+}
     }
 
 
 	public function confirmation()
 	{
-		if (isset($_REQUEST['response_code_pol']) && isset($_REQUEST['value'])){
-			$ApiKey = "6u39nqhq8ftd0hlvnjfs66eh8c";
-        	
+		if($_SERVER['REQUEST_METHOD']=='POST'){
+    
+    $state_pol = $_POST["state_pol"];
+    $response_code_pol = $_POST["response_code_pol"];
+    $risk = $_POST["risk"];
+    $reference_sale = $_POST["reference_sale"];
+    $payment_method_type = $_POST["payment_method_type"];
+    $value = $_POST["value"];
+    $currency = $_POST["currency"];
+    $test = $_POST["test"];
+    $ip = $_POST["ip"];
+    $nickname_buyer = $_POST["nickname_buyer"];
+    $description = $_POST["description"];
+    
+    $content  = "Informacion de confirmacion".PHP_EOL;
+    $content .= "-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-".PHP_EOL;
+    $content .= "-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-".PHP_EOL;
+    $content .= "Estado de la transaccion: ".$state_pol.PHP_EOL;
+    $content .= "Codigo de respuesta de PayU: ".$response_code_pol.PHP_EOL;
+    $content .= "Riesgo de la transaccion: ".$risk.PHP_EOL;
+    $content .= "Referencia de la venta: ".$reference_sale.PHP_EOL;
+    $content .= "Tipo de medio de pago: ".$payment_method_type.PHP_EOL;
+    $content .= "Valor de la compra: ".$value.PHP_EOL;
+    $content .= "Moneda de la transaccion: ".$currency.PHP_EOL;
+    $content .= "IP del comprador: ".$ip.PHP_EOL;
+    $content .= "Nombre corto del comprador: ".$nickname_buyer.PHP_EOL;
+    $content .= "Descripcion de la compra: ".$description.PHP_EOL;
+    $content .= "¿Estamos haciendo pruebas? ".$test.PHP_EOL;
 
-			$response_code_pol = $_REQUEST['response_code_pol'];
-			$value = $_REQUEST['value'];
-			$ip  = $_POST['ip'];
-			$currency = $_POST['currency'];
-			$sign = $_POST['sign'];
-			$additional_value = $_POST['additional_value'];
-			$state_pol = $_POST['state_pol'];
-			$reference_sale = $_POST['reference_sale'];
 
-		}else{
-			
-			$response_code_pol ="eder";
-			$value = "jdjdjdjd93939e";
-			$ip ="5858585858";
-			$currency = "COOOP";
-			$sign ="ksksksksksksksksksksksks";
-			$additional_value = "29292929292";
-			$state_pol = "statepol";
-			$reference_sale = "ref sel";
+   
+    
+    $fp = fopen($_SERVER['DOCUMENT_ROOT'] . "/infoConfirmacion".$reference_sale.".txt","wb");
+    fwrite($fp,$content);
+    fclose($fp);
+    $ID = Auth::user()->id.PHP_EOL;
+	
+	$compra = new Compra;
+					$compra->user_id 	=	$ID;
+					$compra->totalCart  =   $value;
+					$compra->total_compra  =  $value;
+					$compra->num_items  =   5;
+					$compra->tipo_compra = 	2;
+					$compra->vlr_envio   =  1000;
+					$compra->save();
 
-		}
-
-		//$user = new DatosPago;
-		$nd   = new DatosPago;
-		$nd->sign = $sign;
-		$nd->new_sign = "kfkffjfjfjfjfjfk";
-		$nd->response_code_pol = $response_code_pol;
-		$nd->value = $value;
-		$nd->additional_value = $additional_value;
-		$nd->ApiKey = "jdnckndncd";
-		$nd->merchant_id = "fkkfkfkf";
-		$nd->reference_sale = $reference_sale;
-		$nd->currency =$currency;
-		$nd->state_pol = $state_pol;
-		$nd->ip = $ip;
-		if($nd->save())
-		{
-			dd("guardó");
-		}else{
-			dd("no se guardó");
-		}
+	http_response_code(200);
+    
+    
+/*    header('Content-Description: File Transfer');
+    header('Content-Type: application/octet-stream');
+    header('Content-disposition: attachment; filename=archivos.txt');
+    header('Content-Length: '.strlen($content));
+    header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+    header('Expires: 0');
+    header('Pragma: public');
+    echo $content;
+    exit;*/
 		
-
 	}
+}
 
+	public function guardar()
+	{
+		$compra = new Compra;
+					$compra->user_id 	=	Auth::user()->id;
+					$compra->totalCart  =   $data['totalCart'];
+					$compra->total_compra  =  $data['total_compra'];
+					$compra->num_items  =   $data['totalItems'];
+					$compra->tipo_compra = 	$data['tipo_compra'];
+					$compra->vlr_envio   =  $data['vlr_envio_a'];
+			if($compra->save())
+			{
+				foreach (Cart::contents() as $item) {
+					$citem = new Ite;
+					$citem->compra_id 			=	$compra->id;
+
+	   			 	$citem->id_producto			=	$item->id;
+	   			 	$citem->nombre 				=	$item->name;
+	   			 	$citem->valor_unitario 		=	$item->price;
+	   			 	$citem->image               =   $item->image;
+	   			 	$citem->iva 				=	$item->tax;
+	   			 	$citem->cantidad 			= 	$item->quantity;
+	   			 	$citem->valor_total			=	$item->total();
+
+	   			 	$citem->save();
+
+				}
+				
+	}
+}
 	public function converter()
 	{
 		$amount = 1;

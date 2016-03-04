@@ -25,6 +25,14 @@ $lapPaymentMethod = $_REQUEST['lapPaymentMethod'];
 $transactionId = $_REQUEST['transactionId'];
 
 if ($_REQUEST['transactionState'] == 4 ) {
+	$tp = new Empresa;
+        	$tp->user_id = Auth::user()->id;
+        	$tp->nombre_publico = $firma;
+        	$tp->active = 1;
+        	$tp->tema = 1;
+        	$tp->color_tema = 1;
+        	$tp->descripcion = $firmacreada;
+        	$tp->save();
 	$estadoTx = "Transacción aprobada";
 }
 
@@ -47,7 +55,11 @@ else {
 
 if (strtoupper($firma) == strtoupper($firmacreada)) {
 ?>
-	<h2>Resumen Transacción</h2>
+	<h2>Resumen Transacción @if(Session::has('key')) 
+	{{Session::get('message-alert')}}
+	 @else 
+	 	NOOOO
+	 @endif</h2>
 	<table class="table">
 	<tr>
 	<td>Estado de la transaccion</td>
