@@ -1,3 +1,5 @@
+
+<meta charset="utf-8">
 <style type="text/css" media="screen">
 							.paypalBtn{
 								background: #1565C0;
@@ -124,6 +126,17 @@
 </form>
 
 
+<form action="{{URL::route('postPedido')}}" method="post" accept-charset="utf-8">
+	<input type="hidden" id="totalCart" name="totalCart" value="{{Cart::total()}}">
+									<input type="hidden" id="totalCart"name="totalItems" value="{{Cart::totalItems()}}">
+									<input type="hidden" id="total_compra" name="total_compra" value="{{Cart::total()}}">
+									<input type="hidden" id="vlr_envio_a" name="vlr_envio_a" value="0">
+									<input type="hidden" id="tipo_compra" name="tipo_compra" value="2">
+
+									<input type="submit" value="enviar simple">
+</form>
+
+
 
 <?php  $refCod = "eder-".date('YmdHms');$sig = "6u39nqhq8ftd0hlvnjfs66eh8c~500238~".$refCod."~".Cart::total()."~COP"; $e = md5($sig);?>
 	<form method="post" action="https://stg.gateway.payulatam.com/ppp-web-gateway/">
@@ -137,9 +150,13 @@
   <input name="currency"      type="hidden"  value="COP" >
   <input name="signature"     type="hidden"  value="{{$e}}"  >
   <input name="test"          type="hidden"  value="1" >
-  <input name="buyerEmail"    type="hidden"  value="{{Auth::user()->email}}" >
-  <input name="responseUrl"    type="hidden"  value="{{URL::route('pur')}}" >
-  <input name="confirmationUrl"    type="hidden"  value="http://www.morenoyalvarez.com/payu/confirmation" >
+    <input name="extra1"          type="hidden"  value="{{Auth::user()->id}}">
+   <input name="extra3"          type="hidden"  value="{{Funciones::getCodigos()}}">
+     {{--<input name="extra3"          type="hidden"  value="{{Cart::totalItems()}}">--}}
+    <input name="extra2"type="hidden"  value="{{Cart::totalItems()}}">
+  <input name="buyerEmail"    type="hidden"  value="{{Auth::user()->email}}">
+  <input name="responseUrl"    type="hidden"  value="{{URL::route('pur')}}">
+  <input name="confirmationUrl"    type="hidden"  value="{{URL::route('purconfirmation')}}" >
   <input name="Submit"        type="submit"  value="PAGAR PAYU" >
 </form>
 {{--http://localhost:8000/checkout?merchantId=553848&merchant_name=ivan+jose+rojas+cabrales&merchant_address=cll+22+n+21-37+apto+906&telephone=3015673205&merchant_url=&transactionState=4&lapTransactionState=APPROVED&message=APPROVED&referenceCode=TestEder&reference_pol=102385282&transactionId=79991a13-ae86-4380-986d-70f5d0505a52&description=Pago+1&trazabilityCode=345744429&cus=345744429&orderLanguage=es&extra1=&extra2=&extra3=&polTransactionState=4&signature=95c7def631b35a40291750157cd16093&polResponseCode=1&lapResponseCode=APPROVED&risk=.00&polPaymentMethod=28&lapPaymentMethod=MASTERCARD&polPaymentMethodType=2&lapPaymentMethodType=CREDIT_CARD&installmentsNumber=1&TX_VALUE=9999.20&TX_TAX=.00&currency=COP&lng=es&pseCycle=&buyerEmail=ederalvarez2009%40hotmail.com&pseBank=&pseReference1=&pseReference2=&pseReference3=&authorizationCode=930001&processingDate=2016-01-09

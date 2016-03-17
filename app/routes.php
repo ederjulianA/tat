@@ -14,6 +14,13 @@ Route::get(	'/', array(
 		'as'=>'index', 
 		'uses'=> 'HomeController@getIndex'
 		));
+		
+		Route::any('/payucon2', array(
+		'as'=>'payucon2', 
+		'uses'=> 'HomeController@payucon2'
+		));
+		
+		
 
 
 Route::get(	'/converter', array(
@@ -28,7 +35,14 @@ Route::any(	'/payu/response', array(
 
 Route::post('/payu/confirmation', array(
 		'as'=>'purconfirmation', 
-		'uses'=> 'HomeController@confirmation'
+		'uses'=> 'PayuController@conf'
+		));
+
+
+//probando sincronización por bloques de articulos
+Route::get('/sync/bloque', array(
+		'as'=>'syncbloque', 
+		'uses'=> 'SyncController@mantis2'
 		));
 
 

@@ -7,7 +7,7 @@
 
 @section('content')
 
-<input type="hidden" id="urlValDis" value="{{URL::route('urlValDis')}}">;
+<input type="hidden" id="urlValDis" value="{{URL::route('urlValDis')}}">
 <style type="text/css">
 	.btn-finalizar{
 		position: absolute;

@@ -71,7 +71,7 @@ class CartController extends BaseController {
 	{
 		$categorias =   $this->cat->getAllCat();
 		$grupos 		=   $this->grupo->getAllGrupos();
-		return View::make('cart')->with('grupos',$grupos)->with('categorias',$categorias)->with('products', Cart::contents());
+		return View::make('cotra.carrito')->with('grupos',$grupos)->with('categorias',$categorias)->with('products', Cart::contents());
 	}
 
 	public function getCheckout()

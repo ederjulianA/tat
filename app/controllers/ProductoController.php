@@ -23,6 +23,6 @@ class ProductoController extends BaseController {
 		$promo      =   $this->promo->getPromo();
 		$grupos     =   $this->grupo->getAllGrupos();
 
-		return View::make('catalogo.producto')->with('grupos',$grupos)->with('promo',$promo)->with('categorias',$categorias)->with('producto',$producto)->with('products', Cart::contents());
+		return View::make('cotra.detalle')->with('grupos',$grupos)->with('promo',$promo)->with('categorias',$categorias)->with('producto',$producto)->with('products', Cart::contents());
 	}
 }

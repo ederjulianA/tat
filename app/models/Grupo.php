@@ -12,5 +12,11 @@
 		  	return $cat;
 		  }
 
+
+		 public function menu()
+    {
+        return $this->belongsToMany('Menu','menu_inventariogrupo','menu_id','grupo_id');
+    }
+
 	
 	}

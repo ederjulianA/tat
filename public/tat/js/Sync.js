@@ -10,6 +10,12 @@ $(document).on('click','#loadProdApi',function(e){
 	e.preventDefault();
 });
 
+$(document).on('click','#loadArt',function(e){
+	sync();
+	$('#loadProdApi').text('Sincronizando...');
+	e.preventDefault();
+});
+
 
 function sync()
 {

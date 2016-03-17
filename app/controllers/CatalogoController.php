@@ -22,7 +22,7 @@ class CatalogoController extends BaseController {
 		$promo      =   $this->promo->getPromo();
 		$grupos 		=   $this->grupo->getAllGrupos();
 		$categorias = $this->cat->getAllCat();
-		return View::make('catalogo.index')->with('grupos',$grupos)->with('categorias',$categorias)->with('promo',$promo)->with('productos',$productos)->with('products', Cart::contents());
+		return View::make('cotra.catalogo')->with('grupos',$grupos)->with('categorias',$categorias)->with('promo',$promo)->with('productos',$productos)->with('products', Cart::contents());
 	}
 
 	public function getCategoria($id)

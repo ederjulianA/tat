@@ -196,6 +196,46 @@ if($rs_access = odbc_exec ($conn_access, $ssql))
 
 
 
+	public function mantis2()
+	{
+
+
+		if ($conn_access  = odbc_connect("Driver={SQL Server Native Client 10.0};Server=".$this->server.",1433;Database=".$this->db.";", ''.$this->user.'', ''.$this->pass.'')){ 
+					   	echo "Conectado correctamente"; 
+					   	
+					        			        $ssql = " select  a.artsec,a.ArtSec, a.ArtNom,ArtImg_GXI,a.InvFamCod,a.ArtCod,a.ArtFicTec,parconiva,
+0 precio1,0 precio2,
+cast(isnull((p3.PrePreFijVal),0)/(1-((isnull(p3.preporval,0))/100)) as int) precio3,
+
+  replace(replace(replace(SG.InvSubGruCod,'S',''),'G',''),'0','99') InvSubGruCod,isnull((select SUM((karcaj+karuni)*(case when (karnat='+') then 1 else -1 end)) saldo
+ from Kardex  k inner join Factura f on f.FacSec=k.facsec where facest='A' and k.ArtSec=a.ArtSec ),0) saldo
+ from articulos a   
+ left join PreciosDetalle p3 on p3.ArtSec=a.ArtSec and  p3.LisPreCod=1
+ 
+ left join PresentacionArticulos pres on pres.preartcod=p3.preartcod
+ left join ParametroContable p on p.parconcod=a.ParConCod
+ left join InventarioFamilia f on f.InvFamCod=a.InvFamCod left join InventarioSubgrupo sg on sg.InvSubGruCod=f.InvSubGruCod 
+ where  artdes='N'"; 
+
+
+					   	if($rs_access = odbc_exec ($conn_access, $ssql)){ 
+					   		
+					   		while ($info = odbc_fetch_array($rs_access)) {
+					 		   //$content[] = $info;
+					   			//$ciudades = new Ciudad;
+					   			$pros[] = $info['ArtSec'];
+								}// END WHILE############################
+
+							} ############END RS_ACCESS##############	
+						}###### END IF CON_ACCESS	
+
+
+						dd($pros);
+
+	}
+
+
+
 
 	public function mantisSync()
 	{
@@ -206,7 +246,7 @@ if($rs_access = odbc_exec ($conn_access, $ssql))
 			if ($conn_access  = odbc_connect("Driver={SQL Server Native Client 10.0};Server=".$this->server.",1433;Database=".$this->db.";", ''.$this->user.'', ''.$this->pass.'')){ 
 					   	echo "Conectado correctamente"; 
 					   	
-					        			        $ssql = " select top 15 a.artsec,a.ArtSec, a.ArtNom,ArtImg_GXI,a.InvFamCod,a.ArtCod,a.ArtFicTec,parconiva,
+					        			        $ssql = " select a.artsec,a.ArtSec, a.ArtNom,ArtImg_GXI,a.InvFamCod,a.ArtCod,a.ArtFicTec,parconiva,
 0 precio1,0 precio2,
 cast(isnull((p3.PrePreFijVal),0)/(1-((isnull(p3.preporval,0))/100)) as int) precio3,
 
@@ -244,8 +284,9 @@ cast(isnull((p3.PrePreFijVal),0)/(1-((isnull(p3.preporval,0))/100)) as int) prec
 								   				$urlImg = 'http://192.168.1.56:8080/MantisWeb20erpappweb22/PublicTempStorage/multimedia/'.$nombre;
 								   				//Image::make($urlImg)->resize(300, null, function ($constraint) {$constraint->aspectRatio();})->save(public_path().'/img/Mantis/'.$nombre);
 								   				Image::make($urlImg)->save(public_path().'/img/Mantis/'.$nombre);
-								   				//$urlImg = $this->urlMantis.$nombre;
-								   				$prod->img = 'img/Mantis/'.$nombre;
+								   				$urlImg = $this->urlMantis.$nombre;
+								   				//$prod->img = 'img/Mantis/'.$nombre;
+								   				$prod->img = $urlImg;
 
 
 								   			}else
@@ -305,8 +346,11 @@ cast(isnull((p3.PrePreFijVal),0)/(1-((isnull(p3.preporval,0))/100)) as int) prec
 
 								   				$urlImg = 'http://192.168.1.56:8080/MantisWeb20erpappweb22/PublicTempStorage/multimedia/'.$nombre;
 								   				//Image::make($urlImg)->resizeCanvas(400, 400, null, true, '#fff')->save(public_path().'/img/Mantis/'.$nombre);
-								   				Image::make($urlImg)->save(public_path().'/img/Mantis/'.$nombre);
-								   				$producto->img = 'img/Mantis/'.$nombre;
+								   				//Image::make($urlImg)->save(public_path().'/img/Mantis/'.$nombre);
+								   				//$producto->img = 'img/Mantis/'.$nombre;
+								   				$urlImg = $this->urlMantis.$nombre;
+								   				//$prod->img = 'img/Mantis/'.$nombre;
+								   				$producto->img = $urlImg;
 								   			}else
 								   			{
 								   				$urlImg = 'img/Mantis/def.png';

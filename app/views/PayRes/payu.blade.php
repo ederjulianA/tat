@@ -1,9 +1,9 @@
 @extends('layouts.front')
 
-@section('cart-items')
+{{--@section('cart-items')
 	@include('includes.cart')
 	
-@stop
+@stop--}}
 
 @section('content')
 <?php
@@ -19,20 +19,51 @@ $firmacreada = md5($firma_cadena);
 $firma = $_REQUEST['signature'];
 $reference_pol = $_REQUEST['reference_pol'];
 $cus = $_REQUEST['cus'];
-$extra1 = $_REQUEST['description'];
+$extra1 = $_REQUEST['extra1'];
+$extra2 = $_REQUEST['extra2'];
 $pseBank = $_REQUEST['pseBank'];
 $lapPaymentMethod = $_REQUEST['lapPaymentMethod'];
 $transactionId = $_REQUEST['transactionId'];
 
 if ($_REQUEST['transactionState'] == 4 ) {
-	$tp = new Empresa;
-        	$tp->user_id = Auth::user()->id;
+	/*$tp = new Empresa;
+        	$tp->user_id = $extra2;
         	$tp->nombre_publico = $firma;
         	$tp->active = 1;
         	$tp->tema = 1;
         	$tp->color_tema = 1;
-        	$tp->descripcion = $firmacreada;
-        	$tp->save();
+        	$tp->descripcion = $TX_VALUE;
+        	$tp->save();*/
+
+        			$compra = new Compra;
+					$compra->user_id 	= $extra1;
+					$compra->totalCart  =   $TX_VALUE;
+					$compra->total_compra  =  $TX_VALUE;
+					$compra->num_items  =   $extra2;
+					$compra->tipo_compra = 	2;
+					$compra->vlr_envio   =  1000;
+					$compra->save();
+
+
+
+					foreach (Cart::contents() as $item) {
+					$citem = new Ite;
+					$citem->compra_id 			=	$compra->id;
+
+	   			 	$citem->id_producto			=	$item->id;
+	   			 	$citem->nombre 				=	$item->name;
+	   			 	$citem->valor_unitario 		=	$item->price;
+	   			 	$citem->image               =   $item->image;
+	   			 	$citem->iva 				=	$item->tax;
+	   			 	$citem->cantidad 			= 	$item->quantity;
+	   			 	$citem->valor_total			=	$item->total();
+
+	   			 	$citem->save();
+
+				}
+				
+
+        	Cart::destroy();
 	$estadoTx = "Transacción aprobada";
 }
 

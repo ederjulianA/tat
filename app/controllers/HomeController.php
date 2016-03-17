@@ -7,23 +7,131 @@ class HomeController extends BaseController {
 	protected $cat;
 	protected $grupo;
 	protected $promo;
-	public function __construct(Producto $producto, Categoria $cat, Grupo $grupo,Promo $promo)
+
+	protected $conn;
+	protected $server;
+	protected $db;
+	protected $user;
+	protected $pass;
+	protected $urlMantis;
+	public function __construct(Producto $producto, Categoria $cat, Grupo $grupo,Promo $promo, Conn $conn)
 	{
 		$this->producto = $producto;
 		$this->cat = $cat;
 		$this->grupo = $grupo;
 		$this->promo = $promo;
+
+		$this->conn         = $conn;
+		$this->server       = $this->conn->getServer();
+		$this->user         = $this->conn->getUser();
+		$this->pass         = $this->conn->getPass();
+		$this->db           = $this->conn->getDb();
+		$this->urlMantis       = $this->conn->getUrlImg();
 	}
 
 
 	public function getPayUr()
 
 	{
-		$grupos 		=   $this->grupo->getAllGrupos();
+		$ApiKey = "6u39nqhq8ftd0hlvnjfs66eh8c";
+		$merchant_id = $_REQUEST['merchantId'];
+		$referenceCode = $_REQUEST['referenceCode'];
+		$TX_VALUE = $_REQUEST['TX_VALUE'];
+		$New_value = number_format($TX_VALUE, 1, '.', '');
+		$currency = $_REQUEST['currency'];
+		$transactionState = $_REQUEST['transactionState'];
+		$firma_cadena = "$ApiKey~$merchant_id~$referenceCode~$New_value~$currency~$transactionState";
+		$firmacreada = md5($firma_cadena);
+		$firma = $_REQUEST['signature'];
+		$reference_pol = $_REQUEST['reference_pol'];
+		$cus = $_REQUEST['cus'];
+		$extra1 = $_REQUEST['extra1'];
+		$extra2 = $_REQUEST['extra2'];
+		$pseBank = $_REQUEST['pseBank'];
+		$lapPaymentMethod = $_REQUEST['lapPaymentMethod'];
+		$transactionId = $_REQUEST['transactionId'];
+
+		if ($_REQUEST['transactionState'] == 4 ) {
+
+
+				if ($conn_access = odbc_connect ( "Driver={SQL Server Native Client 10.0};Server=".$this->server.",1433;Database=".$this->db.";", ''.$this->user.'', ''.$this->pass.'')){ 
+			 $ssql = "select * from Secuencia where SecCod='PEDIDO'"; 
+			if($rs_access = odbc_exec ($conn_access, $ssql)){ 
+						while ($info = odbc_fetch_array($rs_access)) {
+					 		   //$content[] = $info;
+					   			//$ciudades = new Ciudad;
+					   			$SecNum = $info['SecNum'];
+					   			
+								}// END WHILE############################
+									$NitIde = Auth::user()->NitSec;
+									$ssql2 = "select n.NitIde,n.NitSec, c.Vencod From Nit n
+										inner join ClientesVendedores c on c.NitSec = n.NitSec
+										where n.NitIde = '$NitIde'";
+									if($rs_access = odbc_exec($conn_access, $ssql2)){ 
+												while ($info2 = odbc_fetch_array($rs_access)) {
+					 		  
+					   							$NitSec = $info2['NitSec'];
+					   							$Vencod = $info2['Vencod'];
+					   			
+												}// END WHILE############################
+												$id_pedido = 'PED-WEB-'.date('Ymd-Hms');
+												//dd($id_pedido,$SecNum,$NitSec);
+												$totalCompra =  $TX_VALUE;
+												
+												$ssql3 ="INSERT INTO Cotizaciones1(CotTip,CotSec,TipCod,EmpCod,CotFecha,CotObs,CotUsuCod,CotCliConPag,CotSecConCon,CotLisPreCod,CotSubVenCod,CotSubNitSec,CotSubCliSec,CotNum,CotSumCot,BodSucCCSec,CotEst,CotSubCotSec,AnuFueSec,CotAnuObs,CotEstado)
+                   								 VALUES('P','$SecNum','PED',1,'16-01-2016','miobs','admin',1/*cliConPag*/,1/*numItems*/,1/*lisprecod*/,$Vencod/*vencod*/,'$NitSec'/*nitsec*/,1/*clisec*/,'$id_pedido','$totalCompra',1/*BODsUCCSEC*/,2/*CotEst*/,NULL,NULL,NULL,'A')";
+
+                   								 if($rs_access = odbc_exec($conn_access, $ssql3)){ 
+                   								 		$ssql4 = "UPDATE Secuencia SET SecNum=SecNum+1 where SecCod='PEDIDO'";
+                   								 		if($rs_access = odbc_exec($conn_access, $ssql4)){
+					$num = 1;
+					foreach (Cart::contents() as $item) {   
+					               								 			
+                  $artSec = $item->ArtSec;
+                  $price  = $item->price;
+                  $CotArtNom = $item->name;
+                  $uni    = $item->quantity ;
+                  $CotSubPrecio = Cart::total(false);								 			
+				  $ssql5 = "insert into CotizacionesDetalle1(CotTip,CotSec,CotSecCon,CotObsequio,ArtSec,CotArtEmb,CotArtLot,CotArtLotFec
+				,CotArtCaj,CotArtUni,CotArtDesUno,CotArtDesDos,CotArtDesTre,CotArtDesCua,CotArtDesVal,CotArtConIva,CotArtPrecio,
+				CotSumDes,CotArtSubTotDesUno,CotArtSubTotDesDos,CotArtSubTotDesTre,CotArtSubTotDesCua,CotSubLisPreCod,
+				CotSubPreArtCod,SubBodSucCCSec,PedArtCaj,PedArtUni,CotSecEst,CotPre,cotdesuni,CotPreFacCon,CotArtNom,CotArtValImp,CotPorIva,CotSubPrecio)
+				values('P','$SecNum',$num,'N',$artSec/*ArtSec*/,1 /*ArtEmb*/,'S/L','1999-01-01 00:00:00.000',0.000000,$uni/*CotArtUni*/,0.00,0.00,0.00,0.00,0.00000,
+				(select top 1 ParConIva from Articulos a left join ParametroContable p on a.ParConCod=p.ParConCod where ArtSec='$artSec'),
+				'$price'/*CotArtPrecio*/,0.00000,0.00000,0.00000,0.00000,0.00000,isnull((select lisprecod from clientes where nitsec='$NitSec' and clisec=1),0)
+				,(select top 1 PreArtCod from ArtPre where artsec=$artSec),1,0,0,'A',0,0.00000,1.00000,'$CotArtNom',0.00000
+				,(select top 1 ParConIva from Articulos a left join ParametroContable p on a.ParConCod=p.ParConCod where ArtSec=$artSec),'$CotSubPrecio')
+				";
+															if($rs_access = odbc_exec($conn_access, $ssql5)){
+
+																$num = $num +1;
+															}
+
+
+														}//end for each Cart
+                   								 	}
+
+                   								 }//END SSQL3
+									}//end if ssql2
+
+
+					 
+			}//END IF SSQL############################
+		}// END IF SQL CONN
+
+
+			$grupos 		=   $this->grupo->getAllGrupos();
 		$categorias =   $this->cat->getAllCat();
 		$products = Cart::contents();
 		return View::make('PayRes.payu',compact('grupos','categorias','products'));
+
+		}
+
+
+		
 	}
+
+	
 
 
 	public function response(Request $request)
@@ -62,6 +170,11 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     $ip = $_POST["ip"];
     $nickname_buyer = $_POST["nickname_buyer"];
     $description = $_POST["description"];
+    $extra1      = $_POST["extra1"];
+    $extra2      = $_POST["extra2"];
+    $sign= $_POST["sign"];
+
+
     
     $content  = "Informacion de confirmacion".PHP_EOL;
     $content .= "-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-".PHP_EOL;
@@ -79,8 +192,8 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     $content .= "¿Estamos haciendo pruebas? ".$test.PHP_EOL;
 
     $nd   = new DatosPago;
-		$nd->sign = "jjsjsjsjjs";
-		$nd->user_id = 100;
+		$nd->sign = $sign;
+		$nd->user_id = $extra1;
 		$nd->new_sign = "djsjdjdjdjdj";
 		$nd->response_code_pol = $response_code_pol;
 		$nd->value = $value;
@@ -129,6 +242,9 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     $ip = $_POST["ip"];
     $nickname_buyer = $_POST["nickname_buyer"];
     $description = $_POST["description"];
+    $extra1      = $_POST["extra1"];
+
+    $extra2      = $_POST["extra2"];
     
     $content  = "Informacion de confirmacion".PHP_EOL;
     $content .= "-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-".PHP_EOL;
@@ -151,18 +267,25 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     $fp = fopen($_SERVER['DOCUMENT_ROOT'] . "/infoConfirmacion".$reference_sale.".txt","wb");
     fwrite($fp,$content);
     fclose($fp);
-    $ID = Auth::user()->id.PHP_EOL;
+     
 	
 	$compra = new Compra;
-					$compra->user_id 	=	$ID;
+					$compra->user_id 	= $extra1;
 					$compra->totalCart  =   $value;
 					$compra->total_compra  =  $value;
-					$compra->num_items  =   5;
+					$compra->num_items  =   $extra2;
 					$compra->tipo_compra = 	2;
 					$compra->vlr_envio   =  1000;
 					$compra->save();
 
-	http_response_code(200);
+	 http_response_code(200);
+				
+					
+	
+                                      
+
+
+
     
     
 /*    header('Content-Description: File Transfer');
@@ -175,8 +298,33 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     echo $content;
     exit;*/
 		
+	}else{
+		$citems = Cart::contents();
+						foreach ($citems as $item) {
+					$citem = new Ite;
+
+					//$citem->compra_id 			=	$compra->id;
+
+	   			 	$citem->id_producto			=	$item->id;
+	   			 	$citem->nombre 				=	$item->name;
+	   			 	$citem->valor_unitario 		=	$item->price;
+	   			 	$citem->image               =   $item->image;
+	   			 	$citem->iva 				=	$item->tax;
+	   			 	$citem->cantidad 			= 	$item->quantity;
+	   			 	$citem->valor_total			=	$item->total();
+	   			 	var_dump($citem);
+
 	}
 }
+
+
+}
+
+
+	public function payucon2()
+	{
+		Cart::destroy();
+	}
 
 	public function guardar()
 	{
@@ -332,7 +480,8 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 		$promo      =   $this->promo->getPromo();
 		$grupos 		=   $this->grupo->getAllGrupos();
 		$categorias = $this->cat->getAllCat();
-		return View::make('index')->with('grupos',$grupos)->with('categorias',$categorias)->with('promo',$promo)->with('productos',$productos)->with('products', Cart::contents());
+		$menu       = Menu::all();
+		return View::make('cotra.index')->with('grupos',$grupos)->with('menu',$menu)->with('categorias',$categorias)->with('promo',$promo)->with('productos',$productos)->with('products', Cart::contents());
 	}
 
 	public function getRegistger()

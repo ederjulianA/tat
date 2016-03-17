@@ -24,6 +24,19 @@
 		
 	}
 
+	public static function getCodigos()
+	{
+		$codigos ="";
+		foreach (Cart::contents() as $item) {
+			$codigos = $codigos."-".$item->ArtSec.",".$item->id.",".$item->price.",".$item->quantity;
+
+		}
+		$porciones = explode("-",$codigos);
+		
+
+		return $porciones[0];
+	}
+
 		public static  function getCat($id)
 		{ 
 			//dd($id);
