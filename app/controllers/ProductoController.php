@@ -22,7 +22,8 @@ class ProductoController extends BaseController {
 		$producto 	=	$this->pro->getProducto($slug);
 		$promo      =   $this->promo->getPromo();
 		$grupos     =   $this->grupo->getAllGrupos();
+		$menu       = Menu::all();
 
-		return View::make('cotra.detalle')->with('grupos',$grupos)->with('promo',$promo)->with('categorias',$categorias)->with('producto',$producto)->with('products', Cart::contents());
+		return View::make('cotra.detalle')->with('menu',$menu)->with('grupos',$grupos)->with('promo',$promo)->with('categorias',$categorias)->with('producto',$producto)->with('products', Cart::contents());
 	}
 }

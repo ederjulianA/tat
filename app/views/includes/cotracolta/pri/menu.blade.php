@@ -18,19 +18,19 @@
     
                         <nav class="collapse pull-left navbar-collapse menu">
                             <ul class="nav navbar-nav sf-menu">
-                                {{--<li>
-                                    <a id="current" href="#">
-                                    Aseo y hogar
+                                <li>
+                                    <a id="current" href="{{URL::route('catalogo')}}">
+                                    Catálogo
                                     <span class="sf-sub-indicator">
                                     <i class="fa fa-angle-down "></i>
                                     </span>
                                     </a>
                                     <ul>
-                                        <li><a href="index-shop.html" class="sf-with-ul">Sub1 </a></li>
-                                        <li><a href="index-shop.html" class="sf-with-ul">Sub2</a></li>
-                                        <li><a href="index-shop.html" class="sf-with-ul">Sub3</a></li>
+                                        <li><a href="" class="sf-with-ul">Sub1 </a></li>
+                                        <li><a href="" class="sf-with-ul">Sub2</a></li>
+                                        <li><a href="" class="sf-with-ul">Sub3</a></li>
                                     </ul>
-                                </li>--}}
+                                </li>
                                 {{--<li>
                                     <a href="#" class="sf-with-ul">
                                     Ciudado personal 

@@ -6,7 +6,18 @@
 @stop
 
 @section('content')
-		 @if(Session::has('message-alert'))
+		 
+
+
+		<!-- Latest Products Starts -->
+		<section class="products-list">			
+			<div class="container">
+			<!-- Heading Starts -->
+				<!--<h2 class="product-head">Nuestross productos</h2>-->
+			<!-- Heading Ends -->
+			<!-- Products Row Starts -->
+				<div class="row">
+				@if(Session::has('message-alert'))
 			<div class="row">
 			<div class="col-md-5">
 				 
@@ -25,16 +36,6 @@
 			
 		</div>
 		@endif
-
-
-		<!-- Latest Products Starts -->
-		<section class="products-list">			
-			<div class="container">
-			<!-- Heading Starts -->
-				<!--<h2 class="product-head">Nuestross productos</h2>-->
-			<!-- Heading Ends -->
-			<!-- Products Row Starts -->
-				<div class="row">
 				
 				@foreach($productos as $pro)
 					<!-- Product #1 Starts -->

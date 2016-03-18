@@ -22,6 +22,7 @@ class 	SyncController extends BaseController {
 		$this->user         = $this->conn->getUser();
 		$this->pass         = $this->conn->getPass();
 		$this->db           = $this->conn->getDb();
+		$this->img          = $this->conn->getUrlImg();
 		$this->urlMantis       = $this->conn->getUrlImg();
 		
 	}
@@ -31,6 +32,7 @@ class 	SyncController extends BaseController {
 	public function pedMantis()
 	{
 			if ($conn_access = odbc_connect ( "Driver={SQL Server Native Client 10.0};Server=".$this->server.",1433;Database=".$this->db.";", ''.$this->user.'', ''.$this->pass.'')){ 
+			//if ($conn_access  = odbc_connect("Driver={SQL Server Native Client 10.0};Server=192.168.1.102,1433;Database=erpappweb22proto;", 'sa', 'Somic321')){ 
 			 $ssql = "select * from Secuencia where SecCod='PEDIDO'"; 
 			if($rs_access = odbc_exec ($conn_access, $ssql)){ 
 						while ($info = odbc_fetch_array($rs_access)) {
@@ -156,7 +158,8 @@ if($rs_access = odbc_exec ($conn_access, $ssql))
 	public function testConn()
 
 	{
-		 if ($conn_access  = odbc_connect("Driver={SQL Server Native Client 10.0};Server=".$this->server.",1433;Database=".$this->db.";", ''.$this->user.'', ''.$this->pass.'')){ 
+		 //if ($conn_access  = odbc_connect("Driver={SQL Server Native Client 10.0};Server=".$this->server.",1433;Database=".$this->db.";", ''.$this->user.'', ''.$this->pass.'')){ 
+		   if ($conn_access  = odbc_connect("Driver={SQL Server Native Client 10.0};Server=".$this->server.",1433;Database=".$this->db.";", ''.$this->user.'', ''.$this->pass.'')){ 
 					   	echo "Conectado correctamente"; 
 					   	if(!$conn_access)
 					   	{
@@ -246,14 +249,14 @@ cast(isnull((p3.PrePreFijVal),0)/(1-((isnull(p3.preporval,0))/100)) as int) prec
 			if ($conn_access  = odbc_connect("Driver={SQL Server Native Client 10.0};Server=".$this->server.",1433;Database=".$this->db.";", ''.$this->user.'', ''.$this->pass.'')){ 
 					   	echo "Conectado correctamente"; 
 					   	
-					        			        $ssql = " select a.artsec,a.ArtSec, a.ArtNom,ArtImg_GXI,a.InvFamCod,a.ArtCod,a.ArtFicTec,parconiva,
+					        			        $ssql = " select top 200 a.artsec,a.ArtSec, a.ArtNom,ArtImg_GXI,a.InvFamCod,a.ArtCod,a.ArtFicTec,parconiva,
 0 precio1,0 precio2,
 cast(isnull((p3.PrePreFijVal),0)/(1-((isnull(p3.preporval,0))/100)) as int) precio3,
 
   replace(replace(replace(SG.InvSubGruCod,'S',''),'G',''),'0','99') InvSubGruCod,isnull((select SUM((karcaj+karuni)*(case when (karnat='+') then 1 else -1 end)) saldo
  from Kardex  k inner join Factura f on f.FacSec=k.facsec where facest='A' and k.ArtSec=a.ArtSec ),0) saldo
  from articulos a   
- left join PreciosDetalle p3 on p3.ArtSec=a.ArtSec and  p3.LisPreCod=1
+ left join PreciosDetalle p3 on p3.ArtSec=a.ArtSec and  p3.LisPreCod=2
  
  left join PresentacionArticulos pres on pres.preartcod=p3.preartcod
  left join ParametroContable p on p.parconcod=a.ParConCod
@@ -267,6 +270,7 @@ cast(isnull((p3.PrePreFijVal),0)/(1-((isnull(p3.preporval,0))/100)) as int) prec
 					 		   //$content[] = $info;
 					   			//$ciudades = new Ciudad;
 					   			$pros[] = $info;
+					   			
 								}// END WHILE############################
 
 							} ############END RS_ACCESS##############	
@@ -277,14 +281,15 @@ cast(isnull((p3.PrePreFijVal),0)/(1-((isnull(p3.preporval,0))/100)) as int) prec
 									$prod = Producto::where('id_mantis','=',$pro['ArtCod'])->first();
 									if($prod)
 									{
-										File::delete($prod->img);
+										//File::delete($prod->img);
 										if($pro['ArtImg_GXI'] != NULL)
 								   			{
 								   				$nombre = Str_replace('gxdbfile:','',$pro['ArtImg_GXI']);
-								   				$urlImg = 'http://192.168.1.56:8080/MantisWeb20erpappweb22/PublicTempStorage/multimedia/'.$nombre;
-								   				//Image::make($urlImg)->resize(300, null, function ($constraint) {$constraint->aspectRatio();})->save(public_path().'/img/Mantis/'.$nombre);
-								   				Image::make($urlImg)->save(public_path().'/img/Mantis/'.$nombre);
 								   				$urlImg = $this->urlMantis.$nombre;
+								   			
+								   				//Image::make($urlImg)->resize(300, null, function ($constraint) {$constraint->aspectRatio();})->save(public_path().'/img/Mantis/'.$nombre);
+								   				//Image::make($urlImg)->save(public_path().'/img/Mantis/'.$nombre);
+								   				//$urlImg = $this->urlMantis.$nombre;
 								   				//$prod->img = 'img/Mantis/'.$nombre;
 								   				$prod->img = $urlImg;
 
@@ -336,6 +341,7 @@ cast(isnull((p3.PrePreFijVal),0)/(1-((isnull(p3.preporval,0))/100)) as int) prec
 										$prod->precio = $pro['precio3'];
 										$prod->por_iva = $pro['parconiva'];
 										$prod->cantidad = $pro['saldo'];
+
 										$prod->save();
 									}else{
 										
@@ -344,11 +350,11 @@ cast(isnull((p3.PrePreFijVal),0)/(1-((isnull(p3.preporval,0))/100)) as int) prec
 								   			{
 								   				$nombre = Str_replace('gxdbfile:','',$pro['ArtImg_GXI']);
 
-								   				$urlImg = 'http://192.168.1.56:8080/MantisWeb20erpappweb22/PublicTempStorage/multimedia/'.$nombre;
+								   				$urlImg = $this->urlMantis.$nombre;
 								   				//Image::make($urlImg)->resizeCanvas(400, 400, null, true, '#fff')->save(public_path().'/img/Mantis/'.$nombre);
 								   				//Image::make($urlImg)->save(public_path().'/img/Mantis/'.$nombre);
 								   				//$producto->img = 'img/Mantis/'.$nombre;
-								   				$urlImg = $this->urlMantis.$nombre;
+								   				//$urlImg = $this->urlMantis.$nombre;
 								   				//$prod->img = 'img/Mantis/'.$nombre;
 								   				$producto->img = $urlImg;
 								   			}else
@@ -431,24 +437,31 @@ cast(isnull((p3.PrePreFijVal),0)/(1-((isnull(p3.preporval,0))/100)) as int) prec
 					 		   //$content[] = $info;
 					   			//$ciudades = new Ciudad;
 					   			$categorias[] = $info;
+
+
 								}// END WHILE############################
+
 
 							} ############END RS_ACCESS##############	
 						}###### END IF CON_ACCESS
 
-						//dd($categorias);
+						
 
 						foreach($categorias as $cate)
 						{
+							//dd($cate);
 							$cat = Categoria::where('InvSubGruCod','=',$cate['InvSubGruCod'])->first();
 							if($cat)
 							{
-								$VarSlug = Str::slug($cate['InvSubGruNom']);
+								/*$VarSlug = strtolower($cate['InvSubGruNom']);
+								$VarSlug = str_replace(array('?'),"",$VarSlug);
+								$VarSlug = utf8_encode($cate['InvSubGruNom']);
+								$VarSlug = Str::slug($cate['InvSubGruNom']);*/
 								$cat->InvSubGruId = $cate['InvSubGruId'];
 								$cat->InvSubGruCod = $cate['InvSubGruCod'];
 								$cat->InvGruCod = $cate['InvGruCod'];
 								$cat->cat_nom = $cate['InvSubGruNom'];
-								$cat->cat_slug = $VarSlug;
+								//$cat->cat_slug = $VarSlug;
 								$cat->img = '';
 
 								$cat->save();
@@ -459,8 +472,9 @@ cast(isnull((p3.PrePreFijVal),0)/(1-((isnull(p3.preporval,0))/100)) as int) prec
 
 								$categoria = new Categoria;
 								
-								
-								$VarSlug = Str::slug($cate['InvSubGruNom']);
+								//$VarSlug = strtolower($cate['InvSubGruNom']);
+								//$VarSlug = utf8_encode($cate['InvSubGruNom']);
+								//$VarSlug = Str::slug($cate['InvSubGruNom']);
 
 						
 							
@@ -470,7 +484,7 @@ cast(isnull((p3.PrePreFijVal),0)/(1-((isnull(p3.preporval,0))/100)) as int) prec
 								$categoria->InvGruCod = $cate['InvGruCod'];
 								$categoria->cat_nom = $cate['InvSubGruNom'];
 								
-								$categoria->cat_slug = $VarSlug;
+								//$categoria->cat_slug = $VarSlug;
 								$categoria->img = '';
 
 								$categoria->save();
@@ -578,6 +592,9 @@ cast(isnull((p3.PrePreFijVal),0)/(1-((isnull(p3.preporval,0))/100)) as int) prec
 							$grup = Grupo::where('InvGruCod','=',$gru['InvGruCod'])->first();
 							if($grup)
 							{
+								$VarSlug = strtolower($gru['InvGruNom']);
+								$VarSlug = utf8_encode($gru['InvGruNom']);
+								
 								$VarSlug = Str::slug($gru['InvGruNom']);
 								$grup->InvGruId = $gru['InvGruId'];
 								$grup->InvGruCod = $gru['InvGruCod'];
@@ -593,6 +610,8 @@ cast(isnull((p3.PrePreFijVal),0)/(1-((isnull(p3.preporval,0))/100)) as int) prec
 
 								$grupo = new Grupo;
 								
+								$VarSlug = strtolower($gru['InvGruNom']);
+								$VarSlug = utf8_encode($gru['InvGruNom']);
 								
 							$VarSlug = Str::slug($gru['InvGruNom']);
 

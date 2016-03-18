@@ -9,6 +9,23 @@
 <input type="hidden" id="urlValDis" value="{{URL::route('urlValDis')}}">
 	  <!-- Main Content -->
                 <div class="content margin-top60 margin-bottom60">
+                 @if(Session::has('message-alert'))
+                <div class="row">
+                    
+                         
+
+                        <div class="alert alert-warning alert-dismissable">
+                          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                          <strong>Mensaje</strong> {{Session::get('message-alert')}}
+                        </div>
+
+                        <!--<p class="mensajes-flash" style="" data-dismiss="alert"id="mensaje-flash"> {{Session::get('message-alert')}}
+                            
+                        </p>-->
+                
+                    
+                </div>
+            @endif
                     <div class="container">
                         <div class="row">
                             <div class="col-sm-12 col-md-12">
@@ -70,7 +87,7 @@
                                     <tbody>
                                         <tr>
                                             <td class="action no-border">
-                                                <a href="#" class="btn btn-default"><i class="fa fa-angle-left"></i> Continuar comprando</a>
+                                                <a href="{{URL::route('catalogo')}}" class="btn btn-default"><i class="fa fa-angle-left"></i> Continuar comprando</a>
                                                 <a class="update btn btn-color pull-right" href="{{URL::route('cart')}}"><i class="fa fa-rotate-right"></i> Actualizar</a>
                                             </td>
                                         </tr>
@@ -106,7 +123,7 @@
                                         </tbody>
                                     </table>
                                     <div>
-                                        <a class="btn  btn-color" href="checkout.html">Ir al Checkout</a><br>   
+                                        <a class="btn  btn-color" href="{{URL::route('checkout')}}">Ir al Checkout</a><br>   
                                     </div>
                                 </div>
                             </div>

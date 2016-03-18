@@ -6,6 +6,23 @@
 
 @section('content')
 	<div class="row carousel-holder">
+     @if(Session::has('message-alert'))
+                <div class="row">
+                    
+                         
+
+                        <div class="alert alert-warning alert-dismissable">
+                          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                          <strong>Mensaje</strong> {{Session::get('message-alert')}}
+                        </div>
+
+                        <!--<p class="mensajes-flash" style="" data-dismiss="alert"id="mensaje-flash"> {{Session::get('message-alert')}}
+                            
+                        </p>-->
+                
+                    
+                </div>
+            @endif
 
                     <div class="col-md-12">
                         <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
@@ -78,7 +95,7 @@
                                                                             <h3 class="name"><a href="{{URL::route('proDetalle',array('slug'=>$producto->slug))}}">{{$producto->pro_nom}}</a></h3>
                                                                             <div class="price">
                                                                                 <span class="price-old">1'200.000</span>
-                                                                                <span class="price-new">${{number_format($producto->precio, 0, '', '.')}}</span>
+                                                                                <span class="price-new">${{ number_format(App::make('UserController')->getPrice($producto->id_mantis), 0, '', '.') }}</span>
                                                                             </div>
                                                                         </div>
                                                                         <div class="right">

@@ -36,4 +36,6 @@ class Conn extends Eloquent {
 			$par = Conn::where('id','=',1)->first();
 			return $par->urlImg;
 		}
+
+		
 	}

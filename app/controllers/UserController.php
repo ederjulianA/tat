@@ -294,7 +294,7 @@ cast(isnull((p3.PrePreFijVal),0)/(1-((isnull(p3.preporval,0))/100)) as int) prec
   replace(replace(replace(SG.InvSubGruCod,'S',''),'G',''),'0','99') InvSubGruCod,isnull((select SUM((karcaj+karuni)*(case when (karnat='+') then 1 else -1 end)) saldo
  from Kardex  k inner join Factura f on f.FacSec=k.facsec where facest='A' and k.ArtSec=a.ArtSec ),0) saldo
  from articulos a   
- left join PreciosDetalle p3 on p3.ArtSec=a.ArtSec and  p3.LisPreCod=1 
+ left join PreciosDetalle p3 on p3.ArtSec=a.ArtSec and  p3.LisPreCod=2
  
  left join PresentacionArticulos pres on pres.preartcod=p3.preartcod
  left join ParametroContable p on p.parconcod=a.ParConCod

@@ -71,7 +71,9 @@ class CartController extends BaseController {
 	{
 		$categorias =   $this->cat->getAllCat();
 		$grupos 		=   $this->grupo->getAllGrupos();
-		return View::make('cotra.carrito')->with('grupos',$grupos)->with('categorias',$categorias)->with('products', Cart::contents());
+
+		$menu       = Menu::all();
+		return View::make('cotra.carrito')->with('menu',$menu)->with('grupos',$grupos)->with('categorias',$categorias)->with('products', Cart::contents());
 	}
 
 	public function getCheckout()
@@ -86,12 +88,15 @@ class CartController extends BaseController {
 		$canales    =  	$this->barrio->getAllCanales();
 		$grupos 	=   $this->grupo->getAllGrupos();
 		$pagos   	= 	Mpagos::all();
+		$envi       = $this->envios->getEnvios();
 		$datos = NULL;
+		$menu = Menu::all();
 			
 		if(Auth::check())
 		{
 			$user = User::where('id','=',Auth::user()->id)->first();
 			$dat = Shipping::where('user_id','=',Auth::user()->id)->first();
+			
 
 			$datos = DB::table('user_datos as ud')->join('barrios as b','ud.barrio_id','=','b.id')
 												  ->join('canales as c' ,'ud.canal','=', 'c.id')
@@ -112,11 +117,11 @@ class CartController extends BaseController {
 					'ud.comentarios'
 				)->where('ud.user_id','=',Auth::user()->id)->first();
 					
-			return View::make('checkout')->with('pagos',$pagos)->with('grupos',$grupos)->with('barrios',$barrios)->with('canales',$canales)->with('ciudades',$ciudades)->with('datos',$datos)->with('categorias',$categorias)->with('products', Cart::contents());
+			return View::make('cotra.checkout')->with('envi',$envi)->with('menu',$menu)->with('pagos',$pagos)->with('grupos',$grupos)->with('barrios',$barrios)->with('canales',$canales)->with('ciudades',$ciudades)->with('datos',$datos)->with('categorias',$categorias)->with('products', Cart::contents());
 		}
 		
 
-		return View::make('checkout')->with('pagos',$pagos)->with('grupos',$grupos)->with('datos',$datos)->with('barrios',$barrios)->with('categorias',$categorias)->with('products', Cart::contents());
+		return View::make('cotra.checkout')->with('envi',$envi)->with('menu',$menu)->with('pagos',$pagos)->with('grupos',$grupos)->with('datos',$datos)->with('barrios',$barrios)->with('categorias',$categorias)->with('products', Cart::contents());
 		
 	}
 
@@ -286,6 +291,6 @@ public function pedMantis()
 
 
 }
-
+//181.225.65.155---erpweb1108 ---sa---Colombia$2015
 
 }

@@ -29,8 +29,8 @@
                                         </div>
                                         <!-- /Single Product Image -->
                                         <!-- Product Thumbnail -->
-                                         <div class="simpleLens-thumbnails-container">
-                                            <div id="product-zoom-carousel" class="product-zoom-carousel carousel slide">
+                                        {{--}} <div class="simpleLens-thumbnails-container">
+                                                <div id="product-zoom-carousel" class="product-zoom-carousel carousel slide">
                                                 <div class="carousel-inner">
                                                     <div class="item active">
                                                         <a href="#" class="simpleLens-thumbnail-wrapper" data-lens-image="{{asset($producto->img)}}" data-big-image="{{asset($producto->img)}}">
@@ -61,10 +61,10 @@
                                                         </a>                                                    
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <a id="prev2" class="prev" href="#product-zoom-carousel" data-slide="prev"><i class="fa fa-angle-left"></i></a>
-                                            <a id="next2" class="next" href="#product-zoom-carousel" data-slide="next"><i class="fa fa-angle-right"></i></a>                    
-                                        </div>
+                                                </div>
+                                                <a id="prev2" class="prev" href="#product-zoom-carousel" data-slide="prev"><i class="fa fa-angle-left"></i></a>
+                                                <a id="next2" class="next" href="#product-zoom-carousel" data-slide="next"><i class="fa fa-angle-right"></i></a>                    
+                                        </div>--}}
                                         <!-- /Product Thumbnail -->
                                     </div>
                                 </div>
@@ -78,7 +78,7 @@
                                         <input type="hidden" name="id_producto" id="id_producto" value="{{$producto->id}}">
                                         <p><b>Stock : </b><button type="button" class="btn btn-default btn-sm btn-color">Disponible</button></p>
                                         <input type="hidden" id="cant-dis" value="{{ round($producto->cantidad)}}">
-                                        <p><b>Price : <button type="button" class="btn btn-default btn-sm" disabled="disabled">$1200</button> <button type="button" class="btn btn-default btn-sm">$999</button></b></p>
+                                        <p><b>Price : <button type="button" class="btn btn-default btn-sm" disabled="disabled">$1200</button> <button type="button" class="btn btn-default btn-sm">${{ number_format(App::make('UserController')->getPrice($producto->id_mantis), 0, '', '.') }}</button></b></p>
                                         <p><b>Cantidad :</b> <input class="td-qty" type="number"  name="cantidad" value="1" size="2" id="input-quantity"></p>
                                         <p>     
                                             @if($producto->cantidad > 0)

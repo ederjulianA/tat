@@ -537,14 +537,14 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 							return Redirect::intended('admin');
 						}
 				}else{
-					return Redirect::route('login')
+					return Redirect::back()
 				->with('message-alert', 'El email o la contraseña no coinciden, o la cuenta no esta activada');
 				}
 
 
 			}
 
-			return Redirect::route('login')
+			return Redirect::back()
 				->with('message-alert', 'Hubo un problema en el inicio de sesión ');
 	}
 

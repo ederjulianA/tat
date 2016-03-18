@@ -64,8 +64,15 @@
                                 </ul>
                             </div>
                             <div class="phone-login pull-right">
-                                <a href="#" data-toggle="modal" data-target="#loginModal"><i class="fa fa-sign-in"></i>Login</a>
-                                <a href="#" data-toggle="modal" data-target="#registrationModal"><i class="fa fa-edit"></i> Registrarse</a>
+                                @if(Auth::check())
+                                    <a href="" >{{Auth::user()->email}}</a>
+                                    <a href="{{URL::route('logout')}}" ><i class="fa fa-sign-in"></i>Cerrar sesión</a>
+
+                                @else
+                                    <a href="#" data-toggle="modal" data-target="#loginModal"><i class="fa fa-sign-in"></i>Login</a>
+                                    <a href="#" data-toggle="modal" data-target="#registrationModal"><i class="fa fa-edit"></i> Registrarse</a>
+                                @endif
+                                
                                 <a href="{{URL::route('cart')}}"><i class="fa fa-shopping-cart"></i> Carro de compras</a>
                             </div>
                         </div>
