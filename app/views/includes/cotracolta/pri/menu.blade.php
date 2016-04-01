@@ -82,9 +82,8 @@
                                                 </ul>
                                             </li>--}}
 
-                                            @foreach($m->grupo as $md)
-                                                <li><a href="" class="sf-with-ul">Producto1</a></li>
-                                            @endforeach
+                                            {{Funciones::getSubmenu($m->id)}}
+                                           
                                             {{--<li><a href="" class="sf-with-ul">Producto2</a></li>
                                             <li><a href="" class="sf-with-ul">Producto3</a></li>
                                             <li>

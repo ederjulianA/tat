@@ -140,7 +140,7 @@
 								</dl>
 								<hr />
 							
-									<button type="submit" class="paypalBtn">PAGAR</button> 
+									<button type="submit" class="paypalBtn">PAGAR con paypal</button> 
 								
 							</div>
 									

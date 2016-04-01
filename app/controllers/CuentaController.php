@@ -24,8 +24,9 @@ class CuentaController extends BaseController {
 		$grupos 		=   $this->grupo->getAllGrupos();
 		$categorias =   $this->cat->getAllCat();
 		$pedidos    =	$this->user->getPedidos($user);
+		$menu       = Menu::all();
 		
-		return View::make('user.index',compact('user','pedidos'))->with('categorias',$categorias)->with('grupos',$grupos)->with('products', Cart::contents());
+		return View::make('user.index',compact('user','pedidos','menu'))->with('categorias',$categorias)->with('grupos',$grupos)->with('products', Cart::contents());
 	}
 
 	public function getDetalleCuenta($id)
@@ -35,8 +36,10 @@ class CuentaController extends BaseController {
 		$categorias =   $this->cat->getAllCat();
 		$pedido   =	$this->empresa->getPedidoDetalle($id);
 		
-		$items  =	$this->user->getItems($id);
 		
-		return View::make('user.detallePedido',compact('user','pedido','items'))->with('grupos',$grupos)->with('categorias',$categorias)->with('products', Cart::contents());
+		$items  =	$this->user->getItems($id);
+		$menu       = Menu::all();
+		
+		return View::make('user.detallePedido',compact('user','pedido','items','menu'))->with('grupos',$grupos)->with('categorias',$categorias)->with('products', Cart::contents());
 	}
 }

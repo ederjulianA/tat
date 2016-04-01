@@ -78,6 +78,11 @@
                   <button type="submit" class="btn btn-success btn-lg">PROBAR CONEXION</button>
                   
                 </form>
+
+                <a href="#" id="loadTestPro" >Articulos</a>
+
+                <input type="hidden" id="urlTestPro" value="{{URL::route('urlTestPro')}}">
+                <input type="hidden" id="urlTestSavePro" value="{{URL::route('urlTestSavePro')}}">
                 
               </div>
           </div>
@@ -139,5 +144,6 @@
 
 @section('scripts')
   <script src="{{asset('tat/js/adminTipEnt.js')}}"></script>
+  <script src="{{asset('tat/js/Sync.js')}}"></script>
 
 @stop

@@ -28,6 +28,7 @@ class UserController extends BaseController {
 
 	public function postNewUser()
 	{
+
 		$validator = Validator::make(Input::all(),
 				array(
 						'email' 		    => 'required|email|unique:users',
@@ -99,12 +100,13 @@ class UserController extends BaseController {
 																 1 ,1 ,1 ,'N' )";
 													if($rs_access = odbc_exec ($conn_access, $ssql3)){
 														//dd("NIT CREADO");
+																$fecReg = date('d-m-Y');
 
 															//$tel = Input::get('telefono');
 															$ssql4  = "INSERT INTO NITNITTEL (nitsec ,nittel,nittip) VALUES ($SecNum ,$tel,'C')";
 															if($rs_access = odbc_exec ($conn_access, $ssql4)){
 																 $ssql5 = "insert into clientes (nitsec  ,clisec,clinom ,                      clirep ,        clisig ,      clisigimaext,clisigimanom ,    clipag ,    perclicod  ,    cliregmer ,    cencod ,           clidir ,                  climail ,        barcod  ,    tipclicod  ,    cliciucod ,  cobcod  ,    zoncod ,zonrutcod  ,cancod  , cansubcod  ,clifeccum ,    clicup ,    cliconpag ,    lisprecod  ,    cliestsoceco ,  cliest ,    clifecing ,    clirepimaext ,clirepimanom ,    clitel , cligcntip ,    cligcncod ,    cliblocup ,    clibloche ,    cliblomor ,cliblodescob ,    cliblodescobdia     ,cliblocampre ,    cliintord ,    clicamsec ,   clicarocu ,    clicarpro , clicarhob ,    clicarotr ,    clisiniva ,   cligeolocali ,    tricliica ,    tricliicapucsec    ,cliaplred    ,clired) 
-				values ( $SecNum  ,'1','$FullNom',   '' ,             '' ,             '',          '' ,            '' ,          2,            '' ,       (Select top 1 CenCod from CentrosPoblados) ,'cALLE 20 # 24-27',  '$email' ,1,            1,            (select top 1 nitCiuCod from Empresa e left join Nit n on e.NitSec=n.NitSec ) ,    1,    1 ,999 ,1  , 1  ,GETDATE() ,   0 ,    1 ,    1,    99 ,   'A' ,  '08-12-2015' ,  '' ,'' ,   '$tel' ,        'C',    1,   '' ,   '' ,  '' ,'' ,    0     ,'O' ,   0 ,  0 ,  '' ,   '' , '' ,   '' ,  'S' , NULL ,  '' ,  NULL    ,''    ,0) 
+				values ( $SecNum  ,'1','$FullNom',   '' ,             '' ,             '',          '' ,            '' ,          2,            '' ,       (Select top 1 CenCod from CentrosPoblados) ,'$dir',  '$email' ,1,            1,            (select top 1 nitCiuCod from Empresa e left join Nit n on e.NitSec=n.NitSec ) ,    1,    1 ,1/*zonrutcod*/  ,1  , 1  ,GETDATE() ,   0 ,    1 ,    3/*lisprecod*/,    99 ,   'A' ,  '$fecReg' ,  '' ,'' ,   '$tel' ,        'C',    1,   '' ,   '' ,  '' ,'' ,    0     ,'O' ,   0 ,  0 ,  '' ,   '' , '' ,   '' ,  'S' , NULL ,  '' ,  NULL    ,''    ,0) 
 
 							";
 																		
@@ -294,7 +296,7 @@ cast(isnull((p3.PrePreFijVal),0)/(1-((isnull(p3.preporval,0))/100)) as int) prec
   replace(replace(replace(SG.InvSubGruCod,'S',''),'G',''),'0','99') InvSubGruCod,isnull((select SUM((karcaj+karuni)*(case when (karnat='+') then 1 else -1 end)) saldo
  from Kardex  k inner join Factura f on f.FacSec=k.facsec where facest='A' and k.ArtSec=a.ArtSec ),0) saldo
  from articulos a   
- left join PreciosDetalle p3 on p3.ArtSec=a.ArtSec and  p3.LisPreCod=2
+ left join PreciosDetalle p3 on p3.ArtSec=a.ArtSec and  p3.LisPreCod=3
  
  left join PresentacionArticulos pres on pres.preartcod=p3.preartcod
  left join ParametroContable p on p.parconcod=a.ParConCod

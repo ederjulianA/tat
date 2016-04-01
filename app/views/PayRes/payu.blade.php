@@ -1,4 +1,4 @@
-@extends('layouts.front')
+@extends('layouts.cotra')
 
 {{--@section('cart-items')
 	@include('includes.cart')

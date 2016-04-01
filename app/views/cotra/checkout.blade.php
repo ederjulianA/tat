@@ -251,20 +251,23 @@
                                     </header>
                                     <ul class="progress-list">
                                         <li class="active"><a href="#" class="edit"><i class="fa fa-pencil"></i> Editar</a> Método Checkout</li>
-                                        <li>
-                                        	<form action="{{URL::route('payment')}}" method="post" accept-charset="utf-8">
+                                        {{-- PAYPAL--}}
+                                        	@if(Auth::check())
+                                        		<li>
+                                        				<form action="{{URL::route('payment')}}" method="post" accept-charset="utf-8">
 								<input type="hidden"id="urlEnvAjax" value="{{URL::route('urlEnvAjax')}}">
 								<div class="panel-body">
 									<select class="select_envio select_error" name="tipo_compra" id="slc_envio">
 										<option value="0">ESCOJA UNA OPCIÓN </option>
-										{{--@foreach($envi as $e)
+										@foreach($envi as $e)
 											<option value="{{$e->id}}">{{$e->nom_metodo}}</option>
-										@endforeach--}}
+										@endforeach
 										
 									</select>
 									
-									
+									<hr />
 
+									<dl class="dl-horizontal">
 									
 									<input type="hidden" id="totalCart" name="totalCart" value="{{Cart::total()}}">
 									<input type="hidden" id="totalCart"name="totalItems" value="{{Cart::totalItems()}}">
@@ -280,17 +283,20 @@
 								</dl>
 								<hr />
 							
-									<button type="submit" class="paypalBtn">PAGAR CON PAYPAL</button> 
+									<button type="submit" class="paypalBtn">PAGAR con paypal</button> 
 								
 							</div>
 									
 									
 						</form>
-                                        </li>
-                                        <li>
-                                        	<?php  $refCod = "eder-".date('YmdHms');$sig = "6u39nqhq8ftd0hlvnjfs66eh8c~500238~".$refCod."~".Cart::total()."~COP"; $e = md5($sig);?>
+                                        		</li>
+
+
+                                        		<li>
+                                        			
+
+                                        			<?php  $refCod = "eder-".date('YmdHms');$sig = "6u39nqhq8ftd0hlvnjfs66eh8c~500238~".$refCod."~".Cart::total()."~COP"; $e = md5($sig);?>
 	<form method="post" action="https://stg.gateway.payulatam.com/ppp-web-gateway/">
-	<input type="image" border="0" alt="" src="http://www.payulatam.com/img-secure-2015/boton_pagar_grande.png" onClick="this.form.urlOrigen.value = window.location.href;"/>
   <input name="merchantId"    type="hidden"  value="500238"   >
   <input name="accountId"     type="hidden"  value="500537" >
   <input name="description"   type="hidden"  value="Test PAYU"  >
@@ -308,9 +314,16 @@
   <input name="buyerEmail"    type="hidden"  value="{{Auth::user()->email}}">
   <input name="responseUrl"    type="hidden"  value="{{URL::route('pur')}}">
   <input name="confirmationUrl"    type="hidden"  value="{{URL::route('purconfirmation')}}" >
-  <input name="Submit"        type="submit"  value="PAGAR PAYU" >
+  <input type="image" border="0" alt="" src="http://www.payulatam.com/img-secure-2015/boton_pagar_grande.png" onClick="this.form.urlOrigen.value = window.location.href;"/>
 </form>
-                                        </li>
+                                        		</li>
+                                        	@else
+                                        		<li>Inicia sesión para finalizar la compra</li>
+                                        	@endif
+                                        {{--ENDPAYPAL--}}	
+
+
+
                                         <li><a href="#" class="edit"><i class="fa fa-pencil"></i> Editar</a>Método de envío</li>
                                     </ul>
                                 </aside>

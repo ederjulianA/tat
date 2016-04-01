@@ -24,6 +24,21 @@
 		
 	}
 
+	public static function getSubmenu($id)
+	{
+		$menu = DB::table('menu_inventariogrupo as m')->join('inventariogrupo as i','i.InvGruCod','=','m.grupo_id')->select('m.id','m.grupo_id','m.menu_id','i.InvGruCod','i.InvGruNom')->where('m.menu_id','=',$id)->get();
+		
+$html ='';
+foreach ($menu as $user)
+{
+	$html = $html.'<li><a href="/categoria/'.$user->InvGruCod.'">'.$user->InvGruNom.'</a></li>';
+    
+}
+
+
+		return $html;
+	}
+
 	public static function getCodigos()
 	{
 		$codigos ="";

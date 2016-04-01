@@ -36,8 +36,8 @@
                                         </div>                                       
                                     </div>
                                     <div class="col-lg-5 col-md-6 col-sm-6 col-xs-12 pull-right">
-                                        @include('includes.cotracolta.search')
-                                       
+                                         @include('includes.cotracolta.search') 
+                                        <!-- /Product Search  -->
                                     </div>
                                 </div>
                                 <div class="product-grid">

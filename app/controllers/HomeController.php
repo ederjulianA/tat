@@ -77,9 +77,10 @@ class HomeController extends BaseController {
 												$id_pedido = 'PED-WEB-'.date('Ymd-Hms');
 												//dd($id_pedido,$SecNum,$NitSec);
 												$totalCompra =  $TX_VALUE;
+												$CotFecEd = date("d.m.y");
 												
 												$ssql3 ="INSERT INTO Cotizaciones1(CotTip,CotSec,TipCod,EmpCod,CotFecha,CotObs,CotUsuCod,CotCliConPag,CotSecConCon,CotLisPreCod,CotSubVenCod,CotSubNitSec,CotSubCliSec,CotNum,CotSumCot,BodSucCCSec,CotEst,CotSubCotSec,AnuFueSec,CotAnuObs,CotEstado)
-                   								 VALUES('P','$SecNum','PED',1,'16-01-2016','miobs','admin',1/*cliConPag*/,1/*numItems*/,1/*lisprecod*/,$Vencod/*vencod*/,'$NitSec'/*nitsec*/,1/*clisec*/,'$id_pedido','$totalCompra',1/*BODsUCCSEC*/,2/*CotEst*/,NULL,NULL,NULL,'A')";
+                   								 VALUES('P','$SecNum','PED',1,'$CotFecEd','miobs','admin',1/*cliConPag*/,1/*numItems*/,1/*lisprecod*/,$Vencod/*vencod*/,'$NitSec'/*nitsec*/,1/*clisec*/,'$id_pedido','$totalCompra',1/*BODsUCCSEC*/,2/*CotEst*/,NULL,NULL,NULL,'A')";
 
                    								 if($rs_access = odbc_exec($conn_access, $ssql3)){ 
                    								 		$ssql4 = "UPDATE Secuencia SET SecNum=SecNum+1 where SecCod='PEDIDO'";
@@ -481,6 +482,8 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 		$grupos 		=   $this->grupo->getAllGrupos();
 		$categorias = $this->cat->getAllCat();
 		$menu       = Menu::all();
+
+		
 		return View::make('cotra.index')->with('grupos',$grupos)->with('menu',$menu)->with('categorias',$categorias)->with('promo',$promo)->with('productos',$productos)->with('products', Cart::contents());
 	}
 
@@ -488,7 +491,8 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 	{
 		$grupos 		=   $this->grupo->getAllGrupos();
 		$categorias =   $this->cat->getAllCat();
-		return View::make('register')->with('grupos',$grupos)->with('categorias',$categorias)->with('products', Cart::contents());
+		$menu       = Menu::all();
+		return View::make('cotra.login')->with('grupos',$grupos)->with('categorias',$categorias)->with('products', Cart::contents());
 	}
 
 	
@@ -497,7 +501,8 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 	{
 		$grupos 		=   $this->grupo->getAllGrupos();
 		$categorias =   $this->cat->getAllCat();
-		return View::make('login')->with('grupos',$grupos)->with('categorias',$categorias)->with('products', Cart::contents());
+		$menu    = Menu::all();
+		return View::make('cotra.login')->with('menu',$menu)->with('grupos',$grupos)->with('categorias',$categorias)->with('products', Cart::contents());
 	}
 
 	public function postLogin()
@@ -559,9 +564,9 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 
 
 	//FUNCIÓN PARA CREAR UNA NUEVA TIENDA
-	public function postRegister()
+	/*public function postRegister()
 	{
-		//CREAMOS LAS REGLAS DE VALIDACIÓN PARA LA PETICÓN POST ENVIADA POR EL USUARIO
+		
 		$validator = Validator::make(Input::all(),
 				array(
 						'name' 		=> 'required|unique:empresas,nombre_publico',
@@ -571,7 +576,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 			);
 
 
-		//VALIDAMOS SI LA PETICIÓN PASÓ LOS FILTROS DE VALIDACIÓN ANTERIORES
+		
 		if($validator->fails())
 		{
 			return Redirect::to('/register')
@@ -600,6 +605,6 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 		}
 
 
-	}
+	}*/
 
 }

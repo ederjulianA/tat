@@ -1,0 +1,1627 @@
+-- phpMyAdmin SQL Dump
+-- version 4.1.14
+-- http://www.phpmyadmin.net
+--
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 19-03-2016 a las 10:20:41
+-- Versión del servidor: 5.6.17
+-- Versión de PHP: 5.5.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- Base de datos: `tat`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `barrios`
+--
+
+CREATE TABLE IF NOT EXISTS `barrios` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `cod` varchar(200) COLLATE utf8_spanish2_ci NOT NULL,
+  `ciu_id` int(11) NOT NULL,
+  `bar_nom` varchar(200) COLLATE utf8_spanish2_ci NOT NULL,
+  `Lunes` tinyint(1) NOT NULL DEFAULT '0',
+  `Martes` tinyint(1) NOT NULL DEFAULT '0',
+  `Miercoles` tinyint(1) NOT NULL DEFAULT '0',
+  `Jueves` tinyint(1) NOT NULL DEFAULT '0',
+  `Viernes` tinyint(1) NOT NULL DEFAULT '0',
+  `Sabado` tinyint(1) NOT NULL DEFAULT '0',
+  `Domingo` tinyint(1) NOT NULL DEFAULT '0',
+  `created_at` date NOT NULL,
+  `updated_at` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=7 ;
+
+--
+-- Volcado de datos para la tabla `barrios`
+--
+
+INSERT INTO `barrios` (`id`, `cod`, `ciu_id`, `bar_nom`, `Lunes`, `Martes`, `Miercoles`, `Jueves`, `Viernes`, `Sabado`, `Domingo`, `created_at`, `updated_at`) VALUES
+(1, 'cod1', 1, 'San Francisco', 0, 0, 0, 0, 0, 0, 0, '0000-00-00', '0000-00-00'),
+(2, 'cod2', 1, 'Cabecera', 0, 0, 0, 0, 0, 0, 0, '0000-00-00', '0000-00-00'),
+(3, 'cod3', 3, 'El poblado', 0, 0, 0, 0, 0, 0, 0, '0000-00-00', '0000-00-00'),
+(4, 'cod4', 1, 'Mutis', 0, 0, 0, 0, 0, 0, 0, '0000-00-00', '0000-00-00'),
+(5, 'cod1123', 2, 'La candelaria', 0, 0, 0, 0, 0, 0, 0, '0000-00-00', '0000-00-00'),
+(6, 'cod12345', 4, 'El limoncito  ', 0, 0, 0, 0, 0, 0, 0, '0000-00-00', '0000-00-00');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `canales`
+--
+
+CREATE TABLE IF NOT EXISTS `canales` (
+  `id` int(11) NOT NULL,
+  `can_nom` varchar(200) COLLATE utf8_spanish2_ci NOT NULL,
+  `created_at` date NOT NULL,
+  `updated_at` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `canales`
+--
+
+INSERT INTO `canales` (`id`, `can_nom`, `created_at`, `updated_at`) VALUES
+(0, 'Tienda', '0000-00-00', '0000-00-00'),
+(0, 'Restaurantes', '0000-00-00', '0000-00-00');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `categorias`
+--
+
+CREATE TABLE IF NOT EXISTS `categorias` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `InvGruCod` varchar(16) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `cat_nom` varchar(100) COLLATE utf8_spanish2_ci NOT NULL,
+  `cat_slug` varchar(200) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `img` varchar(250) COLLATE utf8_spanish2_ci NOT NULL,
+  `created_at` date NOT NULL,
+  `updated_at` date NOT NULL,
+  `InvSubGruId` varchar(20) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `InvSubGruCod` varchar(16) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=1471 ;
+
+--
+-- Volcado de datos para la tabla `categorias`
+--
+
+INSERT INTO `categorias` (`id`, `InvGruCod`, `cat_nom`, `cat_slug`, `img`, `created_at`, `updated_at`, `InvSubGruId`, `InvSubGruCod`) VALUES
+(1164, '49', 'RECARGA VIRTUAL', NULL, '', '2016-03-19', '2016-03-19', '49-100', '100'),
+(1165, '35', 'VENTA MINUTOS COMCEL', NULL, '', '2016-03-19', '2016-03-19', '35-123', '123'),
+(1166, '1               ', 'CREMA PEINAR SAVITAL                              ', NULL, '', '2016-03-19', '2016-03-19', '277-277', '165'),
+(1167, '35', 'EQUIPOS CLARO MOSTRADOR', NULL, '', '2016-03-19', '2016-03-19', '35-02', '176'),
+(1168, 'G51', 'EQUIPOS CLARO', NULL, '', '2016-03-19', '2016-03-19', 'G51-03', '177'),
+(1169, '10008', 'CEREALES', NULL, '', '2016-03-19', '2016-03-19', 'G90-001', '178'),
+(1170, '10010', 'PAPELES Y CARTONES SA', NULL, '', '2016-03-19', '2016-03-19', 'G92-01', '179'),
+(1171, '10009', 'INVERSIONES AREVALO JP SAS', NULL, '', '2016-03-19', '2016-03-19', 'G91-01', '180'),
+(1172, '10011', 'ARROCERA AGUA CLARA SAS', NULL, '', '2016-03-19', '2016-03-19', '90-01', '181'),
+(1173, 'G24', 'CEREALES LISTOS', NULL, '', '2016-03-19', '2016-03-19', 'G24-289', '182'),
+(1174, 'G24', 'Toddy', NULL, '', '2016-03-19', '2016-03-19', 'G24-2', '303'),
+(1175, '10012', 'TIGO SIM CARD', NULL, '', '2016-03-19', '2016-03-19', 'G36-01', '304'),
+(1176, '10013', 'EMPAQUES', NULL, '', '2016-03-19', '2016-03-19', 'G93-01', '305'),
+(1177, 'G01', 'PREDATOR', NULL, '', '2016-03-19', '2016-03-19', 'G01-01', '306'),
+(1178, 'G09', 'HALOGENO', NULL, '', '2016-03-19', '2016-03-19', 'G09-01', '307'),
+(1179, 'G00', 'ACTIVADE N', NULL, '', '2016-03-19', '2016-03-19', 'G00-001', 'G00S001'),
+(1180, 'G00', 'OBSEQUIOS N', NULL, '', '2016-03-19', '2016-03-19', 'G00-040', 'G00S040'),
+(1181, 'G00', 'HUGGIES N', NULL, '', '2016-03-19', '2016-03-19', 'G00-047', 'G00S047'),
+(1182, 'G00', 'OBSEQUIOS CKC N', NULL, '', '2016-03-19', '2016-03-19', 'G00-051', 'G00S051'),
+(1183, 'G00', 'OBSEQUIOS N', NULL, '', '2016-03-19', '2016-03-19', 'G00-133', 'G00S133'),
+(1184, 'G00', 'PASPAN EMPACADA N', NULL, '', '2016-03-19', '2016-03-19', 'G00-136', 'G00S136'),
+(1185, 'G00', 'MANT.CRIOLLA N', NULL, '', '2016-03-19', '2016-03-19', 'G00-145', 'G00S145'),
+(1186, 'G00', 'REFRESCOS N', NULL, '', '2016-03-19', '2016-03-19', 'G00-166', 'G00S166'),
+(1187, 'G00', 'SERVICIOS VARIOS N', NULL, '', '2016-03-19', '2016-03-19', 'G00-199', 'G00S199'),
+(1188, 'G01', 'ACTIVADE N', NULL, '', '2016-03-19', '2016-03-19', 'G01-001', 'G01S001'),
+(1189, 'G01', 'BATILADO N', NULL, '', '2016-03-19', '2016-03-19', 'G01-002', 'G01S002'),
+(1190, 'G01', 'BONAICE N', NULL, '', '2016-03-19', '2016-03-19', 'G01-003', 'G01S003'),
+(1191, 'G01', 'BONFRUT N', NULL, '', '2016-03-19', '2016-03-19', 'G01-004', 'G01S004'),
+(1192, 'G01', 'CALDO DO', NULL, '', '2016-03-19', '2016-03-19', 'G01-005', 'G01S005'),
+(1193, 'G01', 'CALDO RICOSTILLA N', NULL, '', '2016-03-19', '2016-03-19', 'G01-006', 'G01S006'),
+(1194, 'G01', 'CONFITERIA N', NULL, '', '2016-03-19', '2016-03-19', 'G01-007', 'G01S007'),
+(1195, 'G01', 'DEL FOGON N', NULL, '', '2016-03-19', '2016-03-19', 'G01-008', 'G01S008'),
+(1196, 'G01', 'EGO GEL N', NULL, '', '2016-03-19', '2016-03-19', 'G01-009', 'G01S009'),
+(1197, 'G01', 'FORTIDENT N', NULL, '', '2016-03-19', '2016-03-19', 'G01-010', 'G01S010'),
+(1198, 'G01', 'FRESCO FRUTI', NULL, '', '2016-03-19', '2016-03-19', 'G01-011', 'G01S011'),
+(1199, 'G01', 'FRESCO BOKA N', NULL, '', '2016-03-19', '2016-03-19', 'G01-012', 'G01S012'),
+(1200, 'G01', 'FRESCOS LIGHT N', NULL, '', '2016-03-19', '2016-03-19', 'G01-013', 'G01S013'),
+(1201, 'G01', 'FRESCOS YA N', NULL, '', '2016-03-19', '2016-03-19', 'G01-014', 'G01S014'),
+(1202, 'G01', 'FRUTIVE N', NULL, '', '2016-03-19', '2016-03-19', 'G01-015', 'G01S015'),
+(1203, 'G01', 'GELAGURT N', NULL, '', '2016-03-19', '2016-03-19', 'G01-016', 'G01S016'),
+(1204, 'G01', 'GELATINA FRUTI', NULL, '', '2016-03-19', '2016-03-19', 'G01-017', 'G01S017'),
+(1205, 'G01', 'INSTACREM N', NULL, '', '2016-03-19', '2016-03-19', 'G01-018', 'G01S018'),
+(1206, 'G01', 'OBSEQUIOS N', NULL, '', '2016-03-19', '2016-03-19', 'G01-019', 'G01S019'),
+(1207, 'G01', 'PULPIFRUTA N', NULL, '', '2016-03-19', '2016-03-19', 'G01-020', 'G01S020'),
+(1208, 'G01', 'SAVITAL N', NULL, '', '2016-03-19', '2016-03-19', 'G01-021', 'G01S021'),
+(1209, 'G01', 'SAZONE N', NULL, '', '2016-03-19', '2016-03-19', 'G01-022', 'G01S022'),
+(1210, 'G01', 'SOPERAS N', NULL, '', '2016-03-19', '2016-03-19', 'G01-023', 'G01S023'),
+(1211, 'G01', 'HOGARE', NULL, '', '2016-03-19', '2016-03-19', 'G01-024', 'G01S024'),
+(1212, 'G01', 'SUNTEA N', NULL, '', '2016-03-19', '2016-03-19', 'G01-025', 'G01S025'),
+(1213, 'G01', 'OBSEQUIOS N', NULL, '', '2016-03-19', '2016-03-19', 'G01-040', 'G01S040'),
+(1214, 'G01', 'OBSEQUIOS N', NULL, '', '2016-03-19', '2016-03-19', 'G01-092', 'G01S092'),
+(1215, 'G01', 'OBSEQUIOS N', NULL, '', '2016-03-19', '2016-03-19', 'G01-174', 'G01S174'),
+(1216, 'G01', 'AROMATEL N', NULL, '', '2016-03-19', '2016-03-19', 'G01-276', 'G01S276'),
+(1217, 'G01', 'CREMA PEINAR SAVITAL N', NULL, '', '2016-03-19', '2016-03-19', 'G01-277', 'G01S277'),
+(1218, 'G01', 'ACONDICIONADOR SAVITAL N', NULL, '', '2016-03-19', '2016-03-19', 'G01-278', 'G01S278'),
+(1219, 'G01', 'JABON SAVITAL N', NULL, '', '2016-03-19', '2016-03-19', 'G01-279', 'G01S279'),
+(1220, 'G01', 'DON GUSTICO N', NULL, '', '2016-03-19', '2016-03-19', 'G01-308', 'G01S308'),
+(1221, 'G01', 'VIVE 100 PEQUE', NULL, '', '2016-03-19', '2016-03-19', 'G01-312', 'G01S312'),
+(1222, 'G01', 'SUNTEA LIQUIDO N', NULL, '', '2016-03-19', '2016-03-19', 'G01-324', 'G01S324'),
+(1223, 'G01', 'SHAMPOO BIOEXPERT N', NULL, '', '2016-03-19', '2016-03-19', 'G01-335', 'G01S335'),
+(1224, 'G01', 'ACONDICIONADOR BIOEXPERT N', NULL, '', '2016-03-19', '2016-03-19', 'G01-336', 'G01S336'),
+(1225, 'G01', 'CREMA PARA PEINAR BIOEXPERT N', NULL, '', '2016-03-19', '2016-03-19', 'G01-337', 'G01S337'),
+(1226, 'G01', 'FORTIDEN BLANQUEADORA N', NULL, '', '2016-03-19', '2016-03-19', 'G01-351', 'G01S351'),
+(1227, 'G01', 'EGO SHAMPOO N', NULL, '', '2016-03-19', '2016-03-19', 'G01-352', 'G01S352'),
+(1228, 'G01', 'BATICREMA N', NULL, '', '2016-03-19', '2016-03-19', 'G01-353', 'G01S353'),
+(1229, 'G01', 'CEPILLO FORTIDENT N', NULL, '', '2016-03-19', '2016-03-19', 'G01-354', 'G01S354'),
+(1230, 'G01', 'DO', NULL, '', '2016-03-19', '2016-03-19', 'G01-355', 'G01S355'),
+(1231, 'G01', 'RICOSTILLA DESMENUZADO N', NULL, '', '2016-03-19', '2016-03-19', 'G01-356', 'G01S356'),
+(1232, 'G01', 'VIVE 100 GRANDE N', NULL, '', '2016-03-19', '2016-03-19', 'G01-357', 'G01S357'),
+(1233, 'G01', 'POPETAS N', NULL, '', '2016-03-19', '2016-03-19', 'G01-381', 'G01S381'),
+(1234, 'G02', 'OBSEQUIOS N', NULL, '', '2016-03-19', '2016-03-19', 'G02-019', 'G02S019'),
+(1235, 'G02', 'ACEITE CANOLI VITALE N', NULL, '', '2016-03-19', '2016-03-19', 'G02-031', 'G02S031'),
+(1236, 'G02', 'ACEITE GIRASOL N', NULL, '', '2016-03-19', '2016-03-19', 'G02-032', 'G02S032'),
+(1237, 'G02', 'ACEITE Z N', NULL, '', '2016-03-19', '2016-03-19', 'G02-033', 'G02S033'),
+(1238, 'G02', 'ACEITES CREMOSOS N', NULL, '', '2016-03-19', '2016-03-19', 'G02-034', 'G02S034'),
+(1239, 'G02', 'ACEITE DE OLIVA N', NULL, '', '2016-03-19', '2016-03-19', 'G02-035', 'G02S035'),
+(1240, 'G02', 'JABONES DE BARRAS N', NULL, '', '2016-03-19', '2016-03-19', 'G02-036', 'G02S036'),
+(1241, 'G02', 'LINEA PANADERIA N', NULL, '', '2016-03-19', '2016-03-19', 'G02-037', 'G02S037'),
+(1242, 'G02', 'MARGARINAS DE MESA N', NULL, '', '2016-03-19', '2016-03-19', 'G02-038', 'G02S038'),
+(1243, 'G02', 'SALSAS CAMPI N', NULL, '', '2016-03-19', '2016-03-19', 'G02-039', 'G02S039'),
+(1244, 'G02', 'OBSEQUIOS N', NULL, '', '2016-03-19', '2016-03-19', 'G02-040', 'G02S040'),
+(1245, 'G02', 'OBSEQUIOS N', NULL, '', '2016-03-19', '2016-03-19', 'G02-092', 'G02S092'),
+(1246, 'G03', 'PAP.HIG. SCOTT N', NULL, '', '2016-03-19', '2016-03-19', 'G03-046', 'G03S046'),
+(1247, 'G03', 'HUGGIES N', NULL, '', '2016-03-19', '2016-03-19', 'G03-047', 'G03S047'),
+(1248, 'G03', 'LINEA FEMENINA N', NULL, '', '2016-03-19', '2016-03-19', 'G03-048', 'G03S048'),
+(1249, 'G03', 'SERVILLETAS N', NULL, '', '2016-03-19', '2016-03-19', 'G03-049', 'G03S049'),
+(1250, 'G03', 'TOALLAS COCINA N', NULL, '', '2016-03-19', '2016-03-19', 'G03-050', 'G03S050'),
+(1251, 'G03', 'OBSEQUIOS CKC N', NULL, '', '2016-03-19', '2016-03-19', 'G03-051', 'G03S051'),
+(1252, 'G03', 'OBSEQUIOS N', NULL, '', '2016-03-19', '2016-03-19', 'G03-092', 'G03S092'),
+(1253, 'G04', 'ARROZ GELVEZ N', NULL, '', '2016-03-19', '2016-03-19', 'G04-056', 'G04S056'),
+(1254, 'G04', 'CAMISETAS N', NULL, '', '2016-03-19', '2016-03-19', 'G04-057', 'G04S057'),
+(1255, 'G04', 'MODIFICADORES DE LECHE N', NULL, '', '2016-03-19', '2016-03-19', 'G04-190', 'G04S190'),
+(1256, 'G04', 'GALLETAS N', NULL, '', '2016-03-19', '2016-03-19', 'G04-263', 'G04S263'),
+(1257, 'G05', 'ACEITE DE OLIVA N', NULL, '', '2016-03-19', '2016-03-19', 'G05-035', 'G05S035'),
+(1258, 'G05', 'AZUCAR N', NULL, '', '2016-03-19', '2016-03-19', 'G05-061', 'G05S061'),
+(1259, 'G05', 'BLANCOX N', NULL, '', '2016-03-19', '2016-03-19', 'G05-062', 'G05S062'),
+(1260, 'G05', 'LOZACREM N', NULL, '', '2016-03-19', '2016-03-19', 'G05-063', 'G05S063'),
+(1261, 'G05', 'SAL REFISAL N', NULL, '', '2016-03-19', '2016-03-19', 'G05-064', 'G05S064'),
+(1262, 'G05', 'SALEROS N', NULL, '', '2016-03-19', '2016-03-19', 'G05-065', 'G05S065'),
+(1263, 'G06', 'DETERGENTES N', NULL, '', '2016-03-19', '2016-03-19', 'G06-071', 'G06S071'),
+(1264, 'G06', 'JABONES DE BARRA N', NULL, '', '2016-03-19', '2016-03-19', 'G06-072', 'G06S072'),
+(1265, 'G06', 'MI SAL N', NULL, '', '2016-03-19', '2016-03-19', 'G06-073', 'G06S073'),
+(1266, 'G07', 'BLANCOX N', NULL, '', '2016-03-19', '2016-03-19', 'G07-062', 'G07S062'),
+(1267, 'G07', 'LOZACREM N', NULL, '', '2016-03-19', '2016-03-19', 'G07-063', 'G07S063'),
+(1268, 'G07', 'SAL REFISAL N', NULL, '', '2016-03-19', '2016-03-19', 'G07-064', 'G07S064'),
+(1269, 'G07', 'SALEROS N', NULL, '', '2016-03-19', '2016-03-19', 'G07-065', 'G07S065'),
+(1270, 'G07', 'BLANCOX N', NULL, '', '2016-03-19', '2016-03-19', 'G07-076', 'G07S076'),
+(1271, 'G07', 'HARINA EXTRAPARDO N', NULL, '', '2016-03-19', '2016-03-19', 'G07-077', 'G07S077'),
+(1272, 'G07', 'HARINA ROBINSON N', NULL, '', '2016-03-19', '2016-03-19', 'G07-078', 'G07S078'),
+(1273, 'G07', 'SALEROS N', NULL, '', '2016-03-19', '2016-03-19', 'G07-081', 'G07S081'),
+(1274, 'G07', 'LIMPIA PISOS N', NULL, '', '2016-03-19', '2016-03-19', 'G07-359', 'G07S359'),
+(1275, 'G08', 'OBSEQUIOS N', NULL, '', '2016-03-19', '2016-03-19', 'G08-019', 'G08S019'),
+(1276, 'G08', 'CRAZY-M&M N', NULL, '', '2016-03-19', '2016-03-19', 'G08-086', 'G08S086'),
+(1277, 'G08', 'MILKY WAY N', NULL, '', '2016-03-19', '2016-03-19', 'G08-087', 'G08S087'),
+(1278, 'G08', 'SNICKERS N', NULL, '', '2016-03-19', '2016-03-19', 'G08-088', 'G08S088'),
+(1279, 'G08', 'MASC.AVES N', NULL, '', '2016-03-19', '2016-03-19', 'G08-089', 'G08S089'),
+(1280, 'G08', 'MASC.GATOS N', NULL, '', '2016-03-19', '2016-03-19', 'G08-090', 'G08S090'),
+(1281, 'G08', 'MASC.PERROS N', NULL, '', '2016-03-19', '2016-03-19', 'G08-091', 'G08S091'),
+(1282, 'G08', 'OBSEQUIOS N', NULL, '', '2016-03-19', '2016-03-19', 'G08-092', 'G08S092'),
+(1283, 'G08', 'PEDIGREE MADRID N', NULL, '', '2016-03-19', '2016-03-19', 'G08-281', 'G08S281'),
+(1284, 'G08', 'MASC VITAL RC N', NULL, '', '2016-03-19', '2016-03-19', 'G08-316', 'G08S316'),
+(1285, 'G08', 'MASC SANO CREC N', NULL, '', '2016-03-19', '2016-03-19', 'G08-317', 'G08S317'),
+(1286, 'G08', 'MASC ETPA 2 N', NULL, '', '2016-03-19', '2016-03-19', 'G08-318', 'G08S318'),
+(1287, 'G08', 'MASC ETPA 3 N', NULL, '', '2016-03-19', '2016-03-19', 'G08-319', 'G08S319'),
+(1288, 'G08', 'POUCH N', NULL, '', '2016-03-19', '2016-03-19', 'G08-358', 'G08S358'),
+(1289, 'G09', 'OBSEQUIOS N', NULL, '', '2016-03-19', '2016-03-19', 'G09-092', 'G09S092'),
+(1290, 'G09', 'FLOFI N', NULL, '', '2016-03-19', '2016-03-19', 'G09-096', 'G09S096'),
+(1291, 'G09', 'BOMBILLOS N', NULL, '', '2016-03-19', '2016-03-19', 'G09-097', 'G09S097'),
+(1292, 'G09', 'CONDONES N', NULL, '', '2016-03-19', '2016-03-19', 'G09-098', 'G09S098'),
+(1293, 'G09', 'FOSFOROS N', NULL, '', '2016-03-19', '2016-03-19', 'G09-099', 'G09S099'),
+(1294, 'G09', 'FRUTA LISTA N', NULL, '', '2016-03-19', '2016-03-19', 'G09-100', 'G09S100'),
+(1295, 'G09', 'LINEA OXY N', NULL, '', '2016-03-19', '2016-03-19', 'G09-101', 'G09S101'),
+(1296, 'G09', 'PALILLOS FESTIVAL N', NULL, '', '2016-03-19', '2016-03-19', 'G09-102', 'G09S102'),
+(1297, 'G09', 'SOPAS MARUCHAN N', NULL, '', '2016-03-19', '2016-03-19', 'G09-103', 'G09S103'),
+(1298, 'G09', 'ATUNES N', NULL, '', '2016-03-19', '2016-03-19', 'G09-104', 'G09S104'),
+(1299, 'G09', 'OBSEQUIOS N', NULL, '', '2016-03-19', '2016-03-19', 'G09-109', 'G09S109'),
+(1300, 'G09', 'LINEA DUO N', NULL, '', '2016-03-19', '2016-03-19', 'G09-261', 'G09S261'),
+(1301, 'G09', 'SARDINAS N', NULL, '', '2016-03-19', '2016-03-19', 'G09-262', 'G09S262'),
+(1302, 'G09', 'PALOMITAS DE MAIZ N', NULL, '', '2016-03-19', '2016-03-19', 'G09-310', 'G09S310'),
+(1303, 'G09', 'LINEA MEDICURE N', NULL, '', '2016-03-19', '2016-03-19', 'G09-327', 'G09S327'),
+(1304, 'G09', 'LINEA VIRGINIA N', NULL, '', '2016-03-19', '2016-03-19', 'G09-329', 'G09S329'),
+(1305, 'G09', 'ZAIMELA N', NULL, '', '2016-03-19', '2016-03-19', 'G09-330', 'G09S330'),
+(1306, 'G09', 'MAXICLEAN N', NULL, '', '2016-03-19', '2016-03-19', 'G09-331', 'G09S331'),
+(1307, 'G09', 'LINEA BARBASOL N', NULL, '', '2016-03-19', '2016-03-19', 'G09-332', 'G09S332'),
+(1308, 'G09', 'WESTING HOUSE N', NULL, '', '2016-03-19', '2016-03-19', 'G09-339', 'G09S339'),
+(1309, 'G09', 'LINEA FOGO N', NULL, '', '2016-03-19', '2016-03-19', 'G09-340', 'G09S340'),
+(1310, 'G09', 'WIN N', NULL, '', '2016-03-19', '2016-03-19', 'G09-341', 'G09S341'),
+(1311, 'G09', 'NEON N', NULL, '', '2016-03-19', '2016-03-19', 'G09-342', 'G09S342'),
+(1312, 'G09', 'PANDA N', NULL, '', '2016-03-19', '2016-03-19', 'G09-343', 'G09S343'),
+(1313, 'G09', 'LINEA FESTIVAL N', NULL, '', '2016-03-19', '2016-03-19', 'G09-344', 'G09S344'),
+(1314, 'G10', 'OBSEQUIOS N', NULL, '', '2016-03-19', '2016-03-19', 'G10-092', 'G10S092'),
+(1315, 'G10', 'ALIMENTOS N', NULL, '', '2016-03-19', '2016-03-19', 'G10-106', 'G10S106'),
+(1316, 'G10', 'MEDICAMENTOS N', NULL, '', '2016-03-19', '2016-03-19', 'G10-107', 'G10S107'),
+(1317, 'G10', 'SUCRAX N', NULL, '', '2016-03-19', '2016-03-19', 'G10-108', 'G10S108'),
+(1318, 'G10', 'OBSEQUIOS N', NULL, '', '2016-03-19', '2016-03-19', 'G10-109', 'G10S109'),
+(1319, 'G10', 'MEDICAMENTOS N', NULL, '', '2016-03-19', '2016-03-19', 'G10-111', 'G10S111'),
+(1320, 'G11', 'OBSEQUIOS N', NULL, '', '2016-03-19', '2016-03-19', 'G11-019', 'G11S019'),
+(1321, 'G11', 'OBSEQUIOS N', NULL, '', '2016-03-19', '2016-03-19', 'G11-092', 'G11S092'),
+(1322, 'G11', 'PRODUCTOS VETERINARIOS N', NULL, '', '2016-03-19', '2016-03-19', 'G11-110', 'G11S110'),
+(1323, 'G11', 'MEDICAMENTOS N', NULL, '', '2016-03-19', '2016-03-19', 'G11-111', 'G11S111'),
+(1324, 'G11', 'VENENOS N', NULL, '', '2016-03-19', '2016-03-19', 'G11-265', 'G11S265'),
+(1325, 'G12', 'ALIMENTOS INSTANTANEOS N', NULL, '', '2016-03-19', '2016-03-19', 'G12-116', 'G12S116'),
+(1326, 'G12', 'FORTIPLATANO N', NULL, '', '2016-03-19', '2016-03-19', 'G12-117', 'G12S117'),
+(1327, 'G12', 'FORTIMAIZ N', NULL, '', '2016-03-19', '2016-03-19', 'G12-118', 'G12S118'),
+(1328, 'G12', 'MALTEADA,CEREALES N', NULL, '', '2016-03-19', '2016-03-19', 'G12-119', 'G12S119'),
+(1329, 'G13', 'ADEREZOS N', NULL, '', '2016-03-19', '2016-03-19', 'G13-125', 'G13S125'),
+(1330, 'G13', 'COMPOTAS N', NULL, '', '2016-03-19', '2016-03-19', 'G13-126', 'G13S126'),
+(1331, 'G13', 'ENLATADOS N', NULL, '', '2016-03-19', '2016-03-19', 'G13-127', 'G13S127'),
+(1332, 'G13', 'ESENCIAS N', NULL, '', '2016-03-19', '2016-03-19', 'G13-128', 'G13S128'),
+(1333, 'G13', 'INSTITUCIONAL N', NULL, '', '2016-03-19', '2016-03-19', 'G13-129', 'G13S129'),
+(1334, 'G13', 'JUGOS N', NULL, '', '2016-03-19', '2016-03-19', 'G13-130', 'G13S130'),
+(1335, 'G13', 'MERMELADAS N', NULL, '', '2016-03-19', '2016-03-19', 'G13-131', 'G13S131'),
+(1336, 'G13', 'SALSAS N', NULL, '', '2016-03-19', '2016-03-19', 'G13-132', 'G13S132'),
+(1337, 'G13', 'OBSEQUIOS N', NULL, '', '2016-03-19', '2016-03-19', 'G13-133', 'G13S133'),
+(1338, 'G14', 'PASPAN EMPACADA N', NULL, '', '2016-03-19', '2016-03-19', 'G14-136', 'G14S136'),
+(1339, 'G14', 'PASPAN PANADERIA N', NULL, '', '2016-03-19', '2016-03-19', 'G14-137', 'G14S137'),
+(1340, 'G15', 'LECHE EN POLVO N', NULL, '', '2016-03-19', '2016-03-19', 'G15-140', 'G15S140'),
+(1341, 'G15', 'DELIAVENA N', NULL, '', '2016-03-19', '2016-03-19', 'G15-141', 'G15S141'),
+(1342, 'G16', 'MANT.CRIOLLA N', NULL, '', '2016-03-19', '2016-03-19', 'G16-145', 'G16S145'),
+(1343, 'G17', 'PANELA N', NULL, '', '2016-03-19', '2016-03-19', 'G17-149', 'G17S149'),
+(1344, 'G18', 'SONY CARBON N', NULL, '', '2016-03-19', '2016-03-19', 'G18-155', 'G18S155'),
+(1345, 'G18', 'SONY ALCALINA N', NULL, '', '2016-03-19', '2016-03-19', 'G18-156', 'G18S156'),
+(1346, 'G18', 'LINTERNAS N', NULL, '', '2016-03-19', '2016-03-19', 'G18-157', 'G18S157'),
+(1347, 'G19', 'CAMPESINA N', NULL, '', '2016-03-19', '2016-03-19', 'G19-161', 'G19S161'),
+(1348, 'G20', 'HARINA LA NIEVE N', NULL, '', '2016-03-19', '2016-03-19', 'G20-164', 'G20S164'),
+(1349, 'G21', 'OBSEQUIOS N', NULL, '', '2016-03-19', '2016-03-19', 'G21-092', 'G21S092'),
+(1350, 'G21', 'REFRESCOS N', NULL, '', '2016-03-19', '2016-03-19', 'G21-166', 'G21S166'),
+(1351, 'G21', 'JUGOS N', NULL, '', '2016-03-19', '2016-03-19', 'G21-167', 'G21S167'),
+(1352, 'G21', 'BEBIDAS ISOTONICAS N', NULL, '', '2016-03-19', '2016-03-19', 'G21-168', 'G21S168'),
+(1353, 'G22', 'BIBERONES N', NULL, '', '2016-03-19', '2016-03-19', 'G22-170', 'G22S170'),
+(1354, 'G22', 'ESPONJAS N', NULL, '', '2016-03-19', '2016-03-19', 'G22-171', 'G22S171'),
+(1355, 'G22', 'GUANTES N', NULL, '', '2016-03-19', '2016-03-19', 'G22-172', 'G22S172'),
+(1356, 'G22', 'LIMPIADORES N', NULL, '', '2016-03-19', '2016-03-19', 'G22-173', 'G22S173'),
+(1357, 'G23', 'OBSEQUIOS N', NULL, '', '2016-03-19', '2016-03-19', 'G23-092', 'G23S092'),
+(1358, 'G23', 'CARAMELOS DE LECHE N', NULL, '', '2016-03-19', '2016-03-19', 'G23-180', 'G23S180'),
+(1359, 'G23', 'GOMAS N', NULL, '', '2016-03-19', '2016-03-19', 'G23-181', 'G23S181'),
+(1360, 'G23', 'CHICLES N', NULL, '', '2016-03-19', '2016-03-19', 'G23-182', 'G23S182'),
+(1361, 'G23', 'CARAMELOS DUROS N', NULL, '', '2016-03-19', '2016-03-19', 'G23-183', 'G23S183'),
+(1362, 'G23', 'SNACKS N', NULL, '', '2016-03-19', '2016-03-19', 'G23-184', 'G23S184'),
+(1363, 'G23', 'REFRESCANTES N', NULL, '', '2016-03-19', '2016-03-19', 'G23-185', 'G23S185'),
+(1364, 'G23', 'CARAMELOS MASTICABLES N', NULL, '', '2016-03-19', '2016-03-19', 'G23-186', 'G23S186'),
+(1365, 'G23', 'TURRONES N', NULL, '', '2016-03-19', '2016-03-19', 'G23-187', 'G23S187'),
+(1366, 'G23', 'MASMELOS N', NULL, '', '2016-03-19', '2016-03-19', 'G23-188', 'G23S188'),
+(1367, 'G24', 'OBSEQUIOS N', NULL, '', '2016-03-19', '2016-03-19', 'G24-040', 'G24S040'),
+(1368, 'G24', 'MASC.PERROS N', NULL, '', '2016-03-19', '2016-03-19', 'G24-091', 'G24S091'),
+(1369, 'G24', 'MODIFICADORES DE LECHE N', NULL, '', '2016-03-19', '2016-03-19', 'G24-190', 'G24S190'),
+(1370, 'G24', 'CEREALES INFANTILES N', NULL, '', '2016-03-19', '2016-03-19', 'G24-191', 'G24S191'),
+(1371, 'G24', 'AVENAS QUAKER N', NULL, '', '2016-03-19', '2016-03-19', 'G24-193', 'G24S193'),
+(1372, 'G24', 'AVENAS DON PACHO N', NULL, '', '2016-03-19', '2016-03-19', 'G24-194', 'G24S194'),
+(1373, 'G24', 'OTROS DESAYUNOS N', NULL, '', '2016-03-19', '2016-03-19', 'G24-197', 'G24S197'),
+(1374, 'G24', 'HARINAS PRECOCIDAS DE MAIZ N', NULL, '', '2016-03-19', '2016-03-19', 'G24-198', 'G24S198'),
+(1375, 'G24', 'MASCOTA PERRO DOGURMET N', NULL, '', '2016-03-19', '2016-03-19', 'G24-309', 'G24S309'),
+(1376, 'G24', 'MASCOTA PERRO DONKAN N', NULL, '', '2016-03-19', '2016-03-19', 'G24-311', 'G24S311'),
+(1377, 'G25', 'LINEA POPULAR N', NULL, '', '2016-03-19', '2016-03-19', 'G25-041', 'G25S041'),
+(1378, 'G25', 'LINEA SUPER BLANCO N', NULL, '', '2016-03-19', '2016-03-19', 'G25-042', 'G25S042'),
+(1379, 'G25', 'LINEA SERVILLETAS-TOALLAS N', NULL, '', '2016-03-19', '2016-03-19', 'G25-043', 'G25S043'),
+(1380, 'G25', 'LINEA INSTITUCIONAL N', NULL, '', '2016-03-19', '2016-03-19', 'G25-044', 'G25S044'),
+(1381, 'G26', 'SERVICIOS VARIOS N', NULL, '', '2016-03-19', '2016-03-19', 'G26-199', 'G26S199'),
+(1382, 'G26', 'CARROS CANASTAS N', NULL, '', '2016-03-19', '2016-03-19', 'G26-260', 'G26S260'),
+(1383, 'G27', 'OBSEQUIOS N', NULL, '', '2016-03-19', '2016-03-19', 'G27-092', 'G27S092'),
+(1384, 'G27', 'CIGARRILLOS NACIONALES N', NULL, '', '2016-03-19', '2016-03-19', 'G27-210', 'G27S210'),
+(1385, 'G28', 'REFRESCOS N', NULL, '', '2016-03-19', '2016-03-19', 'G28-166', 'G28S166'),
+(1386, 'G29', 'FORTIPLATANO N', NULL, '', '2016-03-19', '2016-03-19', 'G29-117', 'G29S117'),
+(1387, 'G29', 'FORTIMAIZ N', NULL, '', '2016-03-19', '2016-03-19', 'G29-118', 'G29S118'),
+(1388, 'G29', 'MALTEADA,CEREALES N', NULL, '', '2016-03-19', '2016-03-19', 'G29-119', 'G29S119'),
+(1389, 'G30', 'OBSEQUIOS N', NULL, '', '2016-03-19', '2016-03-19', 'G30-019', 'G30S019'),
+(1390, 'G31', 'OBSEQUIOS N', NULL, '', '2016-03-19', '2016-03-19', 'G31-019', 'G31S019'),
+(1391, 'G31', 'OBSEQUIOS N', NULL, '', '2016-03-19', '2016-03-19', 'G31-092', 'G31S092'),
+(1392, 'G31', 'SCHICK N', NULL, '', '2016-03-19', '2016-03-19', 'G31-266', 'G31S266'),
+(1393, 'G31', 'ENERGIZER N', NULL, '', '2016-03-19', '2016-03-19', 'G31-267', 'G31S267'),
+(1394, 'G31', 'LINTERNAS N', NULL, '', '2016-03-19', '2016-03-19', 'G31-364', 'G31S364'),
+(1395, 'G32', 'OBSEQUIOS N', NULL, '', '2016-03-19', '2016-03-19', 'G32-019', 'G32S019'),
+(1396, 'G32', 'GALLETAS N', NULL, '', '2016-03-19', '2016-03-19', 'G32-263', 'G32S263'),
+(1397, 'G33', 'RIOPAILA N', NULL, '', '2016-03-19', '2016-03-19', 'G33-083', 'G33S083'),
+(1398, 'G50', 'RECARGA VIRTUAL N', NULL, '', '2016-03-19', '2016-03-19', 'G50-249', 'G50S249'),
+(1399, 'G50', 'RECARGAS MOVILWAY N', NULL, '', '2016-03-19', '2016-03-19', 'G50-380', 'G50S380'),
+(1400, 'G51', 'SIN DEFINIR N', NULL, '', '2016-03-19', '2016-03-19', 'G51-S000', 'G51S000'),
+(1401, 'G51', 'PRODUCTOS COMCEL N', NULL, '', '2016-03-19', '2016-03-19', 'G51-S250', 'G51S250'),
+(1402, 'G51', 'VENTA MINUTOS N', NULL, '', '2016-03-19', '2016-03-19', 'G51-S320', 'G51S320'),
+(1403, 'G52', 'TARJETAS TIGO N', NULL, '', '2016-03-19', '2016-03-19', 'G52-251', 'G52S251'),
+(1404, 'G53', 'MOVISTAR N', NULL, '', '2016-03-19', '2016-03-19', 'G53-252', 'G53S252'),
+(1405, 'G54', 'TELECOM N', NULL, '', '2016-03-19', '2016-03-19', 'G54-253', 'G54S253'),
+(1406, 'G55', 'AVANTEL N', NULL, '', '2016-03-19', '2016-03-19', 'G55-254', 'G55S254'),
+(1407, 'G57', 'SIMCARD UFF N', NULL, '', '2016-03-19', '2016-03-19', 'G57-264', 'G57S264'),
+(1408, '42', 'OBSEQUIOS N', NULL, '', '2016-03-19', '2016-03-19', 'G58-019', 'G58S019'),
+(1409, '42', 'OBSEQUIOS N', NULL, '', '2016-03-19', '2016-03-19', 'G58-092', 'G58S092'),
+(1410, '42', 'GRANOS N', NULL, '', '2016-03-19', '2016-03-19', 'G58-269', 'G58S269'),
+(1411, '42', 'ARROZ LA HUERTA N', NULL, '', '2016-03-19', '2016-03-19', 'G58-280', 'G58S280'),
+(1412, 'G59', 'GRANOS N', NULL, '', '2016-03-19', '2016-03-19', 'G59-269', 'G59S269'),
+(1413, 'G60', 'OBSEQUIOS N', NULL, '', '2016-03-19', '2016-03-19', 'G60-092', 'G60S092'),
+(1414, 'G60', 'BABYSEC N', NULL, '', '2016-03-19', '2016-03-19', 'G60-270', 'G60S270'),
+(1415, 'G60', 'LADYSOFT N', NULL, '', '2016-03-19', '2016-03-19', 'G60-271', 'G60S271'),
+(1416, 'G60', 'SERVILLETA-COCINA N', NULL, '', '2016-03-19', '2016-03-19', 'G60-272', 'G60S272'),
+(1417, 'G60', 'LINEA NOBLE N', NULL, '', '2016-03-19', '2016-03-19', 'G60-273', 'G60S273'),
+(1418, 'G60', 'LINEA ELITE N', NULL, '', '2016-03-19', '2016-03-19', 'G60-274', 'G60S274'),
+(1419, 'G60', 'COTIDIAN N', NULL, '', '2016-03-19', '2016-03-19', 'G60-275', 'G60S275'),
+(1420, 'G60', 'ULTRA *1 N', NULL, '', '2016-03-19', '2016-03-19', 'G60-360', 'G60S360'),
+(1421, 'G60', 'DUO AMARILLO N', NULL, '', '2016-03-19', '2016-03-19', 'G60-361', 'G60S361'),
+(1422, 'G60', 'DUO ROJO N', NULL, '', '2016-03-19', '2016-03-19', 'G60-362', 'G60S362'),
+(1423, 'G60', 'ELITE*1 N', NULL, '', '2016-03-19', '2016-03-19', 'G60-363', 'G60S363'),
+(1424, 'G61', 'GRANOS N', NULL, '', '2016-03-19', '2016-03-19', 'G61-269', 'G61S269'),
+(1425, 'G62', 'ARROZ LA HUERTA N', NULL, '', '2016-03-19', '2016-03-19', 'G62-280', 'G62S280'),
+(1426, 'G74', 'ARROZ ZULIA N', NULL, '', '2016-03-19', '2016-03-19', 'G74-321', 'G74S321'),
+(1427, 'G74', 'ARROZ ORO N', NULL, '', '2016-03-19', '2016-03-19', 'G74-322', 'G74S322'),
+(1428, 'G74', 'ARROZ CRISTAL N', NULL, '', '2016-03-19', '2016-03-19', 'G74-323', 'G74S323'),
+(1429, 'G75', 'ARROZ ROA N', NULL, '', '2016-03-19', '2016-03-19', 'G75-301', 'G75S301'),
+(1430, 'G75', 'ARROZ ESPECIALIDADES N', NULL, '', '2016-03-19', '2016-03-19', 'G75-302', 'G75S302'),
+(1431, 'G75', 'SOPAS ROA N', NULL, '', '2016-03-19', '2016-03-19', 'G75-303', 'G75S303'),
+(1432, 'G75', 'CEREAL KRUNCHOOS N', NULL, '', '2016-03-19', '2016-03-19', 'G75-304', 'G75S304'),
+(1433, 'G75', 'APANA ROA N', NULL, '', '2016-03-19', '2016-03-19', 'G75-305', 'G75S305'),
+(1434, 'G75', 'ARROZ CON LECHE N', NULL, '', '2016-03-19', '2016-03-19', 'G75-306', 'G75S306'),
+(1435, 'G75', 'ARROZ FLOR HUILA N', NULL, '', '2016-03-19', '2016-03-19', 'G75-307', 'G75S307'),
+(1436, 'G76', 'SIN DEFINIR N', NULL, '', '2016-03-19', '2016-03-19', 'G76-000', 'G76S000'),
+(1437, 'G76', 'RECARGA VIRTUAL N', NULL, '', '2016-03-19', '2016-03-19', 'G76-249', 'G76S249'),
+(1438, 'G76', 'MOVISTAR N', NULL, '', '2016-03-19', '2016-03-19', 'G76-252', 'G76S252'),
+(1439, 'G77', 'OBSEQUIOS N', NULL, '', '2016-03-19', '2016-03-19', 'G77-092', 'G77S092'),
+(1440, 'G77', 'ARROZ FLOR HUILA N', NULL, '', '2016-03-19', '2016-03-19', 'G77-307', 'G77S307'),
+(1441, 'G78', 'ATUN ABRE FACIL N', NULL, '', '2016-03-19', '2016-03-19', 'G78-282', 'G78S282'),
+(1442, 'G79', 'TRANZA PARTICIPACION N', NULL, '', '2016-03-19', '2016-03-19', 'G79-313', 'G79S313'),
+(1443, 'G80', 'FULL CARGA PARTICIPACION N', NULL, '', '2016-03-19', '2016-03-19', 'G80-314', 'G80S314'),
+(1444, 'G81', 'CONEXRED PARTICIPACION N', NULL, '', '2016-03-19', '2016-03-19', 'G81-315', 'G81S315'),
+(1445, 'G82', 'GOMITAS N', NULL, '', '2016-03-19', '2016-03-19', 'G82-325', 'G82S325'),
+(1446, 'G83', 'COMPOTAS HEINZ N', NULL, '', '2016-03-19', '2016-03-19', 'G83-326', 'G83S326'),
+(1447, 'G83', 'SALSA DE TOMATE HEINZ N', NULL, '', '2016-03-19', '2016-03-19', 'G83-333', 'G83S333'),
+(1448, 'G83', 'ADEREZOS HEINZ N', NULL, '', '2016-03-19', '2016-03-19', 'G83-334', 'G83S334'),
+(1449, 'G84', 'GASEOSA ONE KOLA N', NULL, '', '2016-03-19', '2016-03-19', 'G84-345', 'G84S345'),
+(1450, 'G84', 'ALOE JANNA N', NULL, '', '2016-03-19', '2016-03-19', 'G84-346', 'G84S346'),
+(1451, 'G84', 'TE GENESIS N', NULL, '', '2016-03-19', '2016-03-19', 'G84-347', 'G84S347'),
+(1452, 'G84', 'AGUA GENESIS N', NULL, '', '2016-03-19', '2016-03-19', 'G84-348', 'G84S348'),
+(1453, 'G85', 'VENTA MINUTOS N', NULL, '', '2016-03-19', '2016-03-19', 'G85-320', 'G85S320'),
+(1454, 'G86', 'COMPOTAS HEINZ N', NULL, '', '2016-03-19', '2016-03-19', 'G86-326', 'G86S326'),
+(1455, 'G86', 'OBSEQUIOS CORBETA N', NULL, '', '2016-03-19', '2016-03-19', 'G86-338', 'G86S338'),
+(1456, 'G87', 'NIVEA BODY N', NULL, '', '2016-03-19', '2016-03-19', 'G87-365', 'G87S365'),
+(1457, 'G87', 'NIVEA VISAGE N', NULL, '', '2016-03-19', '2016-03-19', 'G87-366', 'G87S366'),
+(1458, 'G87', 'NIVEA DEO N', NULL, '', '2016-03-19', '2016-03-19', 'G87-367', 'G87S367'),
+(1459, 'G87', 'NIVEA INTIMO N', NULL, '', '2016-03-19', '2016-03-19', 'G87-368', 'G87S368'),
+(1460, 'G87', 'NIVEA SUN N', NULL, '', '2016-03-19', '2016-03-19', 'G87-369', 'G87S369'),
+(1461, 'G87', 'NIVEA LIPCARE N', NULL, '', '2016-03-19', '2016-03-19', 'G87-370', 'G87S370'),
+(1462, 'G87', 'NIVEA HANDS N', NULL, '', '2016-03-19', '2016-03-19', 'G87-371', 'G87S371'),
+(1463, 'G87', 'NIVEA CREME N', NULL, '', '2016-03-19', '2016-03-19', 'G87-372', 'G87S372'),
+(1464, 'G87', 'NIVEA JABONES N', NULL, '', '2016-03-19', '2016-03-19', 'G87-373', 'G87S373'),
+(1465, 'G87', 'NIVEA MEN N', NULL, '', '2016-03-19', '2016-03-19', 'G87-374', 'G87S374'),
+(1466, 'G87', 'CONDONES DUO N', NULL, '', '2016-03-19', '2016-03-19', 'G87-375', 'G87S375'),
+(1467, 'G87', 'HANSPLAST N', NULL, '', '2016-03-19', '2016-03-19', 'G87-376', 'G87S376'),
+(1468, 'G88', 'ACEITES CARIBE N', NULL, '', '2016-03-19', '2016-03-19', 'G88-378', 'G88S378'),
+(1469, 'G88', 'JABON CLARO N', NULL, '', '2016-03-19', '2016-03-19', 'G88-379', 'G88S379'),
+(1470, 'G89', 'INDULECHE N', NULL, '', '2016-03-19', '2016-03-19', 'G89-382', 'G89S382');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ciudades`
+--
+
+CREATE TABLE IF NOT EXISTS `ciudades` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ciu_nom` varchar(200) COLLATE utf8_spanish2_ci NOT NULL,
+  `created_at` date NOT NULL,
+  `updated_at` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=5 ;
+
+--
+-- Volcado de datos para la tabla `ciudades`
+--
+
+INSERT INTO `ciudades` (`id`, `ciu_nom`, `created_at`, `updated_at`) VALUES
+(1, 'Bucaramanga', '0000-00-00', '0000-00-00'),
+(2, 'Piedecuesta', '0000-00-00', '0000-00-00'),
+(3, 'Girón', '0000-00-00', '0000-00-00'),
+(4, 'Floridablanca', '0000-00-00', '0000-00-00');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `compra`
+--
+
+CREATE TABLE IF NOT EXISTS `compra` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `totalCart` int(11) NOT NULL,
+  `total_compra` int(11) NOT NULL,
+  `num_items` int(11) NOT NULL,
+  `tipo_compra` int(11) NOT NULL,
+  `vlr_envio` int(11) NOT NULL,
+  `estado_id` int(11) NOT NULL DEFAULT '1',
+  `conf` tinyint(1) NOT NULL DEFAULT '0',
+  `created_at` date NOT NULL,
+  `updated_at` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=16 ;
+
+--
+-- Volcado de datos para la tabla `compra`
+--
+
+INSERT INTO `compra` (`id`, `user_id`, `totalCart`, `total_compra`, `num_items`, `tipo_compra`, `vlr_envio`, `estado_id`, `conf`, `created_at`, `updated_at`) VALUES
+(8, 30, 442156, 442156, 29, 2, 1000, 1, 0, '2016-03-06', '2016-03-18'),
+(9, 28, 19998, 19998, 10, 2, 1000, 1, 0, '2016-03-18', '2016-03-18'),
+(10, 28, 104000, 104000, 15, 1, 0, 1, 0, '2016-03-18', '2016-03-18'),
+(11, 28, 22398, 22398, 5, 2, 5000, 1, 0, '2016-03-18', '2016-03-18'),
+(12, 28, 15999, 15999, 4, 2, 1000, 1, 0, '2016-03-18', '2016-03-18'),
+(13, 28, 311497, 311497, 5, 0, 0, 1, 0, '2016-03-19', '2016-03-19'),
+(14, 28, 39997, 39997, 20, 2, 1000, 1, 0, '2016-03-19', '2016-03-19'),
+(15, 28, 183754, 183754, 21, 1, 0, 1, 0, '2016-03-19', '2016-03-19');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `compra_items`
+--
+
+CREATE TABLE IF NOT EXISTS `compra_items` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `compra_id` int(11) NOT NULL,
+  `nombre` varchar(250) COLLATE utf8_spanish2_ci NOT NULL,
+  `image` varchar(250) COLLATE utf8_spanish2_ci NOT NULL,
+  `valor_unitario` int(11) NOT NULL,
+  `iva` int(11) DEFAULT NULL,
+  `cantidad` int(11) NOT NULL,
+  `valor_total` int(11) NOT NULL,
+  `id_producto` int(11) NOT NULL,
+  `created_at` date NOT NULL,
+  `updated_at` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=26 ;
+
+--
+-- Volcado de datos para la tabla `compra_items`
+--
+
+INSERT INTO `compra_items` (`id`, `compra_id`, `nombre`, `image`, `valor_unitario`, `iva`, `cantidad`, `valor_total`, `id_producto`, `created_at`, `updated_at`) VALUES
+(9, 8, 'BOMBILLO PANEL LED REDONDO 12W 6400K', 'img/Mantis/def.png', 21769, 16, 7, 176764, 8627, '2016-03-06', '2016-03-06'),
+(10, 8, 'MASILLA DUREPOXI RALLI 50 GRAMOS', 'http://192.168.1.56:8080/MantisWeb20erpappweb22/PublicTempStorage/multimedia/MASILLA_3f608753135043daa7d97de44cb38c20.jpg', 1741, 16, 12, 24235, 8562, '2016-03-06', '2016-03-06'),
+(11, 8, 'HD ALMENDRO OSCURO 43.2*43.2-2', 'img/Mantis/def.png', 15717, 16, 5, 91159, 9877, '2016-03-06', '2016-03-06'),
+(12, 8, 'HARINA PAN INTREGRAL X500GR', 'img/Mantis/def.png', 28571, 5, 5, 149998, 10654, '2016-03-18', '2016-03-18'),
+(13, 9, 'MASILLA DUREPOXI RALLI 50 GRAMOS', 'http://192.168.1.56:8080/MantisWeb20erpappweb22/PublicTempStorage/multimedia/MASILLA_3f608753135043daa7d97de44cb38c20.jpg', 1724, 16, 10, 19998, 12155, '2016-03-18', '2016-03-18'),
+(14, 10, 'ESMALTE SAPOLIN CAOBA 1/32', 'img/Mantis/def.png', 2931, 16, 5, 17000, 12276, '2016-03-18', '2016-03-18'),
+(15, 10, 'ANTICORROSIVO BLER BLANCO 1/4', 'img/Mantis/def.png', 7500, 16, 10, 87000, 12308, '2016-03-18', '2016-03-18'),
+(16, 11, 'AEROSOL TOOLCRAFT NARANJA 400 ML', 'img/Mantis/def.png', 3448, 16, 4, 15999, 12292, '2016-03-18', '2016-03-18'),
+(17, 11, 'DESAGUE SENCILLO SIN REBOSE CROMO', 'http://192.168.1.56:8080/MantisWeb20erpappweb22/PublicTempStorage/multimedia/img1_5738fe14848c4a899f99956834430767.jpg', 5517, 16, 1, 6400, 12161, '2016-03-18', '2016-03-18'),
+(18, 12, 'SIFON BOTELLA NEUTRO.', 'http://192.168.1.56:8080/MantisWeb20erpappweb22/PublicTempStorage/multimedia/sifon_d2e5c3125dbd4cc9a4e89dcc2a14e683.jpg', 3448, 16, 4, 15999, 12162, '2016-03-18', '2016-03-18'),
+(19, 13, 'ESMALTE SAPOLIN CAOBA 1/8', 'img/Mantis/def.png', 7844, 16, 2, 18198, 12263, '2016-03-19', '2016-03-19'),
+(20, 13, 'ESMALTE SAPOLIN VERDE ESMERALDA 1/32', 'img/Mantis/def.png', 2931, 16, 1, 3400, 12280, '2016-03-19', '2016-03-19'),
+(21, 13, 'MUEBLE BORGONA PARA LAVAMANOS ROBLE CLARO REF 00027', 'img/Mantis/def.png', 236982, 16, 1, 274899, 12153, '2016-03-19', '2016-03-19'),
+(22, 13, 'EMULSION ASFALTICA HIPERMEGA', 'img/Mantis/def.png', 12931, 16, 1, 15000, 12345, '2016-03-19', '2016-03-19'),
+(23, 14, 'MASILLA DUREPOXI RALLI 50 GRAMOS', 'http://192.168.1.56:8080/MantisWeb20erpappweb22/PublicTempStorage/multimedia/MASILLA_3f608753135043daa7d97de44cb38c20.jpg', 1724, 16, 20, 39997, 12155, '2016-03-19', '2016-03-19'),
+(24, 15, 'REPUESTO LADY PROTECTOR*3CART', 'img/Mantis/def.png', 7482, 16, 20, 173582, 12629, '2016-03-19', '2016-03-19'),
+(25, 15, 'F.FRUTIÑO GUAYABA NARANJA*2LTS*24*20', 'img/Mantis/def.png', 8769, 16, 1, 10172, 12558, '2016-03-19', '2016-03-19');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `conn`
+--
+
+CREATE TABLE IF NOT EXISTS `conn` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ip` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
+  `db` varchar(100) COLLATE utf8_spanish2_ci NOT NULL,
+  `user` varchar(100) COLLATE utf8_spanish2_ci NOT NULL,
+  `pass` varchar(100) COLLATE utf8_spanish2_ci NOT NULL,
+  `urlImg` varchar(250) COLLATE utf8_spanish2_ci NOT NULL,
+  `created_at` date NOT NULL,
+  `updated_at` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=3 ;
+
+--
+-- Volcado de datos para la tabla `conn`
+--
+
+INSERT INTO `conn` (`id`, `ip`, `db`, `user`, `pass`, `urlImg`, `created_at`, `updated_at`) VALUES
+(1, '192.168.1.56', 'beteli', 'sa', 'Somic321', 'http://192.168.1.56:8080/MantisWeb20apps/PublicTempStorage/multimedia/', '2015-10-29', '2016-03-19'),
+(2, 'Eder-pc', 'erpweb', 'sa', 'Somic321', 'http://localhost:8080/MantisWeb20erpappweb/PublicTempStorage/multimedia/', '2015-10-31', '2015-10-31');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `departamento`
+--
+
+CREATE TABLE IF NOT EXISTS `departamento` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `DepNom` varchar(150) COLLATE utf8_spanish2_ci NOT NULL,
+  `created_at` date NOT NULL,
+  `updated_at` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=100 ;
+
+--
+-- Volcado de datos para la tabla `departamento`
+--
+
+INSERT INTO `departamento` (`id`, `DepNom`, `created_at`, `updated_at`) VALUES
+(5, 'Antioquia', '2015-07-25', '2015-07-25'),
+(8, 'Atlantico', '2015-07-25', '2015-07-25'),
+(11, 'Bogota', '2015-07-25', '2015-07-25'),
+(13, 'Bolivar', '2015-07-25', '2015-07-25'),
+(15, 'Boyaca ', '2015-07-25', '2015-07-25'),
+(17, 'Caldas', '2015-07-25', '2015-07-25'),
+(18, 'Caqueta ', '2015-07-25', '2015-07-25'),
+(19, 'Cauca', '2015-07-25', '2015-07-25'),
+(20, 'Cesar', '2015-07-25', '2015-07-25'),
+(23, 'Cordoba', '2015-07-25', '2015-07-25'),
+(25, 'Cundinamarca', '2015-07-25', '2015-07-25'),
+(27, 'Choco', '2015-07-25', '2015-07-25'),
+(35, 'Guangzhou', '2015-07-25', '2015-07-25'),
+(41, 'Huila', '2015-07-25', '2015-07-25'),
+(44, 'La Guajira', '2015-07-25', '2015-07-25'),
+(47, 'Magdalena', '2015-07-25', '2015-07-25'),
+(50, 'Meta', '2015-07-25', '2015-07-25'),
+(52, 'Narino', '2015-07-25', '2015-07-25'),
+(54, 'Norte de Santander', '2015-07-25', '2015-07-25'),
+(63, 'Quindio', '2015-07-25', '2015-07-25'),
+(66, 'Risaralda', '2015-07-25', '2015-07-25'),
+(68, 'Santander', '2015-07-25', '2015-07-25'),
+(70, 'Sucre', '2015-07-25', '2015-07-25'),
+(73, 'Tolima', '2015-07-25', '2015-07-25'),
+(76, 'Valle del Cauca', '2015-07-25', '2015-07-25'),
+(81, 'Arauca', '2015-07-25', '2015-07-25'),
+(85, 'Casanare', '2015-07-25', '2015-07-25'),
+(86, 'Putumayo', '2015-07-25', '2015-07-25'),
+(88, 'San Andres', '2015-07-25', '2015-07-25'),
+(91, 'Amazonas', '2015-07-25', '2015-07-25'),
+(94, 'Guain', '2015-07-25', '2015-07-25'),
+(95, 'Guaviare', '2015-07-25', '2015-07-25'),
+(97, 'Vaupes', '2015-07-25', '2015-07-25'),
+(99, 'Vichada', '2015-07-25', '2015-07-25');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `dias`
+--
+
+CREATE TABLE IF NOT EXISTS `dias` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `dia_nom` varchar(200) COLLATE utf8_spanish2_ci NOT NULL,
+  `created_at` date NOT NULL,
+  `updated_at` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=8 ;
+
+--
+-- Volcado de datos para la tabla `dias`
+--
+
+INSERT INTO `dias` (`id`, `dia_nom`, `created_at`, `updated_at`) VALUES
+(1, 'Lunes', '0000-00-00', '0000-00-00'),
+(2, 'Martes', '0000-00-00', '0000-00-00'),
+(3, 'Miercoles', '0000-00-00', '0000-00-00'),
+(4, 'Jueves', '0000-00-00', '0000-00-00'),
+(5, 'Viernes', '0000-00-00', '0000-00-00'),
+(6, 'Sabado', '0000-00-00', '0000-00-00'),
+(7, 'Domingo', '0000-00-00', '0000-00-00');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `dia_barrio`
+--
+
+CREATE TABLE IF NOT EXISTS `dia_barrio` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `dia_id` int(11) NOT NULL,
+  `barrio_id` int(11) NOT NULL,
+  `created_at` date NOT NULL,
+  `updated_at` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=76 ;
+
+--
+-- Volcado de datos para la tabla `dia_barrio`
+--
+
+INSERT INTO `dia_barrio` (`id`, `dia_id`, `barrio_id`, `created_at`, `updated_at`) VALUES
+(66, 1, 1, '2015-03-24', '2015-03-24'),
+(67, 2, 2, '2015-03-24', '2015-03-24'),
+(68, 3, 3, '2015-03-24', '2015-03-24'),
+(69, 4, 4, '2015-03-24', '2015-03-24'),
+(70, 5, 5, '2015-03-24', '2015-03-24'),
+(71, 6, 6, '2015-03-24', '2015-03-24'),
+(72, 7, 5, '2015-03-24', '2015-03-24'),
+(73, 6, 1, '2015-06-13', '2015-06-13'),
+(74, 4, 2, '2015-06-23', '2015-06-23'),
+(75, 4, 3, '2015-06-23', '2015-06-23');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `empresas`
+--
+
+CREATE TABLE IF NOT EXISTS `empresas` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(5) NOT NULL,
+  `nombre_publico` varchar(200) COLLATE utf8_spanish2_ci NOT NULL,
+  `razon_social` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `direccion` varchar(250) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `direccion_maps` varchar(250) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `active` int(2) NOT NULL DEFAULT '1',
+  `latitude` double DEFAULT NULL,
+  `longitude` double DEFAULT NULL,
+  `tema` int(2) NOT NULL DEFAULT '1',
+  `color_tema` int(2) DEFAULT '1',
+  `descripcion` varchar(200) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `logo` varchar(250) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `telefono` varchar(20) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `created_at` date NOT NULL,
+  `updated_at` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=6 ;
+
+--
+-- Volcado de datos para la tabla `empresas`
+--
+
+INSERT INTO `empresas` (`id`, `user_id`, `nombre_publico`, `razon_social`, `direccion`, `direccion_maps`, `active`, `latitude`, `longitude`, `tema`, `color_tema`, `descripcion`, `logo`, `telefono`, `created_at`, `updated_at`) VALUES
+(1, 1, 'ede-alvarez', NULL, NULL, NULL, 1, NULL, NULL, 1, 1, NULL, 'img/empresas/logos/default.jpg', NULL, '2014-11-28', '2014-11-28'),
+(2, 28, '830062e53cdc0644738b5e98a0f83b02', NULL, NULL, NULL, 1, NULL, NULL, 1, 1, '830062e53cdc0644738b5e98a0f83b02', NULL, NULL, '2016-03-05', '2016-03-05'),
+(3, 28, '306502c42daee0cecc8459de47fc958a', NULL, NULL, NULL, 1, NULL, NULL, 1, 1, '306502c42daee0cecc8459de47fc958a', NULL, NULL, '2016-03-05', '2016-03-05'),
+(4, 28, 'e85ad8c3efd68f659c1c6c3df326f21c', NULL, NULL, NULL, 1, NULL, NULL, 1, 1, 'e85ad8c3efd68f659c1c6c3df326f21c', NULL, NULL, '2016-03-05', '2016-03-05'),
+(5, 5, 'e1eeefc917bc4d3c1abb0dd88f17c6a1', NULL, NULL, NULL, 1, NULL, NULL, 1, 1, '10097.80', NULL, NULL, '2016-03-05', '2016-03-05');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `estados`
+--
+
+CREATE TABLE IF NOT EXISTS `estados` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nom_est` varchar(200) COLLATE utf8_spanish2_ci NOT NULL,
+  `created_at` date NOT NULL,
+  `updated_at` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=5 ;
+
+--
+-- Volcado de datos para la tabla `estados`
+--
+
+INSERT INTO `estados` (`id`, `nom_est`, `created_at`, `updated_at`) VALUES
+(1, 'Pendiente de Confirmación', '0000-00-00', '0000-00-00'),
+(2, 'Confirmado', '0000-00-00', '0000-00-00'),
+(3, 'En reparto', '0000-00-00', '0000-00-00'),
+(4, 'Entregado', '0000-00-00', '0000-00-00');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `inventariofamilia`
+--
+
+CREATE TABLE IF NOT EXISTS `inventariofamilia` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `InvFamCod` varchar(20) COLLATE utf8_spanish2_ci NOT NULL,
+  `InvFamId` varchar(20) COLLATE utf8_spanish2_ci NOT NULL,
+  `InvFamNom` varchar(100) COLLATE utf8_spanish2_ci NOT NULL,
+  `fam_slug` varchar(200) COLLATE utf8_spanish2_ci NOT NULL,
+  `fam_InvSubGruCod` varchar(20) COLLATE utf8_spanish2_ci NOT NULL,
+  `created_at` date NOT NULL,
+  `updated_at` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=5821 ;
+
+--
+-- Volcado de datos para la tabla `inventariofamilia`
+--
+
+INSERT INTO `inventariofamilia` (`id`, `InvFamCod`, `InvFamId`, `InvFamNom`, `fam_slug`, `fam_InvSubGruCod`, `created_at`, `updated_at`) VALUES
+(5513, '166', '277-27702', 'COMERCIALIZACION                                  ', 'comercializacion', '165             ', '2016-03-19', '2016-03-19'),
+(5514, '177', '35-02-65', 'COMERCIALIZACION', 'comercializacion', '176', '2016-03-19', '2016-03-19'),
+(5515, '178', 'G51-03-02', 'COMERCIALIZACION', 'comercializacion', '177', '2016-03-19', '2016-03-19'),
+(5516, '179', 'G90-001-001', 'COMERCIALIZACION', 'comercializacion', '178', '2016-03-19', '2016-03-19'),
+(5517, '180', 'G92-01-01', 'CAJAS CORRUGADAS', 'cajas-corrugadas', '179', '2016-03-19', '2016-03-19'),
+(5518, '181', 'G91-01-01', 'ETIQUETAS', 'etiquetas', '180', '2016-03-19', '2016-03-19'),
+(5519, '182', '90-01-01', 'ARROZ', 'arroz', '181', '2016-03-19', '2016-03-19'),
+(5520, '304', 'G24-2-1', 'COMERCIALIZACION', 'comercializacion', '303', '2016-03-19', '2016-03-19'),
+(5521, '305', 'G36-01-001', 'COMERCIAliZACION', 'comercializacion', '304', '2016-03-19', '2016-03-19'),
+(5522, '306', 'G93-01-01', 'EMPAQUES', 'empaques', '305', '2016-03-19', '2016-03-19'),
+(5523, '307', 'G01-01-01', 'COMERCIALIZACION', 'comercializacion', '306', '2016-03-19', '2016-03-19'),
+(5524, '308', 'G09-01-01', 'HALOGENO', 'halogeno', '307', '2016-03-19', '2016-03-19'),
+(5525, '64', '35-123-64', 'SIN DEFINIR', 'sin-definir', '123', '2016-03-19', '2016-03-19'),
+(5526, '83', '49-100-83', 'COMERCIALIZACION', 'comercializacion', '100', '2016-03-19', '2016-03-19'),
+(5527, 'G00S001F02', 'G00-001-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G00S001', '2016-03-19', '2016-03-19'),
+(5528, 'G00S040F02', 'G00-040-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G00S040', '2016-03-19', '2016-03-19'),
+(5529, 'G00S047F02', 'G00-047-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G00S047', '2016-03-19', '2016-03-19'),
+(5530, 'G00S051F02', 'G00-051-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G00S051', '2016-03-19', '2016-03-19'),
+(5531, 'G00S133F02', 'G00-133-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G00S133', '2016-03-19', '2016-03-19'),
+(5532, 'G00S136F02', 'G00-136-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G00S136', '2016-03-19', '2016-03-19'),
+(5533, 'G00S145F02', 'G00-145-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G00S145', '2016-03-19', '2016-03-19'),
+(5534, 'G00S166F02', 'G00-166-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G00S166', '2016-03-19', '2016-03-19'),
+(5535, 'G00S199F02', 'G00-199-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G00S199', '2016-03-19', '2016-03-19'),
+(5536, 'G01S001F02', 'G01-001-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G01S001', '2016-03-19', '2016-03-19'),
+(5537, 'G01S002F02', 'G01-002-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G01S002', '2016-03-19', '2016-03-19'),
+(5538, 'G01S003F02', 'G01-003-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G01S003', '2016-03-19', '2016-03-19'),
+(5539, 'G01S004F02', 'G01-004-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G01S004', '2016-03-19', '2016-03-19'),
+(5540, 'G01S005F02', 'G01-005-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G01S005', '2016-03-19', '2016-03-19'),
+(5541, 'G01S006F02', 'G01-006-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G01S006', '2016-03-19', '2016-03-19'),
+(5542, 'G01S007F02', 'G01-007-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G01S007', '2016-03-19', '2016-03-19'),
+(5543, 'G01S008F02', 'G01-008-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G01S008', '2016-03-19', '2016-03-19'),
+(5544, 'G01S009F02', 'G01-009-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G01S009', '2016-03-19', '2016-03-19'),
+(5545, 'G01S010F02', 'G01-010-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G01S010', '2016-03-19', '2016-03-19'),
+(5546, 'G01S011F02', 'G01-011-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G01S011', '2016-03-19', '2016-03-19'),
+(5547, 'G01S012F02', 'G01-012-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G01S012', '2016-03-19', '2016-03-19'),
+(5548, 'G01S013F02', 'G01-013-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G01S013', '2016-03-19', '2016-03-19'),
+(5549, 'G01S014F02', 'G01-014-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G01S014', '2016-03-19', '2016-03-19'),
+(5550, 'G01S015F02', 'G01-015-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G01S015', '2016-03-19', '2016-03-19'),
+(5551, 'G01S016F02', 'G01-016-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G01S016', '2016-03-19', '2016-03-19'),
+(5552, 'G01S017F02', 'G01-017-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G01S017', '2016-03-19', '2016-03-19'),
+(5553, 'G01S018F02', 'G01-018-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G01S018', '2016-03-19', '2016-03-19'),
+(5554, 'G01S019F01', 'G01-019-01', 'MARCA REGISTRA                                    ', 'marca-registra', 'G01S019', '2016-03-19', '2016-03-19'),
+(5555, 'G01S019F02', 'G01-019-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G01S019', '2016-03-19', '2016-03-19'),
+(5556, 'G01S020F02', 'G01-020-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G01S020', '2016-03-19', '2016-03-19'),
+(5557, 'G01S021F02', 'G01-021-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G01S021', '2016-03-19', '2016-03-19'),
+(5558, 'G01S022F02', 'G01-022-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G01S022', '2016-03-19', '2016-03-19'),
+(5559, 'G01S023F02', 'G01-023-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G01S023', '2016-03-19', '2016-03-19'),
+(5560, 'G01S024F02', 'G01-024-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G01S024', '2016-03-19', '2016-03-19'),
+(5561, 'G01S025F02', 'G01-025-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G01S025', '2016-03-19', '2016-03-19'),
+(5562, 'G01S040F02', 'G01-040-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G01S040', '2016-03-19', '2016-03-19'),
+(5563, 'G01S092F02', 'G01-092-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G01S092', '2016-03-19', '2016-03-19'),
+(5564, 'G01S174F02', 'G01-174-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G01S174', '2016-03-19', '2016-03-19'),
+(5565, 'G01S276F02', 'G01-276-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G01S276', '2016-03-19', '2016-03-19'),
+(5566, 'G01S277F02', 'G01-277-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G01S277', '2016-03-19', '2016-03-19'),
+(5567, 'G01S278F02', 'G01-278-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G01S278', '2016-03-19', '2016-03-19'),
+(5568, 'G01S279F02', 'G01-279-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G01S279', '2016-03-19', '2016-03-19'),
+(5569, 'G01S308F02', 'G01-308-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G01S308', '2016-03-19', '2016-03-19'),
+(5570, 'G01S312F02', 'G01-312-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G01S312', '2016-03-19', '2016-03-19'),
+(5571, 'G01S324F02', 'G01-324-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G01S324', '2016-03-19', '2016-03-19'),
+(5572, 'G01S335F02', 'G01-335-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G01S335', '2016-03-19', '2016-03-19'),
+(5573, 'G01S336F02', 'G01-336-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G01S336', '2016-03-19', '2016-03-19'),
+(5574, 'G01S337F02', 'G01-337-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G01S337', '2016-03-19', '2016-03-19'),
+(5575, 'G01S351F02', 'G01-351-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G01S351', '2016-03-19', '2016-03-19'),
+(5576, 'G01S352F02', 'G01-352-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G01S352', '2016-03-19', '2016-03-19'),
+(5577, 'G01S353F02', 'G01-353-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G01S353', '2016-03-19', '2016-03-19'),
+(5578, 'G01S354F02', 'G01-354-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G01S354', '2016-03-19', '2016-03-19'),
+(5579, 'G01S355F02', 'G01-355-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G01S355', '2016-03-19', '2016-03-19'),
+(5580, 'G01S356F02', 'G01-356-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G01S356', '2016-03-19', '2016-03-19'),
+(5581, 'G01S357F02', 'G01-357-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G01S357', '2016-03-19', '2016-03-19'),
+(5582, 'G01S381F02', 'G01-381-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G01S381', '2016-03-19', '2016-03-19'),
+(5583, 'G02S019F02', 'G02-019-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G02S019', '2016-03-19', '2016-03-19'),
+(5584, 'G02S031F02', 'G02-031-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G02S031', '2016-03-19', '2016-03-19'),
+(5585, 'G02S032F02', 'G02-032-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G02S032', '2016-03-19', '2016-03-19'),
+(5586, 'G02S033F02', 'G02-033-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G02S033', '2016-03-19', '2016-03-19'),
+(5587, 'G02S034F02', 'G02-034-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G02S034', '2016-03-19', '2016-03-19'),
+(5588, 'G02S035F02', 'G02-035-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G02S035', '2016-03-19', '2016-03-19'),
+(5589, 'G02S036F02', 'G02-036-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G02S036', '2016-03-19', '2016-03-19'),
+(5590, 'G02S037F02', 'G02-037-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G02S037', '2016-03-19', '2016-03-19'),
+(5591, 'G02S038F02', 'G02-038-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G02S038', '2016-03-19', '2016-03-19'),
+(5592, 'G02S039F02', 'G02-039-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G02S039', '2016-03-19', '2016-03-19'),
+(5593, 'G02S040F02', 'G02-040-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G02S040', '2016-03-19', '2016-03-19'),
+(5594, 'G02S092F02', 'G02-092-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G02S092', '2016-03-19', '2016-03-19'),
+(5595, 'G03S046F02', 'G03-046-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G03S046', '2016-03-19', '2016-03-19'),
+(5596, 'G03S047F02', 'G03-047-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G03S047', '2016-03-19', '2016-03-19'),
+(5597, 'G03S048F02', 'G03-048-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G03S048', '2016-03-19', '2016-03-19'),
+(5598, 'G03S049F02', 'G03-049-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G03S049', '2016-03-19', '2016-03-19'),
+(5599, 'G03S050F02', 'G03-050-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G03S050', '2016-03-19', '2016-03-19'),
+(5600, 'G03S051F02', 'G03-051-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G03S051', '2016-03-19', '2016-03-19'),
+(5601, 'G03S092F02', 'G03-092-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G03S092', '2016-03-19', '2016-03-19'),
+(5602, 'G04S056F02', 'G04-056-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G04S056', '2016-03-19', '2016-03-19'),
+(5603, 'G04S057F02', 'G04-057-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G04S057', '2016-03-19', '2016-03-19'),
+(5604, 'G04S190F02', 'G04-190-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G04S190', '2016-03-19', '2016-03-19'),
+(5605, 'G04S263F02', 'G04-263-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G04S263', '2016-03-19', '2016-03-19'),
+(5606, 'G05S035F02', 'G05-035-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G05S035', '2016-03-19', '2016-03-19'),
+(5607, 'G05S061F02', 'G05-061-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G05S061', '2016-03-19', '2016-03-19'),
+(5608, 'G05S062F02', 'G05-062-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G05S062', '2016-03-19', '2016-03-19'),
+(5609, 'G05S063F02', 'G05-063-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G05S063', '2016-03-19', '2016-03-19'),
+(5610, 'G05S064F02', 'G05-064-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G05S064', '2016-03-19', '2016-03-19'),
+(5611, 'G05S065F02', 'G05-065-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G05S065', '2016-03-19', '2016-03-19'),
+(5612, 'G06S071F02', 'G06-071-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G06S071', '2016-03-19', '2016-03-19'),
+(5613, 'G06S072F02', 'G06-072-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G06S072', '2016-03-19', '2016-03-19'),
+(5614, 'G06S073F02', 'G06-073-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G06S073', '2016-03-19', '2016-03-19'),
+(5615, 'G07S062F02', 'G07-062-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G07S062', '2016-03-19', '2016-03-19'),
+(5616, 'G07S063F02', 'G07-063-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G07S063', '2016-03-19', '2016-03-19'),
+(5617, 'G07S064F02', 'G07-064-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G07S064', '2016-03-19', '2016-03-19'),
+(5618, 'G07S065F02', 'G07-065-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G07S065', '2016-03-19', '2016-03-19'),
+(5619, 'G07S076F02', 'G07-076-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G07S076', '2016-03-19', '2016-03-19'),
+(5620, 'G07S077F02', 'G07-077-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G07S077', '2016-03-19', '2016-03-19'),
+(5621, 'G07S078F02', 'G07-078-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G07S078', '2016-03-19', '2016-03-19'),
+(5622, 'G07S081F02', 'G07-081-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G07S081', '2016-03-19', '2016-03-19'),
+(5623, 'G07S359F02', 'G07-359-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G07S359', '2016-03-19', '2016-03-19'),
+(5624, 'G08S019F02', 'G08-019-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G08S019', '2016-03-19', '2016-03-19'),
+(5625, 'G08S086F02', 'G08-086-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G08S086', '2016-03-19', '2016-03-19'),
+(5626, 'G08S087F02', 'G08-087-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G08S087', '2016-03-19', '2016-03-19'),
+(5627, 'G08S088F02', 'G08-088-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G08S088', '2016-03-19', '2016-03-19'),
+(5628, 'G08S089F02', 'G08-089-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G08S089', '2016-03-19', '2016-03-19'),
+(5629, 'G08S090F02', 'G08-090-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G08S090', '2016-03-19', '2016-03-19'),
+(5630, 'G08S091F02', 'G08-091-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G08S091', '2016-03-19', '2016-03-19'),
+(5631, 'G08S092F02', 'G08-092-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G08S092', '2016-03-19', '2016-03-19'),
+(5632, 'G08S281F02', 'G08-281-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G08S281', '2016-03-19', '2016-03-19'),
+(5633, 'G08S316F02', 'G08-316-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G08S316', '2016-03-19', '2016-03-19'),
+(5634, 'G08S317F02', 'G08-317-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G08S317', '2016-03-19', '2016-03-19'),
+(5635, 'G08S318F02', 'G08-318-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G08S318', '2016-03-19', '2016-03-19'),
+(5636, 'G08S319F02', 'G08-319-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G08S319', '2016-03-19', '2016-03-19'),
+(5637, 'G08S358F02', 'G08-358-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G08S358', '2016-03-19', '2016-03-19'),
+(5638, 'G09S092F02', 'G09-092-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G09S092', '2016-03-19', '2016-03-19'),
+(5639, 'G09S096F02', 'G09-096-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G09S096', '2016-03-19', '2016-03-19'),
+(5640, 'G09S097F02', 'G09-097-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G09S097', '2016-03-19', '2016-03-19'),
+(5641, 'G09S098F02', 'G09-098-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G09S098', '2016-03-19', '2016-03-19'),
+(5642, 'G09S099F02', 'G09-099-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G09S099', '2016-03-19', '2016-03-19'),
+(5643, 'G09S100F02', 'G09-100-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G09S100', '2016-03-19', '2016-03-19'),
+(5644, 'G09S101F02', 'G09-101-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G09S101', '2016-03-19', '2016-03-19'),
+(5645, 'G09S102F02', 'G09-102-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G09S102', '2016-03-19', '2016-03-19'),
+(5646, 'G09S103F02', 'G09-103-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G09S103', '2016-03-19', '2016-03-19'),
+(5647, 'G09S104F02', 'G09-104-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G09S104', '2016-03-19', '2016-03-19'),
+(5648, 'G09S109F02', 'G09-109-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G09S109', '2016-03-19', '2016-03-19'),
+(5649, 'G09S261F02', 'G09-261-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G09S261', '2016-03-19', '2016-03-19'),
+(5650, 'G09S262F02', 'G09-262-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G09S262', '2016-03-19', '2016-03-19'),
+(5651, 'G09S310F02', 'G09-310-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G09S310', '2016-03-19', '2016-03-19'),
+(5652, 'G09S327F02', 'G09-327-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G09S327', '2016-03-19', '2016-03-19'),
+(5653, 'G09S329F02', 'G09-329-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G09S329', '2016-03-19', '2016-03-19'),
+(5654, 'G09S330F02', 'G09-330-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G09S330', '2016-03-19', '2016-03-19'),
+(5655, 'G09S331F02', 'G09-331-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G09S331', '2016-03-19', '2016-03-19'),
+(5656, 'G09S332F02', 'G09-332-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G09S332', '2016-03-19', '2016-03-19'),
+(5657, 'G09S339F02', 'G09-339-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G09S339', '2016-03-19', '2016-03-19'),
+(5658, 'G09S340F02', 'G09-340-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G09S340', '2016-03-19', '2016-03-19'),
+(5659, 'G09S341F02', 'G09-341-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G09S341', '2016-03-19', '2016-03-19'),
+(5660, 'G09S342F02', 'G09-342-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G09S342', '2016-03-19', '2016-03-19'),
+(5661, 'G09S343F02', 'G09-343-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G09S343', '2016-03-19', '2016-03-19'),
+(5662, 'G09S344F02', 'G09-344-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G09S344', '2016-03-19', '2016-03-19'),
+(5663, 'G10S092F02', 'G10-092-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G10S092', '2016-03-19', '2016-03-19'),
+(5664, 'G10S106F02', 'G10-106-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G10S106', '2016-03-19', '2016-03-19'),
+(5665, 'G10S107F02', 'G10-107-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G10S107', '2016-03-19', '2016-03-19'),
+(5666, 'G10S108F02', 'G10-108-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G10S108', '2016-03-19', '2016-03-19'),
+(5667, 'G10S109F02', 'G10-109-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G10S109', '2016-03-19', '2016-03-19'),
+(5668, 'G10S111F02', 'G10-111-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G10S111', '2016-03-19', '2016-03-19'),
+(5669, 'G11S019F02', 'G11-019-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G11S019', '2016-03-19', '2016-03-19'),
+(5670, 'G11S092F02', 'G11-092-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G11S092', '2016-03-19', '2016-03-19'),
+(5671, 'G11S110F02', 'G11-110-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G11S110', '2016-03-19', '2016-03-19'),
+(5672, 'G11S111F02', 'G11-111-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G11S111', '2016-03-19', '2016-03-19'),
+(5673, 'G11S265F02', 'G11-265-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G11S265', '2016-03-19', '2016-03-19'),
+(5674, 'G12S116F02', 'G12-116-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G12S116', '2016-03-19', '2016-03-19'),
+(5675, 'G12S117F02', 'G12-117-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G12S117', '2016-03-19', '2016-03-19'),
+(5676, 'G12S118F02', 'G12-118-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G12S118', '2016-03-19', '2016-03-19'),
+(5677, 'G12S119F02', 'G12-119-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G12S119', '2016-03-19', '2016-03-19'),
+(5678, 'G13S125F02', 'G13-125-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G13S125', '2016-03-19', '2016-03-19'),
+(5679, 'G13S126F02', 'G13-126-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G13S126', '2016-03-19', '2016-03-19'),
+(5680, 'G13S127F02', 'G13-127-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G13S127', '2016-03-19', '2016-03-19'),
+(5681, 'G13S128F02', 'G13-128-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G13S128', '2016-03-19', '2016-03-19'),
+(5682, 'G13S129F02', 'G13-129-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G13S129', '2016-03-19', '2016-03-19'),
+(5683, 'G13S130F02', 'G13-130-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G13S130', '2016-03-19', '2016-03-19'),
+(5684, 'G13S131F02', 'G13-131-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G13S131', '2016-03-19', '2016-03-19'),
+(5685, 'G13S132F02', 'G13-132-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G13S132', '2016-03-19', '2016-03-19'),
+(5686, 'G13S133F02', 'G13-133-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G13S133', '2016-03-19', '2016-03-19'),
+(5687, 'G14S136F02', 'G14-136-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G14S136', '2016-03-19', '2016-03-19'),
+(5688, 'G14S137F02', 'G14-137-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G14S137', '2016-03-19', '2016-03-19'),
+(5689, 'G15S140F02', 'G15-140-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G15S140', '2016-03-19', '2016-03-19'),
+(5690, 'G15S141F02', 'G15-141-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G15S141', '2016-03-19', '2016-03-19'),
+(5691, 'G16S145F02', 'G16-145-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G16S145', '2016-03-19', '2016-03-19'),
+(5692, 'G17S149F02', 'G17-149-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G17S149', '2016-03-19', '2016-03-19'),
+(5693, 'G18S155F02', 'G18-155-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G18S155', '2016-03-19', '2016-03-19'),
+(5694, 'G18S156F02', 'G18-156-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G18S156', '2016-03-19', '2016-03-19'),
+(5695, 'G18S157F02', 'G18-157-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G18S157', '2016-03-19', '2016-03-19'),
+(5696, 'G19S161F02', 'G19-161-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G19S161', '2016-03-19', '2016-03-19'),
+(5697, 'G20S164F02', 'G20-164-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G20S164', '2016-03-19', '2016-03-19'),
+(5698, 'G21S092F02', 'G21-092-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G21S092', '2016-03-19', '2016-03-19'),
+(5699, 'G21S166F02', 'G21-166-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G21S166', '2016-03-19', '2016-03-19'),
+(5700, 'G21S167F02', 'G21-167-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G21S167', '2016-03-19', '2016-03-19'),
+(5701, 'G21S168F02', 'G21-168-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G21S168', '2016-03-19', '2016-03-19'),
+(5702, 'G22S170F02', 'G22-170-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G22S170', '2016-03-19', '2016-03-19'),
+(5703, 'G22S171F02', 'G22-171-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G22S171', '2016-03-19', '2016-03-19'),
+(5704, 'G22S172F02', 'G22-172-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G22S172', '2016-03-19', '2016-03-19'),
+(5705, 'G22S173F02', 'G22-173-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G22S173', '2016-03-19', '2016-03-19'),
+(5706, 'G23S092F02', 'G23-092-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G23S092', '2016-03-19', '2016-03-19'),
+(5707, 'G23S180F02', 'G23-180-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G23S180', '2016-03-19', '2016-03-19'),
+(5708, 'G23S181F02', 'G23-181-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G23S181', '2016-03-19', '2016-03-19'),
+(5709, 'G23S182F02', 'G23-182-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G23S182', '2016-03-19', '2016-03-19'),
+(5710, 'G23S183F02', 'G23-183-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G23S183', '2016-03-19', '2016-03-19'),
+(5711, 'G23S184F02', 'G23-184-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G23S184', '2016-03-19', '2016-03-19'),
+(5712, 'G23S185F02', 'G23-185-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G23S185', '2016-03-19', '2016-03-19'),
+(5713, 'G23S186F02', 'G23-186-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G23S186', '2016-03-19', '2016-03-19'),
+(5714, 'G23S187F02', 'G23-187-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G23S187', '2016-03-19', '2016-03-19'),
+(5715, 'G23S188F02', 'G23-188-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G23S188', '2016-03-19', '2016-03-19'),
+(5716, 'G24S040F02', 'G24-040-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G24S040', '2016-03-19', '2016-03-19'),
+(5717, 'G24S091F02', 'G24-091-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G24S091', '2016-03-19', '2016-03-19'),
+(5718, 'G24S190F02', 'G24-190-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G24S190', '2016-03-19', '2016-03-19'),
+(5719, 'G24S191F02', 'G24-191-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G24S191', '2016-03-19', '2016-03-19'),
+(5720, 'G24S193F02', 'G24-193-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G24S193', '2016-03-19', '2016-03-19'),
+(5721, 'G24S194F02', 'G24-194-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G24S194', '2016-03-19', '2016-03-19'),
+(5722, 'G24S197F02', 'G24-197-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G24S197', '2016-03-19', '2016-03-19'),
+(5723, 'G24S198F02', 'G24-198-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G24S198', '2016-03-19', '2016-03-19'),
+(5724, 'G24S309F02', 'G24-309-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G24S309', '2016-03-19', '2016-03-19'),
+(5725, 'G24S311F02', 'G24-311-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G24S311', '2016-03-19', '2016-03-19'),
+(5726, 'G25S041F02', 'G25-041-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G25S041', '2016-03-19', '2016-03-19'),
+(5727, 'G25S042F02', 'G25-042-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G25S042', '2016-03-19', '2016-03-19'),
+(5728, 'G25S043F02', 'G25-043-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G25S043', '2016-03-19', '2016-03-19'),
+(5729, 'G25S044F02', 'G25-044-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G25S044', '2016-03-19', '2016-03-19'),
+(5730, 'G26S199F02', 'G26-199-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G26S199', '2016-03-19', '2016-03-19'),
+(5731, 'G26S260F02', 'G26-260-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G26S260', '2016-03-19', '2016-03-19'),
+(5732, 'G27S092F02', 'G27-092-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G27S092', '2016-03-19', '2016-03-19'),
+(5733, 'G27S210F02', 'G27-210-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G27S210', '2016-03-19', '2016-03-19'),
+(5734, 'G28S166F02', 'G28-166-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G28S166', '2016-03-19', '2016-03-19'),
+(5735, 'G29S117F02', 'G29-117-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G29S117', '2016-03-19', '2016-03-19'),
+(5736, 'G29S118F02', 'G29-118-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G29S118', '2016-03-19', '2016-03-19'),
+(5737, 'G29S119F02', 'G29-119-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G29S119', '2016-03-19', '2016-03-19'),
+(5738, 'G30S019F02', 'G30-019-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G30S019', '2016-03-19', '2016-03-19'),
+(5739, 'G31S019F02', 'G31-019-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G31S019', '2016-03-19', '2016-03-19'),
+(5740, 'G31S092F02', 'G31-092-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G31S092', '2016-03-19', '2016-03-19'),
+(5741, 'G31S266F02', 'G31-266-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G31S266', '2016-03-19', '2016-03-19'),
+(5742, 'G31S267F02', 'G31-267-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G31S267', '2016-03-19', '2016-03-19'),
+(5743, 'G31S364F02', 'G31-364-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G31S364', '2016-03-19', '2016-03-19'),
+(5744, 'G32S019F02', 'G32-019-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G32S019', '2016-03-19', '2016-03-19'),
+(5745, 'G32S263F02', 'G32-263-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G32S263', '2016-03-19', '2016-03-19'),
+(5746, 'G33S083F02', 'G33-083-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G33S083', '2016-03-19', '2016-03-19'),
+(5747, 'G50S249F02', 'G50-249-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G50S249', '2016-03-19', '2016-03-19'),
+(5748, 'G50S380F02', 'G50-380-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G50S380', '2016-03-19', '2016-03-19'),
+(5749, 'G51S000F00', 'G51-000-00', 'SIN DEFINIR                                       ', 'sin-definir', 'G51S000', '2016-03-19', '2016-03-19'),
+(5750, 'G51S250F00', 'G51-250-00', 'SIN DEFINIR                                       ', 'sin-definir', 'G51S250', '2016-03-19', '2016-03-19'),
+(5751, 'G51S250F02', 'G51-250-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G51S250', '2016-03-19', '2016-03-19'),
+(5752, 'G51S320F00', 'G51-320-00', 'SIN DEFINIR                                       ', 'sin-definir', 'G51S320', '2016-03-19', '2016-03-19'),
+(5753, 'G52S251F02', 'G52-251-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G52S251', '2016-03-19', '2016-03-19'),
+(5754, 'G53S252F02', 'G53-252-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G53S252', '2016-03-19', '2016-03-19'),
+(5755, 'G54S253F02', 'G54-253-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G54S253', '2016-03-19', '2016-03-19'),
+(5756, 'G55S254F02', 'G55-254-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G55S254', '2016-03-19', '2016-03-19'),
+(5757, 'G57S264F00', 'G57-264-00', 'SIN DEFINIR                                       ', 'sin-definir', 'G57S264', '2016-03-19', '2016-03-19'),
+(5758, 'G58S019F02', 'G58-019-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G58S019', '2016-03-19', '2016-03-19'),
+(5759, 'G58S092F02', 'G58-092-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G58S092', '2016-03-19', '2016-03-19'),
+(5760, 'G58S269F02', 'G58-269-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G58S269', '2016-03-19', '2016-03-19'),
+(5761, 'G58S280F02', 'G58-280-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G58S280', '2016-03-19', '2016-03-19'),
+(5762, 'G59S269F03', 'G59-269-03', 'PRODUCCI', 'produccion', 'G59S269', '2016-03-19', '2016-03-19'),
+(5763, 'G60S092F02', 'G60-092-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G60S092', '2016-03-19', '2016-03-19'),
+(5764, 'G60S270F02', 'G60-270-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G60S270', '2016-03-19', '2016-03-19'),
+(5765, 'G60S271F02', 'G60-271-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G60S271', '2016-03-19', '2016-03-19'),
+(5766, 'G60S272F02', 'G60-272-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G60S272', '2016-03-19', '2016-03-19'),
+(5767, 'G60S273F02', 'G60-273-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G60S273', '2016-03-19', '2016-03-19'),
+(5768, 'G60S274F02', 'G60-274-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G60S274', '2016-03-19', '2016-03-19'),
+(5769, 'G60S275F02', 'G60-275-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G60S275', '2016-03-19', '2016-03-19'),
+(5770, 'G60S360F02', 'G60-360-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G60S360', '2016-03-19', '2016-03-19'),
+(5771, 'G60S361F02', 'G60-361-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G60S361', '2016-03-19', '2016-03-19'),
+(5772, 'G60S362F02', 'G60-362-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G60S362', '2016-03-19', '2016-03-19'),
+(5773, 'G60S363F02', 'G60-363-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G60S363', '2016-03-19', '2016-03-19'),
+(5774, 'G61S269F03', 'G61-269-03', 'PRODUCCI', 'produccion', 'G61S269', '2016-03-19', '2016-03-19'),
+(5775, 'G62S280F03', 'G62-280-03', 'PRODUCCI', 'produccion', 'G62S280', '2016-03-19', '2016-03-19'),
+(5776, 'G74S321F02', 'G74-321-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G74S321', '2016-03-19', '2016-03-19'),
+(5777, 'G74S322F02', 'G74-322-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G74S322', '2016-03-19', '2016-03-19'),
+(5778, 'G74S323F02', 'G74-323-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G74S323', '2016-03-19', '2016-03-19'),
+(5779, 'G75S301F02', 'G75-301-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G75S301', '2016-03-19', '2016-03-19'),
+(5780, 'G75S302F02', 'G75-302-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G75S302', '2016-03-19', '2016-03-19'),
+(5781, 'G75S303F02', 'G75-303-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G75S303', '2016-03-19', '2016-03-19'),
+(5782, 'G75S304F02', 'G75-304-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G75S304', '2016-03-19', '2016-03-19'),
+(5783, 'G75S305F02', 'G75-305-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G75S305', '2016-03-19', '2016-03-19'),
+(5784, 'G75S306F02', 'G75-306-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G75S306', '2016-03-19', '2016-03-19'),
+(5785, 'G75S307F02', 'G75-307-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G75S307', '2016-03-19', '2016-03-19'),
+(5786, 'G76S000F02', 'G76-000-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G76S000', '2016-03-19', '2016-03-19'),
+(5787, 'G76S249F02', 'G76-249-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G76S249', '2016-03-19', '2016-03-19'),
+(5788, 'G76S252F02', 'G76-252-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G76S252', '2016-03-19', '2016-03-19'),
+(5789, 'G77S092F02', 'G77-092-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G77S092', '2016-03-19', '2016-03-19'),
+(5790, 'G77S307F02', 'G77-307-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G77S307', '2016-03-19', '2016-03-19'),
+(5791, 'G78S282F02', 'G78-282-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G78S282', '2016-03-19', '2016-03-19'),
+(5792, 'G79S313F02', 'G79-313-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G79S313', '2016-03-19', '2016-03-19'),
+(5793, 'G80S314F02', 'G80-314-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G80S314', '2016-03-19', '2016-03-19'),
+(5794, 'G81S315F02', 'G81-315-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G81S315', '2016-03-19', '2016-03-19'),
+(5795, 'G82S325F02', 'G82-325-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G82S325', '2016-03-19', '2016-03-19'),
+(5796, 'G83S326F02', 'G83-326-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G83S326', '2016-03-19', '2016-03-19'),
+(5797, 'G83S333F02', 'G83-333-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G83S333', '2016-03-19', '2016-03-19'),
+(5798, 'G83S334F02', 'G83-334-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G83S334', '2016-03-19', '2016-03-19'),
+(5799, 'G84S345F02', 'G84-345-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G84S345', '2016-03-19', '2016-03-19'),
+(5800, 'G84S346F02', 'G84-346-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G84S346', '2016-03-19', '2016-03-19'),
+(5801, 'G84S347F02', 'G84-347-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G84S347', '2016-03-19', '2016-03-19'),
+(5802, 'G84S348F02', 'G84-348-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G84S348', '2016-03-19', '2016-03-19'),
+(5803, 'G85S320F00', 'G85-320-00', 'SIN DEFINIR                                       ', 'sin-definir', 'G85S320', '2016-03-19', '2016-03-19'),
+(5804, 'G86S326F02', 'G86-326-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G86S326', '2016-03-19', '2016-03-19'),
+(5805, 'G86S338F02', 'G86-338-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G86S338', '2016-03-19', '2016-03-19'),
+(5806, 'G87S365F00', 'G87-365-00', 'SIN DEFINIR                                       ', 'sin-definir', 'G87S365', '2016-03-19', '2016-03-19'),
+(5807, 'G87S366F02', 'G87-366-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G87S366', '2016-03-19', '2016-03-19'),
+(5808, 'G87S367F00', 'G87-367-00', 'SIN DEFINIR                                       ', 'sin-definir', 'G87S367', '2016-03-19', '2016-03-19'),
+(5809, 'G87S368F00', 'G87-368-00', 'SIN DEFINIR                                       ', 'sin-definir', 'G87S368', '2016-03-19', '2016-03-19'),
+(5810, 'G87S369F02', 'G87-369-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G87S369', '2016-03-19', '2016-03-19'),
+(5811, 'G87S370F02', 'G87-370-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G87S370', '2016-03-19', '2016-03-19'),
+(5812, 'G87S371F02', 'G87-371-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G87S371', '2016-03-19', '2016-03-19'),
+(5813, 'G87S372F02', 'G87-372-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G87S372', '2016-03-19', '2016-03-19'),
+(5814, 'G87S373F02', 'G87-373-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G87S373', '2016-03-19', '2016-03-19'),
+(5815, 'G87S374F00', 'G87-374-00', 'SIN DEFINIR                                       ', 'sin-definir', 'G87S374', '2016-03-19', '2016-03-19'),
+(5816, 'G87S375F00', 'G87-375-00', 'SIN DEFINIR                                       ', 'sin-definir', 'G87S375', '2016-03-19', '2016-03-19'),
+(5817, 'G87S376F00', 'G87-376-00', 'SIN DEFINIR                                       ', 'sin-definir', 'G87S376', '2016-03-19', '2016-03-19'),
+(5818, 'G88S378F02', 'G88-378-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G88S378', '2016-03-19', '2016-03-19'),
+(5819, 'G88S379F02', 'G88-379-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G88S379', '2016-03-19', '2016-03-19'),
+(5820, 'G89S382F02', 'G89-382-02', 'COMERCIALIZACION                                  ', 'comercializacion', 'G89S382', '2016-03-19', '2016-03-19');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `inventariogrupo`
+--
+
+CREATE TABLE IF NOT EXISTS `inventariogrupo` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `InvGruCod` varchar(20) COLLATE utf8_spanish2_ci NOT NULL,
+  `InvGruId` varchar(20) COLLATE utf8_spanish2_ci NOT NULL,
+  `InvGruNom` varchar(100) COLLATE utf8_spanish2_ci NOT NULL,
+  `estado` tinyint(1) NOT NULL DEFAULT '1',
+  `created_at` date NOT NULL,
+  `updated_at` date NOT NULL,
+  `slug_grupo` varchar(200) COLLATE utf8_spanish2_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=520 ;
+
+--
+-- Volcado de datos para la tabla `inventariogrupo`
+--
+
+INSERT INTO `inventariogrupo` (`id`, `InvGruCod`, `InvGruId`, `InvGruNom`, `estado`, `created_at`, `updated_at`, `slug_grupo`) VALUES
+(449, '1', '1', 'QUALA', 1, '2016-03-19', '2016-03-19', 'quala'),
+(450, '10008', 'G90', 'TRADING FOODS LTDA', 1, '2016-03-19', '2016-03-19', 'trading-foods-ltda'),
+(451, '10009', 'G91', 'INVERSIONES AREVALO JP SAS', 1, '2016-03-19', '2016-03-19', 'inversiones-arevalo-jp-sas'),
+(452, '10010', 'G92', 'PAPELES Y CARTONES SA', 1, '2016-03-19', '2016-03-19', 'papeles-y-cartones-sa'),
+(453, '10011', '90', 'ARROCERA AGUA CLARA SAS', 1, '2016-03-19', '2016-03-19', 'arrocera-agua-clara-sas'),
+(454, '10012', 'G36', 'TIGO', 1, '2016-03-19', '2016-03-19', 'tigo'),
+(455, '10013', 'G93', 'GILPA IMPRESORES', 1, '2016-03-19', '2016-03-19', 'gilpa-impresores'),
+(456, '35', '35', 'COMCEL', 1, '2016-03-19', '2016-03-19', 'comcel'),
+(457, '42', '42', 'LA HUERTA', 1, '2016-03-19', '2016-03-19', 'la-huerta'),
+(458, '49', '49', 'MOVISTAR TELEFONICA MOVILES', 1, '2016-03-19', '2016-03-19', 'movistar-telefonica-moviles'),
+(459, 'G00', 'G00', 'SIN DEFINIR                                       ', 1, '2016-03-19', '2016-03-19', 'sin-definir'),
+(460, 'G01', 'G01', 'QUALA                                             ', 1, '2016-03-19', '2016-03-19', 'quala'),
+(461, 'G02', 'G02', 'ACEGRASAS                                         ', 1, '2016-03-19', '2016-03-19', 'acegrasas'),
+(462, 'G03', 'G03', 'COLPAPEL                                          ', 1, '2016-03-19', '2016-03-19', 'colpapel'),
+(463, 'G04', 'G04', 'ARROCERA GELVEZ                                   ', 1, '2016-03-19', '2016-03-19', 'arrocera-gelvez'),
+(464, 'G05', 'G05', 'MANUELITA                                         ', 1, '2016-03-19', '2016-03-19', 'manuelita'),
+(465, 'G06', 'G06', 'MARCHEN S.A                                       ', 1, '2016-03-19', '2016-03-19', 'marchen-sa'),
+(466, 'G07', 'G07', 'HARINERA PARDO                                    ', 1, '2016-03-19', '2016-03-19', 'harinera-pardo'),
+(467, 'G08', 'G08', 'MASTERFOODS                                       ', 1, '2016-03-19', '2016-03-19', 'masterfoods'),
+(468, 'G09', 'G09', 'OPTION                                            ', 1, '2016-03-19', '2016-03-19', 'option'),
+(469, 'G10', 'G10', 'LA FRANCOL                                        ', 1, '2016-03-19', '2016-03-19', 'la-francol'),
+(470, 'G11', 'G11', 'BAYER                                             ', 1, '2016-03-19', '2016-03-19', 'bayer'),
+(471, 'G12', 'G12', 'INCOLFEC                                          ', 1, '2016-03-19', '2016-03-19', 'incolfec'),
+(472, 'G13', 'G13', 'PANAMERICANA S.A                                  ', 1, '2016-03-19', '2016-03-19', 'panamericana-sa'),
+(473, 'G14', 'G14', 'ICOHARINAS                                        ', 1, '2016-03-19', '2016-03-19', 'icoharinas'),
+(474, 'G15', 'G15', 'PROCOMER                                          ', 1, '2016-03-19', '2016-03-19', 'procomer'),
+(475, 'G16', 'G16', 'PROLACTEOS                                        ', 1, '2016-03-19', '2016-03-19', 'prolacteos'),
+(476, 'G17', 'G17', 'INVERSIONES FINO LTDA                             ', 1, '2016-03-19', '2016-03-19', 'inversiones-fino-ltda'),
+(477, 'G18', 'G18', 'UNIVERSAL ENERGY                                  ', 1, '2016-03-19', '2016-03-19', 'universal-energy'),
+(478, 'G19', 'G19', 'MOLINOS BARRANQUILLITA                            ', 1, '2016-03-19', '2016-03-19', 'molinos-barranquillita'),
+(479, 'G20', 'G20', 'MOLINOS DEL ATALNTICO                             ', 1, '2016-03-19', '2016-03-19', 'molinos-del-atalntico'),
+(480, 'G21', 'G21', 'AJE COLOMBIA                                      ', 1, '2016-03-19', '2016-03-19', 'aje-colombia'),
+(481, 'G22', 'G22', 'ETERNA S.A                                        ', 1, '2016-03-19', '2016-03-19', 'eterna-sa'),
+(482, 'G23', 'G23', 'SUPER DE ALIMENTOS                                ', 1, '2016-03-19', '2016-03-19', 'super-de-alimentos'),
+(483, 'G24', 'G24', 'ALIMENTOS POLAR                                   ', 1, '2016-03-19', '2016-03-19', 'alimentos-polar'),
+(484, 'G25', 'G25', 'PAPELES DE RISARALDA S.A.                         ', 1, '2016-03-19', '2016-03-19', 'papeles-de-risaralda-sa'),
+(485, 'G26', 'G26', 'TECNIALAMBRE S.A.                                 ', 1, '2016-03-19', '2016-03-19', 'tecnialambre-sa'),
+(486, 'G27', 'G27', 'PROTABACO LTDA                                    ', 1, '2016-03-19', '2016-03-19', 'protabaco-ltda'),
+(487, 'G28', 'G28', 'MAXI COLA                                         ', 1, '2016-03-19', '2016-03-19', 'maxi-cola'),
+(488, 'G29', 'G29', 'GRUPO SURTI S.A.S.                                ', 1, '2016-03-19', '2016-03-19', 'grupo-surti-sas'),
+(489, 'G30', 'G30', 'INDUSTRIAS TOMY                                   ', 1, '2016-03-19', '2016-03-19', 'industrias-tomy'),
+(490, 'G31', 'G31', 'EVEREADY DE COLOMBIA S.A.                         ', 1, '2016-03-19', '2016-03-19', 'eveready-de-colombia-sa'),
+(491, 'G32', 'G32', 'FEDERAL SAS                                       ', 1, '2016-03-19', '2016-03-19', 'federal-sas'),
+(492, 'G33', 'G33', 'PRECOMERCIA LTDA                                  ', 1, '2016-03-19', '2016-03-19', 'precomercia-ltda'),
+(493, 'G50', 'G50', 'RECARGA VIRTUAL                                   ', 1, '2016-03-19', '2016-03-19', 'recarga-virtual'),
+(494, 'G51', 'G51', 'COMCEL-REAL', 1, '2016-03-19', '2016-03-19', 'comcel-real'),
+(495, 'G52', 'G52', 'COLOMBIA MOVIL                                    ', 1, '2016-03-19', '2016-03-19', 'colombia-movil'),
+(496, 'G53', 'G53', 'GUIDO LOPEZ                                       ', 1, '2016-03-19', '2016-03-19', 'guido-lopez'),
+(497, 'G54', 'G54', 'TELECOM                                           ', 1, '2016-03-19', '2016-03-19', 'telecom'),
+(498, 'G55', 'G55', 'AVANTEL                                           ', 1, '2016-03-19', '2016-03-19', 'avantel'),
+(499, 'G57', 'G57', 'STORE MANAGEMENT                                  ', 1, '2016-03-19', '2016-03-19', 'store-management'),
+(500, 'G59', 'G59', 'SUDESPENSA BARRAGAN S.A.                          ', 1, '2016-03-19', '2016-03-19', 'sudespensa-barragan-sa'),
+(501, 'G60', 'G60', 'DRYPERS                                           ', 1, '2016-03-19', '2016-03-19', 'drypers'),
+(502, 'G61', 'G61', 'ISIDRO PACHECO C                                  ', 1, '2016-03-19', '2016-03-19', 'isidro-pacheco-c'),
+(503, 'G62', 'G62', 'COAGRONORTE LTDA                                  ', 1, '2016-03-19', '2016-03-19', 'coagronorte-ltda'),
+(504, 'G74', 'G74', 'COAGRONORTE LTDA                                  ', 1, '2016-03-19', '2016-03-19', 'coagronorte-ltda'),
+(505, 'G75', 'G75', 'MOLINOS ROA S.A.                                  ', 1, '2016-03-19', '2016-03-19', 'molinos-roa-sa'),
+(506, 'G76', 'G76', 'MOVISTAR TELEFONICA MOVILES                       ', 1, '2016-03-19', '2016-03-19', 'movistar-telefonica-moviles'),
+(507, 'G77', 'G77', 'MOLINOS FLORHUILA S.A.                            ', 1, '2016-03-19', '2016-03-19', 'molinos-florhuila-sa'),
+(508, 'G78', 'G78', 'PRODUCTO DEL PRADO S.A.S                          ', 1, '2016-03-19', '2016-03-19', 'producto-del-prado-sas'),
+(509, 'G79', 'G79', 'TRANZA                                            ', 1, '2016-03-19', '2016-03-19', 'tranza'),
+(510, 'G80', 'G80', 'FULL CARGA                                        ', 1, '2016-03-19', '2016-03-19', 'full-carga'),
+(511, 'G81', 'G81', 'CONEXRED                                          ', 1, '2016-03-19', '2016-03-19', 'conexred'),
+(512, 'G82', 'G82', 'RAUL FERNANDO FRANCO CASTRO                       ', 1, '2016-03-19', '2016-03-19', 'raul-fernando-franco-castro'),
+(513, 'G83', 'G83', 'CORBETA SA                                        ', 1, '2016-03-19', '2016-03-19', 'corbeta-sa'),
+(514, 'G84', 'G84', 'COMERJA SAS                                       ', 1, '2016-03-19', '2016-03-19', 'comerja-sas'),
+(515, 'G85', 'G85', 'MINUTOS                                           ', 1, '2016-03-19', '2016-03-19', 'minutos'),
+(516, 'G86', 'G86', 'DISTRIBUYENDO                                     ', 1, '2016-03-19', '2016-03-19', 'distribuyendo'),
+(517, 'G87', 'G87', 'BEIERSDORF                                        ', 1, '2016-03-19', '2016-03-19', 'beiersdorf'),
+(518, 'G88', 'G88', 'INVERSIONES JEC SAS                               ', 1, '2016-03-19', '2016-03-19', 'inversiones-jec-sas'),
+(519, 'G89', 'G89', 'INDULECHE                                         ', 1, '2016-03-19', '2016-03-19', 'induleche');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `menu`
+--
+
+CREATE TABLE IF NOT EXISTS `menu` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `men_nom` varchar(200) COLLATE utf8_spanish2_ci NOT NULL,
+  `created_at` date NOT NULL,
+  `updated_at` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=3 ;
+
+--
+-- Volcado de datos para la tabla `menu`
+--
+
+INSERT INTO `menu` (`id`, `men_nom`, `created_at`, `updated_at`) VALUES
+(1, 'Aseo', '0000-00-00', '0000-00-00'),
+(2, 'Hogar', '0000-00-00', '0000-00-00');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `menu_inventariogrupo`
+--
+
+CREATE TABLE IF NOT EXISTS `menu_inventariogrupo` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `menu_id` int(11) NOT NULL,
+  `grupo_id` varchar(10) COLLATE utf8_spanish2_ci NOT NULL,
+  `created_at` date NOT NULL,
+  `updated_at` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=5 ;
+
+--
+-- Volcado de datos para la tabla `menu_inventariogrupo`
+--
+
+INSERT INTO `menu_inventariogrupo` (`id`, `menu_id`, `grupo_id`, `created_at`, `updated_at`) VALUES
+(1, 1, '001', '0000-00-00', '0000-00-00'),
+(3, 1, '002', '0000-00-00', '0000-00-00'),
+(4, 1, '003', '0000-00-00', '0000-00-00');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `metodo_envio`
+--
+
+CREATE TABLE IF NOT EXISTS `metodo_envio` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nom_metodo` varchar(200) COLLATE utf8_spanish2_ci NOT NULL,
+  `tiempo_entrega` varchar(200) COLLATE utf8_spanish2_ci NOT NULL,
+  `valor` int(11) NOT NULL,
+  `created_at` date NOT NULL,
+  `updated_at` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=4 ;
+
+--
+-- Volcado de datos para la tabla `metodo_envio`
+--
+
+INSERT INTO `metodo_envio` (`id`, `nom_metodo`, `tiempo_entrega`, `valor`, `created_at`, `updated_at`) VALUES
+(1, 'Ruta Camion', 'Ruta', 0, '2015-05-07', '2015-05-07'),
+(2, 'INMEDIATO', '60 minutos', 5000, '0000-00-00', '0000-00-00'),
+(3, 'hfhfhf', '40', 3000, '2016-02-24', '2016-02-24');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `productos`
+--
+
+CREATE TABLE IF NOT EXISTS `productos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ArtSec` varchar(20) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `id_mantis` varchar(20) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `pro_nom` varchar(200) COLLATE utf8_spanish2_ci NOT NULL,
+  `categoria_id` varchar(16) COLLATE utf8_spanish2_ci NOT NULL,
+  `descripcion` text COLLATE utf8_spanish2_ci,
+  `slug` varchar(250) COLLATE utf8_spanish2_ci NOT NULL,
+  `img` varchar(250) COLLATE utf8_spanish2_ci NOT NULL,
+  `mantis_img` int(1) NOT NULL,
+  `precio` decimal(17,5) DEFAULT NULL,
+  `Estado` tinyint(1) NOT NULL DEFAULT '1',
+  `por_iva` int(2) DEFAULT NULL,
+  `cantidad` float DEFAULT NULL,
+  `created_at` date NOT NULL,
+  `updated_at` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=12753 ;
+
+--
+-- Volcado de datos para la tabla `productos`
+--
+
+INSERT INTO `productos` (`id`, `ArtSec`, `id_mantis`, `pro_nom`, `categoria_id`, `descripcion`, `slug`, `img`, `mantis_img`, `precio`, `Estado`, `por_iva`, `cantidad`, `created_at`, `updated_at`) VALUES
+(12553, '1000', 'CHV19', 'PED. ADULTO VITAL ET#3 *500GR*20UND', 'G08S319F02', NULL, 'ped-adulto-vital-et3-500gr20und', 'img/Mantis/def.png', 0, '3450.00000', 1, 5, 0, '2016-03-19', '2016-03-19'),
+(12554, '1001', 'CHV20', 'PED. ADULTO VITAL ET#3 *1KG*12UND', 'G08S319F02', NULL, 'ped-adulto-vital-et3-1kg12und', 'img/Mantis/def.png', 0, '6907.00000', 1, 5, 0, '2016-03-19', '2016-03-19'),
+(12555, '1002', 'CHV21', 'PED. ADULTO VITAL ET#3 *2KG*8UND', 'G08S319F02', NULL, 'ped-adulto-vital-et3-2kg8und', 'img/Mantis/def.png', 0, '13282.00000', 1, 5, 0, '2016-03-19', '2016-03-19'),
+(12556, '10021', 'm550', 'DONKAN CACHORRO 22KG*1UN', 'G24S311F02', NULL, 'donkan-cachorro-22kg1un', 'img/Mantis/def.png', 0, '54236.00000', 1, 5, 0, '2016-03-19', '2016-03-19'),
+(12557, '10022', 'qug45', 'GELATINA TRIO+1UND+20%DCTO', 'G01S017F02', NULL, 'gelatina-trio1und20dcto', 'img/Mantis/def.png', 0, '2326.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12558, '10023', 'quf01', 'F.FRUTIÑO GUAYABA NARANJA*2LTS*24*20', 'G01S011F02', NULL, 'ffrutino-guayaba-naranja2lts2420', 'img/Mantis/def.png', 0, '8769.00000', 1, 16, 100, '2016-03-19', '2016-03-19'),
+(12559, '10024', 'q948', 'BABY MANZANA QUAKER 200 X 24 UND', 'G24S191F02', NULL, 'baby-manzana-quaker-200-x-24-und', 'img/Mantis/def.png', 0, '3223.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12560, '10025', 'qum27', 'AROMATEL MANZANA*115ML TIRA*6 UND', 'G01S276F02', NULL, 'aromatel-manzana115ml-tira6-und', 'img/Mantis/def.png', 0, '2153.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12561, '10026', 'qum29', 'AROMATEL FLORAL DOYPACK*205ML', 'G01S276F02', NULL, 'aromatel-floral-doypack205ml', 'img/Mantis/def.png', 0, '719.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12562, '10027', 'qum31', 'AROMATEL MANZANA *425ML CJ*24UND', 'G01S276F02', NULL, 'aromatel-manzana-425ml-cj24und', 'img/Mantis/def.png', 0, '1580.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12563, '10028', 'qum32', 'AROMATEL FLORAL *425ML CJ*24UND', 'G01S276F02', NULL, 'aromatel-floral-425ml-cj24und', 'img/Mantis/def.png', 0, '1580.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12564, '10029', 'drb26', 'BABYSEC PROMOPACK TALLA XG*50UND', 'G60S270F02', NULL, 'babysec-promopack-talla-xg50und', 'img/Mantis/def.png', 0, '21567.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12565, '1003', 'CHV22', 'PED. ADULTO VITAL ET#3 *4KG*5UND', 'G08S319F02', NULL, 'ped-adulto-vital-et3-4kg5und', 'img/Mantis/def.png', 0, '26242.00000', 1, 5, 0, '2016-03-19', '2016-03-19'),
+(12566, '10030', 'h704', 'HARINA PAN INTREGRAL X500GR', 'G24S198F02', NULL, 'harina-pan-intregral-x500gr', 'img/Mantis/def.png', 0, '28571.00000', 1, 5, 0, '2016-03-19', '2016-03-19'),
+(12567, '10031', 'QSL13', 'SUNTEA GAS MANZANA*400ML DP*4UND', 'G01S324F02', NULL, 'suntea-gas-manzana400ml-dp4und', 'img/Mantis/def.png', 0, '5068.00000', 1, 0, 0, '2016-03-19', '2016-03-19'),
+(12568, '10034', '107', 'MIUG SCHICK GRATIS', 'G31S092F02', NULL, 'miug-schick-gratis', 'img/Mantis/def.png', 0, '0.00000', 1, 0, 0, '2016-03-19', '2016-03-19'),
+(12569, '10035', '39', 'PRACTIHUERTA FRIJOLES', 'G58S019F02', NULL, 'practihuerta-frijoles', 'img/Mantis/def.png', 0, '0.00000', 1, 0, 0, '2016-03-19', '2016-03-19'),
+(12570, '10036', '40', 'PRACTIHUERTA ARROZ', 'G58S019F02', NULL, 'practihuerta-arroz', 'img/Mantis/def.png', 0, '0.00000', 1, 0, 0, '2016-03-19', '2016-03-19'),
+(12571, '10037', '41', 'PRACTIHUERTA SAL', 'G58S019F02', NULL, 'practihuerta-sal', 'img/Mantis/def.png', 0, '0.00000', 1, 0, 0, '2016-03-19', '2016-03-19'),
+(12572, '10038', '43', 'PRACTIHUERTA LENTEJAS', 'G58S019F02', NULL, 'practihuerta-lentejas', 'img/Mantis/def.png', 0, '0.00000', 1, 0, 0, '2016-03-19', '2016-03-19'),
+(12573, '10039', '44', 'PRACTIHUERTA ESPECIAS', 'G58S019F02', NULL, 'practihuerta-especias', 'img/Mantis/def.png', 0, '0.00000', 1, 0, 0, '2016-03-19', '2016-03-19'),
+(12574, '1004', 'CHV23', 'PED. ADULTO VITAL ET#3 *8KG', 'G08S319F02', NULL, 'ped-adulto-vital-et3-8kg', 'img/Mantis/def.png', 0, '42343.00000', 1, 5, 0, '2016-03-19', '2016-03-19'),
+(12575, '10040', '45', 'PRACTIHUERTA GARBANZOS', 'G58S019F02', NULL, 'practihuerta-garbanzos', 'img/Mantis/def.png', 0, '0.00000', 1, 0, 0, '2016-03-19', '2016-03-19'),
+(12576, '10041', '46', 'PRACTIHUERTA ARVEJAS', 'G58S019F02', NULL, 'practihuerta-arvejas', 'img/Mantis/def.png', 0, '0.00000', 1, 0, 0, '2016-03-19', '2016-03-19'),
+(12577, '10042', '64', 'TULA ENERGIZER', 'G31S092F02', NULL, 'tula-energizer', 'img/Mantis/def.png', 0, '0.00000', 1, 0, 0, '2016-03-19', '2016-03-19'),
+(12578, '10043', '66', 'TERMOS ENERGIZER', 'G31S092F02', NULL, 'termos-energizer', 'img/Mantis/def.png', 0, '0.00000', 1, 0, 0, '2016-03-19', '2016-03-19'),
+(12579, '10044', '73', 'EXHIBIDOR PEDIGREE-WHISKAS', 'G08S092F02', NULL, 'exhibidor-pedigree-whiskas', 'img/Mantis/def.png', 0, '0.00000', 1, 0, 0, '2016-03-19', '2016-03-19'),
+(12580, '10045', '74', 'EXHIBIDOR MASCOTAS CON RUEDAS', 'G08S092F02', NULL, 'exhibidor-mascotas-con-ruedas', 'img/Mantis/def.png', 0, '0.00000', 1, 0, 0, '2016-03-19', '2016-03-19'),
+(12581, '10048', 'ACB01', 'ACEITE CARIBE*900 CC*12UND', 'G88S378F02', NULL, 'aceite-caribe900-cc12und', 'img/Mantis/def.png', 0, '2983.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12582, '10049', 'ACB02', 'ACEITE CARIBE*450 CC*24UND', 'G88S378F02', NULL, 'aceite-caribe450-cc24und', 'img/Mantis/def.png', 0, '1577.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12583, '1005', 'CHV24', 'PED. VITAL ADULTO ET#3 BULTO*17KG', 'G08S319F02', NULL, 'ped-vital-adulto-et3-bulto17kg', 'img/Mantis/def.png', 0, '81406.00000', 1, 5, 0, '2016-03-19', '2016-03-19'),
+(12584, '10050', 'ACB03', 'ACEITE CARIBE*220 CC*48UND', 'G88S378F02', NULL, 'aceite-caribe220-cc48und', 'img/Mantis/def.png', 0, '829.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12585, '10051', 'ACB04', 'JABON CLARO *75GRAMOS', 'G88S379F02', NULL, 'jabon-claro-75gramos', 'img/Mantis/def.png', 0, '418.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12586, '10052', 'ACB05', 'JABON CLARO *125GRAMOS', 'G88S379F02', NULL, 'jabon-claro-125gramos', 'img/Mantis/def.png', 0, '706.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12587, '10055', 'ACB08', 'JABON TIPO HOTEL DP*50UND*10GR', 'G88S379F02', NULL, 'jabon-tipo-hotel-dp50und10gr', 'img/Mantis/def.png', 0, '3937.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12588, '10056', 'ACB09', 'JABON CLARO *75GR PG12 LLEV 13', 'G88S379F02', NULL, 'jabon-claro-75gr-pg12-llev-13', 'img/Mantis/def.png', 0, '5016.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12589, '10057', 'ACB10', 'JABON CLARO STDO*125GR PG12 LLEV 13', 'G88S379F02', NULL, 'jabon-claro-stdo125gr-pg12-llev-13', 'img/Mantis/def.png', 0, '9178.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12590, '10058', 'AVT04', 'SIM CARD PREPAGO AVANTEL', 'G55S254F02', NULL, 'sim-card-prepago-avantel', 'img/Mantis/def.png', 0, '862.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12591, '10059', 'CHP63', 'PACK WHISKAS POUCH GRTIS RECIPIENTE', 'G08S091F02', NULL, 'pack-whiskas-pouch-grtis-recipiente', 'img/Mantis/def.png', 0, '7226.00000', 1, 5, 0, '2016-03-19', '2016-03-19'),
+(12592, '10060', 'CHV08OF', 'PED. CACHORRO ET#1 KILO+1SOBRE', 'G08S317F02', NULL, 'ped-cachorro-et1-kilo1sobre', 'img/Mantis/def.png', 0, '7114.00000', 1, 5, 0, '2016-03-19', '2016-03-19'),
+(12593, '10062', 'CHV13OF', 'CACHORRO ET#1 *22KG GRATIS 2KILOS', 'G08S317F02', NULL, 'cachorro-et1-22kg-gratis-2kilos', 'img/Mantis/def.png', 0, '104160.00000', 1, 5, 0, '2016-03-19', '2016-03-19'),
+(12594, '10064', 'CHV33', 'PED. VITAL RAZAS PEQUEÑA *22KILOS', 'G08S316F02', NULL, 'ped-vital-razas-pequena-22kilos', 'img/Mantis/def.png', 0, '97447.00000', 1, 5, 0, '2016-03-19', '2016-03-19'),
+(12595, '10066', 'CMT14', 'PLAN 1150 MINUTOS', 'G51S320F00', NULL, 'plan-1150-minutos', 'img/Mantis/def.png', 0, '4.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12596, '10067', 'CMT15', 'PLAN 1120', 'G85S320F00', NULL, 'plan-1120', 'img/Mantis/def.png', 0, '4.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12597, '10068', 'CMT18', 'PLAN 200 MINUTOS', 'G51S320F00', NULL, 'plan-200-minutos', 'img/Mantis/def.png', 0, '4.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12598, '10069', 'CMT19', 'PLAN 490 MINUTOS', 'G51S320F00', NULL, 'plan-490-minutos', 'img/Mantis/def.png', 0, '4.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12599, '10070', 'CMT20', 'PLAN 750 MINUTOS', 'G51S320F00', NULL, 'plan-750-minutos', 'img/Mantis/def.png', 0, '4.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12600, '10071', 'CMT21', 'PLAN 1500 MINUTOS', 'G51S320F00', NULL, 'plan-1500-minutos', 'img/Mantis/def.png', 0, '4.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12601, '10072', 'CMT22', 'PLAN 580 MINUTOS', 'G51S320F00', NULL, 'plan-580-minutos', 'img/Mantis/def.png', 0, '4.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12602, '10073', 'CMT23', 'PLAN 2000 MINUTOS', 'G51S320F00', NULL, 'plan-2000-minutos', 'img/Mantis/def.png', 0, '4.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12603, '10074', 'CMT24', 'PLAN 2450 MINUTOS', 'G51S320F00', NULL, 'plan-2450-minutos', 'img/Mantis/def.png', 0, '4.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12604, '10075', 'CMT26', 'PLAN 400 MINUTOS', 'G51S320F00', NULL, 'plan-400-minutos', 'img/Mantis/def.png', 0, '4.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12605, '10076', 'DRB27', 'BABYSEC PROMOPACK P*30UND', 'G60S270F02', NULL, 'babysec-promopack-p30und', 'img/Mantis/def.png', 0, '6567.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12606, '10077', 'DUO01', 'CONDONES DUO NORMAL LUBRI*2*3', 'G87S375F00', NULL, 'condones-duo-normal-lubri23', 'img/Mantis/def.png', 0, '3744.00000', 1, 0, 0, '2016-03-19', '2016-03-19'),
+(12607, '10078', 'DUO02', 'CONDONES DUO ULTRASENSIBLE*2*3', 'G87S375F00', NULL, 'condones-duo-ultrasensible23', 'img/Mantis/def.png', 0, '4533.00000', 1, 0, 0, '2016-03-19', '2016-03-19'),
+(12608, '10079', 'DUO03', 'CONDONES DUO RETARDANTE*2*3', 'G87S375F00', NULL, 'condones-duo-retardante23', 'img/Mantis/def.png', 0, '4533.00000', 1, 0, 0, '2016-03-19', '2016-03-19'),
+(12609, '1008', 'CHV25', 'PED. VITAL ADULTO ET#3 BULTO*22KG', 'G08S319F02', NULL, 'ped-vital-adulto-et3-bulto22kg', 'img/Mantis/def.png', 0, '93246.00000', 1, 5, 0, '2016-03-19', '2016-03-19'),
+(12610, '10080', 'DUO04', 'CONDONES DUO ESTIMULANTE*2*3', 'G87S375F00', NULL, 'condones-duo-estimulante23', 'img/Mantis/def.png', 0, '4533.00000', 1, 0, 0, '2016-03-19', '2016-03-19'),
+(12611, '10081', 'DUO05', 'CONDONES DUO G SENSATION*2*3', 'G87S375F00', NULL, 'condones-duo-g-sensation23', 'img/Mantis/def.png', 0, '4533.00000', 1, 0, 0, '2016-03-19', '2016-03-19'),
+(12612, '10082', 'DUO06', 'PREPACK CONDONES DUO PAG20 LLV24', 'G87S375F00', NULL, 'prepack-condones-duo-pag20-llv24', 'img/Mantis/def.png', 0, '94022.00000', 1, 0, 0, '2016-03-19', '2016-03-19'),
+(12613, '10083', 'DUO07', 'PREPACK CONDONES DUO PAG12 LLV14', 'G87S375F00', NULL, 'prepack-condones-duo-pag12-llv14', 'img/Mantis/def.png', 0, '58644.00000', 1, 0, 0, '2016-03-19', '2016-03-19'),
+(12614, '10084', 'DUO08', 'DUO G   ANILLO VIBRADOR', 'G87S375F00', NULL, 'duo-g-anillo-vibrador', 'img/Mantis/def.png', 0, '13711.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12615, '10085', 'DUO09', 'DP CONDONES DUO INDIVUALES*50UND', 'G87S375F00', NULL, 'dp-condones-duo-indivuales50und', 'img/Mantis/def.png', 0, '51200.00000', 1, 0, 0, '2016-03-19', '2016-03-19'),
+(12616, '10086', 'GL26', 'FRIJOL PALOMO 1/2 LIBRA* 12 UND', 'G58S269F02', NULL, 'frijol-palomo-12-libra-12-und', 'img/Mantis/def.png', 0, '13027.00000', 1, 0, 0, '2016-03-19', '2016-03-19'),
+(12617, '10087', 'GL27', 'FRIJOL PALOMO  LIBRA* 6 UND', 'G58S269F02', NULL, 'frijol-palomo-libra-6-und', 'img/Mantis/def.png', 0, '12772.00000', 1, 0, 0, '2016-03-19', '2016-03-19'),
+(12618, '10094', 'HAN01', 'COPITOS HANSAPLAST BOLSA*20UND', 'G87S376F00', NULL, 'copitos-hansaplast-bolsa20und', 'img/Mantis/def.png', 0, '1388.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12619, '10095', 'HAN02', 'COPITOS HANSAPLAST TARJETA*40UND', 'G87S376F00', NULL, 'copitos-hansaplast-tarjeta40und', 'img/Mantis/def.png', 0, '2211.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12620, '10096', 'HPL05', 'LOZACREM LIMON  *150GR', 'G07S063F02', NULL, 'lozacrem-limon-150gr', 'img/Mantis/def.png', 0, '778.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12621, '10098', 'L2429', 'LINTERNA EVEREADY RECARGABLE', 'G31S364F02', NULL, 'linterna-eveready-recargable', 'img/Mantis/def.png', 0, '8951.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12622, '10103', 'M537', 'DOGOURMET CHURRASCO KILO*18UND', 'G24S309F02', NULL, 'dogourmet-churrasco-kilo18und', 'img/Mantis/def.png', 0, '4024.00000', 1, 5, 0, '2016-03-19', '2016-03-19'),
+(12623, '10105', 'M539OF', 'DOGOURMET POLLO 22KG+2LB CACHORRO', 'G24S309F02', NULL, 'dogourmet-pollo-22kg2lb-cachorro', 'img/Mantis/def.png', 0, '68472.00000', 1, 5, 0, '2016-03-19', '2016-03-19'),
+(12624, '10106', 'M540', 'DOGOURMET FILET MIGNON KILO*18UND', 'G24S309F02', NULL, 'dogourmet-filet-mignon-kilo18und', 'img/Mantis/def.png', 0, '4024.00000', 1, 5, 0, '2016-03-19', '2016-03-19'),
+(12625, '10107', 'M542OF', 'DOGOURMET CACHORRO 500 PG 4 LLV5', 'G24S309F02', NULL, 'dogourmet-cachorro-500-pg-4-llv5', 'img/Mantis/def.png', 0, '9580.00000', 1, 5, 0, '2016-03-19', '2016-03-19'),
+(12626, '10109', 'M552', 'DOGOURMET CACHORRO TROCITOS KILO', 'G24S309F02', NULL, 'dogourmet-cachorro-trocitos-kilo', 'img/Mantis/def.png', 0, '5711.00000', 1, 5, 0, '2016-03-19', '2016-03-19'),
+(12627, '10110', 'M553', 'DOGOURMET CACHORRO TROCITOS 2KILOS', 'G24S309F02', NULL, 'dogourmet-cachorro-trocitos-2kilos', 'img/Mantis/def.png', 0, '11115.00000', 1, 5, 0, '2016-03-19', '2016-03-19'),
+(12628, '10111', 'M7510690B', 'SCHICK LADY PROTECTOR', 'G31S266F02', NULL, 'schick-lady-protector', 'img/Mantis/def.png', 0, '5625.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12629, '10112', 'M7510691B', 'REPUESTO LADY PROTECTOR*3CART', 'G31S266F02', NULL, 'repuesto-lady-protector3cart', 'img/Mantis/def.png', 0, '7482.00000', 1, 16, 100, '2016-03-19', '2016-03-19'),
+(12630, '10113', 'M7511300C', 'QUATTRO TITANIUM FREESTYLE', 'G31S266F02', NULL, 'quattro-titanium-freestyle', 'img/Mantis/def.png', 0, '4941.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12631, '10114', 'MTB18', 'BLANCOX NATURAL*3800ML*4UND', 'G07S062F02', NULL, 'blancox-natural3800ml4und', 'img/Mantis/def.png', 0, '9022.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12632, '10115', 'MTB19', 'BLANCOX DESMANCHADOR*500ML*12UND', 'G07S062F02', NULL, 'blancox-desmanchador500ml12und', 'img/Mantis/def.png', 0, '2408.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12633, '10116', 'MTB20', 'BLANCOX R COLOR FLORAL*3800ML*4UND', 'G07S062F02', NULL, 'blancox-r-color-floral3800ml4und', 'img/Mantis/def.png', 0, '13018.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12634, '10118', 'MTB50', 'BLCX  LIMPIA PISOS VIBRANTE*150ML', 'G07S359F02', NULL, 'blcx-limpia-pisos-vibrante150ml', 'img/Mantis/def.png', 0, '838.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12635, '10119', 'MTS20', 'SALERO PIMIENTA*1 DP *12 UND', 'G07S065F02', NULL, 'salero-pimienta1-dp-12-und', 'img/Mantis/def.png', 0, '21824.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12636, '10120', 'MTS24', 'SALERO PICANTE*1 DP *12 UND', 'G07S065F02', NULL, 'salero-picante1-dp-12-und', 'img/Mantis/def.png', 0, '17972.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12637, '10121', 'MTS56', 'SALERO DIETETICO*500GR GTIS SALERITO', 'G07S065F02', NULL, 'salero-dietetico500gr-gtis-salerito', 'img/Mantis/def.png', 0, '5089.00000', 1, 0, 0, '2016-03-19', '2016-03-19'),
+(12638, '10122', 'NVB02', 'NIVEA BODY NUTRITIVA P/EXTRASECA*400ML', 'G87S365F00', NULL, 'nivea-body-nutritiva-pextraseca400ml', 'img/Mantis/def.png', 0, '13211.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12639, '10123', 'NVB12', 'NIVEA BODY EXPRESS P/NORMAL*125ML', 'G87S365F00', NULL, 'nivea-body-express-pnormal125ml', 'img/Mantis/def.png', 0, '4833.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12640, '10124', 'NVC01', 'NIVEA CREME 30ML *CJ*24UND', 'G87S372F02', NULL, 'nivea-creme-30ml-cj24und', 'img/Mantis/def.png', 0, '4388.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12641, '10125', 'NVD02', 'NIVEA SPRAY ACLARADO SATIN*150ML', 'G87S367F00', NULL, 'nivea-spray-aclarado-satin150ml', 'img/Mantis/def.png', 0, '9588.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12642, '10126', 'NVD14', 'NIVEA ROLL ON ACLARADO SATIN*50ML', 'G87S367F00', NULL, 'nivea-roll-on-aclarado-satin50ml', 'img/Mantis/def.png', 0, '7055.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12643, '10127', 'NVD15', 'NIVEA ROLL ON ACLARADO NATURAL*50ML', 'G87S367F00', NULL, 'nivea-roll-on-aclarado-natural50ml', 'img/Mantis/def.png', 0, '7055.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12644, '10128', 'NVV03', 'NIVEA GEL LIMPIADOR FACIAL P/N*150ML', 'G87S366F02', NULL, 'nivea-gel-limpiador-facial-pn150ml', 'img/Mantis/def.png', 0, '17466.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12645, '10129', 'NVV05', 'NIVEA LECHE LIMPIADORA P/SECA*200ML', 'G87S366F02', NULL, 'nivea-leche-limpiadora-pseca200ml', 'img/Mantis/def.png', 0, '15533.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12646, '10130', 'OPB55', 'BOMBILLO HALOGENO 70W DP*10 UND', '308', NULL, 'bombillo-halogeno-70w-dp10-und', 'img/Mantis/def.png', 0, '20405.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12647, '10131', 'OPM15', 'PAÑO ANTIBACT MANOS MEDICURE*10UND', 'G09S327F02', NULL, 'pano-antibact-manos-medicure10und', 'img/Mantis/def.png', 0, '896.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12648, '10135', 'QUS74', 'SAVITAL SH BIOTINA *12*170ML', 'G01S021F02', NULL, 'savital-sh-biotina-12170ml', 'img/Mantis/def.png', 0, '3747.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12649, '10136', 'SUD17', 'OKA LOKA MEZCLA LOKA*24DP*50UN', 'G23S183F02', NULL, 'oka-loka-mezcla-loka24dp50un', 'img/Mantis/def.png', 0, '2896.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12650, '10137', 'MVT17', 'MINUTOS MOVISTAR', 'G85S320F00', NULL, 'minutos-movistar', 'img/Mantis/def.png', 0, '51.00000', 1, 0, 0, '2016-03-19', '2016-03-19'),
+(12651, '10138', 'NVC04', 'NIVEA CREME *60ML PAG 5 LLVE6', 'G87S372F02', NULL, 'nivea-creme-60ml-pag-5-llve6', 'img/Mantis/def.png', 0, '35300.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12652, '10139', 'NVD08', 'NIVEA BARRA BLACK&WHITE MUJER*43G', 'G87S367F00', NULL, 'nivea-barra-blackwhite-mujer43g', 'img/Mantis/def.png', 0, '8100.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12653, '10140', 'NVJ04', 'NIVEA JABON PROTEINA LECHE *90G', 'G87S373F02', NULL, 'nivea-jabon-proteina-leche-90g', 'img/Mantis/def.png', 0, '933.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12654, '10141', 'NVJ09', 'NIVEA JABON AVENA*3UND*90G', 'G87S373F02', NULL, 'nivea-jabon-avena3und90g', 'img/Mantis/def.png', 0, '3422.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12655, '10142', 'NVL02', 'NIVEA LIP CEREZA', 'G87S370F02', NULL, 'nivea-lip-cereza', 'img/Mantis/def.png', 0, '5877.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12656, '10143', 'NVM04', 'NIVEA BALSAMO SENSITIVE*100ML', 'G87S374F00', NULL, 'nivea-balsamo-sensitive100ml', 'img/Mantis/def.png', 0, '17022.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12657, '10144', 'NVV02', 'NIVEA TOALLITAS P/SECA SENSIBLE *25UND', 'G87S366F02', NULL, 'nivea-toallitas-pseca-sensible-25und', 'img/Mantis/def.png', 0, '11822.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12658, '10145', 'NVV11', 'NIVEA REGENERADORA NOCHE *50ML', 'G87S366F02', NULL, 'nivea-regeneradora-noche-50ml', 'img/Mantis/def.png', 0, '13300.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12659, '10146', 'NVV18', 'NIVEA CELLULAR ANTIAGE CONT. OJOS*15ML', 'G87S366F02', NULL, 'nivea-cellular-antiage-cont-ojos15ml', 'img/Mantis/def.png', 0, '37088.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12660, '10147', 'OPA57', 'ESPONJA CELULOSA MAXICLEAN CJ*24UND', 'G09S331F02', NULL, 'esponja-celulosa-maxiclean-cj24und', 'img/Mantis/def.png', 0, '1750.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12661, '10148', 'OPF18', 'FOSFORO MADERA*200UN DP*4+1ENCEND.', 'G09S099F02', NULL, 'fosforo-madera200un-dp41encend', 'img/Mantis/def.png', 0, '2458.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12662, '10149', 'OPM16', 'TOALLAS DESMAQUILLANTES MEDICURE*30', 'G09S327F02', NULL, 'toallas-desmaquillantes-medicure30', 'img/Mantis/def.png', 0, '5579.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12663, '10150', 'QUI10', 'INSTACREM LIGHT 4GR*10DISP X 100 UND', 'G01S018F02', NULL, 'instacrem-light-4gr10disp-x-100-und', 'img/Mantis/def.png', 0, '7854.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12664, '10151', 'QUS78', 'SAVITAL CREMA BIOTINA*275ML', 'G01S277F02', NULL, 'savital-crema-biotina275ml', 'img/Mantis/def.png', 0, '5796.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12665, '10152', 'SP60766', 'CARTUCHO QUATTRO TITANIUM*2CART', 'G31S266F02', NULL, 'cartucho-quattro-titanium2cart', 'img/Mantis/def.png', 0, '7668.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12666, '10153', 'SUC38', 'PREPACK PATAS DE CABRA', 'G23S186F02', NULL, 'prepack-patas-de-cabra', 'img/Mantis/def.png', 0, '12873.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12667, '10154', 'TMKT-738', 'VASO CERVECERO', 'G31S092F02', NULL, 'vaso-cervecero', 'img/Mantis/def.png', 0, '0.00000', 1, 0, 0, '2016-03-19', '2016-03-19'),
+(12668, '10155', 'ZUL10', 'ARROZ ZULIA PREMIUM LIBRA*25 UND', 'G74S321F02', NULL, 'arroz-zulia-premium-libra25-und', 'img/Mantis/def.png', 0, '39352.00000', 1, 0, 0, '2016-03-19', '2016-03-19'),
+(12669, '10157', 'NVB05', 'NIVEA BODY SOFT P/SECA*1LITRO', 'G87S365F00', NULL, 'nivea-body-soft-pseca1litro', 'img/Mantis/def.png', 0, '17022.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12670, '10158', 'NVB13', 'NIVEA BODY REPARADORA SOS*400ML', 'G87S365F00', NULL, 'nivea-body-reparadora-sos400ml', 'img/Mantis/def.png', 0, '14044.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12671, '10159', 'NVB15', 'NIVEA BODY REAFIRMANTE Q10*1LITRO', 'G87S365F00', NULL, 'nivea-body-reafirmante-q101litro', 'img/Mantis/def.png', 0, '25200.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12672, '10160', 'NVB20', 'NIVEA BAJO LA DUCHA PIEL SECA*250ML', 'G87S365F00', NULL, 'nivea-bajo-la-ducha-piel-seca250ml', 'img/Mantis/def.png', 0, '8100.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12673, '10161', 'NVC02', 'NIVEA CREME 60ML *CJ*12UND', 'G87S372F02', NULL, 'nivea-creme-60ml-cj12und', 'img/Mantis/def.png', 0, '7055.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12674, '10162', 'NVD11', 'NIVEA BARRA BLACK&WHITE HOMBRE*43G', 'G87S367F00', NULL, 'nivea-barra-blackwhite-hombre43g', 'img/Mantis/def.png', 0, '8100.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12675, '10163', 'NVJ02', 'NIVEA JABON ALOE*90G', 'G87S373F02', NULL, 'nivea-jabon-aloe90g', 'img/Mantis/def.png', 0, '933.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12676, '10164', 'NVL03', 'NIVEA LIP FRESA', 'G87S370F02', NULL, 'nivea-lip-fresa', 'img/Mantis/def.png', 0, '6311.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12677, '10166', 'NVM01', 'NIVEA ESPUMA/AFEITAR HIDRATANTE*200ML', 'G87S374F00', NULL, 'nivea-espumaafeitar-hidratante200ml', 'img/Mantis/def.png', 0, '12566.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12678, '10167', 'NVM02', 'NIVEA ESPUMA DE AFEITAR SENSITIVE*200ML', 'G87S374F00', NULL, 'nivea-espuma-de-afeitar-sensitive200ml', 'img/Mantis/def.png', 0, '11366.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12679, '10168', 'NVV04', 'NIVEA LECHE LIMPIADORA P/N*200ML', 'G87S366F02', NULL, 'nivea-leche-limpiadora-pn200ml', 'img/Mantis/def.png', 0, '15533.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12680, '10170', 'QUD20', 'FORTIDENT EXTRAGRANDE BLANQ. PAG 2 LLV 3', 'G01S010F02', NULL, 'fortident-extragrande-blanq-pag-2-llv-3', 'img/Mantis/def.png', 0, '6813.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12681, '10172', 'ZUL08', 'ARROZ ZULIA INTEGRAL KILO*15UND', 'G74S322F02', NULL, 'arroz-zulia-integral-kilo15und', 'img/Mantis/def.png', 0, '47981.00000', 1, 0, 0, '2016-03-19', '2016-03-19'),
+(12682, '10173', 'ZUL12', 'BULTO ARROZ ZULIA *10KILOS', 'G74S321F02', NULL, 'bulto-arroz-zulia-10kilos', 'img/Mantis/def.png', 0, '28954.00000', 1, 0, 0, '2016-03-19', '2016-03-19'),
+(12683, '10174', 'MVW01', 'RECARGAS MOVILWAY', 'G50S380F02', NULL, 'recargas-movilway', 'img/Mantis/def.png', 0, '1.00000', 1, 0, 0, '2016-03-19', '2016-03-19'),
+(12684, '10175', 'NVB22', 'NIVEA BAJO LA DUCHA PIEL NORMAL*250ML', 'G87S365F00', NULL, 'nivea-bajo-la-ducha-piel-normal250ml', 'img/Mantis/def.png', 0, '8100.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12685, '10176', 'NVB24', 'NIVEA ACEITE CORP. PARA  ESTRIAS*200ML', 'G87S365F00', NULL, 'nivea-aceite-corp-para-estrias200ml', 'img/Mantis/def.png', 0, '14788.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12686, '10177', 'NVD06', 'NIVEA SPRAY STRESS PROTECT HOMBRE*150ML', 'G87S367F00', NULL, 'nivea-spray-stress-protect-hombre150ml', 'img/Mantis/def.png', 0, '9288.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12687, '10178', 'NVI02', 'NIVEA JABON INTIMO NATURAL *250ML', 'G87S368F00', NULL, 'nivea-jabon-intimo-natural-250ml', 'img/Mantis/def.png', 0, '11077.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12688, '10179', 'NVJ01', 'NIVEA JABON AVENA*90G', 'G87S373F02', NULL, 'nivea-jabon-avena90g', 'img/Mantis/def.png', 0, '933.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12689, '10180', 'NVS01', 'NIVEA BLOQUEADOR FACIAL FPS50*50ML', 'G87S369F02', NULL, 'nivea-bloqueador-facial-fps5050ml', 'img/Mantis/def.png', 0, '13300.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12690, '10182', 'NVV10', 'NIVEA CREMA HIDRATANTE DIA P/SECA *50ML', 'G87S366F02', NULL, 'nivea-crema-hidratante-dia-pseca-50ml', 'img/Mantis/def.png', 0, '13300.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12691, '10183', 'NVV13', 'NIVEA ACLARADO NATURAL NOCHE*50ML', 'G87S366F02', NULL, 'nivea-aclarado-natural-noche50ml', 'img/Mantis/def.png', 0, '13011.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12692, '10184', 'NVV15', 'NIVEA FACIAL Q10 NOCHE *50ML', 'G87S366F02', NULL, 'nivea-facial-q10-noche-50ml', 'img/Mantis/def.png', 0, '26688.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12693, '10185', 'OPA60', 'ESPONJA AUTO MICROFRIBRA MAXICLEAN', 'G09S331F02', NULL, 'esponja-auto-microfribra-maxiclean', 'img/Mantis/def.png', 0, '7000.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12694, '10186', 'QUN26', 'PROMO BONICE (DB MORA+ DB LIMON+1MARA)', 'G01S003F02', NULL, 'promo-bonice-db-mora-db-limon1mara', 'img/Mantis/def.png', 0, '12092.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12695, '10187', 'QUS75', 'SAVITAL SH BIOTINA *24*18', 'G01S021F02', NULL, 'savital-sh-biotina-2418', 'img/Mantis/def.png', 0, '6210.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12696, '10188', 'QUS76', 'SAVITAL CREMA BIOTINA*24*18UND', 'G01S277F02', NULL, 'savital-crema-biotina2418und', 'img/Mantis/def.png', 0, '6210.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12697, '10189', 'QUS77', 'SAVITAL ACOND BIOTINA *24*18', 'G01S278F02', NULL, 'savital-acond-biotina-2418', 'img/Mantis/def.png', 0, '6210.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12698, '10190', 'QUU34', 'SUNTEA  LULO 9 LTS*12UND', 'G01S025F02', NULL, 'suntea-lulo-9-lts12und', 'img/Mantis/def.png', 0, '7653.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12699, '10191', 'SUD18', 'CARAMELO CLASICO MORA*100 UND', 'G23S183F02', NULL, 'caramelo-clasico-mora100-und', 'img/Mantis/def.png', 0, '2735.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12700, '10192', 'SUG56', 'TRULULU SURTIDO 18B*90GRAMOS', 'G23S181F02', NULL, 'trululu-surtido-18b90gramos', 'img/Mantis/def.png', 0, '14080.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12701, '10193', 'CMT28', 'PLAN DE DATOS CLARO 3MB', 'G85S320F00', NULL, 'plan-de-datos-claro-3mb', 'img/Mantis/def.png', 0, '3200.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12702, '10194', 'NVB17', 'NIVEA BODY REAFIRMANTE Q10*250ML', 'G87S365F00', NULL, 'nivea-body-reafirmante-q10250ml', 'img/Mantis/def.png', 0, '9388.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12703, '10196', 'NVD10', 'NIVEA BARRA STRESS PROTECT MUJER*43G', 'G87S367F00', NULL, 'nivea-barra-stress-protect-mujer43g', 'img/Mantis/def.png', 0, '8100.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12704, '10197', 'NVD13', 'NIVEA ROLL ON BLACK&WHITE MUJER*50ML', 'G87S367F00', NULL, 'nivea-roll-on-blackwhite-mujer50ml', 'img/Mantis/def.png', 0, '6311.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12705, '10198', 'NVD19', 'NIVEA ROLL ON SILVER PROTECT *50ML', 'G87S367F00', NULL, 'nivea-roll-on-silver-protect-50ml', 'img/Mantis/def.png', 0, '6311.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12706, '10199', 'NVH02', 'NIVEA CREMA MANOS NUTRITIVA *75ML', 'G87S371F02', NULL, 'nivea-crema-manos-nutritiva-75ml', 'img/Mantis/def.png', 0, '7366.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12707, '10200', 'NVJ05', 'NIVEA JABON BAMBOO *90G', 'G87S373F02', NULL, 'nivea-jabon-bamboo-90g', 'img/Mantis/def.png', 0, '877.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12708, '10201', 'NVJ07', 'NIVEA JABON PROT. LECHE*3UND*90G', 'G87S373F02', NULL, 'nivea-jabon-prot-leche3und90g', 'img/Mantis/def.png', 0, '3344.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12709, '10202', 'NVJ10', 'NIVEA JABON BAMBOO*3UND*90G', 'G87S373F02', NULL, 'nivea-jabon-bamboo3und90g', 'img/Mantis/def.png', 0, '3344.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12710, '10203', 'NVL01', 'NIVEA LIP MEDICADO', 'G87S370F02', NULL, 'nivea-lip-medicado', 'img/Mantis/def.png', 0, '6622.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12711, '10204', 'NVM05', 'NIVEA FOR MEN GEL SENSITIVE*200ML', 'G87S374F00', NULL, 'nivea-for-men-gel-sensitive200ml', 'img/Mantis/def.png', 0, '14788.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12712, '10205', 'NVS02', 'NIVEA BLOQ. FACIAL LIGHT *50ML', 'G87S369F02', NULL, 'nivea-bloq-facial-light-50ml', 'img/Mantis/def.png', 0, '13300.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12713, '10206', 'NVS04', 'NIVEA BLOQ. CORPORAL SENSIBLE *125ML', 'G87S369F02', NULL, 'nivea-bloq-corporal-sensible-125ml', 'img/Mantis/def.png', 0, '17766.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12714, '10207', 'NVV09', 'NIVEA CREMA HIDRATANTE DIA P/N *50ML', 'G87S366F02', NULL, 'nivea-crema-hidratante-dia-pn-50ml', 'img/Mantis/def.png', 0, '13300.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12715, '10208', 'NVV17', 'NIVEA CELLULAR ANTIEDAD NOCHE*50ML', 'G87S366F02', NULL, 'nivea-cellular-antiedad-noche50ml', 'img/Mantis/def.png', 0, '37088.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12716, '10210', 'QUU32', 'SUNTEA LULO 4.5 LTS*10UND', 'G01S025F02', NULL, 'suntea-lulo-45-lts10und', 'img/Mantis/def.png', 0, '4324.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12717, '10211', 'SUR15', 'MENTA CHAO LIMON CJ*24B *100UND', 'G23S185F02', NULL, 'menta-chao-limon-cj24b-100und', 'img/Mantis/def.png', 0, '2896.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12718, '10212', 'SUR16', 'CHAO LIMON LINEA 12DP *24LINEAS', 'G23S183F02', NULL, 'chao-limon-linea-12dp-24lineas', 'img/Mantis/def.png', 0, '2896.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12719, '10213', 'WP45600', 'SCHICK GEL PROTECT*75ML', 'G31S266F02', NULL, 'schick-gel-protect75ml', 'img/Mantis/def.png', 0, '4746.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12720, '10214', 'MVW02', 'BETEL MOVIL H2H', 'G50S380F02', NULL, 'betel-movil-h2h', 'img/Mantis/def.png', 0, '1.00000', 1, 0, 0, '2016-03-19', '2016-03-19'),
+(12721, '10215', 'NVB06', 'NIVEA BODY SOFT P/SECA*400ML', 'G87S365F00', NULL, 'nivea-body-soft-pseca400ml', 'img/Mantis/def.png', 0, '12566.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12722, '10216', 'NVB08', 'NIVEA BODY SOFT P/SECA*125ML', 'G87S365F00', NULL, 'nivea-body-soft-pseca125ml', 'img/Mantis/def.png', 0, '5877.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12723, '10217', 'NVB16', 'NIVEA BODY REAFIRMANTE Q10*400ML', 'G87S365F00', NULL, 'nivea-body-reafirmante-q10400ml', 'img/Mantis/def.png', 0, '16277.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12724, '10218', 'NVB18', 'NIVEA BODY REAFIRMANTE Q10*125ML', 'G87S365F00', NULL, 'nivea-body-reafirmante-q10125ml', 'img/Mantis/def.png', 0, '6622.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12725, '10219', 'NVD05', 'NIVEA SPRAY BLACK&WHITE HOMBRE*150ML', 'G87S367F00', NULL, 'nivea-spray-blackwhite-hombre150ml', 'img/Mantis/def.png', 0, '9288.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12726, '10220', 'NVD07', 'NIVEA SPRAY SILVER PROTECT *150ML', 'G87S367F00', NULL, 'nivea-spray-silver-protect-150ml', 'img/Mantis/def.png', 0, '8100.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12727, '10221', 'NVD09', 'NIVEA BARRA ACLARADO NATURAL*43G', 'G87S367F00', NULL, 'nivea-barra-aclarado-natural43g', 'img/Mantis/def.png', 0, '8100.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12728, '10222', 'NVD16', 'NIVEA ROLL ON STRESS PROTECT MUJER*50ML', 'G87S367F00', NULL, 'nivea-roll-on-stress-protect-mujer50ml', 'img/Mantis/def.png', 0, '6311.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12729, '10223', 'NVD18', 'NIVEA ROLL ON STRESS PROTECT MEN*50ML', 'G87S367F00', NULL, 'nivea-roll-on-stress-protect-men50ml', 'img/Mantis/def.png', 0, '6622.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12730, '10224', 'NVD20', 'NIVEA BARRA SILVER PROTECT HOMBRE*43G', 'G87S367F00', NULL, 'nivea-barra-silver-protect-hombre43g', 'img/Mantis/def.png', 0, '7366.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12731, '10225', 'NVH01', 'NIVEA CREMA MANOS Q10 *75ML', 'G87S371F02', NULL, 'nivea-crema-manos-q10-75ml', 'img/Mantis/def.png', 0, '8844.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12732, '10226', 'NVJ06', 'NIVEA JABON ALOE*3 UND*90G', 'G87S373F02', NULL, 'nivea-jabon-aloe3-und90g', 'img/Mantis/def.png', 0, '3344.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12733, '10227', 'NVJ08', 'NIVEA JABON MIEL*3UND*90G', 'G87S373F02', NULL, 'nivea-jabon-miel3und90g', 'img/Mantis/def.png', 0, '3344.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12734, '10228', 'NVS05', 'NIVEA BRONCEADOR FPS 5 *200ML', 'G87S369F02', NULL, 'nivea-bronceador-fps-5-200ml', 'img/Mantis/def.png', 0, '18144.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12735, '10229', 'NVV06', 'NIVEA LECHE LIMPIADORA Q10PLUS*200ML', 'G87S366F02', NULL, 'nivea-leche-limpiadora-q10plus200ml', 'img/Mantis/def.png', 0, '17022.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12736, '10230', 'NVV08', 'NIVEA TONICO FACIAL P/SECA*200ML', 'G87S366F02', NULL, 'nivea-tonico-facial-pseca200ml', 'img/Mantis/def.png', 0, '15988.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12737, '10231', 'NVV12', 'NIVEA ACLARADO RADIANTE DIA*50ML', 'G87S366F02', NULL, 'nivea-aclarado-radiante-dia50ml', 'img/Mantis/def.png', 0, '13011.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12738, '10232', 'NVV19', 'NIVEA CC CREAM Q10*50ML', 'G87S366F02', NULL, 'nivea-cc-cream-q1050ml', 'img/Mantis/def.png', 0, '29355.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12739, '10233', 'ONE99', 'UNIDAD ONE KOLA ROJA*400 ML', 'G84S345F02', NULL, 'unidad-one-kola-roja400-ml', 'img/Mantis/def.png', 0, '478.00000', 1, 0, 0, '2016-03-19', '2016-03-19'),
+(12740, '10234', 'OPA59', 'PAÑO MAXICLEAN PAQUETE*6UND', 'G09S331F02', NULL, 'pano-maxiclean-paquete6und', 'img/Mantis/def.png', 0, '3965.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12741, '10235', 'OPF19', 'ENCENDEDOR WIN ELECT. COLORS DP*25UND', 'G09S341F02', NULL, 'encendedor-win-elect-colors-dp25und', 'img/Mantis/def.png', 0, '8200.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12742, '10237', 'QUD17', 'COMBO FORTIDENT PAG10 LLEVE 12 *60ML', 'G01S351F02', NULL, 'combo-fortident-pag10-lleve-12-60ml', 'img/Mantis/def.png', 0, '11505.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12743, '10238', 'QUS72', 'SAVITAL SH BIOTINA *12*550ML', 'G01S021F02', NULL, 'savital-sh-biotina-12550ml', 'img/Mantis/def.png', 0, '7069.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12744, '10239', 'QUS79', 'SAVITAL ACOND BIOTINA *12*530ML', 'G01S278F02', NULL, 'savital-acond-biotina-12530ml', 'img/Mantis/def.png', 0, '7069.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12745, '10240', 'QUS80', 'SAVITAL CREMA BIOTINA*36*95ML', 'G01S277F02', NULL, 'savital-crema-biotina3695ml', 'img/Mantis/def.png', 0, '2059.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12746, '10242', 'SUG55', 'TRULULU RULETA *12D*12UND', 'G23S181F02', NULL, 'trululu-ruleta-12d12und', 'img/Mantis/def.png', 0, '4184.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12747, '10243', 'NVB01', 'NIVEA BODY NUTRITIVA P/EXTRASECA*1L', 'G87S365F00', NULL, 'nivea-body-nutritiva-pextraseca1l', 'img/Mantis/def.png', 0, '19988.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12748, '10244', 'NVB07', 'NIVEA BODY SOFT P/SECA*250ML', 'G87S365F00', NULL, 'nivea-body-soft-pseca250ml', 'img/Mantis/def.png', 0, '7055.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12749, '10245', 'NVB09', 'NIVEA BODY EXPRESS P/NORMAL*1 LITRO', 'G87S365F00', NULL, 'nivea-body-express-pnormal1-litro', 'img/Mantis/def.png', 0, '17022.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12750, '10246', 'NVB11', 'NIVEA BODY EXPRESS P/NORMAL*400ML', 'G87S365F00', NULL, 'nivea-body-express-pnormal400ml', 'img/Mantis/def.png', 0, '11522.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12751, '10247', 'NVB19', 'NIVEA BAJO LA DUCHA PIEL SECA*400ML', 'G87S365F00', NULL, 'nivea-bajo-la-ducha-piel-seca400ml', 'img/Mantis/def.png', 0, '12566.00000', 1, 16, 0, '2016-03-19', '2016-03-19'),
+(12752, '10248', 'NVC03', 'NIVEA CREME *30ML PAG 10 LLVE12', 'G87S372F02', NULL, 'nivea-creme-30ml-pag-10-llve12', 'img/Mantis/def.png', 0, '40844.00000', 1, 16, 0, '2016-03-19', '2016-03-19');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `promociones`
+--
+
+CREATE TABLE IF NOT EXISTS `promociones` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `titulo` varchar(200) COLLATE utf8_spanish2_ci NOT NULL,
+  `descripcion` text COLLATE utf8_spanish2_ci NOT NULL,
+  `img` varchar(250) COLLATE utf8_spanish2_ci NOT NULL,
+  `imgC` varchar(250) COLLATE utf8_spanish2_ci NOT NULL,
+  `estado` int(2) NOT NULL DEFAULT '1',
+  `valor` int(7) NOT NULL,
+  `created_at` date NOT NULL,
+  `updated_at` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=9 ;
+
+--
+-- Volcado de datos para la tabla `promociones`
+--
+
+INSERT INTO `promociones` (`id`, `titulo`, `descripcion`, `img`, `imgC`, `estado`, `valor`, `created_at`, `updated_at`) VALUES
+(7, 'Nueva PPromo', 'esta es una nueva promo', 'img/promos/2015-04-21-22-04-40-Full-3f00K2CllcXDf.jpg', 'img/promos/crop/2015-04-21-22-04-40-Crop-2FUhcPYbhDXqq.jpg', 1, 25900, '2015-04-21', '2015-04-21'),
+(8, 'guitarra sheeran', 'la guitarra de sheeran', 'img/promos/2015-04-21-22-04-11-Full-Vbt8lDRNI3Y5a.jpg', 'img/promos/crop/2015-04-21-22-04-11-Crop-0hJadCIK2gEAJ.jpg', 1, 1000000, '2015-04-21', '2015-04-21');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tipopago`
+--
+
+CREATE TABLE IF NOT EXISTS `tipopago` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `TipPagNom` varchar(100) COLLATE utf8_spanish2_ci NOT NULL,
+  `created_at` date NOT NULL,
+  `updated_at` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=107 ;
+
+--
+-- Volcado de datos para la tabla `tipopago`
+--
+
+INSERT INTO `tipopago` (`id`, `TipPagNom`, `created_at`, `updated_at`) VALUES
+(1, 'Contado', '0000-00-00', '0000-00-00'),
+(2, 'Cupo Cliente', '0000-00-00', '0000-00-00'),
+(70, 'admin@admin.com', '2016-02-18', '2016-02-18'),
+(71, '', '2016-02-18', '2016-02-18'),
+(72, '', '2016-02-19', '2016-02-19'),
+(73, 'admin@admin.com', '2016-02-19', '2016-02-19'),
+(74, '', '2016-02-19', '2016-02-19'),
+(75, 'kajaja', '2016-02-19', '2016-02-19'),
+(76, 'admin@admin.com', '2016-02-19', '2016-02-19'),
+(77, '', '2016-02-19', '2016-02-19'),
+(78, 'd', '2016-02-19', '2016-02-19'),
+(79, 'admin@admin.com', '2016-02-19', '2016-02-19'),
+(80, '', '2016-02-19', '2016-02-19'),
+(81, 'admin@admin.com', '2016-02-19', '2016-02-19'),
+(82, 'admin@admin.com', '2016-02-19', '2016-02-19'),
+(83, '', '2016-02-19', '2016-02-19'),
+(84, 'admin@admin.com', '2016-02-19', '2016-02-19'),
+(85, '', '2016-02-19', '2016-02-19'),
+(86, 'admin@admin.com', '2016-02-19', '2016-02-19'),
+(87, '', '2016-02-19', '2016-02-19'),
+(88, '', '2016-02-19', '2016-02-19'),
+(89, 'ederalvarez2091057@gmail.com', '2016-02-19', '2016-02-19'),
+(90, 'admin@admin.com', '2016-02-19', '2016-02-19'),
+(91, '', '2016-02-19', '2016-02-19'),
+(92, '', '2016-02-19', '2016-02-19'),
+(93, '', '2016-02-19', '2016-02-19'),
+(94, '', '2016-02-21', '2016-02-21'),
+(95, '', '2016-02-21', '2016-02-21'),
+(96, '', '2016-02-21', '2016-02-21'),
+(97, '', '2016-02-21', '2016-02-21'),
+(98, '', '2016-02-21', '2016-02-21'),
+(99, 'jjbbbb', '2016-02-21', '2016-02-21'),
+(100, 'jjbbbb', '2016-02-21', '2016-02-21'),
+(101, 'jjbbbb', '2016-02-21', '2016-02-21'),
+(102, 'jjbbbb', '2016-02-21', '2016-02-21'),
+(103, 'jjbbbb', '2016-02-21', '2016-02-21'),
+(104, 'jjbbbb', '2016-02-21', '2016-02-21'),
+(105, 'jjbbbb', '2016-02-21', '2016-02-21'),
+(106, 'jjbbbb', '2016-02-21', '2016-02-21');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `users`
+--
+
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `NitSec` varchar(16) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `email` varchar(200) COLLATE utf8_spanish2_ci NOT NULL,
+  `CliCup` int(18) DEFAULT NULL,
+  `password` varchar(200) COLLATE utf8_spanish2_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8_spanish2_ci NOT NULL,
+  `remember_pass` varchar(100) COLLATE utf8_spanish2_ci NOT NULL,
+  `active` int(5) NOT NULL DEFAULT '1',
+  `condiciones` tinyint(1) NOT NULL,
+  `admin` int(5) NOT NULL DEFAULT '0',
+  `created_at` date NOT NULL,
+  `updated_at` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=33 ;
+
+--
+-- Volcado de datos para la tabla `users`
+--
+
+INSERT INTO `users` (`id`, `NitSec`, `email`, `CliCup`, `password`, `remember_token`, `remember_pass`, `active`, `condiciones`, `admin`, `created_at`, `updated_at`) VALUES
+(3, '123431', 'admin@admin.com', NULL, '$2y$10$qlhwbOAYyq.dRvx6VdQEHuk5aGumJ23AuxbNlUPbFdKD5fiHalUzm', 'Yri9k1xcGjOpPeFFisDjYTlatnyye6CxPYN847axxezq8ogGFvGVcN7Rt1iJ', '', 1, 1, 1, '0000-00-00', '2016-03-19'),
+(28, '900030472', 'ederalvarez2091057@gmail.com', NULL, '$2y$10$g3QreIXuJFhrkE8DxTRds.FT81yDnOlpwUNSEOO.7sV.ZnVGwJ9xC', 'TsaFs66sXOLsnznUTBAjN47pR3ZXOw4wDl3gNHQ0e9nQ7jEpX2hFy8cQfSkb', '', 1, 1, 0, '2016-01-22', '2016-03-19'),
+(29, '1095345654', 'cvcarlosandres39@gmail.com', NULL, '$2y$10$RmYlmWlNnUpVBuqRXAuaPuk1PBmYQUQCMIff9vumnt8eramYNshie', '', '', 1, 1, 0, '2016-02-09', '2016-02-09'),
+(30, '1102365685', 'ederalvarez2009@hotmail.com', NULL, '$2y$10$venQExu/OBwh1mS8hLXwoeZUR/222yFY6gK9yo/oBOQRR3YUXwWQq', '', '', 1, 1, 0, '2016-03-06', '2016-03-06'),
+(31, '100200300', 'demi1057@gmail.com', NULL, '$2y$10$/mh20RInNerB8H5ezecs.uV/oPgJ5xz.j6aYShmO95oJZAcdpFdt6', '', '', 1, 1, 0, '2016-03-19', '2016-03-19'),
+(32, '100200301', 'ivan.rojas.sis@gmail.com', NULL, '$2y$10$iG8q4jkWXaF0K7BzgRA9XuxfrlNSZF9QXOlnBAogw4qgsQ00vY/vW', '', '', 1, 1, 0, '2016-03-19', '2016-03-19');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `user_datos`
+--
+
+CREATE TABLE IF NOT EXISTS `user_datos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `barrio_id` int(11) DEFAULT NULL,
+  `nombre` varchar(150) COLLATE utf8_spanish2_ci NOT NULL,
+  `apellido` varchar(150) COLLATE utf8_spanish2_ci NOT NULL,
+  `cedula` varchar(20) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `nombre_negocio` varchar(200) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `ciudad` int(11) DEFAULT NULL,
+  `canal` int(11) DEFAULT NULL,
+  `direccion` varchar(200) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `telefono` varchar(20) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `comentarios` text COLLATE utf8_spanish2_ci,
+  `created_at` date NOT NULL,
+  `updated_at` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=30 ;
+
+--
+-- Volcado de datos para la tabla `user_datos`
+--
+
+INSERT INTO `user_datos` (`id`, `user_id`, `barrio_id`, `nombre`, `apellido`, `cedula`, `nombre_negocio`, `ciudad`, `canal`, `direccion`, `telefono`, `comentarios`, `created_at`, `updated_at`) VALUES
+(24, 28, 1, 'Edere', 'Alvarez', '1102365683', NULL, 1, 0, 'calle 20 # 24-27', '3013119199', NULL, '2016-01-22', '2016-03-19'),
+(25, 3, 1, 'Admin', 'Pag', '13456543', 'lov', 1, 0, 'calle 39 # 20-39 piso e', '3013119198', 'lkwnlkwn', '2016-02-09', '2016-02-09'),
+(26, 29, 1, 'Carlos', 'Valderrama', '1095345654', 'DEFAULT', 1, 0, 'cll 20 # 24-27', '302393939', 'Sin comentarios', '2016-02-09', '2016-02-09'),
+(27, 30, 1, 'Eder', 'Julian', '1102365685', 'DEFAULT', 1, 0, 'calle 17 #3w-65 miraflores torre 36 apto 11-30', '3013119198', 'Sin comentarios', '2016-03-06', '2016-03-06'),
+(28, 31, 1, 'demi', 'lovato', '100200300', 'DEFAULT', 1, 0, 'cll 20', '3013119191', 'Sin comentarios', '2016-03-19', '2016-03-19'),
+(29, 32, 1, 'ivan', 'rojas', '100200301', 'DEFAULT', 1, 0, NULL, '3098765454', 'Sin comentarios', '2016-03-19', '2016-03-19');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `user_favs`
+--
+
+CREATE TABLE IF NOT EXISTS `user_favs` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `art_cod` varchar(20) COLLATE utf8_spanish2_ci NOT NULL,
+  `created_at` date NOT NULL,
+  `updated_at` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=15 ;
+
+--
+-- Volcado de datos para la tabla `user_favs`
+--
+
+INSERT INTO `user_favs` (`id`, `user_id`, `art_cod`, `created_at`, `updated_at`) VALUES
+(9, 3, '933000', '2016-02-19', '2016-02-19'),
+(10, 3, '931120', '2016-02-19', '2016-02-19'),
+(11, 3, '931100', '2016-02-19', '2016-02-19'),
+(12, 1, '000276', '2016-02-19', '2016-02-19'),
+(13, 3, '931000              ', '2016-02-19', '2016-02-19'),
+(14, 3, '010005', '2016-02-19', '2016-02-19');
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

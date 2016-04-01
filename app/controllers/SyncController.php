@@ -72,7 +72,7 @@ CotSubPreArtCod,SubBodSucCCSec,PedArtCaj,PedArtUni,CotSecEst,CotPre,cotdesuni,Co
 values('P','$SecNum',1,'N',$artSec/*ArtSec*/,1 /*ArtEmb*/,'S/L','1999-01-01 00:00:00.000',0.000000,$uni/*CotArtUni*/,0.00,0.00,0.00,0.00,0.00000,
 (select top 1 ParConIva from Articulos a left join ParametroContable p on a.ParConCod=p.ParConCod where ArtSec='$artSec'),
 '$price'/*CotArtPrecio*/,0.00000,0.00000,0.00000,0.00000,0.00000,isnull((select lisprecod from clientes where nitsec='$NitSec' and clisec=1),0)
-,(select top 1 PreArtCod from ArtPre where artsec=$artSec),1,0,0,'A',0,0.00000,1.00000,NULL,0.00000
+,(select top 1 PreArtCod from ArtPre where artsec=$artSec),1/*Bodega*/,0,0,'A',0,0.00000,1.00000,NULL,0.00000
 ,(select top 1 ParConIva from Articulos a left join ParametroContable p on a.ParConCod=p.ParConCod where ArtSec=$artSec),'$price')
 ";
 															if($rs_access = odbc_exec($conn_access, $ssql5)){
@@ -249,14 +249,16 @@ cast(isnull((p3.PrePreFijVal),0)/(1-((isnull(p3.preporval,0))/100)) as int) prec
 			if ($conn_access  = odbc_connect("Driver={SQL Server Native Client 10.0};Server=".$this->server.",1433;Database=".$this->db.";", ''.$this->user.'', ''.$this->pass.'')){ 
 					   	echo "Conectado correctamente"; 
 					   	
-					        			        $ssql = " select top 200 a.artsec,a.ArtSec, a.ArtNom,ArtImg_GXI,a.InvFamCod,a.ArtCod,a.ArtFicTec,parconiva,
+					        			        $ssql = " select  a.artsec,a.ArtSec,conteo,isnull(dt,0) AS dt, a.ArtNom,ArtImg_GXI,a.InvFamCod,a.ArtCod,a.ArtFicTec,parconiva,
 0 precio1,0 precio2,
 cast(isnull((p3.PrePreFijVal),0)/(1-((isnull(p3.preporval,0))/100)) as int) precio3,
 
   replace(replace(replace(SG.InvSubGruCod,'S',''),'G',''),'0','99') InvSubGruCod,isnull((select SUM((karcaj+karuni)*(case when (karnat='+') then 1 else -1 end)) saldo
  from Kardex  k inner join Factura f on f.FacSec=k.facsec where facest='A' and k.ArtSec=a.ArtSec ),0) saldo
- from articulos a   
- left join PreciosDetalle p3 on p3.ArtSec=a.ArtSec and  p3.LisPreCod=2
+ from articulos a 
+ 
+ left join EDER e on e.conteo = a.ArtSec  
+ left join PreciosDetalle p3 on p3.ArtSec=a.ArtSec and  p3.LisPreCod=3
  
  left join PresentacionArticulos pres on pres.preartcod=p3.preartcod
  left join ParametroContable p on p.parconcod=a.ParConCod
@@ -281,68 +283,73 @@ cast(isnull((p3.PrePreFijVal),0)/(1-((isnull(p3.preporval,0))/100)) as int) prec
 									$prod = Producto::where('id_mantis','=',$pro['ArtCod'])->first();
 									if($prod)
 									{
-										//File::delete($prod->img);
-										if($pro['ArtImg_GXI'] != NULL)
-								   			{
-								   				$nombre = Str_replace('gxdbfile:','',$pro['ArtImg_GXI']);
-								   				$urlImg = $this->urlMantis.$nombre;
-								   			
-								   				//Image::make($urlImg)->resize(300, null, function ($constraint) {$constraint->aspectRatio();})->save(public_path().'/img/Mantis/'.$nombre);
-								   				//Image::make($urlImg)->save(public_path().'/img/Mantis/'.$nombre);
-								   				//$urlImg = $this->urlMantis.$nombre;
-								   				//$prod->img = 'img/Mantis/'.$nombre;
-								   				$prod->img = $urlImg;
+										if($prod->dt != $pro['dt'])
+										    {
+
+												//File::delete($prod->img);
+												if($pro['ArtImg_GXI'] != NULL)
+										   			{
+										   				$nombre = Str_replace('gxdbfile:','',$pro['ArtImg_GXI']);
+										   				$urlImg = $this->urlMantis.$nombre;
+
+										   				//Image::make($urlImg)->resize(300, null, function ($constraint) {$constraint->aspectRatio();})->save(public_path().'/img/Mantis/'.$nombre);
+										   				//Image::make($urlImg)->save(public_path().'/img/Mantis/'.$nombre);
+										   				//$urlImg = $this->urlMantis.$nombre;
+										   				//$prod->img = 'img/Mantis/'.$nombre;
+										   				$prod->img = $urlImg;
 
 
-								   			}else
-								   			{
-								   				$urlImg = 'img/Mantis/def.png';
-								   				$prod->img = $urlImg;
-								   			}
-										/*if(!$pro['ArtFot'])
-										{
-											$filename ="def.png";
-											$prod->img = 'img/Mantis/'.$filename;
+										   			}else
+										   			{
+										   				$urlImg = 'img/Mantis/def.png';
+										   				$prod->img = $urlImg;
+										   			}
+												/*if(!$pro['ArtFot'])
+												{
+													$filename ="def.png";
+													$prod->img = 'img/Mantis/'.$filename;
+												}
+												else
+												{
+														//###########CREAR LA IMAGEN DESDE EL ARCHIVOBLOB
+
+													$codigoIMG = str_random(13);
+													$filename = date('Y-m-d-H-m-s')."-".$codigoIMG.".jpg";
+
+													//Image::make($p->ProImg)->resizeCanvas(800, 400, null, false, '#fff')->save(public_path().'/img/products/'.$filename);
+
+													Image::make($pro['ArtFot'])->save(public_path().'/img/Mantis/'.$filename);
+													$prod->img = 'img/Mantis/'.$filename;
+													
+												########################################
+												}*/
+
+												
+												$Nombre = strtolower($pro['ArtNom']);
+												$Nombre = utf8_encode($Nombre);
+												$artnom = utf8_encode($pro['ArtNom']);
+												$VarSlug = Str::slug($Nombre);
+												
+												$prod->id_mantis = $pro['ArtCod'];
+												//$prod->pro_nom = $pro['artnom'];
+												$prod->ArtSec    = $pro['ArtSec'];
+												$prod->pro_nom = $artnom;
+												//$prod->InvFamCod = $pro['InvFamCod'];
+
+
+									
+
+												$prod->categoria_id = $pro['InvFamCod'];
+												$prod->descripcion	= $pro['ArtFicTec'];
+												$prod->slug = $VarSlug;
+												
+												$prod->precio = $pro['precio3'];
+												$prod->por_iva = $pro['parconiva'];
+												$prod->cantidad = $pro['saldo'];
+												$prod->dt       = $pro['dt'];
+
+												$prod->save();
 										}
-										else
-										{
-												//###########CREAR LA IMAGEN DESDE EL ARCHIVOBLOB
-
-											$codigoIMG = str_random(13);
-											$filename = date('Y-m-d-H-m-s')."-".$codigoIMG.".jpg";
-
-											//Image::make($p->ProImg)->resizeCanvas(800, 400, null, false, '#fff')->save(public_path().'/img/products/'.$filename);
-
-											Image::make($pro['ArtFot'])->save(public_path().'/img/Mantis/'.$filename);
-											$prod->img = 'img/Mantis/'.$filename;
-											
-										########################################
-										}*/
-
-										
-										$Nombre = strtolower($pro['ArtNom']);
-										$Nombre = utf8_encode($Nombre);
-										$artnom = utf8_encode($pro['ArtNom']);
-										$VarSlug = Str::slug($Nombre);
-										
-										$prod->id_mantis = $pro['ArtCod'];
-										//$prod->pro_nom = $pro['artnom'];
-										$prod->ArtSec    = $pro['ArtSec'];
-										$prod->pro_nom = $artnom;
-										//$prod->InvFamCod = $pro['InvFamCod'];
-
-
-							
-
-										$prod->categoria_id = $pro['InvFamCod'];
-										$prod->descripcion	= $pro['ArtFicTec'];
-										$prod->slug = $VarSlug;
-										
-										$prod->precio = $pro['precio3'];
-										$prod->por_iva = $pro['parconiva'];
-										$prod->cantidad = $pro['saldo'];
-
-										$prod->save();
 									}else{
 										
 										$producto = new Producto;
@@ -412,7 +419,8 @@ cast(isnull((p3.PrePreFijVal),0)/(1-((isnull(p3.preporval,0))/100)) as int) prec
 										//$producto->img = 'img/Mantis/'.$filename;
 										$producto->precio 		= $pro['precio3'];
 										$producto->por_iva 		= $pro['parconiva'];
-										$producto->cantidad 	=  $pro['saldo'];;
+										$producto->cantidad 	=  $pro['saldo'];
+										$producto->dt 			= $pro['dt'];
 										$producto->save();
 									}
 								}#######################END FOREACH

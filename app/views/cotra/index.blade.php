@@ -33,13 +33,13 @@
                             </ol>
                             <div class="carousel-inner">
                                 <div class="item active">
-                                    <img class="slide-image" src="{{asset('cot/img/slider/slideCootracolta.jpg')}}" alt="">
+                                    <img class="slide-image" src="{{asset('cot/img/slider/b1.jpg')}}" alt="">
                                 </div>
                                 <div class="item">
-                                    <img class="slide-image" src="{{asset('cot/img/slider/slideCootracolta.jpg')}}" alt="">
+                                    <img class="slide-image" src="{{asset('cot/img/slider/b2.jpg')}}" alt="">
                                 </div>
                                 <div class="item">
-                                    <img class="slide-image" src="{{asset('cot/img/slider/slideCootracolta.jpg')}}" alt="">
+                                    <img class="slide-image" src="{{asset('cot/img/slider/b3.jpg')}}" alt="">
                                 </div>
                             </div>
                             <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
@@ -104,7 +104,7 @@
                                                                                     <!-- <input type="button" value="" onclick="addToCart('');" class="product-icon fa fa-shopping-cart shopping-cart" /> -->
                                                                                     <button class="btn btn-shopping-cart">
                                                                                     <span class="fa fa-shopping-cart product-icon hidden-sm">&nbsp;</span>
-                                                                                    <span>Agregar al carro</span>
+                                                                                    <span><a href="{{URL::route('proDetalle',array('slug'=>$producto->slug))}}">Agregar al carro</a></span>
                                                                                     </button>
                                                                                 </div>
             

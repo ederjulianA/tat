@@ -100,7 +100,7 @@ Route::get(	'/PedidoPdf/{id}', array(
 
 //GRUPO DE RUTAS PARA ANTES DE ESTAR REGISTRADO
 Route::group(['before' => 'guest'], function () {
-		Route::get(	'/register', array(
+		Route::any(	'/register', array(
 		'as'=>'register', 
 		'uses'=> 'HomeController@getRegistger'
 		));
@@ -119,7 +119,10 @@ Route::group(['before' => 'guest'], function () {
 		'uses'=> 'HomeController@postRegister'
 		));
 
+		
+
 });
+
 
 Route::get('cart', array('as' => 'cart', 'uses' => 'CartController@getCart'));
 Route::get('checkout', array('as' => 'checkout', 'uses' => 'CartController@getCheckout'));
@@ -142,7 +145,7 @@ Route::get('buscador/{f?}/{o?}', array('as' => 'buscador', 'uses' => 'BuscadorCo
 Route::post('addToCart', array('as' => 'addToCart', 'uses' => 'CartController@addToCart'));
 Route::post('updateItem', array('as' => 'updateItem', 'uses' => 'CartController@updateItem'));
 Route::post('register/new/user', array('as' => 'newUser', 'uses' => 'UserController@postNewUser'));
-Route::post('postlogin', array('as' => 'postlogin', 'uses' => 'HomeController@postLogin'));
+Route::any('postlogin', array('as' => 'postlogin', 'uses' => 'HomeController@postLogin'));
 Route::post('postLoginCheckout', array('as' => 'postLoginCheckout', 'uses' => 'UserController@postLoginCheckout'));
 Route::post('postUpdateData', array('as' => 'postUpdateData', 'uses' => 'UserController@postUpdateData'));
 Route::post('postPedido', array('as' => 'postPedido', 'uses' => 'CartController@postPedido'));
@@ -165,7 +168,10 @@ Route::post('urlAddProd', array('as' => 'urlAddProd', 'uses' => 'Ajax2Controller
 Route::post('urlBuscarProd', array('as' => 'urlBuscarProd', 'uses' => 'Ajax2Controller@urlBuscarProd'));
 Route::post('urlDeleteProd', array('as' => 'urlDeleteProd', 'uses' => 'Ajax2Controller@urlDeleteProd'));
 Route::post('urlReparto', array('as' => 'urlReparto', 'uses' => 'Ajax2Controller@urlReparto'));
-Route::post('urlSync', array('as' => 'urlSync', 'uses' => 'Ajax2Controller@urlSync'));
+Route::any('urlSync', array('as' => 'urlSync', 'uses' => 'Ajax2Controller@urlSync'));
+Route::any('urlTestPro', array('as' => 'urlTestPro', 'uses' => 'Ajax2Controller@urlTestPro'));
+Route::any('urlTestSavePro', array('as' => 'urlTestSavePro', 'uses' => 'Ajax2Controller@urlTestSavePro'));
+
 
 
 

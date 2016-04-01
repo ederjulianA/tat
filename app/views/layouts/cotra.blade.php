@@ -47,13 +47,6 @@
             <!-- Header -->
             <header id="header">
                 <!-- Header Top Bar -->
-                <div class="logo pull-left">
-                     <h1>
-                        <a href="/">
-                        <img class="logo-color" src="{{asset('cot/img/logos/logo.png')}}" alt="Cootracolta" width="160" height="80">
-                        </a>
-                    </h1>
-                 </div>
                 <div class="top-bar">
                     <div class="slidedown collapse">
                         <div class="container">
@@ -65,12 +58,14 @@
                             </div>
                             <div class="phone-login pull-right">
                                 @if(Auth::check())
-                                    <a href="" >{{Auth::user()->email}}</a>
+                                    <a href="{{URL::route('micuenta')}}" >{{Auth::user()->email}}</a>
                                     <a href="{{URL::route('logout')}}" ><i class="fa fa-sign-in"></i>Cerrar sesión</a>
 
                                 @else
-                                    <a href="#" data-toggle="modal" data-target="#loginModal"><i class="fa fa-sign-in"></i>Login</a>
-                                    <a href="#" data-toggle="modal" data-target="#registrationModal"><i class="fa fa-edit"></i> Registrarse</a>
+                                    {{--<a href="{{URL::route('login')}}" data-toggle="modal" data-target="#loginModal"><i class="fa fa-sign-in"></i>Login</a>
+                                    <a href="{{URL::route('login')}}" data-toggle="modal" data-target="#registrationModal"><i class="fa fa-edit"></i> Registrarse</a>--}} 
+                                    <a href="{{URL::route('login')}}" ><i class="fa fa-sign-in"></i>Login</a>
+                                    <a href="{{URL::route('login')}}" ><i class="fa fa-edit"></i> Registrarse</a>
                                 @endif
                                 
                                 <a href="{{URL::route('cart')}}"><i class="fa fa-shopping-cart"></i> Carro de compras</a>

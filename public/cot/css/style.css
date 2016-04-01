@@ -488,7 +488,7 @@ header .main-header {
     text-align: left;
 }
 
-.logo { height: 80px }
+.logo { height: 40px }
 
 .logo h1 { margin: 13px 0 }
 
@@ -3745,12 +3745,14 @@ figure.effect-zoe:hover figcaption>span:nth-child(2) {
 
 .product-block .name a {
     color: #283043;
-    font-size: 16px;
+    font-size: 14px;
     line-height: 22px;
     text-decoration: none;
     display: inline-block;
     *display: inline;
     zoom: 1;
+    width: auto;
+    height: 75px;
 }
 
 .product-block .name a:hover { color: #283043 }
@@ -3767,6 +3769,36 @@ figure.effect-zoe:hover figcaption>span:nth-child(2) {
     -ms-border-radius: 0px;
     -o-border-radius: 0px;
     border-radius: 0px;
+}
+
+.product-block .image {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    margin-bottom: 10px;
+    border: 0px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    -ms-border-radius: 0px;
+    -o-border-radius: 0px;
+    border-radius: 0px;
+}
+
+.product-block .image2 {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    margin-bottom: 10px;
+    border: 0px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    -ms-border-radius: 0px;
+    -o-border-radius: 0px;
+    border-radius: 0px;
+    width: auto;
+    height: 200px;
 }
 
 .product-block .image .product-zoom {

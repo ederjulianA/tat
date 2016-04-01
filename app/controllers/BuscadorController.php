@@ -28,8 +28,9 @@ class BuscadorController extends BaseController {
 		$grupos 		=   $this->grupo->getAllGrupos();
 		$categorias =   $this->cat->getAllCat();
 		$promo      =   $this->promo->getPromo();
+		$menu       =   Menu::all();
 		
-		return View::make('catalogo.Buscador')->with('grupos',$grupos)->with('promo',$promo)->with('categorias',$categorias)->with('productos',$productos)->with('keyword',$keyword)->with('products', Cart::contents());
+		return View::make('cotra.buscador')->with('menu',$menu)->with('grupos',$grupos)->with('promo',$promo)->with('categorias',$categorias)->with('productos',$productos)->with('keyword',$keyword)->with('products', Cart::contents());
 
 
 	}

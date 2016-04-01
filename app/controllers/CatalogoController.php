@@ -32,6 +32,7 @@ class CatalogoController extends BaseController {
 		$productos = $this->pro->getProCategorias($id);
 		$promo      =   $this->promo->getPromo();
 		$grupos		=   $this->grupo->getAllGrupos();
-		return View::make('catalogo.categoria')->with('grupos',$grupos)->with('promo',$promo)->with('categorias',$categorias)->with('productos',$productos)->with('products', Cart::contents());
+		$menu       =   Menu::all();
+		return View::make('cotra.categoria')->with('menu',$menu)->with('grupos',$grupos)->with('promo',$promo)->with('categorias',$categorias)->with('productos',$productos)->with('products', Cart::contents());
 	}
 }

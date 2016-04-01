@@ -283,9 +283,10 @@ where n.NitIde = '$NitIde'";
 												$id_pedido = 'PED-WEB-'.date('Ymd-Hms');
 												//dd($id_pedido,$SecNum,$NitSec);
 												$totalCompra =  $data['totalCart'];
+                                                $CotFecEd = date("d-m-y");
 												
 												$ssql3 ="INSERT INTO Cotizaciones1(CotTip,CotSec,TipCod,EmpCod,CotFecha,CotObs,CotUsuCod,CotCliConPag,CotSecConCon,CotLisPreCod,CotSubVenCod,CotSubNitSec,CotSubCliSec,CotNum,CotSumCot,BodSucCCSec,CotEst,CotSubCotSec,AnuFueSec,CotAnuObs,CotEstado)
-                   								 VALUES('P','$SecNum','PED',1,'16-01-2016','miobs','admin',1/*cliConPag*/,1/*numItems*/,1/*lisprecod*/,$Vencod/*vencod*/,'$NitSec'/*nitsec*/,1/*clisec*/,'$id_pedido','$totalCompra',1/*BODsUCCSEC*/,2/*CotEst*/,NULL,NULL,NULL,'A')";
+                   								 VALUES('P','$SecNum','PED',1,'$CotFecEd','miobs','admin',1/*cliConPag*/,1/*numItems*/,1/*lisprecod*/,$Vencod/*vencod*/,'$NitSec'/*nitsec*/,1/*clisec*/,'$id_pedido','$totalCompra',1/*BODsUCCSEC*/,2/*CotEst*/,NULL,NULL,NULL,'A')";
 
                    								 if($rs_access = odbc_exec($conn_access, $ssql3)){ 
                    								 		$ssql4 = "UPDATE Secuencia SET SecNum=SecNum+1 where SecCod='PEDIDO'";
@@ -305,7 +306,7 @@ CotSubPreArtCod,SubBodSucCCSec,PedArtCaj,PedArtUni,CotSecEst,CotPre,cotdesuni,Co
 values('P','$SecNum',$num,'N',$artSec/*ArtSec*/,1 /*ArtEmb*/,'S/L','1999-01-01 00:00:00.000',0.000000,$uni/*CotArtUni*/,0.00,0.00,0.00,0.00,0.00000,
 (select top 1 ParConIva from Articulos a left join ParametroContable p on a.ParConCod=p.ParConCod where ArtSec='$artSec'),
 '$price'/*CotArtPrecio*/,0.00000,0.00000,0.00000,0.00000,0.00000,isnull((select lisprecod from clientes where nitsec='$NitSec' and clisec=1),0)
-,(select top 1 PreArtCod from ArtPre where artsec=$artSec),1,0,0,'A',0,0.00000,1.00000,'$CotArtNom',0.00000
+,(select top 1 PreArtCod from ArtPre where artsec=$artSec),1/*Bodega*/,0,0,'A',0,0.00000,1.00000,'$CotArtNom',0.00000
 ,(select top 1 ParConIva from Articulos a left join ParametroContable p on a.ParConCod=p.ParConCod where ArtSec=$artSec),'$CotSubPrecio')
 ";
 															if($rs_access = odbc_exec($conn_access, $ssql5)){

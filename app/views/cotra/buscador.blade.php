@@ -44,8 +44,8 @@
                                     <div class="products-block">
                                         <div class="row product-items">
 
-	                                         @foreach(array_chunk($productos->getCollection()->all(),3) as $row)
-												@foreach($row as $producto)
+	                                        
+												@foreach($productos as $producto)
 	                                            <!-- Product Items -->
 	                                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 product-cols first">
 	                                                <div class="product-block">
@@ -89,7 +89,7 @@
 	                                            </div>
 	                                            <!-- /Product Items -->
 	                                            @endforeach
-	                                          @endforeach  
+	                                         
 	                                          
                                         </div>
                                        
@@ -97,7 +97,7 @@
                                 </div>
                                 <!-- .product-grid End-->
                                 <div class="row">
-                                    {{$productos->links()}}
+                                    {{--{{$productos->links()}}--}}
                                 </div>
                             </div>
                             <!-- /Products End -->

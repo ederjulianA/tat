@@ -14,13 +14,14 @@
 
 		public function getPedidoDetalle($id)
 		{
+			
 
 			/*$pedido = Compra::where('id','=',$id)->first();*/
 			$pedido = DB::table('compra as c')->join('estados as e','c.estado_id','=','e.id')
 											->join('users as u','c.user_id','=','u.id')
 											->join('user_datos as ud','ud.user_id','=','u.id')
 											->join('barrios as b','ud.barrio_id','=','b.id')
-											->join('metodo_envio as me','c.tipo_compra','=','me.id')
+											->join('metodo_envio as me','me.id','=','c.tipo_compra')
 											
 			->select(
 					'c.id',
@@ -42,9 +43,11 @@
 		 			'c.estado_id',
 		 			'u.email',
 		 			'b.bar_nom'
+		 			//revisar por base de datos que el tipo de compra sea diferente de 0
 		 			
 				)->where('c.id','=',$id)->first();
-			
+
+
 
 			return $pedido;
 		}
