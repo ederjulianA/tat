@@ -38,34 +38,40 @@
       
     </div>
   <!--<a href="" title="" id="loadProdApi" class="btn btn-info"> Sincronizar Productos</a>-->
-  <a href="{{URL::route('mantisSync')}}"class="btn btn-info"  title="">Sincronizar Productos</a>
+  {{--<a href="{{URL::route('mantisSync')}}"class="btn btn-info"  title="">Sincronizar Productos</a>--}}
   <div>
-    <p>Total de productos: {{$numPros}}</p>
+    {{--<p>Total de productos: {{$numPros}}</p>--}}
       <div class="container">
         <div class="row">
+          <form method="get" action="{{URL::route('adminProductos')}}">
             <div class="col-md-4">
                  <div class="form-group">
                     <label> Artcod</label>
-                    <input type="text" class="form-control filters" id="seaCod">
+                    <input type="text" class="form-control filters" value="{{Input::get('ArtCod')}}" id="seaCod" name="ArtCod">
                     
                  </div>
             </div>
             <div class="col-md-4">
               <div class="form-group">
                     <label> Nombre</label>
-                    <input type="text" class="form-control filters" id="seaNom">
+                    <input type="text" class="form-control filters" value="{{Input::get('ArtNom')}}" id="seaNom" name="ArtNom">
                     
                  </div>
             </div>
             <div class="col-md-4">
-              aa
+              <div class="form-group">
+                <input type="submit" class="btn btn-info" value="Buscar">
+               </div> 
             </div>
+          </for>  
           
         </div>
       </div>
     
   </div>
-  
+  {{--<div class="row conte">
+    
+  </div>--}}
     <table class="table">
       <thead>
         <th>Id producto</th>
@@ -87,11 +93,13 @@
           </tr>
         @endforeach
       </tbody>
+
       
     </table>
-  </div>  
+     {{$productos->appends(array('ArtCod' => Input::get('ArtCod'),'ArtNom'=>Input::get('ArtNom')))->links()}}
+  </div>  {{--Div contenedor--}}
 @stop
 
 @section('scripts')
-  <script src="{{asset('tat/js/loads.js')}}"></script>
+  {{--<script src="{{asset('tat/js/loads.js')}}"></script>--}}
 @stop

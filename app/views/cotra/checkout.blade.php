@@ -82,38 +82,49 @@
                                         </a>
                                         <div id="step-2" class="collapse">
                                             <div class="step-content">
-                                                <form class="row no-margin">
+                                                <form class="row no-margin" method="post" action="/register/new/user">
                                                     <div class="col-sm-12 col-md-12">
-                                                        <input class="form-control" placeholder="Nombre" type="text">
+                                                        {{ Form::text('nombre','',array('class'=>'form-control','name'=>'nombre','placeholder'=>'nombre')) }}
+                                                             {{ $errors->first('nombre','<p class="alert alert-danger">:message</p>') }}
                                                     </div>
                                                     <div class="col-sm-12 col-md-12">
-                                                        <input class="form-control" placeholder="Apellido" type="text">
-                                                    </div>
-                                                    <div class="clearfix"></div>
-                                                    <div class="col-sm-12 col-md-12">
-                                                        <input class="form-control" placeholder="Email" type="text">
+                                                        {{ Form::text('apellido','',array('class'=>'form-control','name'=>'apellido','placeholder'=>'apellido')) }}
+                                            {{ $errors->first('apellido','<p class="alert alert-danger">:message</p>') }}
                                                     </div>
                                                     <div class="clearfix"></div>
                                                     <div class="col-sm-12 col-md-12">
-                                                        <input class="form-control" placeholder="Dirección" type="text">
-                                                    </div>
-                                                    <div class="col-sm-12 col-md-12">
-                                                        <input class="form-control" placeholder="Ciudad" type="text">
+                                                        {{ Form::text('NitSec','',array('class'=>'form-control','name'=>'NitSec','placeholder'=>'Cedula')) }}
+                                            {{ $errors->first('NitSec','<p class="alert alert-danger">:message</p>') }}
                                                     </div>
                                                     <div class="clearfix"></div>
                                                     <div class="col-sm-12 col-md-12">
-                                                        <input class="form-control" placeholder="Teléfono" type="text">
+                                                        {{ Form::text('telefono','',array('class'=>'form-control','name'=>'telefono','placeholder'=>'telefono')) }}
+                                            {{ $errors->first('telefono','<p class="alert alert-danger">:message</p>') }}
+                                                    </div>
+                                                    <div class="col-sm-12 col-md-12">
+                                                        {{ Form::text('direccion','',array('class'=>'form-control','name'=>'direccion','placeholder'=>'direccion')) }}
+                                            {{ $errors->first('direccion','<p class="alert alert-danger">:message</p>') }}
                                                     </div>
                                                     <div class="clearfix"></div>
                                                     <div class="col-sm-12 col-md-12">
-                                                        <input class="form-control" placeholder="Contraseña" type="text">
-                                                    </div>
-                                                    <div class="col-sm-12 col-md-12">
-                                                        <input class="form-control" placeholder="Confirmar contraseña" type="text">
+                                                        {{ Form::email('email','',array('class'=>'form-control','name'=>'email','placeholder'=>'Email')) }}
+                                            {{ $errors->first('email','<p class="alert alert-danger">:message</p>') }}
                                                     </div>
                                                     <div class="clearfix"></div>
+                                                    <div class="col-sm-12 col-md-12">
+                                                        <input type="password" class="form-control" name="password" id="inputPassword" placeholder="******">
+                                            {{ $errors->first('password','<p class="alert alert-danger">:message</p>') }}
+                                                    </div>
+                                                    <div class="col-sm-12 col-md-12">
+                                                        <input type="password" class="form-control" name="password_confirmation" id="inputRePassword" placeholder="******">
+                                            {{ $errors->first('password_confirmation','<p class="alert alert-danger">:message</p>') }}
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                    <input type="checkbox" name="terminos"> He leído y acepto los términos y condiciones de servicio 
+
+                                                    {{ $errors->first('terminos','<p class="alert alert-danger">:message</p>') }}
                                                     <div class="col-sm-12 buttons-box text-right">
-                                                        <button type="button" class="btn btn-color">Continuar</button>
+                                                        <button type="submit" class="btn btn-color">Continuar</button>
                                                         <span class="required"><b>*</b> Campos requeridos</span>
                                                     </div>
                                                 </form>
@@ -296,16 +307,18 @@
                                         			
 
                                         			<?php  $refCod = "eder-".date('YmdHms');$sig = "6u39nqhq8ftd0hlvnjfs66eh8c~500238~".$refCod."~".Cart::total()."~COP"; $e = md5($sig);?>
-	<form method="post" action="https://stg.gateway.payulatam.com/ppp-web-gateway/">
+	<form method="post" action="https://stg.gateway.payulatam.com/ppp-web-gateway/" id="formPayu">
+    {{--<form method="post" action="{{URL::route('purconfirmation2')}}">--}}
+    {{--<form method="post" action="https://sandbox.gateway.payulatam.com/ppp-web-gateway/">--}}
   <input name="merchantId"    type="hidden"  value="500238"   >
   <input name="accountId"     type="hidden"  value="500537" >
   <input name="description"   type="hidden"  value="Test PAYU"  >
-  <input name="referenceCode" type="hidden"  value="{{$refCod}}" >
+  <input name="referenceCode" type="hidden"  id="code" value="{{$refCod}}" >
   <input name="amount"        type="hidden"  value="{{Cart::total()}}"   >
   <input name="tax"           type="hidden"  value="0"  >
   <input name="taxReturnBase" type="hidden"  value="0" >
   <input name="currency"      type="hidden"  value="COP" >
-  <input name="signature"     type="hidden"  value="{{$e}}"  >
+  <input name="signature"     type="hidden" id="sig"  value="{{$e}}"  >
   <input name="test"          type="hidden"  value="1" >
     <input name="extra1"          type="hidden"  value="{{Auth::user()->id}}">
    <input name="extra3"          type="hidden"  value="{{Funciones::getCodigos()}}">
@@ -313,10 +326,19 @@
     <input name="extra2"type="hidden"  value="{{Cart::totalItems()}}">
   <input name="buyerEmail"    type="hidden"  value="{{Auth::user()->email}}">
   <input name="responseUrl"    type="hidden"  value="{{URL::route('pur')}}">
-  <input name="confirmationUrl"    type="hidden"  value="{{URL::route('purconfirmation')}}" >
-  <input type="image" border="0" alt="" src="http://www.payulatam.com/img-secure-2015/boton_pagar_grande.png" onClick="this.form.urlOrigen.value = window.location.href;"/>
+  <input name="confirmationUrl"    type="hidden"  value="http://www.tiendo.co/payu/confirmation" >
+  <input type="image" id="btnPayu" border="0" alt="" src="http://www.payulatam.com/img-secure-2015/boton_pagar_grande.png"/>
+  
 </form>
+<input type="hidden" id="UrlPedTem" value="{{URL::route('UrlPedTem')}}">
                                         		</li>
+
+                                                <li>
+                                                    
+
+ 
+
+                                                </li>
                                         	@else
                                         		<li>Inicia sesión para finalizar la compra</li>
                                         	@endif

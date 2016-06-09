@@ -30,14 +30,43 @@ function sync2()
 
 	$.ajax({
 
-			url : "http://localhost/JSONS/GetArticulosCount2.php",
+			//url : "http://somic.com.co:8086/WEBSOMIC/EDER/TIENDO/GetArticulosCount2.php",
+			url : "http://somic.com.co:8086/WEBSOMIC/EDER/TIENDO/articulos1.php",
+			
 			dataType: "json",
 			type : "get",
 			
 			success : function(data){
 				console.log("Armando Ids");
-				console.log(data);
-				armarIds(data);
+				//console.log(data);
+				var cont = 0;
+				var ids = "";
+				var por = data.length;
+				var porNum = 1;
+				var valPor = 1;
+				var NvalPor = 1;
+				swal({   title: "Esto puede tardar varios minutos...!",   text: "<div class='progress'><div class='progress-bar' role='progressbar'  aria-valuemin='0' id='pbar' aria-valuemax='100' style='width:0%;'>10%</div></div>",   html: true ,showConfirmButton: false});
+				//var ids =[];
+				for (var i  in data) {
+					ids = ids+" '"+data[i].id+"',";
+					cont ++;
+					porNum ++;
+					valPor = (porNum*100)/ por;
+					 NvalPor =  Math.round(valPor);
+
+					 
+					console.log(NvalPor);
+
+					if (cont == 10) {
+						getArt(ids,NvalPor);
+						cont = 0;
+						ids = "";
+					};
+
+					
+				};
+
+				//armarIds(data);
 				
 			},error : function(data){
 				
@@ -65,6 +94,7 @@ function sync()
 			
 			success : function(data){
 				console.log(data);
+
 				guardar(data);
 				
 			},error : function(data){
@@ -95,8 +125,9 @@ function armarIds(conteo)
 
 				//var html = '<div class="alert alert-warning alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><strong>Actualización terminada</strong></div>';
 				console.log("Importando articulos...");
-				console.log(data);
-				getArticulos(data);
+				var num = data.length;
+				console.log(num);
+				//getArticulos(data);
 
 				//$('#loadProdApi').text('Load products');
 				//$('.ajax2').append(html);
@@ -118,21 +149,23 @@ function armarIds(conteo)
 
 
 
-function getArticulos(data)
+function getArt(ids,NvalPor)
 {
 	
 	$.ajax({
 
-			url : "http://localhost/JSONS/GetArticuos2.php",
+			//url : "http://somic.com.co:8086/WEBSOMIC/EDER/TIENDO/articulos2.php",
+			url : "http://somic.com.co:8086/WEBSOMIC/EDER/TIENDO/GetArticuos2.php",
 			dataType: "json",
-			type : "post",
+			type : "get",
 			
-			data: {data: data},
+			data: {ids: ids},
 			success : function(data){
 
 				//var html = '<div class="alert alert-warning alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><strong>Actualización terminada</strong></div>';
-				console.log(data);
-				guardar(data);
+				//console.log(data);
+				console.log(NvalPor);
+				guardar(data,NvalPor);
 				
 
 				//$('#loadProdApi').text('Load products');
@@ -156,7 +189,7 @@ function getArticulos(data)
 
 
 
-function guardar(data)
+function guardar(data,NvalPor)
 {
 	var urlSync = $('#urlTestSavePro').val();
 	$.ajax({
@@ -169,6 +202,14 @@ function guardar(data)
 
 				//var html = '<div class="alert alert-warning alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><strong>Actualización terminada</strong></div>';
 				console.log(data);
+				$('#pbar').css("width",NvalPor+'%');
+					 $('#pbar').text(NvalPor+"%");
+				
+
+					 if(NvalPor == 100)
+					 {
+					 	swal({   title: "Sincronizacón terminada",   text: "Se han sincronizado los Articulos.",   timer: 2000,   showConfirmButton: false });
+					 }
 				//$('#loadProdApi').text('Load products');
 				//$('.ajax2').append(html);
 				//location.reload();

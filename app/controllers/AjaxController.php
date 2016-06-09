@@ -13,6 +13,70 @@ class AjaxController extends BaseController {
 			$this->envio 	= $envio;
 	}
 
+	public function urlSaveArt()
+	{
+		header('Content-type: text/javascript');
+		if(isset($_POST['nPrice']) && isset($_POST['id']) && isset($_POST['saldo']) && isset($_POST['oPrice'])){
+			$id = $_POST['id'];
+			$val = $_POST['nPrice'];
+			$saldo = $_POST['saldo'];
+			$price = $_POST['oPrice'];
+			$pro = Producto::where('ArtSec','=',$id)->first();
+			if($pro){
+				$pro->precio  = round($price);
+				$pro->cantidad = $saldo;
+				if($pro->save()){
+					$estado = array('estado'=>'1');
+					return Response::json(array('estado'=>$estado));
+				}else{
+					$estado = array('estado'=>'2');
+					return Response::json(array('estado'=>$estado));
+				}
+			}else{
+				$estado = array('estado'=>'3');
+					return Response::json(array('estado'=>$estado));
+
+			}
+		}
+	}
+
+	public function UrlPedTem()
+	{
+		header('Content-type: text/javascript');
+		if(isset($_POST['key'])){
+					$compra = new Compra;
+					$compra->user_id 	= Auth::user()->id;
+					$compra->totalCart  =   Cart::total();
+					$compra->total_compra  =  Cart::total();
+					$compra->num_items  =   Cart::totalItems();
+					$compra->tipo_compra = 	2;
+					$compra->llave        = $_POST['key'];
+					$compra->pay_status  = 0;
+					$compra->vlr_envio   =  1000;
+					$compra->save();
+
+
+
+					foreach (Cart::contents() as $item) {
+					$citem = new Ite;
+					$citem->compra_id 			=	$compra->id;
+
+	   			 	$citem->id_producto			=	$item->id;
+	   			 	$citem->nombre 				=	$item->name;
+	   			 	$citem->valor_unitario 		=	$item->price;
+	   			 	$citem->image               =   $item->image;
+	   			 	$citem->iva 				=	$item->tax;
+	   			 	$citem->cantidad 			= 	$item->quantity;
+	   			 	$citem->valor_total			=	$item->total();
+
+	   			 	$citem->save();
+
+				}
+				Cart::destroy();
+				$estado = array('estado'=>'1');
+				return Response::json(array('estado'=>$estado));
+		}
+	}
 	public function getEnvAjax()
 	{
 		header('Content-type: text/javascript');
@@ -251,7 +315,7 @@ class AjaxController extends BaseController {
 
 			if(isset($_POST['id_pro']) && isset($_POST['identifier']) && isset($_POST['cantidad']))
 			{
-					$producto = Producto::where('id','=',$_POST['id_pro'])->first();
+					$producto = Producto::where('ArtSec','=',$_POST['id_pro'])->first();
 					if($producto->count())
 					{
 						 
@@ -259,7 +323,7 @@ class AjaxController extends BaseController {
 						 			$nuevaCantidad = $_POST['cantidad'];
 						 			$item->quantity = $nuevaCantidad;
 
-						 			$estado = array('estado'=>'1','itemTotal'=>$item->total(),'totalCart'=>Cart::total());
+						 			$estado = array('estado'=>'1','itemTotal'=>$item->total(),'itemTotalTax'=>$item->total(false),'totalCart'=>Cart::total(),'totalCartTax'=>Cart::total(false));
  									return Response::json(array('estado'=>$estado,'item'=>$item));
 						
 					}

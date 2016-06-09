@@ -3,6 +3,53 @@
 class ApiController extends BaseController {
 
 
+	public function mail()
+	{
+		$email = "ederalvarez2091057@gmail.com";
+			$empresa = "Megalopolis Inc.";
+			$asesor ="ederAAAA";
+			$aliado ="mi aliado";
+			$valor   = 10000;
+		Mail::send('emails.auth.noti', array('aliado'=>$aliado, 'asesor'=>$asesor, 'empresa' => $empresa,"email"=>$email,"valor"=>$valor/*URL::route('mega-perfil')*/), function($message) use ($email,$empresa,$valor,$asesor,$aliado){
+						$message->to($email, $aliado)->subject('Venta cerrada');
+					});
+	}
+
+
+	public function noti()
+	{
+		if(isset($_REQUEST['email']) and isset($_REQUEST['empresa']))
+		{
+			$email  = $_REQUEST['email'];
+			$empresa  = $_REQUEST['empresa'];
+			$valor    = (int)$_REQUEST['valor'];
+			$asesor   = $_REQUEST['asesor'];
+			$aliado   = $_REQUEST['aliado'];
+
+			/*$men =new  Mensaje();
+			$men->email = $email;
+			$men->empresa = $empresa;
+			$men->save();*/
+
+			
+		}else{
+			$email = "ederalvarez2091057@gmail.com";
+			$empresa = "Megalopolis Inc.";
+			$asesor ="ederAAAA";
+			$aliado ="mi aliado";
+			$valor   = 10000;
+
+		}
+		$data[] = array($email,$empresa);
+
+		Mail::send('emails.auth.noti', array('aliado'=>$aliado, 'asesor'=>$asesor, 'empresa' => $empresa,"email"=>$email,"valor"=>$valor/*URL::route('mega-perfil')*/), function($message) use ($email,$empresa,$valor,$asesor,$aliado){
+						$message->to($email, $aliado)->subject('Venta cerrada');
+					});
+
+		return Response::json(array("estado"=>1));
+	}
+
+
 
 
 	public function addFav()

@@ -7,6 +7,7 @@
 
 @section('content')
 		    <div class="content margin-top60 margin-bottom60">
+		    <input type="hidden" id="urlSaveArt" value="{{URL::route('urlSaveArt')}}">
                     <div class="container">
                         <div class="row">
                             <!-- Sidebar Start --> 
@@ -27,6 +28,7 @@
                             <!-- /Sidebar End --> 
                             <!-- Products Start-->
                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+
                                 <div class="row">
                                     <div class="col-lg-7 col-md-6 col-sm-6 col-xs-12">
                                         <div class="display">
@@ -35,7 +37,7 @@
                                             <a class="list btn-small btn-pad" onclick="display(&#39;list&#39;);"><i class="fa fa-th-list"></i></a>
                                         </div>                                       
                                     </div>
-                                    <div class="col-lg-5 col-md-6 col-sm-6 col-xs-12 pull-right">
+                                    <div class="col-lg-5 col-md-6 col-sm-6 col-xs-12 ">
                                         @include('includes.cotracolta.search')
                                        
                                     </div>
@@ -67,7 +69,8 @@
 	                                                            <h3 class="name"><a href="{{URL::route('proDetalle',array('slug'=>$producto->slug))}}">{{$producto->pro_nom}}</a></h3>
 	                                                            <div class="price">
 	                                                                <span class="price-old">$1'200.000</span>
-	                                                                <span class="price-new">${{ number_format(App::make('UserController')->getPrice($producto->id_mantis), 0, '', '.') }}</span>
+	                                                                {{--<span class="price-new">${{ number_format(App::make('UserController')->getPrice($producto->id_mantis), 0, '', '.') }}</span>--}}
+	                                                                <span class="price-new idSync" data="{{$producto->ArtSec}}" id="pro-{{$producto->ArtSec}}">${{ number_format($producto->precio, 0, '', '.') }}</span>
 	                                                            </div>
 	                                                        </div>
 	                                                        <div class="right">
@@ -111,5 +114,6 @@
 @stop
 
 @section('scripts')
-	<script src="{{asset('cot/js/product.js')}}"></script>   
+	<script src="{{asset('tat/js/preciosMantis.js')}}"></script>
+	<script src="{{asset('cot/js/product.js')}}"></script>
 @stop

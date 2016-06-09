@@ -133,6 +133,7 @@ public function limpiar($String){
 				->select(
 						'p.id',
 						'p.id_mantis',
+						'p.ArtSec',
 						'p.pro_nom',
 						'p.categoria_id',
 						'p.descripcion',
@@ -149,7 +150,7 @@ public function limpiar($String){
 				
 							foreach($productos as $p)
 							{
-								$todos[] = array('id'=>$p->id,'id_mantis'=>$p->id_mantis,'pro_nom'=>$p->pro_nom,'categoria_id'=>$p->categoria_id,'descripcion'=>$p->descripcion,'slug'=>$p->slug,'img'=>$p->img,'precio'=>$p->precio,'Estado'=>$p->Estado,'por_iva'=>$p->por_iva,'cantidad'=>$p->cantidad,'InvFamCod'=>$p->InvFamCod,'InvFamNom'=>$p->InvFamNom);
+								$todos[] = array('id'=>$p->id,'ArtSec'=>$p->ArtSec,'id_mantis'=>$p->id_mantis,'pro_nom'=>$p->pro_nom,'categoria_id'=>$p->categoria_id,'descripcion'=>$p->descripcion,'slug'=>$p->slug,'img'=>$p->img,'precio'=>$p->precio,'Estado'=>$p->Estado,'por_iva'=>$p->por_iva,'cantidad'=>$p->cantidad,'InvFamCod'=>$p->InvFamCod,'InvFamNom'=>$p->InvFamNom);
 
 							}
 									}
@@ -160,6 +161,7 @@ public function limpiar($String){
 				->select(
 						'p.id',
 						'p.id_mantis',
+						'p.ArtSec',
 						'p.pro_nom',
 						'p.categoria_id',
 						'p.descripcion',
@@ -176,7 +178,7 @@ public function limpiar($String){
 				
 				foreach($productos as $p)
 				{
-					$todos[] = array('id'=>$p->id,'id_mantis'=>$p->id_mantis,'pro_nom'=>$p->pro_nom,'categoria_id'=>$p->categoria_id,'descripcion'=>$p->descripcion,'slug'=>$p->slug,'img'=>$p->img,'precio'=>$p->precio,'Estado'=>$p->Estado,'por_iva'=>$p->por_iva,'cantidad'=>$p->cantidad,'InvFamCod'=>$p->InvFamCod,'InvFamNom'=>$p->InvFamNom);
+					$todos[] = array('id'=>$p->id,'id_mantis'=>$p->id_mantis,'ArtSec'=>$p->ArtSec,'pro_nom'=>$p->pro_nom,'categoria_id'=>$p->categoria_id,'descripcion'=>$p->descripcion,'slug'=>$p->slug,'img'=>$p->img,'precio'=>$p->precio,'Estado'=>$p->Estado,'por_iva'=>$p->por_iva,'cantidad'=>$p->cantidad,'InvFamCod'=>$p->InvFamCod,'InvFamNom'=>$p->InvFamNom);
 
 				}
 				

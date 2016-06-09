@@ -28,7 +28,8 @@ return array(
 	|
 	*/
 
-	'host' => 'smtp.mailgun.org',
+	//'host' => 'mail.morenoyalvarez.com',
+	'host' => 'smtp.gmail.com',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -41,6 +42,7 @@ return array(
 	|
 	*/
 
+	//'port' => 26,
 	'port' => 587,
 
 	/*
@@ -54,7 +56,7 @@ return array(
 	|
 	*/
 
-	'from' => array('address' => null, 'name' => null),
+	'from' => array('address' => 'soporte@cootracolta.com', 'name' => 'Cootracolta'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -80,7 +82,9 @@ return array(
 	|
 	*/
 
-	'username' => null,
+	'username' => 'cvcarlosandres39@gmail.com',
+	//'username' => 'info@morenoyalvarez.com',
+	//'username' => 'eder@tiendo.co',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -93,7 +97,9 @@ return array(
 	|
 	*/
 
-	'password' => null,
+	'password' => 'gokewggqydrrhanl',
+	//'password' => 'eder4EVER',
+	//'password' => 'vqmssizyiprfzmqi',
 
 	/*
 	|--------------------------------------------------------------------------

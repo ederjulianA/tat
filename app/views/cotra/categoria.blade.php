@@ -7,6 +7,8 @@
 
 @section('content')
 		    <div class="content margin-top60 margin-bottom60">
+
+		    <input type="hidden" id="urlSaveArt" value="{{URL::route('urlSaveArt')}}">
                     <div class="container">
                         <div class="row">
                             <!-- Sidebar Start --> 
@@ -15,8 +17,8 @@
                                 <div class="widget category">
                                     <h3 class="title">Categorías</h3>
                                     <ul class="category-list slide">
-                                    	@foreach($categorias as $cat)
-                                        	<li><a href="/categoria/{{$cat->InvGruCod}}">{{$cat->cat_nom}} 1</a></li>
+                                    	@foreach($grupos as $gru)
+                                        	<li><a href="/categoria/{{$gru->InvGruCod}}">{{$gru->InvGruNom}} </a></li>
                                         @endforeach
                                         
                                     </ul>                                    
@@ -111,5 +113,6 @@
 @stop
 
 @section('scripts')
-	<script src="{{asset('cot/js/product.js')}}"></script>   
+		<script src="{{asset('tat/js/preciosMantis.js')}}"></script>
+	<script src="{{asset('cot/js/product.js')}}"></script> 
 @stop

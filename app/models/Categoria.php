@@ -17,4 +17,9 @@
 		{
 			return Categoria::all();
 		}
+
+		/*public function getAllGrupos()
+		{
+			return Grupo::all();
+		}*/
 	}

@@ -53,6 +53,105 @@ class EmpresaController extends BaseController {
     		return PDF::load($html, 'A4', 'portrait')->show();
 	}
 
+	public function pdfMantis()
+	{
+			if ($conn_access  = odbc_connect("Driver={SQL Server Native Client 10.0};Server=192.168.1.103,1433;Database=erpappweb22proto;", 'sa', 'Somic321')){ 
+					   	echo "Conectado correctamente"; 
+					   	
+					        			        $ssql = " select * from vistarentaarticulo"; 
+
+
+					   	if($rs_access = odbc_exec ($conn_access, $ssql)){ 
+					   		
+					   		while ($info = odbc_fetch_array($rs_access)) {
+					 		   //$content[] = $info;
+					   			//$ciudades = new Ciudad;
+					   			$pros[] = $info;
+								}// END WHILE############################
+
+							} ############END RS_ACCESS##############	
+						}###### END IF CON_ACCESS	
+
+
+					
+
+						
+		$html = View::make('pdf.mantis',compact('pros'));
+		return PDF::load($html, 'A4', 'landscape')->show();
+	}
+
+	public function pdfMantis2()
+	{
+		
+		if ($conn_access  = odbc_connect("Driver={SQL Server Native Client 10.0};Server=192.168.1.103,1433;Database=erpappweb22proto;", 'sa', 'Somic321')){ 
+					   	echo "Conectado correctamente"; 
+					   	
+					        			        $ssql = "select top 10 * from vistarentaarticulo"; 
+
+
+					   	if($rs_access = odbc_exec ($conn_access, $ssql)){ 
+					   		
+					   		while ($info = odbc_fetch_array($rs_access)) {
+					 		   //$content[] = $info;
+					   			//$ciudades = new Ciudad;
+					   			$pros[] = $info;
+								}// END WHILE############################
+
+							} ############END RS_ACCESS##############	
+						}###### END IF CON_ACCESS
+						$rt = '';
+						foreach ($pros as $key => $item) {
+							# code...
+							
+							$r = '<tr><td>'.$item['cod_art'].'</td>  </tr>';
+			$rt = $rt.$r;
+
+						}
+
+							$html = 
+				'<table class="table"><tr><th>id</th></tr>'.$rt.'</table>';
+				
+
+		
+		return PDF::load($html, 'A4', 'landscape')->show();
+	}
+
+	public function pdfarticulos()
+	{
+		if ($conn_access  = odbc_connect("Driver={SQL Server Native Client 10.0};Server=192.168.1.103,1433;Database=erpappweb22proto;", 'sa', 'Somic321')){ 
+					   	echo "Conectado correctamente"; 
+					   	
+					        			        $ssql = "select  * from vistarentaarticulo"; 
+
+
+					   	if($rs_access = odbc_exec ($conn_access, $ssql)){ 
+					   		
+					   		while ($info = odbc_fetch_array($rs_access)) {
+					 		   //$content[] = $info;
+					   			//$ciudades = new Ciudad;
+					   			$pros[] = $info;
+								}// END WHILE############################
+
+							} ############END RS_ACCESS##############	
+						}###### END IF CON_ACCESS	
+
+		//dd($pros);
+		define('BUDGETS_DIR', public_path('uploads/budgets')); // I define this in a constants.php file
+
+if (!is_dir(BUDGETS_DIR)){
+    mkdir(BUDGETS_DIR, 0755, true);
+}
+
+$outputName = str_random(10); // str_random is a [Laravel helper](http://laravel.com/docs/helpers#strings)
+$pdfPath = BUDGETS_DIR.'/'.$outputName.'.pdf';
+$view = View::make('pdf.articulos',compact('pros'));
+File::put($pdfPath, PDF::load($view, 'A4', 'portrait')->output());
+
+		//$$$$$$$$$$$$$$$$$$$$$$$$$$4
+		//$html = View::make('pdf.articulos',compact('pros'));
+		//return PDF::load($html, 'A4', 'landscape')->show();
+	}
+
 	public function getAdminPedidoDetalle($id)
 	{
 		$pedido = $this->empresa->getPedidoDetalle($id);
@@ -140,8 +239,24 @@ class EmpresaController extends BaseController {
 	{
 		$user = Auth::user()->id;
 		//$productos = $this->pro->getAllPro();
-		$productos = Producto::all();
+		//$productos = Producto::where('id','>',0)->paginate(10);
+		/*$q = Producto::query();
+		if (Input::has('ArtCod'))
+		  {
+
+		     // simple where here or another scope, whatever you like
+		     $q->where('id_mantis','like',Input::get('ArtCod'));
+		  }
+		if(Input::has('ArtNom'))
+		{	
+
+			$q->where('pro_nom','like',Input::get('ArtNom'));
+		}
+		$productos = $q->where('id','>',0)->paginate(10);*/
+		$productos = Producto::where('id_mantis', 'LIKE', Input::get('ArtCod').'%')->where('pro_nom', 'LIKE', Input::get('ArtNom').'%')->paginate(10);
+
 		$numPros  = count($productos);
+		
 		return View::make('tiendo.admin.productos',compact('user','productos','numPros'));
 	}
 

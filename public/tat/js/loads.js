@@ -14,7 +14,7 @@ $(document).on('keyup','.filters', function(e){
 				type : "post",
 				data : { cod: cod,nom:nom},
 				beforeSend: function(){
-					swal({   title: "Sending message...",   text: "please wait.",   showConfirmButton: false });
+					//swal({   title: "Sending message...",   text: "please wait.",   showConfirmButton: false });
 				},
 				success : function(data){
 					console.log(data);

@@ -23,13 +23,14 @@ class CatalogoController extends BaseController {
 		$grupos 		=   $this->grupo->getAllGrupos();
 		$menu       = Menu::all();
 		$categorias = $this->cat->getAllCat();
+		
 		return View::make('cotra.catalogo')->with('menu',$menu)->with('grupos',$grupos)->with('categorias',$categorias)->with('promo',$promo)->with('productos',$productos)->with('products', Cart::contents());
 	}
 
 	public function getCategoria($id)
 	{
 		$categorias = $this->cat->getAllCat();
-		$productos = $this->pro->getProCategorias($id);
+		$productos 	= $this->pro->getProCategorias($id);
 		$promo      =   $this->promo->getPromo();
 		$grupos		=   $this->grupo->getAllGrupos();
 		$menu       =   Menu::all();

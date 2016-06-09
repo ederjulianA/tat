@@ -10,6 +10,49 @@ $(document).ready(function(){
 
 });
 
+$(document).on('click','#btnPayu',function(e){
+
+	
+	var key = $('#code').val();
+	
+	var url = $('#UrlPedTem').val();
+	var form = $('#formPayu');
+
+	$.ajax({
+
+			url : url,
+			dataType: "json",
+			type : "post",
+			data : { key : key},
+			success : function(data){
+				if(data.estado.estado == 1)
+				{
+					console.log(data);
+					form.submit();
+					
+				}
+				
+			},error : function(data){
+				
+				console.log(data);
+				
+				
+				}
+
+
+				
+
+
+		});
+
+	
+
+
+	return false;
+	
+	
+});
+
 
 
 
@@ -17,6 +60,7 @@ $(document).ready(function(){
 
 
 $(document).on('click','#btn_addCart', function(e){
+	
 
 
 	
@@ -25,7 +69,7 @@ $(document).on('click','#btn_addCart', function(e){
 	var dis 		= $('#cant-dis').val();
 	//alert(dis+'---'+cantidad);
 	var tot 		= parseInt(dis-cantidad);
-			
+			 
 	
 
 
@@ -36,16 +80,18 @@ $(document).on('click','#btn_addCart', function(e){
 	}else{
 		if(parseInt(dis) < parseInt(cantidad))
 		{
-			swal("Cantidad no disponible.", "Unidades disponiblesss: "+dis);
+			swal("Cantidad no disponible.", "Unidades disponibles: "+dis);
 		}else{
 
 				$.ajax({
+
 
 			url : "../addcartAjax",
 			dataType: "json",
 			type : "post",
 			data : { id_producto : id_pro, cantidad:cantidad},
 			success : function(data){
+
 				if(data.estado.estado == 1)
 				{
 					var Ntotal = data.estado.totalCart.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -213,12 +259,14 @@ $(document).on('change','#barrio_id', function(e){
 $(document).on('change','.cant', function(e){
 	var id = $(this).attr('data');
 	var identifier = $(this).attr('togle');
-	var can = $('#cant-'+id).val();
+	var can = $('#can-'+id).val();
+	//alert(can);
+	
  	
  	var url = $('#urlValDis').val();
  	var dis = getDis(id,url);
 	
- 	console.log(dis);
+ 	console.log("und:"+dis);
  	
 	
 
@@ -236,21 +284,32 @@ $(document).on('change','.cant', function(e){
 		return false;
 	}
 
-		$.ajax({
+	actCart(id,identifier,can);
+
+	e.preventDefault();
+});
+
+function actCart(id, identifier, can){
+	//alert("id: "+id+" identifier: "+identifier+" can: "+can);
+
+	$.ajax({
 
 			url : "/CarroAjax",
 			dataType: "json",
 			type : "post",
 			data : { id_pro : id, identifier: identifier, cantidad:can},
 			success : function(data){
-
+				
 				if(data.estado.estado == 1)
 				{
 					var NtotalItem = data.estado.itemTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+					var NtotalItemTax = data.estado.itemTotalTax.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 					var Ntotal = data.estado.totalCart.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+					var NtotalTax = data.estado.totalCartTax.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 					console.log(data);
 					$('.totalCart').text(Ntotal);
 					$('.itemTotal-'+id).text(NtotalItem);
+					$('.totalCartTax').text(NtotalTax);
 					notie.alert(1, 'Cantidad actualizada!', 1.8);
 					
 							//console.log("dia:"+data.diasv[i].id);
@@ -267,19 +326,17 @@ $(document).on('change','.cant', function(e){
 
 
 		});
-
-	e.preventDefault();
-});
+}
 
 
 //funcion para consultar la cantidad disponible
 function getDis(id,url)
 {
 	
-var d = 0;
+	var d = 0;
+	var t = 0;
 
-
-	$.ajax({
+	/*$.ajax({
 
 			url : url,
 			dataType: "json",
@@ -292,8 +349,8 @@ var d = 0;
 				{
 					//var dis = parseInt(data.pro.saldo);
 					d = parseInt(data.pro.saldo);
-					/*console.log(dis);
-					console.log(data);*/
+					console.log(dis);
+					console.log(data);
 					
 				}	
 					
@@ -301,10 +358,45 @@ var d = 0;
 
 		}
 
-			});
+			});*/
+$.ajax({
+
+			url : "http://somic.com.co:8086/WEBSOMIC/EDER/TIENDO/getPriceById.php",
+			dataType: "json",
+			type : "post",
+			data: {id: id},
+			async: false,
+			success : function(data){
+				
+				console.log(data);
+				for (var i  in data)
+				{
+					//console.log(data);
+					var oPrice = data[i].precio3;
+					var nPrice = data[i].precio3.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+					 d  = parseInt(data[i].saldo);
+					//console.log("cantidades:"+d);
+					//console.log("cantidades:"+d);
 	
+					
+
+					
+				}
+				t = d;
+				
+			
+				
+			},error : function(data){
+				
+				console.log(data);
+				
+				
+				} 
+
+		});
+//alert(t);
+return d;
 	
-	return d;
 }
 
 

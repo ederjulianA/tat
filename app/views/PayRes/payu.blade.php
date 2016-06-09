@@ -86,11 +86,7 @@ else {
 
 if (strtoupper($firma) == strtoupper($firmacreada)) {
 ?>
-	<h2>Resumen Transacción @if(Session::has('key')) 
-	{{Session::get('message-alert')}}
-	 @else 
-	 	NOOOO
-	 @endif</h2>
+	<h2>Resumen Transacción </h2>
 	<table class="table">
 	<tr>
 	<td>Estado de la transaccion</td>

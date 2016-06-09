@@ -26,6 +26,46 @@ class UserController extends BaseController {
 		
 	}
 
+	public function getItems()
+	{
+		$email = "ederalvarez2091057@gmail.com";
+			$empresa = "Megalopolis Inc.";
+			$asesor ="ederAAAA";
+			$aliado ="Eder A";
+			$valor   = 10000;
+			$compra = new Compra;
+					$compra->user_id 	= 3;
+					$compra->totalCart  =   9999;
+					$compra->total_compra  =  9999;
+					$compra->num_items  =   1;
+					$compra->tipo_compra = 	2;
+					$compra->vlr_envio   =  2000;
+					if($compra->save()){
+						foreach (Cart::contents() as $item) {
+							
+                		Mail::send('emails.auth.noti', array('aliado'=>$aliado, 'asesor'=>$asesor, 'empresa' => $empresa,"email"=>$email,"valor"=>$valor/*URL::route('mega-perfil')*/), function($message) use ($email,$empresa,$valor,$asesor,$aliado){
+						$message->to($email, $aliado)->subject('Compra tiendo');
+					});
+                	
+
+								$citem = new Ite;                
+			                    $citem->compra_id           =   $compra->id;
+
+			                    $citem->id_producto         =   $item->id;
+			                    $citem->nombre              =   $item->name;
+			                    $citem->valor_unitario      =   $item->price;
+			                    $citem->image               =   $item->image;
+			                    $citem->iva                 =   $item->tax;
+			                    $citem->cantidad            =   $item->quantity;
+			                    $citem->valor_total         =   $item->total();
+			                 
+
+			                    $citem->save();
+
+                }
+					}
+	}
+
 	public function postNewUser()
 	{
 
@@ -142,7 +182,29 @@ class UserController extends BaseController {
 					$ship->telefono = Input::get('telefono');
 					if($ship->save())
 					{
-						return Redirect::to('/')->with('message-alert','Gracias Por registrarte');
+						$remember = (Input::has('remember')) ? true : false;
+				//creamos la sesion del usuario
+							$auth = Auth::attempt(array(
+						'email'  => $user->email,
+						'password' => Input::get('password'),
+						'active' => 1
+					), $remember);
+
+				if($auth){
+					if(Auth::user()->admin != 1)
+
+						{
+						return Redirect::back();
+
+						}
+						else {
+							return Redirect::intended('admin');
+						}
+				}else{
+					return Redirect::route('login')
+				->with('message-alert', 'El email o la contraseña no coinciden, o la cuenta no esta activada');
+				}
+						return Redirect::back()->with('message-alert','Gracias Por registrarte');
 					}
 					
 				}

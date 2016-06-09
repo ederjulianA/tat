@@ -33,6 +33,7 @@ class HomeController extends BaseController {
 	public function getPayUr()
 
 	{
+		
 		$ApiKey = "6u39nqhq8ftd0hlvnjfs66eh8c";
 		$merchant_id = $_REQUEST['merchantId'];
 		$referenceCode = $_REQUEST['referenceCode'];
@@ -51,74 +52,7 @@ class HomeController extends BaseController {
 		$lapPaymentMethod = $_REQUEST['lapPaymentMethod'];
 		$transactionId = $_REQUEST['transactionId'];
 
-		if ($_REQUEST['transactionState'] == 4 ) {
 
-
-				if ($conn_access = odbc_connect ( "Driver={SQL Server Native Client 10.0};Server=".$this->server.",1433;Database=".$this->db.";", ''.$this->user.'', ''.$this->pass.'')){ 
-			 $ssql = "select * from Secuencia where SecCod='PEDIDO'"; 
-			if($rs_access = odbc_exec ($conn_access, $ssql)){ 
-						while ($info = odbc_fetch_array($rs_access)) {
-					 		   //$content[] = $info;
-					   			//$ciudades = new Ciudad;
-					   			$SecNum = $info['SecNum'];
-					   			
-								}// END WHILE############################
-									$NitIde = Auth::user()->NitSec;
-									$ssql2 = "select n.NitIde,n.NitSec, c.Vencod From Nit n
-										inner join ClientesVendedores c on c.NitSec = n.NitSec
-										where n.NitIde = '$NitIde'";
-									if($rs_access = odbc_exec($conn_access, $ssql2)){ 
-												while ($info2 = odbc_fetch_array($rs_access)) {
-					 		  
-					   							$NitSec = $info2['NitSec'];
-					   							$Vencod = $info2['Vencod'];
-					   			
-												}// END WHILE############################
-												$id_pedido = 'PED-WEB-'.date('Ymd-Hms');
-												//dd($id_pedido,$SecNum,$NitSec);
-												$totalCompra =  $TX_VALUE;
-												$CotFecEd = date("d.m.y");
-												
-												$ssql3 ="INSERT INTO Cotizaciones1(CotTip,CotSec,TipCod,EmpCod,CotFecha,CotObs,CotUsuCod,CotCliConPag,CotSecConCon,CotLisPreCod,CotSubVenCod,CotSubNitSec,CotSubCliSec,CotNum,CotSumCot,BodSucCCSec,CotEst,CotSubCotSec,AnuFueSec,CotAnuObs,CotEstado)
-                   								 VALUES('P','$SecNum','PED',1,'$CotFecEd','miobs','admin',1/*cliConPag*/,1/*numItems*/,1/*lisprecod*/,$Vencod/*vencod*/,'$NitSec'/*nitsec*/,1/*clisec*/,'$id_pedido','$totalCompra',1/*BODsUCCSEC*/,2/*CotEst*/,NULL,NULL,NULL,'A')";
-
-                   								 if($rs_access = odbc_exec($conn_access, $ssql3)){ 
-                   								 		$ssql4 = "UPDATE Secuencia SET SecNum=SecNum+1 where SecCod='PEDIDO'";
-                   								 		if($rs_access = odbc_exec($conn_access, $ssql4)){
-					$num = 1;
-					foreach (Cart::contents() as $item) {   
-					               								 			
-                  $artSec = $item->ArtSec;
-                  $price  = $item->price;
-                  $CotArtNom = $item->name;
-                  $uni    = $item->quantity ;
-                  $CotSubPrecio = Cart::total(false);								 			
-				  $ssql5 = "insert into CotizacionesDetalle1(CotTip,CotSec,CotSecCon,CotObsequio,ArtSec,CotArtEmb,CotArtLot,CotArtLotFec
-				,CotArtCaj,CotArtUni,CotArtDesUno,CotArtDesDos,CotArtDesTre,CotArtDesCua,CotArtDesVal,CotArtConIva,CotArtPrecio,
-				CotSumDes,CotArtSubTotDesUno,CotArtSubTotDesDos,CotArtSubTotDesTre,CotArtSubTotDesCua,CotSubLisPreCod,
-				CotSubPreArtCod,SubBodSucCCSec,PedArtCaj,PedArtUni,CotSecEst,CotPre,cotdesuni,CotPreFacCon,CotArtNom,CotArtValImp,CotPorIva,CotSubPrecio)
-				values('P','$SecNum',$num,'N',$artSec/*ArtSec*/,1 /*ArtEmb*/,'S/L','1999-01-01 00:00:00.000',0.000000,$uni/*CotArtUni*/,0.00,0.00,0.00,0.00,0.00000,
-				(select top 1 ParConIva from Articulos a left join ParametroContable p on a.ParConCod=p.ParConCod where ArtSec='$artSec'),
-				'$price'/*CotArtPrecio*/,0.00000,0.00000,0.00000,0.00000,0.00000,isnull((select lisprecod from clientes where nitsec='$NitSec' and clisec=1),0)
-				,(select top 1 PreArtCod from ArtPre where artsec=$artSec),1,0,0,'A',0,0.00000,1.00000,'$CotArtNom',0.00000
-				,(select top 1 ParConIva from Articulos a left join ParametroContable p on a.ParConCod=p.ParConCod where ArtSec=$artSec),'$CotSubPrecio')
-				";
-															if($rs_access = odbc_exec($conn_access, $ssql5)){
-
-																$num = $num +1;
-															}
-
-
-														}//end for each Cart
-                   								 	}
-
-                   								 }//END SSQL3
-									}//end if ssql2
-
-
-					 
-			}//END IF SSQL############################
-		}// END IF SQL CONN
 
 
 			$grupos 		=   $this->grupo->getAllGrupos();
@@ -126,7 +60,7 @@ class HomeController extends BaseController {
 		$products = Cart::contents();
 		return View::make('PayRes.payu',compact('grupos','categorias','products'));
 
-		}
+		
 
 
 		
@@ -370,7 +304,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
   		$get = explode("</span>",$get[1]);  
   		$converted_amount = preg_replace("/[^0-9\.]/", null, $get[0]);
   		$converted_amount = (float)$converted_amount;
-  		dd($converted_amount);
+  		 return round($converted_amount,2);
 	}
 
 

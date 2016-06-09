@@ -30,12 +30,14 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 	public function getPedidos($iduser)
 	{
-		 $pedidos = DB::table('compra as c')->select(
+		 $pedidos = DB::table('compra as c')->join('estados as e','c.estado_id','=','e.id')->select(
 		 											'c.id',
 		 											'c.totalCart',
 		 											'c.total_compra',
 		 											'c.num_items',
-		 											'c.tipo_compra')->where('c.user_id','=',$iduser)->orderBy('c.id','DESC')->get();
+		 											'c.created_at',
+		 											'e.nom_est',
+		 											'c.tipo_compra')->where('c.user_id','=',$iduser)->orderBy('c.id','DESC')->paginate(10);
 
 		 return $pedidos;
 		 									

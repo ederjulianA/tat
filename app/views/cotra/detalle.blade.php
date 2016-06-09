@@ -5,6 +5,7 @@
 @stop
 
 @section('content')
+    <input type="hidden" id="urlSaveArt" value="{{URL::route('urlSaveArt')}}">
 	 <!-- Main Content -->
                 <div class="content margin-top60 margin-bottom60">
                     <div class="product-item">
@@ -73,12 +74,18 @@
                                     <!-- /Review Box -->
                                     <!-- Product Details -->
                                     <div class="product-details">
-                                        <p class="short-description">Descripción del producto</p>
+                                        <p class="short-description">{{$producto->descripcion}}</p>
                                         <p><b>Código del producto :</b> {{$producto->id_mantis}}-</p>
                                         <input type="hidden" name="id_producto" id="id_producto" value="{{$producto->id}}">
-                                        <p><b>Stock : </b><button type="button" class="btn btn-default btn-sm btn-color">Disponible</button></p>
+                                        @if($producto->cantidad > 0)
+                                            <p><b>Stock : </b><button type="button" class="btn btn-default btn-sm btn-color">Disponible</button></p>
+
+                                        @else
+                                            <p><b>Stock : </b><button type="button" class="btn btn-danger btn-sm ">No disponible</button></p>
+                                        @endif
+                                        
                                         <input type="hidden" id="cant-dis" value="{{ round($producto->cantidad)}}">
-                                        <p><b>Price : <button type="button" class="btn btn-default btn-sm" disabled="disabled">$1200</button> <button type="button" class="btn btn-default btn-sm">${{ number_format(App::make('UserController')->getPrice($producto->id_mantis), 0, '', '.') }}</button></b></p>
+                                        <p><b>Price : <button type="button" class="btn btn-default btn-sm" disabled="disabled">$1200</button> <button type="button"data="{{$producto->ArtSec}}" id="pro-{{$producto->ArtSec}}" class="btn btn-default btn-sm idSync">${{ number_format($producto->precio, 0, '', '.') }}</button></b></p>
                                         <p><b>Cantidad :</b> <input class="td-qty" type="number"  name="cantidad" value="1" size="2" id="input-quantity"></p>
                                         <p>     
                                             @if($producto->cantidad > 0)
@@ -177,4 +184,6 @@
         <script src="{{asset('cot/js/simpleGallery/jquery.simpleLens.js')}}"></script>
         <script src="{{asset('cot/js/product.js')}}"></script>
         <script src="{{asset('js/jquery.knob.js')}}"></script>
+        <!--<script src="{{asset('tat/js/payu.js')}}"></script>-->
+         <script src="{{asset('tat/js/preciosMantis.js')}}"></script>
 @stop

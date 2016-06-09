@@ -78,11 +78,23 @@
                   <button type="submit" class="btn btn-success btn-lg">PROBAR CONEXION</button>
                   
                 </form>
+                
+  {{--<div class='progress-bar' role='progressbar'  aria-valuemin='0' id='pbar' aria-valuemax='100' style='width:0%;'>10%</div></div>--}}
 
                 <a href="#" id="loadTestPro" >Articulos</a>
+                <a href="#" id="loadGrupos" >Grupos</a>
+                <a href="#" id="loadFamilias" >Familias</a><br>
+                <a href="{{URL::route('setPostPrueba')}}">prueba</a><br>
+                <form action="{{URL::route('pruebamail')}}" method="post" accept-charset="utf-8">
+                  <input type="submit">
+                </form>
 
                 <input type="hidden" id="urlTestPro" value="{{URL::route('urlTestPro')}}">
                 <input type="hidden" id="urlTestSavePro" value="{{URL::route('urlTestSavePro')}}">
+
+
+                <input type="hidden" id="urlSaveGrupos" value="{{URL::route('urlSaveGrupos')}}">
+                <input type="hidden" id="urlSaveFamilias" value="{{URL::route('urlSaveFamilias')}}">
                 
               </div>
           </div>
@@ -145,5 +157,6 @@
 @section('scripts')
   <script src="{{asset('tat/js/adminTipEnt.js')}}"></script>
   <script src="{{asset('tat/js/Sync.js')}}"></script>
+  <script src="{{asset('tat/js/Cate.js')}}"></script>
 
 @stop

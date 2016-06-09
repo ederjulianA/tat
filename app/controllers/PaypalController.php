@@ -78,8 +78,10 @@ class PaypalController extends BaseController {
 {
 	$data = Input::all();
 	Session::put('data', $data);
+   $dollar = App::make('HomeController')->converter();
+
 	
-	$dollar = 3300	;
+	//$dollar = 3300	;
     $x = 0;
     $valorEnvio = Input::get('vlr_envio_a');
     $nVlrEnvvio  = round(($valorEnvio/$dollar),2);
@@ -259,109 +261,88 @@ class PaypalController extends BaseController {
 
 
 
-
-    	if ($conn_access = odbc_connect ( "Driver={SQL Server Native Client 10.0};Server=".$this->server.",1433;Database=".$this->db.";", ''.$this->user.'', ''.$this->pass.'')){ 
-			 $ssql = "select * from Secuencia where SecCod='PEDIDO'"; 
-			if($rs_access = odbc_exec ($conn_access, $ssql)){ 
-						while ($info = odbc_fetch_array($rs_access)) {
-					 		   //$content[] = $info;
-					   			//$ciudades = new Ciudad;
-					   			$SecNum = $info['SecNum'];
-					   			
-								}// END WHILE############################
-									$NitIde = Auth::user()->NitSec;
-									$ssql2 = "select n.NitIde,n.NitSec, c.Vencod From Nit n
-inner join ClientesVendedores c on c.NitSec = n.NitSec
-where n.NitIde = '$NitIde'";
-									if($rs_access = odbc_exec($conn_access, $ssql2)){ 
-												while ($info2 = odbc_fetch_array($rs_access)) {
-					 		  
-					   							$NitSec = $info2['NitSec'];
-					   							$Vencod = $info2['Vencod'];
-					   			
-												}// END WHILE############################
-												$id_pedido = 'PED-WEB-'.date('Ymd-Hms');
-												//dd($id_pedido,$SecNum,$NitSec);
-												$totalCompra =  $data['totalCart'];
-                                                $CotFecEd = date("d-m-y");
-												
-												$ssql3 ="INSERT INTO Cotizaciones1(CotTip,CotSec,TipCod,EmpCod,CotFecha,CotObs,CotUsuCod,CotCliConPag,CotSecConCon,CotLisPreCod,CotSubVenCod,CotSubNitSec,CotSubCliSec,CotNum,CotSumCot,BodSucCCSec,CotEst,CotSubCotSec,AnuFueSec,CotAnuObs,CotEstado)
-                   								 VALUES('P','$SecNum','PED',1,'$CotFecEd','miobs','admin',1/*cliConPag*/,1/*numItems*/,1/*lisprecod*/,$Vencod/*vencod*/,'$NitSec'/*nitsec*/,1/*clisec*/,'$id_pedido','$totalCompra',1/*BODsUCCSEC*/,2/*CotEst*/,NULL,NULL,NULL,'A')";
-
-                   								 if($rs_access = odbc_exec($conn_access, $ssql3)){ 
-                   								 		$ssql4 = "UPDATE Secuencia SET SecNum=SecNum+1 where SecCod='PEDIDO'";
-                   								 		if($rs_access = odbc_exec($conn_access, $ssql4)){
-$num = 1;
-foreach (Cart::contents() as $item) {   
-					               								 			
-                  $artSec = $item->ArtSec;
-                  $price  = $item->price;
-                  $CotArtNom = $item->name;
-                  $uni    = $item->quantity ;
-                  $CotSubPrecio = Cart::total(false);								 			
-  $ssql5 = "insert into CotizacionesDetalle1(CotTip,CotSec,CotSecCon,CotObsequio,ArtSec,CotArtEmb,CotArtLot,CotArtLotFec
-,CotArtCaj,CotArtUni,CotArtDesUno,CotArtDesDos,CotArtDesTre,CotArtDesCua,CotArtDesVal,CotArtConIva,CotArtPrecio,
-CotSumDes,CotArtSubTotDesUno,CotArtSubTotDesDos,CotArtSubTotDesTre,CotArtSubTotDesCua,CotSubLisPreCod,
-CotSubPreArtCod,SubBodSucCCSec,PedArtCaj,PedArtUni,CotSecEst,CotPre,cotdesuni,CotPreFacCon,CotArtNom,CotArtValImp,CotPorIva,CotSubPrecio)
-values('P','$SecNum',$num,'N',$artSec/*ArtSec*/,1 /*ArtEmb*/,'S/L','1999-01-01 00:00:00.000',0.000000,$uni/*CotArtUni*/,0.00,0.00,0.00,0.00,0.00000,
-(select top 1 ParConIva from Articulos a left join ParametroContable p on a.ParConCod=p.ParConCod where ArtSec='$artSec'),
-'$price'/*CotArtPrecio*/,0.00000,0.00000,0.00000,0.00000,0.00000,isnull((select lisprecod from clientes where nitsec='$NitSec' and clisec=1),0)
-,(select top 1 PreArtCod from ArtPre where artsec=$artSec),1/*Bodega*/,0,0,'A',0,0.00000,1.00000,'$CotArtNom',0.00000
-,(select top 1 ParConIva from Articulos a left join ParametroContable p on a.ParConCod=p.ParConCod where ArtSec=$artSec),'$CotSubPrecio')
-";
-															if($rs_access = odbc_exec($conn_access, $ssql5)){
-
-																$num = $num +1;
-															}
+            $NitIde = urlencode(Auth::user()->NitSec);
+            $id_pedido = urlencode('PED-WEB-'.date('Ymd-Hms'));
+                                                //dd($id_pedido,$SecNum,$NitSec);
+            $totalCompra =  urlencode($data['totalCart']);
+            $CotFecEd = urlencode(date("d-m-y"));
+            //dd($NitIde);
 
 
-														}//end for each Cart
-                   								 	}
+            $cont = file_get_contents("http://somic.com.co:8086/WEBSOMIC/EDER/TIENDO/setPrueba2.php?NitIde=$NitIde&id_pedido=$id_pedido&totalCompra=$totalCompra&CotFecEd=$CotFecEd");
 
-                   								 }//END SSQL3
-									}//end if ssql2
+            
+            if($cont == true)
+            {
+
+                $num = 1;
+                foreach (Cart::contents() as $item) {   
+                                                                            
+                  $artsec = urlencode($item->ArtSec);
+
+                  $price  = urlencode($item->price);
+                  $CotArtNom = urlencode($item->name);
+                  $uni    = urlencode($item->quantity);
+                  $CotSubPrecio = urlencode(Cart::total(false));  
+                  $SecNum      = trim($cont);
+                  $SecNum2 = str_replace('"', '', $SecNum);
+                  $SecNum2 = urlencode($SecNum2);
+
+                  $cont2 = file_get_contents("http://somic.com.co:8086/WEBSOMIC/EDER/TIENDO/setPruebaDetalle.php?artsec=$artsec&price=$price&CotArtNom=$CotArtNom&uni=$uni&CotSubPrecio=$CotSubPrecio&num=$num&SecNum=$SecNum2&NitIde=$NitIde"); 
+                  $num++;
+
+                  
+                
+             }
 
 
-					 
-			}//END IF SSQL############################
-		}// END IF SQL CONN
+             //GUARDAR EN BASE DE DATOS TIENDO.
 
 
-    	/*---------------------------------------------------*/
+             $compra = new Compra;
+        $compra->user_id    =   Auth::user()->id;
+        $compra->totalCart  =   $data['totalCart'];
+        $compra->total_compra  =  $data['total_compra'];
+        $compra->num_items  =   $data['totalItems'];
+        $compra->tipo_compra =  $data['tipo_compra'];
+        $compra->vlr_envio   =  $data['vlr_envio_a'];
+        $compra->tipo_compra = 2;
+            if($compra->save())
+            {
+                foreach (Cart::contents() as $item) {
+                    $citem = new Ite;
+                    $citem->compra_id           =   $compra->id;
 
+                    $citem->id_producto         =   $item->id;
+                    $citem->nombre              =   $item->name;
+                    $citem->valor_unitario      =   $item->price;
+                    $citem->image               =   $item->image;
+                    $citem->iva                 =   $item->tax;
+                    $citem->cantidad            =   $item->quantity;
+                    $citem->valor_total         =   $item->total();
 
-    	$compra = new Compra;
-		$compra->user_id 	=	Auth::user()->id;
-		$compra->totalCart  =   $data['totalCart'];
-		$compra->total_compra  =  $data['total_compra'];
-		$compra->num_items  =   $data['totalItems'];
-		$compra->tipo_compra = 	$data['tipo_compra'];
-		$compra->vlr_envio   =  $data['vlr_envio_a'];
-			if($compra->save())
-			{
-				foreach (Cart::contents() as $item) {
-					$citem = new Ite;
-					$citem->compra_id 			=	$compra->id;
+                    $citem->save();
 
-	   			 	$citem->id_producto			=	$item->id;
-	   			 	$citem->nombre 				=	$item->name;
-	   			 	$citem->valor_unitario 		=	$item->price;
-	   			 	$citem->image               =   $item->image;
-	   			 	$citem->iva 				=	$item->tax;
-	   			 	$citem->cantidad 			= 	$item->quantity;
-	   			 	$citem->valor_total			=	$item->total();
+                }
+                $items = Cart::contents();
+                Cart::destroy();
+                Session::forget('data');
+                
 
-	   			 	$citem->save();
+                 
+                //Mail::send('emails.auth.compra', array('compra'=>$compra, 'items'=>$items, /*URL::route('mega-perfil')*/), function($message) use ($compra,$items){
+                   //     $message->to(Auth::user()->email, 'Comprador')->subject('Compra cootracolta');
+                    //});
+                return Redirect::route('micuenta')
+            ->with('message-alert', 'Compra finalizada');
 
-				}
-				Cart::destroy();
-				Session::forget('data');
+            }
+             dd("done");
 
-				
-				return Redirect::route('micuenta')
-            ->with('message-alert', 'Payment success');
-
-			}
+            }
+            else{
+                dd("not done");
+            }
 
         
     }//SI EL PAGO FUE APROVADO POR PAYPAL
@@ -419,6 +400,7 @@ public function paymentNoMantis()
 		$compra->num_items  =   $data['totalItems'];
 		$compra->tipo_compra = 	$data['tipo_compra'];
 		$compra->vlr_envio   =  $data['vlr_envio_a'];
+        $compra->tipo_compra = 2;
 			if($compra->save())
 			{
 				foreach (Cart::contents() as $item) {

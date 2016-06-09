@@ -25,33 +25,36 @@
 		</div>
 		@endif
 		<div class="row">
-			<div class="col-md-4">
-				<div class="panel panel-smart">
-					<div class="panel-heading">
-								<h3 class="panel-title">
-									Mis ordenes  <a href="#" title="" id="loadProdApi">Load products</a>
-									<input type="hidden" name="" id="urlSync" value="{{URL::route('saveproducts')}}">
-								</h3>
-					</div>
-					<div class="panel-body">
-						<table class="table">
-							<th>Id pedido</th>
-							<th>Valor</th>
-							<th>Acciones</th>
-							@foreach($pedidos as $pedido)
-							<tr>
-								<td>{{$pedido->id}}</td>
-								<td>${{number_format($pedido->total_compra, 0, '', '.')}}</td>
-								<td><a href="/micuenta/orden/{{$pedido->id}}">Detalle</a></td>
-							</tr>
+			<div class="container">
+				<div class="col-md-4">
+					<div class="panel panel-smart">
+						<div class="panel-heading">
+									<h3 class="panel-title">
+										Mis ordenes  {{--<a href="#" title="" id="loadProdApi">Load products</a>--}}
+										<input type="hidden" name="" id="urlSync" value="{{URL::route('saveproducts')}}">
+									</h3>
+						</div>
+						<div class="panel-body">
+							<table class="table">
+								<th>Id pedido</th>
+								<th>Valor</th>
+								<th>Acciones</th>
+								@foreach($pedidos as $pedido)
+								<tr>
+									<td>{{$pedido->id}}</td>
+									<td>${{number_format($pedido->total_compra, 0, '', '.')}}</td>
+									<td><a href="/micuenta/orden/{{$pedido->id}}">Detalle</a></td>
+								</tr>
 
-							@endforeach
-						</table>
+								@endforeach
+							</table>
+						</div>
 					</div>
+					
 				</div>
-				
 			</div>
-			
+				
+				
 		</div>
 
 	

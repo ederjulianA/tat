@@ -19,7 +19,12 @@ Route::get(	'/', array(
 		'as'=>'payucon2', 
 		'uses'=> 'HomeController@payucon2'
 		));
-		
+
+
+Route::any('/urlSaveArt', array(
+		'as'=>'urlSaveArt', 
+		'uses'=> 'AjaxController@urlSaveArt'
+		));		
 		
 
 
@@ -33,11 +38,35 @@ Route::any(	'/payu/response', array(
 		'uses'=> 'HomeController@getPayUr'
 		));
 
-Route::post('/payu/confirmation', array(
+Route::any('/payu/confirmation', array(
 		'as'=>'purconfirmation', 
-		'uses'=> 'PayuController@conf'
+		'uses'=> 'PayuController@conf2'
 		));
 
+Route::post('/UrlPedTem', array(
+		'as'=>'UrlPedTem', 
+		'uses'=> 'AjaxController@UrlPedTem'
+		));
+
+
+Route::any('/payu2', array(
+		'as'=>'purconfirmation2', 
+		'uses'=> 'PayuController@conf2'
+		));
+
+Route::any('/payu4', array(
+		'as'=>'payu4', 
+		'uses'=> 'PayuController@payu4'
+		));
+
+Route::any('/payu3', array(
+		'as'=>'payu3', 
+		'uses'=> 'UserController@getItems'
+		));
+Route::any('/sendmail', array(
+		'as'=>'pruebamail', 
+		'uses'=> 'ApiController@mail'
+		));
 
 //probando sincronización por bloques de articulos
 Route::get('/sync/bloque', array(
@@ -96,6 +125,16 @@ Route::get(	'/catalogo', array(
 Route::get(	'/PedidoPdf/{id}', array(
 		'as'=>'pedidopdf', 
 		'uses'=> 'EmpresaController@getPdfPedido'
+		));
+
+Route::get(	'/pdfarticulos', array(
+		'as'=>'pdfarticulos', 
+		'uses'=> 'EmpresaController@pdfmantis2'
+		));
+
+Route::get(	'/pdfmantis', array(
+		'as'=>'pdfmantis', 
+		'uses'=> 'EmpresaController@pdfmantis'
 		));
 
 //GRUPO DE RUTAS PARA ANTES DE ESTAR REGISTRADO
@@ -173,6 +212,15 @@ Route::any('urlTestPro', array('as' => 'urlTestPro', 'uses' => 'Ajax2Controller@
 Route::any('urlTestSavePro', array('as' => 'urlTestSavePro', 'uses' => 'Ajax2Controller@urlTestSavePro'));
 
 
+Route::any('urlSaveGrupos', array('as' => 'urlSaveGrupos', 'uses' => 'Ajax2Controller@urlSaveGrupos'));
+Route::any('urlSaveFamilias', array('as' => 'urlSaveFamilias', 'uses' => 'Ajax2Controller@urlSaveFamilias'));
+
+
+
+Route::any('setPostPrueba', array('as' => 'setPostPrueba', 'uses' => 'Ajax2Controller@setPostPrueba'));
+
+
+
 
 
 Route::any('UrlLoadPro', array('as' => 'UrlLoadPro', 'uses' => 'Ajax2Controller@UrlLoadPro'));
@@ -196,6 +244,12 @@ Route::any('UrlLoadPro', array('as' => 'UrlLoadPro', 'uses' => 'Ajax2Controller@
  			Route::any('/prueba', array('as' => 'android', 'uses' => 'Ajax2Controller@prueba'));
 
 
+ 			//GACEL
+
+ 			Route::any('noti', array('as' => 'noti', 'uses' => 'ApiController@noti'));
+
+
+
  
     });
 
@@ -213,7 +267,7 @@ Route::group(['before' => 'auth'], function() {
 
 	 	Route::group(['before' => 'is_admin'], function () {
 
-        Route::get('admin', array('as' => 'adminIndex', 'uses' => 'EmpresaController@getIndex'));
+        Route::get('adminpanel', array('as' => 'adminIndex', 'uses' => 'EmpresaController@getIndex'));
         Route::get('admin/pedidos', array('as' => 'adminPedidos', 'uses' => 'EmpresaController@getPedidos'));
         Route::get('admin/pedido/{id}', array('as' => 'adminPedidoDetalle', 'uses' => 'EmpresaController@getAdminPedidoDetalle'));
         Route::get('admin/articulo/{id}', array('as' => 'adminArticuloDetalle', 'uses' => 'EmpresaController@getAdminArticulo'));

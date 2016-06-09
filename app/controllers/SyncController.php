@@ -249,7 +249,7 @@ cast(isnull((p3.PrePreFijVal),0)/(1-((isnull(p3.preporval,0))/100)) as int) prec
 			if ($conn_access  = odbc_connect("Driver={SQL Server Native Client 10.0};Server=".$this->server.",1433;Database=".$this->db.";", ''.$this->user.'', ''.$this->pass.'')){ 
 					   	echo "Conectado correctamente"; 
 					   	
-					        			        $ssql = " select  a.artsec,a.ArtSec,conteo,isnull(dt,0) AS dt, a.ArtNom,ArtImg_GXI,a.InvFamCod,a.ArtCod,a.ArtFicTec,parconiva,
+					        			        $ssql = " select   a.artsec,a.ArtSec,conteo,isnull(dt,0) AS dt, a.ArtNom,ArtImg_GXI,a.InvFamCod,a.ArtCod,a.ArtFicTec,parconiva,
 0 precio1,0 precio2,
 cast(isnull((p3.PrePreFijVal),0)/(1-((isnull(p3.preporval,0))/100)) as int) precio3,
 

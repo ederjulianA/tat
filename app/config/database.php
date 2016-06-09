@@ -58,6 +58,7 @@ return array(
 			'database'  => 'tat',
 			'username'  => 'root',
 			'password'  => '',
+			//'password'  => 'eder4EVER',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',

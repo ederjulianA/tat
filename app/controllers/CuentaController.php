@@ -26,7 +26,7 @@ class CuentaController extends BaseController {
 		$pedidos    =	$this->user->getPedidos($user);
 		$menu       = Menu::all();
 		
-		return View::make('user.index',compact('user','pedidos','menu'))->with('categorias',$categorias)->with('grupos',$grupos)->with('products', Cart::contents());
+		return View::make('cotra.usuario.usuario',compact('user','pedidos','menu'))->with('categorias',$categorias)->with('grupos',$grupos)->with('products', Cart::contents());
 	}
 
 	public function getDetalleCuenta($id)

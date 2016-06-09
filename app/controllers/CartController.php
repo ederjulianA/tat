@@ -82,6 +82,8 @@ class CartController extends BaseController {
 		{
 			return Redirect::to('/cart')->with('message-alert','No hay Items en tu pedido');
 		}
+		
+		
 		$categorias =   $this->cat->getAllCat();
 		$barrios 	=	$this->barrio->getAllBarrios();
 		$ciudades 	= 	$this->barrio->getAllCities();
@@ -218,7 +220,7 @@ class CartController extends BaseController {
 			 			 Cart::insert(array(
 				'id'=>$producto->id,
 				'name' => $producto->pro_nom,
-				'price' => $producto->precio,
+				'price' => round($producto->precio),
 				'quantity' => Input::get('cantidad'),
 				'tax'	=>$producto->por_iva,
 				'conIva'=> $producto->precio + (($producto->precio * $producto->por_iva)/100),

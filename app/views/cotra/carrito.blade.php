@@ -36,10 +36,10 @@
                                             <tr>
                                                 <th></th>
                                                 <th class="td-name">Nombre producto</th>
-                                                <th></th>
+                                                {{--<th></th>--}}
                                                 <th class="td-price">Precio unitario</th>
-                                                <th class="td-qty">Cantidad</th>
-                                                <th class="td-total">Subtotal</th>
+                                                <th class="td-total">Cantidad</th>
+                                                <th class="td-qty">Subtotal</th>
                                                 <th class="td-remove"></th>
                                             </tr>
                                         </thead>
@@ -55,17 +55,17 @@
 	                                                <td class="td-name">
 	                                                    <a href="product-view.html">{{$pro->name}}</a>
 	                                                </td>
-	                                                <td class="td-edit">
+	                                                {{--<td class="td-edit">
 	                                                    <a class="edit" href="#"><i class="fa fa-pencil"></i> Editar</a>
-	                                                </td>
+	                                                </td>--}}
 	                                                <td class="td-price">
 	                                                    <div class="price"><span id="precio-{{$pro->id}}">${{number_format(Funciones::getPriceIva($pro->price,$pro->tax), 0, '', '.')}}</span></div>
 	                                                </td>
 	                                                <td class="td-qty">
-	                                                   <input type="number" name="cantidad"  width="100px" class="cant input-quantity" togle="{{$pro->identifier}}" id="cant-{{$pro->id}}" data="{{$pro->id}}" value="{{$pro->quantity}}" size="1" class="form-control" />
+	                                                   <input type="number" name="cantidad"  width="100px" class="cant input-quantity" togle="{{$pro->identifier}}" id="can-{{rtrim($pro->ArtSec)}}" data="{{rtrim($pro->ArtSec)}}" value="{{$pro->quantity}}" size="1" class="form-control" />
 	                                                </td>
 	                                                <td class="td-total">
-	                                                    <div class="price">$ <span class="itemTotal-{{$pro->id}}">{{number_format($pro->total(), 0, '', '.')}}</span></div>
+	                                                    <div class="price">$ <span class="itemTotal-{{$pro->ArtSec}}">{{number_format($pro->total(), 0, '', '.')}}</span></div>
 	                                                </td>
 	                                                <td class="td-remove">
 	                                                    
@@ -110,7 +110,7 @@
                                                     <h3>Sub Total : </h3>
                                                 </td>
                                                 <td>
-                                                    <h3>$<span class="totalCart">{{number_format(Cart::total(false), 0, '', '.')}}</span></h3>
+                                                    <h3>$<span class="totalCartTax">{{number_format(Cart::total(false), 0, '', '.')}}</span></h3>
                                                 </td>
                                             </tr>
                                             <tr>

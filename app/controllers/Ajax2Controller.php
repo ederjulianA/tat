@@ -13,6 +13,21 @@ class Ajax2Controller extends BaseController {
 			$this->envio 	= $envio;
 	}
 
+
+	public function setPostPrueba()
+	{
+		$id = 5;
+		$msg = "eder alv";
+		$msg2 = urlencode($msg);
+		$cont = file_get_contents("http://somic.com.co:8086/WEBSOMIC/EDER/TIENDO/setPrueba.php?id=$id&msg=$msg2");
+		if($cont == true)
+		{
+			dd("done");
+		}else{
+			dd("not dont");
+		}
+	}
+
 	public function urlSeaCod()
 	{
 		if(isset($_POST['cod']) || isset($_POST['nom']))
@@ -34,6 +49,78 @@ class Ajax2Controller extends BaseController {
 				$estado = array('estado'=>2,'msg'=>'No hay productos');
 				return Response::json(array('estado'=>$estado));
 			}
+		}
+	}
+
+
+	public function urlSaveFamilias()
+	{
+			header('Content-type: text/javascript');
+		if(isset($_POST['data'])){
+
+			$data = $_POST['data'];
+			$dd   = json_decode( json_encode($data,true));
+			foreach ($dd as  $gru) {//objeto que contiene más objetos
+				
+				$grup = Familia::where('InvFamCod','=',$gru->InvFamCod)->first();
+						if($grup)
+						{
+										$VarSlug = Str::slug($gru->InvFamNom);
+										$grup->InvFamCod = $gru->InvFamCod;
+										$grup->InvFamId = $gru->InvFamCod;
+										$grup->InvFamNom = $gru->InvFamNom;
+										$grup->fam_slug = $VarSlug;
+										$grup->save();
+						}else{
+										$grupo = new Familia();
+										$VarSlug = Str::slug($gru->InvFamNom);
+										$grupo->InvFamId = $gru->InvFamCod;
+										$grupo->InvFamCod = $gru->InvFamCod;
+										$grupo->InvFamNom = $gru->InvFamNom;
+										$grupo->fam_slug = $VarSlug;
+										$grupo->save();
+						}
+			}
+
+
+			$estado = array('estado'=>1,'msg'=>'Se ha terminado la sincronizacion exitosamente 2');
+			return Response::json(array('estado'=>$estado)); 
+		}
+	}
+
+
+	public function urlSaveGrupos()
+	{
+			header('Content-type: text/javascript');
+		if(isset($_POST['data'])){
+
+			$data = $_POST['data'];
+			$dd   = json_decode( json_encode($data,true));
+			foreach ($dd as  $gru) {//objeto que contiene más objetos
+				
+				$grup = Grupo::where('InvGruCod','=',$gru->invgrucod)->first();
+						if($grup)
+						{
+										$VarSlug = Str::slug($gru->invgrunom);
+										$grup->InvGruId = $gru->invgrucod;
+										$grup->InvGruCod = $gru->invgrucod;
+										$grup->InvGruNom = $gru->invgrunom;
+										$grup->slug_grupo = $VarSlug;
+										$grup->save();
+						}else{
+										$grupo = new Grupo();
+										$VarSlug = Str::slug($gru->invgrunom);
+										$grupo->InvGruId = $gru->invgrucod;
+										$grupo->InvGruCod = $gru->invgrucod;
+										$grupo->InvGruNom = $gru->invgrunom;
+										$grupo->slug_grupo = $VarSlug;
+										$grupo->save();
+						}
+			}
+
+
+			$estado = array('estado'=>1,'msg'=>'Se ha terminado la sincronizacion exitosamente 2');
+			return Response::json(array('estado'=>$estado)); 
 		}
 	}
 
@@ -286,18 +373,18 @@ class Ajax2Controller extends BaseController {
 			$dd   = json_decode( json_encode($data,true));
 			//return Response::json($dd);
 
-			$ids  = "";
+			//$ids  = "";
 
 			foreach($dd as $d){
-				return Response::json($d);
+				return Response::json($dd);
 				
 					//return Response::json($conteo);
 					
 				
-					$v = $d->editado;
-					$s=$v;
+					//$v = $d->editado;
+					//$s=$v;
 					//return Response::json($s);
-					$pro = Producto::where('dt','=','$s')->first();
+					$pro = Producto::where('dt','=','0')->first();
 
 					if(!$pro)
 					{
@@ -305,11 +392,13 @@ class Ajax2Controller extends BaseController {
 					}else
 					{
 						$ids =$ids;
-					}				
+					}	
+
 				
 			}	
+			return Response::json($ids);
 
-			return Response::json($ids);	
+			
 
 		}
 	}
@@ -330,7 +419,10 @@ class Ajax2Controller extends BaseController {
 					$prod = Producto::where('id_mantis','=',$pro->ArtCod)->first();
 									if($prod)
 									{
-										//File::delete($prod->img);
+
+										if($prod->dt != $pro->dt){
+
+												//File::delete($prod->img);
 										if($pro->ArtImg_GXI != NULL)
 								   			{
 								   				$nombre = Str_replace('gxdbfile:','',$pro->ArtImg_GXI);
@@ -377,8 +469,8 @@ class Ajax2Controller extends BaseController {
 										$prod->id_mantis = $pro->ArtCod;
 										//$prod->pro_nom = $pro['artnom'];
 										$prod->ArtSec    = $pro->artsec;
-										$prod->pro_nom = $artnom;
-										$prod->dt      = $pro->editado;
+										$prod->pro_nom = $pro->artnom;
+										$prod->dt      = $pro->dt;
 										//$prod->InvFamCod = $pro['InvFamCod'];
 
 
@@ -393,7 +485,17 @@ class Ajax2Controller extends BaseController {
 										$prod->cantidad = $pro->saldo;
 
 										$prod->save();
-									}else{
+
+
+										}
+										
+
+										//cierra dt
+									}
+
+
+
+									else{
 										
 										$producto = new Producto;
 											if($pro->ArtImg_GXI != NULL)
@@ -454,16 +556,16 @@ class Ajax2Controller extends BaseController {
 										$producto->ArtSec    = $pro->artsec;
 
 										//$producto->pro_nom = $pro['artnom'];
-										$producto->pro_nom 		= $artnom;
+										$producto->pro_nom 		= $pro->artnom;
 										$producto->categoria_id = $pro->InvFamCod;
 										//$producto->InvFamCod   =  $pro['InvFamCod'];
-										$producto->descripcion 	= $prod->ArtFicTec;
+										$producto->descripcion 	= $pro->ArtFicTec;
 										$producto->slug 		= $VarSlug;
 										//$producto->img = 'img/Mantis/'.$filename;
 										$producto->precio 		= $pro->precio3;
 										$producto->por_iva 		= $pro->parconiva;
 										$producto->cantidad 	=  $pro->saldo;
-										$producto->dt           = $pro->editado;
+										$producto->dt           = $pro->dt;
 										$producto->save();
 									}
 
