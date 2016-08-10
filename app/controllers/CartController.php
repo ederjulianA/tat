@@ -225,6 +225,7 @@ class CartController extends BaseController {
 				'tax'	=>$producto->por_iva,
 				'conIva'=> $producto->precio + (($producto->precio * $producto->por_iva)/100),
 				'ArtSec'=> $producto->ArtSec,
+				'ArtCod'=>$producto->id_mantis,
 				'image' => $producto->img
 			));
 			 			 return Redirect::back()->with('message-alert','Se ha agregado el producto a tu pedido');

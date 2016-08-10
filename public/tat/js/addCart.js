@@ -99,7 +99,13 @@ $(document).on('click','#btn_addCart', function(e){
 						show:true,
 						keyboard:false
 					});
-					$('.info-item').html('<p>Has agregado a tu lista :'+data.producto.pro_nom+' <img src="'+data.producto.img+'" height="120px" width="auto"></p><br><strong>Total del Pedido: $'+Ntotal+'</strong>')
+					if(data.producto.img == 'img/Mantis/def.png')
+					{
+						$('.info-item').html('<p>Has agregado a tu lista :'+data.producto.pro_nom+' <img src="/'+data.producto.img+'" height="120px" width="auto"></p><br><strong>Total del Pedido: $'+Ntotal+'</strong>')
+					}else{
+						$('.info-item').html('<p>Has agregado a tu lista :'+data.producto.pro_nom+' <img src="'+data.producto.img+'" height="120px" width="auto"></p><br><strong>Total del Pedido: $'+Ntotal+'</strong>')
+					}
+					//$('.info-item').html('<p>Has agregado a tu lista :'+data.producto.pro_nom+' <img src="/'+data.producto.img+'" height="120px" width="auto"></p><br><strong>Total del Pedido: $'+Ntotal+'</strong>')
 					console.log(data);
 				}
 				

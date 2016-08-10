@@ -94,11 +94,22 @@ Route::post('payment', array(
     'uses' => 'PaypalController@postPayment',
 ));
 
+
+Route::post('paymentAgain', array(
+    'as' => 'paymentAgain',
+    'uses' => 'PaypalController@postPaymentAgain',
+));
 // this is after make the payment, PayPal redirect back to your site
 Route::get('payment/status', array(
     'as' => 'payment.status',
     //'uses' => 'PaypalController@paymentNoMantis',
     'uses' => 'PaypalController@getPaymentStatus',
+));
+
+Route::get('payment/status/again', array(
+    'as' => 'payment.statusAgain',
+    //'uses' => 'PaypalController@paymentNoMantis',
+    'uses' => 'PaypalController@getPaymentStatusAgain',
 ));
 
 
@@ -108,6 +119,9 @@ Route::get('payment/status', array(
 
          Route::any('ajax/load/payment', array('as' => 'ajaxLoadPayment', 'uses' => 'CartController@getLoadPayment'));
          Route::any('ajax/load/paymentU', array('as' => 'ajaxLoadPaymentU', 'uses' => 'CartController@getLoadPaymentU'));
+
+
+         Route::any('urlValMail', array('as' => 'urlValMail', 'uses' => 'AjaxController@urlValMail'));
 
 
 //DETALLE DE PRODUCTO
@@ -262,12 +276,13 @@ Route::group(['before' => 'auth'], function() {
 		Route::get('logout', array('as' => 'logout', 'uses' => 'HomeController@logout'));
 
 		Route::get('micuenta', array('as' => 'micuenta', 'uses' => 'CuentaController@getIndex'));
+		Route::get('micuenta/direcciones', array('as' => 'micuentaDir', 'uses' => 'CuentaController@getDirecciones'));
 		Route::get('micuenta/orden/{id}', array('as' => 'micuentaorden', 'uses' => 'CuentaController@getDetalleCuenta'));
 		Route::post('postConfPedido', array('as' => 'postConfPedido', 'uses' => 'EmpresaController@postConfPedido'));
 
 	 	Route::group(['before' => 'is_admin'], function () {
 
-        Route::get('adminpanel', array('as' => 'adminIndex', 'uses' => 'EmpresaController@getIndex'));
+        Route::get('admin', array('as' => 'adminIndex', 'uses' => 'EmpresaController@getIndex'));
         Route::get('admin/pedidos', array('as' => 'adminPedidos', 'uses' => 'EmpresaController@getPedidos'));
         Route::get('admin/pedido/{id}', array('as' => 'adminPedidoDetalle', 'uses' => 'EmpresaController@getAdminPedidoDetalle'));
         Route::get('admin/articulo/{id}', array('as' => 'adminArticuloDetalle', 'uses' => 'EmpresaController@getAdminArticulo'));

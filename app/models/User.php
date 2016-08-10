@@ -36,6 +36,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		 											'c.total_compra',
 		 											'c.num_items',
 		 											'c.created_at',
+		 											'c.estado_id',
 		 											'e.nom_est',
 		 											'c.tipo_compra')->where('c.user_id','=',$iduser)->orderBy('c.id','DESC')->paginate(10);
 

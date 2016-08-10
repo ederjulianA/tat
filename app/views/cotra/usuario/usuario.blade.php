@@ -17,7 +17,25 @@
                                 <div class="my-account">
                                     <div class="bottom-padding">
                                         <h3 class="hello">Hola, Eder!</h3>
-                                        <p>Contenido de bienvenida a mi cuenta.</p>
+                                        <p>
+                                             @if(Session::has('message-alert'))
+                <div class="row">
+                    
+                         
+
+                        <div class="alert alert-warning alert-dismissable">
+                          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                          <strong>Mensaje</strong> {{Session::get('message-alert')}}
+                        </div>
+
+                        <!--<p class="mensajes-flash" style="" data-dismiss="alert"id="mensaje-flash"> {{Session::get('message-alert')}}
+                            
+                        </p>-->
+                
+                    
+                </div>
+            @endif
+                                        </p>
                                     </div>
                                     <div class="bottom-padding">
                                         <div class="title-box">
@@ -48,7 +66,63 @@
                                                             <td class="text-center last">
                                                                 <div class="btn-group">
                                                                     <a href="/micuenta/orden/{{$pedido->id}}" class="btn btn-color">Ver orden</a>
-                                                                    <a href="#" class="btn btn-default">Re ordenar</a>
+                                                                    @if($pedido->estado_id == 1)
+                                                                    <a href="#" class="btn btn-default" data-toggle="modal" data-target="#payAgai">Pagar</a>
+                <div class="modal register fade" id="payAgai" tabindex="-1" role="dialog" aria-labelledby="registrationModal" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h2 class="form-signin-heading modal-title" id="registrationModalLabel">Pagar Orden</h2>
+                        </div>
+                        
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <h3>Orden #{{$pedido->id}}</h3>
+                                       <p>
+                            <form action="{{URL::route('paymentAgain')}}" method="post" accept-charset="utf-8">
+                              
+                                <div class="panel-body">
+                               
+                                    
+                                    <hr />
+
+                                    <dl class="dl-horizontal">
+                                    
+                                    <input type="hidden" id="totalCart" name="totalCart" value="{{$pedido->total_compra}}">
+                                    <input type="hidden" id="totalCart"name="totalItems" value="{{$pedido->num_items}}">
+                                    <input type="hidden" id="total_compra" name="total_compra" value="{{$pedido->total_compra}}">
+                                    <input type="hidden" id="vlr_envio_a" name="vlr_envio_a" value="">
+                                    <input type="hidden" id="id" name="id" value="{{$pedido->id}}">
+                                    
+                                </dl>
+                                <hr />
+                                <dl class="dl-horizontal total">
+                                    <dt>Total :</dt>
+                                    <dd>$ <span id="totalP">{{number_format($pedido->total_compra, 0, '', '.')}}</span></dd>
+                                    <input type="hidden" id="total_compra" name="total_compra" value="{{$pedido->total_compra}}">
+                                </dl>
+                                <hr />
+                            
+                                    <button type="submit" class="">PAGAR con paypal</button> 
+                                
+                            </div>
+                                    
+                                    
+                        </form>
+                                           {{--PAYPAL--}}
+                                       </p>
+                                    </div>
+                                   
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                    <button type="button" class="btn btn-color">Registrarse</button>
+                                </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                                                                    @endif
                                                                 </div>
                                                             </td>
                                                         </tr>
@@ -144,29 +218,7 @@
                             </div>
                             <!-- /My Order Table -->
                             <!-- Sidebar -->
-                            <div id="sidebar" class="sidebar col-sm-3 col-md-3 col-lg-3">
-                                <div class="widget">
-                                    <h3>Mi cuenta</h3>
-                                    <!-- menu-->
-                                    <div id="sidebar-nav">
-                                        <ul class="sidebar-nav">
-                                            <li class="active">
-                                                <a href="my-account.html"><i class="fa fa-gears item-icon"></i>Mis órdenes</a>
-                                            </li>
-                                            <li>
-                                                <a href="my-account-information.html"><i class="fa fa-user item-icon"></i>Información de la cuenta</a>
-                                            </li>
-                                            <li>
-                                                <a href="my-address.html"><i class="fa fa-pencil-square-o item-icon"></i>Direcciones</a>
-                                            </li>
-                                            <li>
-                                                <a href="my-orders.html"><i class="fa fa-shopping-cart item-icon"></i>Mis órdenes</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <!-- /menu-->
-                                </div>
-                            </div>
+                             @include('includes.cotracolta.pri.sidebar')
                             <!-- /Sidebar -->
                         </div>
                     </div>

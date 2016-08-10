@@ -2,6 +2,7 @@
 
 @section('content')
 	  <!-- Main Content -->
+                <input type="hidden" id="urlValMail" value="{{URL::route('urlValMail')}}">
                 <div class="content margin-top60 margin-bottom60">
                     <div class="container">
                         <div class="row">
@@ -86,6 +87,7 @@
                                                         <div class="col-md-12">
                                                             {{ Form::text('NitSec','',array('class'=>'form-control','name'=>'NitSec','id'=>'nit','placeholder'=>'Cedula')) }}
 											{{ $errors->first('NitSec','<p class="alert alert-danger">:message</p>') }}
+                                                    <p id="ajaxNit"></p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -118,6 +120,7 @@
                                                         <div class="col-md-12">
                                                             {{ Form::email('email','',array('class'=>'form-control','name'=>'email','placeholder'=>'Email','id'=>'email')) }}
 											{{ $errors->first('email','<p class="alert alert-danger">:message</p>') }}
+                                            <p id="ajaxEmail"></p>
                                                         </div>
                                                     </div>
                                                 </div>

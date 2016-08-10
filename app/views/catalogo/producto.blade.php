@@ -115,7 +115,7 @@
 													<i class="fa fa-shopping-cart"></i> 
 												</button>
 											@else
-												<button type="button" class="btn btn-cart" id="btn_addCartDis" disabled>
+												<button type="button" class="btn btn-cart " id="btn_addCartDis" disabled>
 													Agregar
 													<i class="fa fa-shopping-cart"></i> 
 												</button>

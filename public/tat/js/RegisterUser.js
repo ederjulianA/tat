@@ -14,6 +14,34 @@ $(document).on('click','#btnNewUser',function(e){
 	var email 		= $('#email').val();
 	var password 	= $('#password').val();
 	//alert(nombre+'-'+apellido+'-'+nit+'-'+telefono+'-'+direccion+'-'+email);
+	var valN = valNit(nit);
+	if( valN == 1)
+	{
+		notie.alert(3, 'Error en el formulario', 2);
+		return false;
+		$('#ajaxNit').text("El número de cedula ya se encuentra registrada");
+		return false;
+	}else{
+		$('#ajaxNit').text("");
+
+	}
+	 var valMail = valMai(email);
+	 if( valMail == 1)
+	{
+		notie.alert(3, 'Error en el formulario', 2);
+		
+		$('#ajaxEmail').text("El email ya se encuentra registrado");
+		return false;
+	}else{
+		$('#ajaxEmail').text("");
+
+	}
+	var sumVal = 0;
+	sumVal = valN + valMail;
+	if (sumVal == 0){
+	 //alert("email"+valMail);
+	 form.submit();
+	}
 	return false;
 
 });
@@ -32,11 +60,14 @@ $(document).on('change','#nit',function(e){
 				{
 					//alert("Nit valido");
 					$('#nit').removeClass("errorE");
+
+					$('#ajaxNit').text("");
 				}else{
 					swal("Ya existe la cedula", "La cedula :"+nit+" ya esta registrada ", "error")
 					$('#nit').addClass("errorE");
 					var html = '<p class="alert alert-danger">:message</p>';
 					$('#nit').append(html);
+					$('#ajaxNit').text("El número de cedula ya se encuentra registrada");
 					$('#nit').focus();
 					return false;
 
@@ -56,3 +87,87 @@ $(document).on('change','#nit',function(e){
 		});
 	e.preventdefault(e);
 });
+
+function valNit(nit)
+{
+	var c = 0;
+	$.ajax({
+			url : 'http://somic.com.co:8086/WEBSOMIC/EDER/TIENDO/USER/GetNit.php',
+			dataType: "json",
+			type : "post",
+			async: false,
+			data : { NitIde : nit},
+			success : function(data){
+				console.log(data);
+				if(data.est == '')
+				{
+					
+					//alert("Nit valido");
+					$('#nit').removeClass("errorE");
+				}else{
+					//swal("Ya existe la cedula", "La cedula :"+nit+" ya esta registrada ", "error")
+					//$('#nit').addClass("errorE");
+					//var html = '<p class="alert alert-danger">:message</p>';
+					//$('#nit').append(html);
+					//$('#nit').focus();
+					
+					c = 1;
+
+				}
+				
+			},error : function(data){
+				
+				console.log(data);
+				
+				
+				}
+
+
+				
+
+
+		});
+	
+	return c;
+}
+
+function valMai(email)
+{
+	var c = 0;
+	var url = $('#urlValMail').val();
+	$.ajax({
+			url : url,
+			dataType: "json",
+			type : "post",
+			async: false,
+			data : { email : email},
+			success : function(data){
+				console.log(data);
+				if(data.estado.estado == '2')
+				{
+					
+					//alert("Nit valido");
+					$('#email').removeClass("errorE");
+				}else{
+					
+					$('#email').addClass("errorE");
+					c = 1;
+
+				}
+				
+			},error : function(data){
+				
+				console.log(data);
+				
+				
+				}
+
+
+				
+
+
+		});
+	
+	
+	return c;
+}

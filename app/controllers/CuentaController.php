@@ -18,6 +18,15 @@ class CuentaController extends BaseController {
 		$this->grupo 		= $grupo;
 	}
 
+	public function getDirecciones()
+	{
+		$user = Auth::user()->id;
+		$grupos 		=   $this->grupo->getAllGrupos();
+		$categorias =   $this->cat->getAllCat();
+		$menu       = Menu::all();
+		return View::make('cotra.usuario.direcciones',compact('user','menu'))->with('categorias',$categorias)->with('grupos',$grupos)->with('products', Cart::contents());
+	}
+
 	public function getIndex()
 	{
 		$user = Auth::user()->id;

@@ -38,7 +38,7 @@ function sync2()
 			
 			success : function(data){
 				console.log("Armando Ids");
-				//console.log(data);
+				console.log(data);
 				var cont = 0;
 				var ids = "";
 				var por = data.length;
@@ -55,9 +55,9 @@ function sync2()
 					 NvalPor =  Math.round(valPor);
 
 					 
-					console.log(NvalPor);
+					//console.log(NvalPor);
 
-					if (cont == 10) {
+					if (cont == 1) {
 						getArt(ids,NvalPor);
 						cont = 0;
 						ids = "";
@@ -151,7 +151,7 @@ function armarIds(conteo)
 
 function getArt(ids,NvalPor)
 {
-	
+	console.log(ids);
 	$.ajax({
 
 			//url : "http://somic.com.co:8086/WEBSOMIC/EDER/TIENDO/articulos2.php",
@@ -163,7 +163,7 @@ function getArt(ids,NvalPor)
 			success : function(data){
 
 				//var html = '<div class="alert alert-warning alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><strong>Actualización terminada</strong></div>';
-				//console.log(data);
+				console.log(data);
 				console.log(NvalPor);
 				guardar(data,NvalPor);
 				
@@ -192,6 +192,7 @@ function getArt(ids,NvalPor)
 function guardar(data,NvalPor)
 {
 	var urlSync = $('#urlTestSavePro').val();
+	console.log(data);
 	$.ajax({
 
 			url : urlSync,
@@ -201,7 +202,7 @@ function guardar(data,NvalPor)
 			success : function(data){
 
 				//var html = '<div class="alert alert-warning alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><strong>Actualización terminada</strong></div>';
-				console.log(data);
+				//console.log(data);
 				$('#pbar').css("width",NvalPor+'%');
 					 $('#pbar').text(NvalPor+"%");
 				

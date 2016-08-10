@@ -9,6 +9,7 @@
         <title>Home</title>
         <meta name="Cootracolta shop" content="Tienda de artículos Cootracolta">
         <meta name="autor" content="Megalópolis Company">
+        @yield('meta-data')
         <!-- Mobile Metas -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- Google Fonts -->

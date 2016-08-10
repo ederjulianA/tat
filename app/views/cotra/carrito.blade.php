@@ -6,7 +6,14 @@
 
 
 @section('content')
+<style type="text/css" media="screen">
+    .error{
+        border-color: 2px solid red;
+    }
+    
+</style>
 <input type="hidden" id="urlValDis" value="{{URL::route('urlValDis')}}">
+<input type="hidden" id="urlSaveArt" value="{{URL::route('urlSaveArt')}}">
 	  <!-- Main Content -->
                 <div class="content margin-top60 margin-bottom60">
                  @if(Session::has('message-alert'))
@@ -46,20 +53,20 @@
                                         <tbody>
                                         	@if($products)
 												@foreach($products as $pro)
-	                                            <tr>
+	                                            <tr id="item-{{$pro->ArtSec}}">
 	                                                <td class="td-images">
 	                                                    <a class="product-image" href="shop-product-view.html">
 	                                                    <img width="auto" height="70" title="" alt="" src="{{asset($pro->image)}}">
 	                                                    </a>
 	                                                </td>
 	                                                <td class="td-name">
-	                                                    <a href="product-view.html">{{$pro->name}}</a>
+	                                                    <a href="#">{{$pro->name}}---{{$pro->ArtCod}} </a>
 	                                                </td>
 	                                                {{--<td class="td-edit">
 	                                                    <a class="edit" href="#"><i class="fa fa-pencil"></i> Editar</a>
 	                                                </td>--}}
 	                                                <td class="td-price">
-	                                                    <div class="price"><span id="precio-{{$pro->id}}">${{number_format(Funciones::getPriceIva($pro->price,$pro->tax), 0, '', '.')}}</span></div>
+	                                                    <div class="price idSync" data="{{$pro->ArtSec}}"><span id="precio-{{$pro->id}}">${{number_format(Funciones::getPriceIva($pro->price,$pro->tax), 0, '', '.')}}</span></div>
 	                                                </td>
 	                                                <td class="td-qty">
 	                                                   <input type="number" name="cantidad"  width="100px" class="cant input-quantity" togle="{{$pro->identifier}}" id="can-{{rtrim($pro->ArtSec)}}" data="{{rtrim($pro->ArtSec)}}" value="{{$pro->quantity}}" size="1" class="form-control" />
@@ -135,4 +142,8 @@
                 <!-- /Main Content -->
             </section>
             <!-- /Main Section -->
+@stop
+
+@section('scripts')
+    <script src="{{asset('tat/js/val-cant.js')}}"></script>
 @stop

@@ -13,6 +13,26 @@ class AjaxController extends BaseController {
 			$this->envio 	= $envio;
 	}
 
+	public function urlValMail()
+	{
+		header('Content-type: text/javascript');
+		if(isset($_POST['email']))	
+		{
+			$email = $_POST['email'];
+
+			$u = User::where('email','=',$email)->first();
+			if($u)
+			{
+					$estado = array('estado'=>'1');
+					return Response::json(array('estado'=>$estado,'user'=>$u));
+			}else
+			{
+					$estado = array('estado'=>'2');
+					return Response::json(array('estado'=>$estado));
+			}
+		}
+	}
+
 	public function urlSaveArt()
 	{
 		header('Content-type: text/javascript');
@@ -67,6 +87,8 @@ class AjaxController extends BaseController {
 	   			 	$citem->image               =   $item->image;
 	   			 	$citem->iva 				=	$item->tax;
 	   			 	$citem->cantidad 			= 	$item->quantity;
+	   			 	$citem->ArtSec 			    =  	$item->ArtSec;
+	   			 	$citem->ArtCod   			= 	$item->ArtCod;
 	   			 	$citem->valor_total			=	$item->total();
 
 	   			 	$citem->save();
@@ -346,6 +368,7 @@ class AjaxController extends BaseController {
 						'quantity' => Input::get('cantidad'),
 						'tax'=>$producto->por_iva,
 						'ArtSec'=> $producto->ArtSec,
+						'ArtCod'=> $producto->id_mantis,
 						'conIva'=> $producto->precio + (($producto->precio * $producto->por_iva)/100),
 						'image' => $producto->img
 						));

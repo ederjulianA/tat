@@ -4,7 +4,57 @@
 	@include('includes.cotracolta.pri.menu')
 @stop
 
+@section('meta-data')
+    <!-- You can use Open Graph tags to customize link previews.
+    Learn more: https://developers.facebook.com/docs/sharing/webmasters -->
+    <meta property="og:url"           content="http://tiendo.co/producto/{{$producto->slug}}" />
+    <meta property="og:type"          content="website" />
+    <meta property="og:title"         content="Articulo | {{$producto->pro_nom}}" />
+    <meta property="og:description"   content="Your description" />
+    <meta property="og:image"         content="http://www.your-domain.com/path/image.jpg" />
+
+@stop
+
 @section('content')
+    <style type="text/css" media="screen">
+        .cont-pro-det{
+            /*border: 1px solid #f90;*/
+            padding: 10px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .cont-pro-det div{
+                vertical-align: middle;
+                display: inline-block;
+                vertical-align: middle;
+                
+                min-height: 60px;
+                width: 30%;
+                margin: 0 auto;
+
+        }
+
+        .cont-pro-det div .precio-t input{
+            vertical-align: middle;
+        }
+        .qty-e{
+            width:80px;
+            font-weight: bold;
+            padding: 5px;
+            text-align: center;
+            border-radius: 5px;
+        }
+        #btn_addCart{
+            width: 100%;
+            padding: 10px;
+            font-weight: bold;
+            font-size: 18px;
+            border-bottom: 5px solid #2D6027 !important;
+            letter-spacing: 1px;
+            text-shadow: 3px 1px 4px rgba(154, 150, 150, 1);
+        }
+        
+    </style>
     <input type="hidden" id="urlSaveArt" value="{{URL::route('urlSaveArt')}}">
 	 <!-- Main Content -->
                 <div class="content margin-top60 margin-bottom60">
@@ -78,27 +128,44 @@
                                         <p><b>Código del producto :</b> {{$producto->id_mantis}}-</p>
                                         <input type="hidden" name="id_producto" id="id_producto" value="{{$producto->id}}">
                                         @if($producto->cantidad > 0)
-                                            <p><b>Stock : </b><button type="button" class="btn btn-default btn-sm btn-color">Disponible</button></p>
+                                            <p><b>Stock : </b><span class="label label-success">Disponible</span></p>
 
                                         @else
-                                            <p><b>Stock : </b><button type="button" class="btn btn-danger btn-sm ">No disponible</button></p>
+                                            <p><b>Stock : </b><span class="label label-danger">No disponiblle</span></p>
                                         @endif
-                                        
-                                        <input type="hidden" id="cant-dis" value="{{ round($producto->cantidad)}}">
-                                        <p><b>Price : <button type="button" class="btn btn-default btn-sm" disabled="disabled">$1200</button> <button type="button"data="{{$producto->ArtSec}}" id="pro-{{$producto->ArtSec}}" class="btn btn-default btn-sm idSync">${{ number_format($producto->precio, 0, '', '.') }}</button></b></p>
-                                        <p><b>Cantidad :</b> <input class="td-qty" type="number"  name="cantidad" value="1" size="2" id="input-quantity"></p>
-                                        <p>     
-                                            @if($producto->cantidad > 0)
+
+                                        <div class="cont-pro-det">
+                                            <div class="precio-t">
+                                                <input type="hidden" id="cant-dis" value="{{ round($producto->cantidad)}}">
+                                                <h2 data="{{$producto->ArtSec}}" id="pro-{{$producto->ArtSec}}" class=" idSync">${{ number_format($producto->precio, 0, '', '.') }}</h2>
+                                            </div>
+
+                                            <div class="cantidad-t">
+                                                <input class="td-qty qty-e" type="number"  name="cantidad" value="1" size="2" id="input-quantity">
+                                            </div>
+
+                                            <div class="add-t">
+                                                 @if($producto->cantidad > 0)
                                                
-                                                    <button type="button" class="btn btn-default btn-sm btn-color" id="btn_addCart">Agregar al carro</button>
+                                                    <button type="button" class="btn btn-default btn-sm btn-color btn-lg" id="btn_addCart">Agregar al carro</button>
                                                 </button>
-                                            @else
+                                                @else
                                               
 
                                                     <button type="button" class="btn btn-default btn-sm btn-color" id="btn_addCartDis" disabled>Agregar al carro</button>
 
                                                 </button>
-                                            @endif               
+                                                @endif 
+                                                
+                                            </div>
+                                            
+                                        </div>
+                                        
+                                        
+                                        <p><b> {{--<button type="button" class="btn btn-default btn-sm" disabled="disabled">$1200</button>--}} </b></p>
+                                        <p><b></p>
+                                        <p>     
+                                                         
                                             
                                         </p>
                                     </div>

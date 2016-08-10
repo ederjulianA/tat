@@ -423,10 +423,10 @@ class Ajax2Controller extends BaseController {
 										if($prod->dt != $pro->dt){
 
 												//File::delete($prod->img);
-										if($pro->ArtImg_GXI != NULL)
+										if($pro->ArtImg_GXI != NULL && $pro->ArtImg_GXI != '0')
 								   			{
 								   				$nombre = Str_replace('gxdbfile:','',$pro->ArtImg_GXI);
-								   				$urlImg = "http://192.168.1.56:8080/MantisWeb20apps/PublicTempStorage/multimedia/".$nombre;
+								   				$urlImg = "http://somic.com.co:8081/MantisWeb20mantis2016/PublicTempStorage/multimedia/".$nombre;
 
 								   				//Image::make($urlImg)->resize(300, null, function ($constraint) {$constraint->aspectRatio();})->save(public_path().'/img/Mantis/'.$nombre);
 								   				//Image::make($urlImg)->save(public_path().'/img/Mantis/'.$nombre);
@@ -498,11 +498,11 @@ class Ajax2Controller extends BaseController {
 									else{
 										
 										$producto = new Producto;
-											if($pro->ArtImg_GXI != NULL)
+											if($pro->ArtImg_GXI != NULL && $pro->ArtImg_GXI != '0')
 								   			{
 								   				$nombre = Str_replace('gxdbfile:','',$pro->ArtImg_GXI);
 
-								   				$urlImg = "http://192.168.1.56:8080/MantisWeb20apps/PublicTempStorage/multimedia/".$nombre;
+								   				$urlImg = "http://somic.com.co:8081/MantisWeb20mantis2016/PublicTempStorage/multimedia/".$nombre;
 								   				//Image::make($urlImg)->resizeCanvas(400, 400, null, true, '#fff')->save(public_path().'/img/Mantis/'.$nombre);
 								   				//Image::make($urlImg)->save(public_path().'/img/Mantis/'.$nombre);
 								   				//$producto->img = 'img/Mantis/'.$nombre;

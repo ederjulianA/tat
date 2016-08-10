@@ -73,7 +73,8 @@ class GeneralesController extends BaseController {
 		$AllGru   = count($gru);
 		$AllArt   = count($art);
 		$para     = $this->conn->getParameters();
-		return View::make('tiendo.admin.generales.sync',compact('AllArt','AllGru','AllFam','AllSubG','para'));
+		//return View::make('tiendo.admin.generales.sync',compact('AllArt','AllGru','AllFam','AllSubG','para'));
+		return View::make('tiendo.admin.generales.sync2',compact('AllArt','AllGru','AllFam','AllSubG','para'));
 	}
 
 
