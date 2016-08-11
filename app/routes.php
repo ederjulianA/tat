@@ -40,7 +40,7 @@ Route::any(	'/payu/response', array(
 
 Route::any('/payu/confirmation', array(
 		'as'=>'purconfirmation', 
-		'uses'=> 'PayuController@conf2'
+		'uses'=> 'PayuController@conf3'
 		));
 
 Route::post('/UrlPedTem', array(

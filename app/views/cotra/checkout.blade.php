@@ -306,12 +306,14 @@
                                         		<li>
                                         			
 
-                                        			<?php  $refCod = "eder-".date('YmdHms');$sig = "6u39nqhq8ftd0hlvnjfs66eh8c~500238~".$refCod."~".Cart::total()."~COP"; $e = md5($sig);?>
-	<form method="post" action="https://stg.gateway.payulatam.com/ppp-web-gateway/" id="formPayu">
-    {{--<form method="post" action="{{URL::route('purconfirmation2')}}">--}}
+                                        			<?php  $refCod = "eder-".date('YmdHms');$sig = "4Vj8eK4rloUd272L48hsrarnUA~508029~".$refCod."~".Cart::total()."~COP"; $e = md5($sig);?>
+	<form method="post" action="https://sandbox.gateway.payulatam.com/ppp-web-gateway" id="formPayu">
+    {{--<form method="post" action="{{URL::route('purconfirmation2')}}">6u39nqhq8ftd0hlvnjfs66eh8c--}}
     {{--<form method="post" action="https://sandbox.gateway.payulatam.com/ppp-web-gateway/">--}}
-  <input name="merchantId"    type="hidden"  value="500238"   >
-  <input name="accountId"     type="hidden"  value="500537" >
+  {{--<input name="merchantId"    type="hidden"  value="500238" >
+  <input name="accountId"     type="hidden"  value="500537" >--}}
+  <input name="merchantId"    type="hidden"  value="508029" >
+  <input name="accountId"     type="hidden"  value="512322" >
   <input name="description"   type="hidden"  value="Test PAYU"  >
   <input name="referenceCode" type="hidden"  id="code" value="{{$refCod}}" >
   <input name="amount"        type="hidden"  value="{{Cart::total()}}"   >

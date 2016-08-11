@@ -15,6 +15,46 @@
 				$result = mysqli_query($conexion, $sql);
 		}
 
+		public function conf3()
+		{
+			$ApiKey = "6u39nqhq8ftd0hlvnjfs66eh8c";
+        	
+			
+			$response_code_pol 			= $_REQUEST['response_code_pol'];
+			$value 						= $_REQUEST['value'];
+			$ip  						= $_POST['ip'];
+			$currency 					= $_POST['currency'];
+			$sign 						= $_POST['sign'];
+			$additional_value 			= $_POST['additional_value'];
+			$state_pol 					= $_POST['state_pol'];
+			$reference_sale 			= $_POST['reference_sale'];
+			$New_value 	 				= number_format($value, 1, '.', '');
+			$firma_cadena 				= "$ApiKey~500238~$reference_sale~$New_value~$currency~$state_pol";
+        	$firmacreada 				= md5($firma_cadena);
+        	$email 						= "ederalvarez2091057@gmail.com";
+			$empresa		 			= "Megalopolis Inc.";
+			$asesor 					="ederAAAA";
+			$aliado 					="Eder A";
+			$valor 						= 10000;
+
+			if ($state_pol == 4)
+			{
+				$compra = Compra::where('llave','=',$reference_sale)->first();
+				$compra->pay_status = 1;
+				if($compra->save())
+				{
+					Mail::send('emails.auth.noti', array('aliado'=>$aliado, 'asesor'=>$asesor, 'empresa' => $empresa,"email"=>$email,"valor"=>$valor/*URL::route('mega-perfil')*/), function($message) use ($email,$empresa,$valor,$asesor,$aliado){
+						$message->to($email, $aliado)->subject('Compra aprobada');
+					});
+				}else
+				{
+					Mail::send('emails.auth.noti', array('aliado'=>$aliado, 'asesor'=>$asesor, 'empresa' => $empresa,"email"=>$email,"valor"=>$valor/*URL::route('mega-perfil')*/), function($message) use ($email,$empresa,$valor,$asesor,$aliado){
+						$message->to($email, $aliado)->subject('Compra rechazada');
+					});
+				}
+			}
+		}
+
 			
 		public function conf2(){
 
