@@ -60,6 +60,33 @@ class AjaxController extends BaseController {
 		}
 	}
 
+	public function UrlPedTem2()
+	{
+		header('Content-type: text/javascript');
+		if(isset($_POST['key']) && isset($_POST['com_id'])){
+
+			$llave = $_POST['key'];
+			$com_id = $_POST['com_id'];
+			$compra = Compra::where('id','=',$com_id)->first();
+			if($compra)
+			{
+				$compra->llave = $llave;
+				if($compra->save())
+				{
+					$estado = array('estado'=>'1');
+					return Response::json(array('estado'=>$estado));
+				}
+			}else{
+				$estado = array('estado'=>'8','msg'=>"error buscando compra");
+				return Response::json(array('estado'=>$estado));
+			}
+
+		}else{
+			$estado = array('estado'=>'0');
+				return Response::json(array('estado'=>$estado));
+		}
+	}
+
 	public function UrlPedTem()
 	{
 		header('Content-type: text/javascript');
@@ -75,25 +102,28 @@ class AjaxController extends BaseController {
 					$compra->vlr_envio   =  1000;
 					$compra->save();
 
+					if ($compra->save())
+					{
+						foreach (Cart::contents() as $item) {
+								$citem = new Ite;
+								$citem->compra_id 			=	$compra->id;
 
+				   			 	$citem->id_producto			=	$item->id;
+				   			 	$citem->nombre 				=	$item->name;
+				   			 	$citem->valor_unitario 		=	$item->price;
+				   			 	$citem->image               =   $item->image;
+				   			 	$citem->iva 				=	$item->tax;
+				   			 	$citem->cantidad 			= 	$item->quantity;
+				   			 	$citem->ArtSec 			    =  	$item->ArtSec;
+				   			 	$citem->ArtCod   			= 	$item->ArtCod;
+				   			 	$citem->valor_total			=	$item->total();
 
-					foreach (Cart::contents() as $item) {
-					$citem = new Ite;
-					$citem->compra_id 			=	$compra->id;
+				   			 	$citem->save();
 
-	   			 	$citem->id_producto			=	$item->id;
-	   			 	$citem->nombre 				=	$item->name;
-	   			 	$citem->valor_unitario 		=	$item->price;
-	   			 	$citem->image               =   $item->image;
-	   			 	$citem->iva 				=	$item->tax;
-	   			 	$citem->cantidad 			= 	$item->quantity;
-	   			 	$citem->ArtSec 			    =  	$item->ArtSec;
-	   			 	$citem->ArtCod   			= 	$item->ArtCod;
-	   			 	$citem->valor_total			=	$item->total();
+							}
+					}
 
-	   			 	$citem->save();
-
-				}
+					
 				Cart::destroy();
 				$estado = array('estado'=>'1');
 				return Response::json(array('estado'=>$estado));

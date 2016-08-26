@@ -7,7 +7,7 @@
 
 @section('content')
 <?php
-$ApiKey = "6u39nqhq8ftd0hlvnjfs66eh8c";
+$ApiKey = "4Vj8eK4rloUd272L48hsrarnUA";
 $merchant_id = $_REQUEST['merchantId'];
 $referenceCode = $_REQUEST['referenceCode'];
 $TX_VALUE = $_REQUEST['TX_VALUE'];
@@ -35,7 +35,7 @@ if ($_REQUEST['transactionState'] == 4 ) {
         	$tp->descripcion = $TX_VALUE;
         	$tp->save();*/
 
-        			$compra = new Compra;
+        			/*$compra = new Compra;
 					$compra->user_id 	= $extra1;
 					$compra->totalCart  =   $TX_VALUE;
 					$compra->total_compra  =  $TX_VALUE;
@@ -63,7 +63,7 @@ if ($_REQUEST['transactionState'] == 4 ) {
 				}
 				
 
-        	Cart::destroy();
+        	Cart::destroy();*/
 	$estadoTx = "Transacción aprobada";
 }
 

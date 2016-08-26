@@ -48,6 +48,11 @@ Route::post('/UrlPedTem', array(
 		'uses'=> 'AjaxController@UrlPedTem'
 		));
 
+Route::post('/UrlPedTem2', array(
+		'as'=>'UrlPedTem2', 
+		'uses'=> 'AjaxController@UrlPedTem2'
+		));
+
 
 Route::any('/payu2', array(
 		'as'=>'purconfirmation2', 

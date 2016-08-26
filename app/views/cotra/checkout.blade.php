@@ -328,7 +328,7 @@
     <input name="extra2"type="hidden"  value="{{Cart::totalItems()}}">
   <input name="buyerEmail"    type="hidden"  value="{{Auth::user()->email}}">
   <input name="responseUrl"    type="hidden"  value="{{URL::route('pur')}}">
-  <input name="confirmationUrl"    type="hidden"  value="http://www.tiendo.co/payu/confirmation" >
+  <input name="confirmationUrl"    type="hidden"  value="{{URL::route('purconfirmation')}}" >
   <input type="image" id="btnPayu" border="0" alt="" src="http://www.payulatam.com/img-secure-2015/boton_pagar_grande.png"/>
   
 </form>

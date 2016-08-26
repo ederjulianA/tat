@@ -10,8 +10,24 @@ class ApiController extends BaseController {
 			$asesor ="ederAAAA";
 			$aliado ="mi aliado";
 			$valor   = 10000;
-		Mail::send('emails.auth.noti', array('aliado'=>$aliado, 'asesor'=>$asesor, 'empresa' => $empresa,"email"=>$email,"valor"=>$valor/*URL::route('mega-perfil')*/), function($message) use ($email,$empresa,$valor,$asesor,$aliado){
+			$compra = Compra::where('id','=', 55)->first();
+				$compra->estado_id = 2;
+				$compra->pay_status = 1;
+		Mail::send('emails.auth.noti', array('aliado'=>$aliado, 'asesor'=>$asesor, 'empresa' => $empresa,"email"=>$email,"compra"=>$compra/*URL::route('mega-perfil')*/), function($message) use ($email,$empresa,$compra,$asesor,$aliado){
 						$message->to($email, $aliado)->subject('Venta cerrada');
+					});
+	}
+
+	public function mail2()
+	{
+
+		$email = "ederalvarez2091057@gmail.com";
+			$empresa = "Megalopolis Inc.";
+			$asesor ="ederAAAA";
+			$aliado ="mi aliado";
+			$valor   = 10000;
+		Mail::send('emails.auth.noti', array('compra'=>$compra, 'asesor'=>$asesor, 'empresa' => $empresa,"email"=>$email/*URL::route('mega-perfil')*/), function($message) use ($email,$empresa,$asesor,$compra){
+						$message->to($email, $aliado)->subject('Compra aprobada');
 					});
 	}
 

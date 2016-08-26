@@ -10,6 +10,45 @@ $(document).ready(function(){
 
 });
 
+$(document).on('click','#btnPayu2',function(e){
+	var com_id = $('#com_id').val();
+	var url = $('#UrlPedTem2').val();
+	var form = $('#formPayu');
+	var key = $('#code').val();
+	console.log(com_id+"---"+key);
+
+	$.ajax({
+
+			url : url,
+			dataType: "json",
+			type : "post",
+			data : { com_id : com_id,key:key},
+			success : function(data){
+				if(data.estado.estado == 1)
+				{
+					console.log(data);
+					form.submit();
+					
+				}
+				
+			},error : function(data){
+				
+				console.log(data);
+				
+				
+				}
+
+
+				
+
+
+		});
+
+
+return false;
+
+});
+
 $(document).on('click','#btnPayu',function(e){
 
 	

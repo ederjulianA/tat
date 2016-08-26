@@ -110,6 +110,41 @@
                                     
                         </form>
                                            {{--PAYPAL--}}
+
+<?php  $refCod = "eder-".date('YmdHms').'-'.$pedido->id;
+$sig = "4Vj8eK4rloUd272L48hsrarnUA~508029~".$refCod."~".$pedido->total_compra."~COP";
+ $e = md5($sig);?>
+    <form method="post" action="https://sandbox.gateway.payulatam.com/ppp-web-gateway" id="formPayu">
+    {{--<form method="post" action="{{URL::route('purconfirmation2')}}">6u39nqhq8ftd0hlvnjfs66eh8c--}}
+    {{--<form method="post" action="https://sandbox.gateway.payulatam.com/ppp-web-gateway/">--}}
+  {{--<input name="merchantId"    type="hidden"  value="500238" >
+  <input name="accountId"     type="hidden"  value="500537" >--}}
+  <input name="merchantId"    type="hidden"  value="508029" >
+  <input name="accountId"     type="hidden"  value="512322" >
+  <input name="description"   type="hidden"  value="Test PAYU"  >
+  <input name="referenceCode" type="hidden"  id="code" value="{{$refCod}}" >
+  <input name="amount"        type="hidden"  value="{{$pedido->total_compra}}"   >
+  <input name="tax"           type="hidden"  value="0"  >
+  <input name="taxReturnBase" type="hidden"  value="0" >
+  <input name="currency"      type="hidden"  value="COP" >
+  <input name="signature"     type="hidden" id="sig"  value="{{$e}}"  >
+  <input name="test"          type="hidden"  value="1" >
+    <input name="extra1"          type="hidden"  value="{{Auth::user()->id}}">
+   <input name="extra3"          type="hidden"  value="{{Funciones::getCodigos()}}">
+     {{--<input name="extra3"          type="hidden"  value="{{Cart::totalItems()}}">--}}
+    <input name="extra2"type="hidden"  value="{{$pedido->num_items}}">
+  <input name="buyerEmail"    type="hidden"  value="{{Auth::user()->email}}">
+  <input name="responseUrl"    type="hidden"  value="{{URL::route('pur')}}">
+  <input name="confirmationUrl"    type="hidden"  value="{{URL::route('purconfirmation')}}" >
+  <input type="image" id="btnPayu2" border="0" alt="" src="http://www.payulatam.com/img-secure-2015/boton_pagar_grande.png"/>
+  
+</form>
+
+<input type="hidden" id="UrlPedTem2" value="{{URL::route('UrlPedTem2')}}">
+<input type="hidden" id="com_id"           value="{{$pedido->id}}">
+
+
+
                                        </p>
                                     </div>
                                    

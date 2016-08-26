@@ -17,7 +17,7 @@
 
 		public function conf3()
 		{
-			$ApiKey = "6u39nqhq8ftd0hlvnjfs66eh8c";
+			$ApiKey = "4Vj8eK4rloUd272L48hsrarnUA";
         	
 			
 			$response_code_pol 			= $_REQUEST['response_code_pol'];
@@ -29,23 +29,39 @@
 			$state_pol 					= $_POST['state_pol'];
 			$reference_sale 			= $_POST['reference_sale'];
 			$New_value 	 				= number_format($value, 1, '.', '');
-			$firma_cadena 				= "$ApiKey~500238~$reference_sale~$New_value~$currency~$state_pol";
+			$firma_cadena 				= "$ApiKey~508029~$reference_sale~$New_value~$currency~$state_pol";
         	$firmacreada 				= md5($firma_cadena);
-        	$email 						= "ederalvarez2091057@gmail.com";
+        	//$email 						= "ederalvarez2091057@gmail.com";
 			$empresa		 			= "Megalopolis Inc.";
 			$asesor 					="ederAAAA";
 			$aliado 					="Eder A";
+			$email                      = $_REQUEST['email_buyer'];
 			$valor 						= 10000;
+			$user_id                    = $_REQUEST['extra1'];
 
 			if ($state_pol == 4)
 			{
 				$compra = Compra::where('llave','=',$reference_sale)->first();
+				$compra->estado_id = 2;
 				$compra->pay_status = 1;
+
 				if($compra->save())
 				{
-					Mail::send('emails.auth.noti', array('aliado'=>$aliado, 'asesor'=>$asesor, 'empresa' => $empresa,"email"=>$email,"valor"=>$valor/*URL::route('mega-perfil')*/), function($message) use ($email,$empresa,$valor,$asesor,$aliado){
-						$message->to($email, $aliado)->subject('Compra aprobada');
+					$items = Ite::where('compra_id','=',$compra->id)->get();
+					$user = User::where('id','=',$user_id)->first();
+					$datos = Shipping::where('user_id','=',$user->id)->first();
+                        $destinatario = $datos->nombre." ".$datos->apellido;
+					Mail::send('emails.compras.c1', array('aliado'=>$aliado, 'asesor'=>$asesor, 'empresa' => $empresa,"email"=>$email,"compra"=>$compra,"items"=>$items,"user"=>$user,"destinatario"=>$destinatario/*URL::route('mega-perfil')*/), function($message) use ($email,$empresa,$compra,$asesor,$aliado,$items,$user,$destinatario){
+						$message->to($email, $destinatario)->subject('Compra cotracolta');
 					});
+						/*$items = Ite::where('compra_id','=',$compra->id)->get();
+                        $user = User::where('id','=',Auth::user()->id)->first();
+                        $email = $user->email;
+                        $datos = Shipping::where('user_id','=',$user->id)->first();
+                        $destinatario = $datos->nombre." ".$datos->apellido;
+                        Mail::send('emails.compras.c1', array('compra'=>$compra, 'items'=>$items,'email'=>$email,'destinatario'=>$destinatario), function($message) use ($compra,$items,$destinatario,$email){
+                        $message->to($email, $destinatario)->subject('Compra en Cootracolta');
+                    });*/
 				}else
 				{
 					Mail::send('emails.auth.noti', array('aliado'=>$aliado, 'asesor'=>$asesor, 'empresa' => $empresa,"email"=>$email,"valor"=>$valor/*URL::route('mega-perfil')*/), function($message) use ($email,$empresa,$valor,$asesor,$aliado){

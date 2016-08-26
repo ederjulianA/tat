@@ -171,7 +171,7 @@ ol li {
             <p style="font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;font-size: 14px;line-height: 1.6em;margin: 0;padding: 0;font-weight: normal;margin-bottom: 10px;">
 </p>
             <h2 style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Lucida Grande&quot;, sans-serif;font-size: 28px;line-height: 1.2em;margin: 40px 0 10px;padding: 0;color: #111111;font-weight: 200;">Valor final</h2>
-            <p style="font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;font-size: 14px;line-height: 1.6em;margin: 0;padding: 0;font-weight: normal;margin-bottom: 10px;">El valor final de la venta fue de : <strong style="font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;font-size: 100%;line-height: 1.6em;margin: 0;padding: 0;">${{number_format($valor, 0, '', '.')}}</strong>
+            <p style="font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;font-size: 14px;line-height: 1.6em;margin: 0;padding: 0;font-weight: normal;margin-bottom: 10px;">El valor final de la venta fue de : <strong style="font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;font-size: 100%;line-height: 1.6em;margin: 0;padding: 0;">${{number_format($compra->total_compra, 0, '', '.')}}</strong>
 </p>
             
             
