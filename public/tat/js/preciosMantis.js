@@ -23,7 +23,9 @@ function consultarPrecio(id)
 
 	$.ajax({
 
-			url : "http://somic.com.co:8086/WEBSOMIC/EDER/TIENDO/getPriceById.php",
+			
+			//url : "http://somic.com.co:8086/WEBSOMIC/EDER/TIENDO/getPriceById.php",
+			url : "http://192.168.100.241:8086/WEBSOMIC/EDER/TV8/getPriceById.php",
 			dataType: "json",
 			type : "post",
 			data: {id: id},
@@ -33,14 +35,20 @@ function consultarPrecio(id)
 				for (var i  in data)
 				{
 					console.log(data);
-					var oPrice = data[i].precio3;
-					var nPrice = data[i].precio3.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-					var saldo  = data[i].saldo;
-					console.log(saldo);
+					//var oPrice = data[i].precio3;
+					//var nPrice = data[i].precio3.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+					var oPrice = Math.round(data[i].valIva);
+					//var new_number = Math.round(oPrice);
+					var nPrice = oPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+					var nPrice2 = Math.round(nPrice);
+					var saldo  =  Math.round(data[i].saldo);
+					console.log(nPrice);
+					$('#pro-'+id).text('$ '+nPrice);
+					grabarArt(oPrice,id,saldo,oPrice);
+					//$('#pro-'+id).text(nPrice2);
 
-					grabarArt(nPrice,id,saldo,oPrice);
-					$('#pro-'+id).text(nPrice);
-				}
+						
+					}
 			
 				
 			},error : function(data){
@@ -53,7 +61,7 @@ function consultarPrecio(id)
 		});
 }
 
-function grabarArt(nPrice,id,saldo,oPrice)
+function grabarArt(	oPrice,id,saldo,oPrice)
 {
 	var url = $('#urlSaveArt').val();
 	
@@ -63,7 +71,7 @@ function grabarArt(nPrice,id,saldo,oPrice)
 			url : url,
 			dataType: "json",
 			type : "post",
-			data: {id: id, nPrice:nPrice,saldo:saldo,oPrice:oPrice},
+			data: {id: id, oPrice:oPrice,saldo:saldo,oPrice:oPrice},
 			success : function(data){
 				
 				console.log(data);

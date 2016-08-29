@@ -3,7 +3,7 @@ $(document).ready(function(){
 		//buscarPrecio();
 		setInterval(function(){
         buscarPrecio();;
-    }, 7000);
+    }, 3000);
 	
 });
 
@@ -28,7 +28,8 @@ function consultarPrecio(id)
 
 	$.ajax({
 
-			url : "http://somic.com.co:8086/WEBSOMIC/EDER/TIENDO/getPriceById.php",
+			//url : "http://somic.com.co:8086/WEBSOMIC/EDER/TIENDO/getPriceById.php",
+			url : "http://192.168.100.241:8086/WEBSOMIC/EDER/TV8/getPriceById.php",
 			dataType: "json",
 			type : "post",
 			data: {id: id},
@@ -38,19 +39,20 @@ function consultarPrecio(id)
 				for (var i  in data)
 				{
 					console.log(data);
-					var oPrice = data[i].precio3;
-					var nPrice = data[i].precio3.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+					//var oPrice = data[i].precio3;
+					var oPrice = Math.round(data[i].valIva);
+					var nPrice = oPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 					var saldo  = data[i].saldo;
 					var artCod = data[i].ArtCod;
 					console.log("el saldo:"+saldo);
 
 					if (saldo <= 0)
 					{
-						notie.alert(3, 'Uno o más items se ha quedado sin existencias', 2);
+						notie.alert(3, 'Uno o más items se ha quedado sin existencias', 5000);
 						$('#item-'+artsec).addClass('error');
 						return false;
 					}
-					grabarArt(nPrice,id,saldo,oPrice);
+					grabarArt(oPrice,id,saldo,oPrice);
 					$('#pro-'+id).text(nPrice);
 				}
 			
@@ -65,7 +67,7 @@ function consultarPrecio(id)
 		});
 }
 
-function grabarArt(nPrice,id,saldo,oPrice)
+function grabarArt(oPrice,id,saldo,oPrice)
 {
 	var url = $('#urlSaveArt').val();
 	
@@ -75,7 +77,7 @@ function grabarArt(nPrice,id,saldo,oPrice)
 			url : url,
 			dataType: "json",
 			type : "post",
-			data: {id: id, nPrice:nPrice,saldo:saldo,oPrice:oPrice},
+			data: {id: id, oPrice:oPrice,saldo:saldo,oPrice:oPrice},
 			success : function(data){
 				
 				console.log(data);

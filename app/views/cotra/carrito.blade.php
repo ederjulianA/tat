@@ -8,7 +8,8 @@
 @section('content')
 <style type="text/css" media="screen">
     .error{
-        border-color: 2px solid red;
+        
+        background-color: #EE5E5E !important;
     }
     
 </style>
@@ -53,7 +54,7 @@
                                         <tbody>
                                         	@if($products)
 												@foreach($products as $pro)
-	                                            <tr id="item-{{$pro->ArtSec}}">
+	                                            <tr id="item-{{$pro->ArtSec}}" class="">
 	                                                <td class="td-images">
 	                                                    <a class="product-image" href="shop-product-view.html">
 	                                                    <img width="auto" height="70" title="" alt="" src="{{asset($pro->image)}}">

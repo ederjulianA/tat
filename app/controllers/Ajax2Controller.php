@@ -96,27 +96,28 @@ class Ajax2Controller extends BaseController {
 
 			$data = $_POST['data'];
 			$dd   = json_decode( json_encode($data,true));
+			//dd($dd);
 			foreach ($dd as  $gru) {//objeto que contiene más objetos
-				
-				$grup = Grupo::where('InvGruCod','=',$gru->invgrucod)->first();
+				//dd($gru);
+				$grup = Grupo::where('InvGruCod','=',$gru->InvGruCod)->first();
 						if($grup)
 						{
-										$VarSlug = Str::slug($gru->invgrunom);
-										$grup->InvGruId = $gru->invgrucod;
-										$grup->InvGruCod = $gru->invgrucod;
-										$grup->InvGruNom = $gru->invgrunom;
+										$VarSlug = Str::slug($gru->InvGruNom);
+										$grup->InvGruId = $gru->InvGruId;
+										$grup->InvGruCod = $gru->InvGruCod;
+										$grup->InvGruNom = $gru->InvGruNom;
 										$grup->slug_grupo = $VarSlug;
 										$grup->save();
 						}else{
 										$grupo = new Grupo();
-										$VarSlug = Str::slug($gru->invgrunom);
-										$grupo->InvGruId = $gru->invgrucod;
-										$grupo->InvGruCod = $gru->invgrucod;
-										$grupo->InvGruNom = $gru->invgrunom;
+										$VarSlug = Str::slug($gru->InvGruNom);
+										$grupo->InvGruId = $gru->InvGruId;
+										$grupo->InvGruCod = $gru->InvGruCod;
+										$grupo->InvGruNom = $gru->InvGruNom;
 										$grupo->slug_grupo = $VarSlug;
 										$grupo->save();
 						}
-			}
+			}///end for each
 
 
 			$estado = array('estado'=>1,'msg'=>'Se ha terminado la sincronizacion exitosamente 2');
@@ -426,7 +427,7 @@ class Ajax2Controller extends BaseController {
 										if($pro->ArtImg_GXI != NULL && $pro->ArtImg_GXI != '0')
 								   			{
 								   				$nombre = Str_replace('gxdbfile:','',$pro->ArtImg_GXI);
-								   				$urlImg = "http://somic.com.co:8081/MantisWeb20mantis2016/PublicTempStorage/multimedia/".$nombre;
+								   				$urlImg = "http://localhost:8080/VERSION8JavaEnvironment/PublicTempStorage/multimedia/".$nombre;
 
 								   				//Image::make($urlImg)->resize(300, null, function ($constraint) {$constraint->aspectRatio();})->save(public_path().'/img/Mantis/'.$nombre);
 								   				//Image::make($urlImg)->save(public_path().'/img/Mantis/'.$nombre);
@@ -470,7 +471,14 @@ class Ajax2Controller extends BaseController {
 										//$prod->pro_nom = $pro['artnom'];
 										$prod->ArtSec    = $pro->artsec;
 										$prod->pro_nom = $pro->artnom;
-										$prod->dt      = $pro->dt;
+										if($pro->dt == '')
+										{
+											$prod->dt           = NULL;
+										}else
+										{
+											$prod->dt           = $pro->dt;
+										}
+										//$prod->dt      = $pro->dt;
 										//$prod->InvFamCod = $pro['InvFamCod'];
 
 
@@ -479,8 +487,14 @@ class Ajax2Controller extends BaseController {
 										$prod->categoria_id = $pro->InvFamCod;
 										$prod->descripcion	= $pro->ArtFicTec;
 										$prod->slug = $VarSlug;
+										if($pro->parconiva <> 0){
+											$valIva = ($pro->precio3*$pro->parconiva)+$pro->precio3;
+										}else{
+											$valIva = $pro->precio3;
+										}
 										
 										$prod->precio = $pro->precio3;
+										$prod->valIva = $pro->valIva;
 										$prod->por_iva = $pro->parconiva;
 										$prod->cantidad = $pro->saldo;
 
@@ -501,8 +515,9 @@ class Ajax2Controller extends BaseController {
 											if($pro->ArtImg_GXI != NULL && $pro->ArtImg_GXI != '0')
 								   			{
 								   				$nombre = Str_replace('gxdbfile:','',$pro->ArtImg_GXI);
+								   				$urlImg = "http://localhost:8080/VERSION8JavaEnvironment/PublicTempStorage/multimedia/".$nombre;
 
-								   				$urlImg = "http://somic.com.co:8081/MantisWeb20mantis2016/PublicTempStorage/multimedia/".$nombre;
+								   				/*$urlImg = "http://somic.com.co:8081/MantisWeb20mantis2016/PublicTempStorage/multimedia/".$nombre;*/
 								   				//Image::make($urlImg)->resizeCanvas(400, 400, null, true, '#fff')->save(public_path().'/img/Mantis/'.$nombre);
 								   				//Image::make($urlImg)->save(public_path().'/img/Mantis/'.$nombre);
 								   				//$producto->img = 'img/Mantis/'.$nombre;
@@ -551,6 +566,13 @@ class Ajax2Controller extends BaseController {
 										$artnom = utf8_encode($pro->artnom);
 										$VarSlug = Str::slug($Nombre);
 										
+										if($pro->dt == '')
+										{
+											$producto->dt           = NULL;
+										}else
+										{
+											$producto->dt           = $pro->dt;
+										}
 										
 										$producto->id_mantis = $pro->ArtCod;
 										$producto->ArtSec    = $pro->artsec;
@@ -562,10 +584,18 @@ class Ajax2Controller extends BaseController {
 										$producto->descripcion 	= $pro->ArtFicTec;
 										$producto->slug 		= $VarSlug;
 										//$producto->img = 'img/Mantis/'.$filename;
-										$producto->precio 		= $pro->precio3;
+										if($pro->parconiva <> 0){
+											$valIva = ($pro->precio3*$pro->parconiva)+$pro->precio3;
+										}else{
+											$valIva = $pro->precio3;
+										}
+										
+										$producto->precio = $pro->precio3;
+										$producto->valIva = $pro->valIva;
+										//$producto->precio 		= $pro->precio3;
 										$producto->por_iva 		= $pro->parconiva;
 										$producto->cantidad 	=  $pro->saldo;
-										$producto->dt           = $pro->dt;
+										
 										$producto->save();
 									}
 

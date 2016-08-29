@@ -36,14 +36,14 @@ class AjaxController extends BaseController {
 	public function urlSaveArt()
 	{
 		header('Content-type: text/javascript');
-		if(isset($_POST['nPrice']) && isset($_POST['id']) && isset($_POST['saldo']) && isset($_POST['oPrice'])){
+		if(isset($_POST['oPrice']) && isset($_POST['id']) && isset($_POST['saldo'])){
 			$id = $_POST['id'];
-			$val = $_POST['nPrice'];
+			//$val = $_POST['nPrice'];
 			$saldo = $_POST['saldo'];
 			$price = $_POST['oPrice'];
 			$pro = Producto::where('ArtSec','=',$id)->first();
 			if($pro){
-				$pro->precio  = round($price);
+				$pro->valIva  = round($price);
 				$pro->cantidad = $saldo;
 				if($pro->save()){
 					$estado = array('estado'=>'1');

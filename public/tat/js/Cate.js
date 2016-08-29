@@ -21,7 +21,9 @@ function loadGrupos()
 
 	$.ajax({
 
-			url : "http://somic.com.co:8086/WEBSOMIC/IVAN/GetGrupos.php",
+			//url : "http://somic.com.co:8086/WEBSOMIC/IVAN/GetGrupos.php",
+			url : "http://192.168.100.241:8086/WEBSOMIC/EDER/TV8/getGrupos.php",
+
 			dataType: "json",
 			type : "get",
 			
@@ -80,7 +82,8 @@ function loadFamilias()
 
 	$.ajax({
 
-			url : "http://somic.com.co:8086/WEBSOMIC/EDER/TIENDO/getFamilias.php",
+			//url : "http://somic.com.co:8086/WEBSOMIC/EDER/TIENDO/getFamilias.php",
+			url : "http://192.168.100.241:8086/WEBSOMIC/EDER/TV8/getFamilias.php",
 			dataType: "json",
 			type : "get",
 			
@@ -135,7 +138,8 @@ function getFam(ids,NvalPor)
 
 	$.ajax({
 
-			url : "http://somic.com.co:8086/WEBSOMIC/EDER/TIENDO/getFamiliasIds.php",
+			//url : "http://somic.com.co:8086/WEBSOMIC/EDER/TIENDO/getFamiliasIds.php",
+			url : "http://192.168.100.241:8086/WEBSOMIC/EDER/TV8/getFamiliasIds.php",
 			dataType: "json",
 			type : "get",
 			data: {ids:ids},

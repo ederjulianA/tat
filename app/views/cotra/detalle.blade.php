@@ -131,13 +131,13 @@
                                             <p><b>Stock : </b><span class="label label-success">Disponible</span></p>
 
                                         @else
-                                            <p><b>Stock : </b><span class="label label-danger">No disponiblle</span></p>
+                                            <p><b>Stock : </b><span class="label label-danger">No disponible</span></p>
                                         @endif
 
                                         <div class="cont-pro-det">
                                             <div class="precio-t">
                                                 <input type="hidden" id="cant-dis" value="{{ round($producto->cantidad)}}">
-                                                <h2 data="{{$producto->ArtSec}}" id="pro-{{$producto->ArtSec}}" class=" idSync">${{ number_format($producto->precio, 0, '', '.') }}</h2>
+                                                <h2 data="{{$producto->ArtSec}}" id="pro-{{$producto->ArtSec}}" class="idSync">${{ number_format($producto->valIva, 0, '', '.') }}</h2>
                                             </div>
 
                                             <div class="cantidad-t">
