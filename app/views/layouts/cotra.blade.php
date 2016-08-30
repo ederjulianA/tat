@@ -47,6 +47,14 @@
         <div class="wrap">
             <!-- Header -->
             <header id="header">
+              <!-- Header Top Bar -->
+                <div class="logo pull-left">
+                     <h1>
+                        <a href="/">
+                        <img class="logoE" src="{{asset('img/cootracolta.jpg')}}" alt="Cootracolta" width="160" height="60">
+                        </a>
+                    </h1>
+                 </div>
                 <!-- Header Top Bar -->
                 <div class="top-bar">
                     <div class="slidedown collapse">

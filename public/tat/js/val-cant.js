@@ -29,7 +29,7 @@ function consultarPrecio(id)
 	$.ajax({
 
 			//url : "http://somic.com.co:8086/WEBSOMIC/EDER/TIENDO/getPriceById.php",
-			url : "http://192.168.100.241:8086/WEBSOMIC/EDER/TV8/getPriceById.php",
+			url : "http://192.168.0.241:8086/WEBSOMIC/EDER/TV8/getPriceById.php",
 			dataType: "json",
 			type : "post",
 			data: {id: id},

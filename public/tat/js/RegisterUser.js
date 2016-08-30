@@ -40,7 +40,8 @@ $(document).on('click','#btnNewUser',function(e){
 	sumVal = valN + valMail;
 	if (sumVal == 0){
 	 //alert("email"+valMail);
-	 form.submit();
+	 //form.submit();
+	 saveUser();
 	}
 	return false;
 
@@ -50,7 +51,8 @@ $(document).on('change','#nit',function(e){
 
 	var nit 		= $('#nit').val();
 	$.ajax({
-			url : 'http://somic.com.co:8086/WEBSOMIC/EDER/TIENDO/USER/GetNit.php',
+			//url : 'http://somic.com.co:8086/WEBSOMIC/EDER/TIENDO/USER/GetNit.php',
+			url : 'http://192.168.0.241:8086/WEBSOMIC/EDER/TV8/USER/GetNit.php',
 			dataType: "json",
 			type : "post",
 			data : { NitIde : nit},
@@ -88,11 +90,51 @@ $(document).on('change','#nit',function(e){
 	e.preventdefault(e);
 });
 
+function saveUser()
+{
+	var form 		= $('#FormNewUser');
+	var nombre 		= $('#nombre').val();
+	var apellido 	= $('#apellido').val();
+	var nit 		= $('#nit').val();
+	var telefono 	= $('#telefono').val();
+	var direccion 	= $('#direccion').val();
+	var email 		= $('#email').val();
+	var password 	= $('#password').val();
+
+	$.ajax({
+			url : "http://192.168.0.241:8086/WEBSOMIC/EDER/TV8/USER/newUser.php",
+			dataType: "json",
+			type : "get",
+			data  : { nombre:nombre, apellido:apellido, nit:nit, telefono:telefono, direccion:direccion, email:email, password:password},
+			success : function(data){
+				console.log(data);
+
+				if(data.estado == 1)
+				{
+					//saveUserStore();
+					form.submit();
+				}else{
+					console.log("error");
+				}
+				
+			},error : function(data){
+				
+				console.log(data);
+				
+				
+				}
+
+				
+
+
+		});
+}
 function valNit(nit)
 {
 	var c = 0;
 	$.ajax({
-			url : 'http://somic.com.co:8086/WEBSOMIC/EDER/TIENDO/USER/GetNit.php',
+			//url : 'http://somic.com.co:8086/WEBSOMIC/EDER/TIENDO/USER/GetNit.php',
+			url : 'http://192.168.0.241:8086/WEBSOMIC/EDER/TV8/USER/GetNit.php',
 			dataType: "json",
 			type : "post",
 			async: false,

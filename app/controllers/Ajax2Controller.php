@@ -52,6 +52,40 @@ class Ajax2Controller extends BaseController {
 		}
 	}
 
+	public function urlSaveSubGrupos()
+	{
+		header('Content-type: text/javascript');
+		if(isset($_POST['data'])){
+			$data = $_POST['data'];
+			$dd   = json_decode( json_encode($data,true));
+			foreach ($dd as  $sub) {//objeto que contiene más objetos
+				$cat = Categoria::where('InvSubGruCod','=',$sub->InvSubGruCod)->first();
+				if($cat){
+					$VarSlug = Str::slug($sub->InvSubGruNom);
+					$cat->cat_nom  =  $sub->InvSubGruNom;
+					$cat->cat_slug =  $VarSlug;
+					
+					$cat->InvSubGruId 	=  $sub->InvSubGruId;
+					$cat->InvGruCod     =  $sub->InvGruCod;
+					$cat->InvSubGruCod  =  $sub->InvSubGruCod;
+					$cat->save();
+				}else{
+					$cate = new Categoria;
+					$VarSlug = Str::slug($sub->InvSubGruNom);
+					$cate->cat_nom 	 	=  $sub->InvSubGruNom;
+					$cate->cat_slug 	=  $VarSlug;
+					$cate->InvGruCod    =  $sub->InvGruCod;
+					$cate->InvSubGruId 	=  $sub->InvSubGruId;
+					$cate->InvSubGruCod =  $sub->InvSubGruCod;
+					$cate->save();
+				}
+			}//END FOREACH
+
+			$estado = array('estado'=>1,'msg'=>'Se ha terminado la sincronizacion exitosamente 2');
+			return Response::json(array('estado'=>$estado));
+		}//END IF
+	}
+
 
 	public function urlSaveFamilias()
 	{
@@ -70,6 +104,7 @@ class Ajax2Controller extends BaseController {
 										$grup->InvFamId = $gru->InvFamCod;
 										$grup->InvFamNom = $gru->InvFamNom;
 										$grup->fam_slug = $VarSlug;
+										$grup->fam_InvSubGruCod = $gru->InvSubGruCod;
 										$grup->save();
 						}else{
 										$grupo = new Familia();
@@ -78,6 +113,7 @@ class Ajax2Controller extends BaseController {
 										$grupo->InvFamCod = $gru->InvFamCod;
 										$grupo->InvFamNom = $gru->InvFamNom;
 										$grupo->fam_slug = $VarSlug;
+										$grupo->fam_InvSubGruCod = $gru->InvSubGruCod;
 										$grupo->save();
 						}
 			}

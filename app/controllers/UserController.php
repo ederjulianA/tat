@@ -66,6 +66,92 @@ class UserController extends BaseController {
 					}
 	}
 
+	public function postNewUser2()
+	{
+		$validator = Validator::make(Input::all(),
+				array(
+						'email' 		    => 'required|email|unique:users',
+						//'password'		    => 'required|alpha_num|min:6|confirmed',
+						'telefono'			=> 'required|numeric|min:7',
+						'nombre'			=> 'required',
+						'apellido'			=> 'required',
+						'NitSec'			=> 'required|unique:users',
+						'terminos'			=> 'accepted',
+					
+
+					)
+			);
+
+		if($validator->fails())
+		{
+			return Redirect::back()->withInput()->with('message-alert','Errores en el formulario')->withErrors($validator->messages());
+		}
+
+
+		$NitIde = Input::get('NitSec');
+		$Nom    = Input::get('nombre');
+		$Ape    = Input::get('apellido');
+		$dir    = Input::get('dir');
+		$FullNom = $Nom.' '.$Ape;
+
+		$tel    = Input::get('telefono');
+		$email  = Input::get('email');
+
+		//REGISTRO DE USUARIO EN LA BASE DE DATOS
+
+				$user = new User;
+				$user->email  		= Input::get('email');
+				$user->password  	= Hash::make(Input::get('password'));
+				$user->admin 		= 0;
+				$user->condiciones 	= true;
+				$user->NitSec       = $NitIde;
+
+				if($user->save())
+				{
+					$ship = new Shipping;
+					$ship->user_id = $user->id;
+					$ship->barrio_id = 1;
+					$ship->nombre = Input::get('nombre');
+					$ship->apellido = Input::get('apellido');
+					$ship->nombre_negocio = 'DEFAULT';
+					$ship->ciudad =1;
+					$ship->canal = 0;
+					$ship->direccion = $dir;
+					$ship->cedula = $NitIde;
+					$ship->comentarios = "Sin comentarios";
+					$ship->telefono = Input::get('telefono');
+					if($ship->save())
+					{
+						$remember = (Input::has('remember')) ? true : false;
+				//creamos la sesion del usuario
+							$auth = Auth::attempt(array(
+						'email'  => $user->email,
+						'password' => Input::get('password'),
+						'active' => 1
+					), $remember);
+
+				if($auth){
+					if(Auth::user()->admin != 1)
+
+						{
+						return Redirect::back();
+
+						}
+						else {
+							return Redirect::intended('/');
+						}
+				}else{
+					return Redirect::route('login')
+					->with('message-alert', 'El email o la contraseña no coinciden, o la cuenta no esta activada');
+				}
+						return Redirect::back()->with('message-alert','Gracias Por registrarte');
+					}
+					
+				}
+
+
+	}
+
 	public function postNewUser()
 	{
 

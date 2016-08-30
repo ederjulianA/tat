@@ -41,16 +41,17 @@
 
        <div class="row">
         <a href="#"class="btn btn-info btn-lg sync"  title="" id="loadFamilias">Sincronizar Familia ({{$AllFam}} Registros)</a>
-        <a href="#"class="btn btn-success btn-lg sync" title="">Sincronizar Subgrupo ({{$AllSubG}} Registros)</a>
+        <a href="#"class="btn btn-success btn-lg sync" title="" id="loadSubGrupo">Sincronizar Subgrupo ({{$AllSubG}} Registros)</a>
         <a href="#"class="btn btn-warning btn-lg sync" title="" id="loadGrupos" >Sincronizar Grupo ({{$AllGru}} Registros)</a>
         <a href="#"class="btn btn-danger btn-lg sync" title=""id="loadTestPro">Sincronizar Articulos ({{$AllArt}} Registros)</a>
         
-         <input type="hidden" id="urlTestPro" value="{{URL::route('urlTestPro')}}">
+                <input type="hidden" id="urlTestPro" value="{{URL::route('urlTestPro')}}">
                 <input type="hidden" id="urlTestSavePro" value="{{URL::route('urlTestSavePro')}}">
 
 
-                <input type="hidden" id="urlSaveGrupos" value="{{URL::route('urlSaveGrupos')}}">
-                <input type="hidden" id="urlSaveFamilias" value="{{URL::route('urlSaveFamilias')}}">
+                <input type="hidden" id="urlSaveGrupos"    value="{{URL::route('urlSaveGrupos')}}">
+                <input type="hidden" id="urlSaveSubGrupos" value="{{URL::route('urlSaveSubGrupos')}}">
+                <input type="hidden" id="urlSaveFamilias"  value="{{URL::route('urlSaveFamilias')}}">
       </div>
   </div>
  

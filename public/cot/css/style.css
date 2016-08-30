@@ -488,9 +488,15 @@ header .main-header {
     text-align: left;
 }
 
-.logo { height: 40px }
+.logo { height: 60px }
 
-.logo h1 { margin: 13px 0 }
+.logo h1 { margin: 2px 0; }
+
+.logoE{
+  position: relative;
+    
+    z-index: 9999;
+  }
 
 .navbar-fixed-top { position: fixed !important }
 

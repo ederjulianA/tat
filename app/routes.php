@@ -232,6 +232,7 @@ Route::any('urlTestSavePro', array('as' => 'urlTestSavePro', 'uses' => 'Ajax2Con
 
 
 Route::any('urlSaveGrupos', array('as' => 'urlSaveGrupos', 'uses' => 'Ajax2Controller@urlSaveGrupos'));
+Route::any('urlSaveSubGrupos', array('as' => 'urlSaveSubGrupos', 'uses' => 'Ajax2Controller@urlSaveSubGrupos'));
 Route::any('urlSaveFamilias', array('as' => 'urlSaveFamilias', 'uses' => 'Ajax2Controller@urlSaveFamilias'));
 
 
