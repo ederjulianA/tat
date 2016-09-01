@@ -223,6 +223,7 @@ class CartController extends BaseController {
 				'price' => round($producto->precio),
 				'quantity' => Input::get('cantidad'),
 				'tax'	=>$producto->por_iva,
+				'valIva'=>$producto->ValIva,
 				'conIva'=> $producto->precio + (($producto->precio * $producto->por_iva)/100),
 				'ArtSec'=> $producto->ArtSec,
 				'ArtCod'=>$producto->id_mantis,

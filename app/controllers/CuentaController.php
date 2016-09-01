@@ -30,12 +30,13 @@ class CuentaController extends BaseController {
 	public function getIndex()
 	{
 		$user = Auth::user()->id;
+		$shipping = Shipping::where('user_id','=',Auth::user()->id)->first();
 		$grupos 		=   $this->grupo->getAllGrupos();
 		$categorias =   $this->cat->getAllCat();
 		$pedidos    =	$this->user->getPedidos($user);
 		$menu       = Menu::all();
 		
-		return View::make('cotra.usuario.usuario',compact('user','pedidos','menu'))->with('categorias',$categorias)->with('grupos',$grupos)->with('products', Cart::contents());
+		return View::make('cotra.usuario.usuario',compact('user','pedidos','menu','shipping'))->with('categorias',$categorias)->with('grupos',$grupos)->with('products', Cart::contents());
 	}
 
 	public function getDetalleCuenta($id)

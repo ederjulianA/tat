@@ -75,9 +75,31 @@ public function limpiar($String){
 			return $producto;
 		}
 
-		public function getProCategorias($id)
+		public function getProCats($id)
 		{
 			$productos = DB::table('productos as p')->join('inventariofamilia as f','f.InvFamCod','=','p.categoria_id')
+													->join('categorias as c','c.InvSubGruCod','=','f.fam_InvSubGruCod')
+													->join('inventariogrupo as g','g.InvGruCod','=','c.InvGruCod')
+													->select(
+															'c.cat_nom',
+				 											 'p.id_mantis',
+															 'p.pro_nom',
+															 'p.img',
+															 'p.slug',
+															 'p.ArtSec',
+															 'p.valIva',
+															 'p.id',
+															 'p.precio',
+															 'p.descripcion AS producto_descripcion'
+														)->where('g.InvGruCod','=',$id)->paginate(18);
+													$num = count($productos);
+													return $productos;
+
+		}
+
+		public function getProCategorias($id)
+		{
+			/*$productos = DB::table('productos as p')->join('inventariofamilia as f','f.InvFamCod','=','p.categoria_id')
 													->join('categorias as c','c.InvSubGruCod','=','f.fam_InvSubGruCod')
 													->join('inventariogrupo as g','g.InvGruCod','=','c.InvGruCod')
 													->select(
@@ -90,6 +112,7 @@ public function limpiar($String){
 															 'p.precio',
 															 'p.descripcion AS producto_descripcion'
 														)->where('g.InvGruCod','=',$id)->paginate(18);
+													dd($productos);*/
 													
 			//$productos = Producto::where('categoria_id','=',$id)->paginate(9);
 			return $productos;

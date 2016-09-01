@@ -16,7 +16,7 @@
                             <div class="col-sm-9 col-md-9 col-lg-9">
                                 <div class="my-account">
                                     <div class="bottom-padding">
-                                        <h3 class="hello">Hola, Eder!</h3>
+                                        <h3 class="hello">Hola {{$shipping->nombre}}!</h3>
                                         <p>
                                              @if(Session::has('message-alert'))
                 <div class="row">

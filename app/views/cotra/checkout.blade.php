@@ -283,7 +283,7 @@
 									<input type="hidden" id="totalCart" name="totalCart" value="{{Cart::total()}}">
 									<input type="hidden" id="totalCart"name="totalItems" value="{{Cart::totalItems()}}">
 									<input type="hidden" id="total_compra" name="total_compra" value="{{Cart::total()}}">
-									<input type="hidden" id="vlr_envio_a" name="vlr_envio_a" value="">
+									<input type="hidden" id="vlr_envio_a" name="vlr_envio_a" value="0">
 									
 								</dl>
 								<hr />

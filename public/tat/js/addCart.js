@@ -206,6 +206,7 @@ $(document).on('change','#slc_envio', function(e){
 
 			$('#slc_envio').addClass('select_error');
 			$('#vlr_envio').text('');
+			$('#vlr_envio_a').val('0');
 			$('#msg-ajax').html('<p class="alert alert-danger"> Por favor escoja un metodo de envio valido</p>');
 		}
 		else if( env == 1)

@@ -10,6 +10,7 @@
         <meta name="Cootracolta shop" content="Tienda de artículos Cootracolta">
         <meta name="autor" content="Megalópolis Company">
         @yield('meta-data')
+
         <!-- Mobile Metas -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- Google Fonts -->
@@ -33,7 +34,10 @@
         <!-- Switcher CSS -->
         <link href="{{asset('cot/css/switcher.css')}}" rel="stylesheet">
         <link href="{{asset('cot/css/spectrum.css')}}" rel="stylesheet">
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.0/css/bootstrap-select.min.css">
 
+        
 
         <link href="{{asset('sweetalert-master/dist/sweetalert.css')}}" rel="stylesheet">
         <!-- Favicons -->
@@ -256,6 +260,9 @@
         <script src="{{asset('cot/js/jquery-migrate-1.0.0.js')}}"></script>
         <script src="{{asset('cot/js/jquery-ui.js')}}"></script>
         <script src="{{asset('cot/js/bootstrap.js')}}"></script>
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.0/js/bootstrap-select.min.js"></script>
+
         <script src="{{asset('cot/js/revolution-slider/js/jquery.themepunch.plugins.min.js')}}"></script> 
         <script src="{{asset('cot/js/revolution-slider/js/jquery.themepunch.revolution.min.js')}}"></script>
         <script src="{{asset('cot/js/jquery.parallax.js')}}"></script>

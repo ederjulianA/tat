@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
 	loadEnvios();
-	
+	loadDep();
 });
 $(document).on('change','#ciudad_id',function(e){
 	var id_ciudad = $('#ciudad_id').val();
@@ -51,7 +51,35 @@ $(document).on('change','#ciudad_id',function(e){
 		});
 });
 
+$(document).on('change','#selDep', function(e){
+	$('#selCiu').html('');
+	var id = $('#selDep').val();
+	$.ajax({
+			url : "http://192.168.0.241:8086/WEBSOMIC/EDER/TV8/getCiudadesById.php",
+			dataType: "json",
+			type : "get",
+			data : {id:id},
+			success : function(data){
+				console.log(data);
+				var barriosOpt ='<option data-tokens="" value="0">Escoja una ciudad</option>';
+				$('#selCiu').append(barriosOpt);
+				for (var i  in data) {
+					 barriosOpt ="<option value='"+data[i].CiuCod+"' data-tokens='"+data[i].CiuNom+"' > "+data[i].CiuNom+"</option>";
+							$('#selCiu').append(barriosOpt);
+				}
+				$('#selCiu').selectpicker('refresh');
+				//guardar(data);
+				
+			},error : function(data){
+				
+				console.log(data);
+				
+				
+				}
+		});
 
+	
+});
 
 function loadEnvios()
 {
@@ -86,6 +114,33 @@ function loadEnvios()
 				
 
 
+		});
+}
+
+function loadDep()
+{
+	$.ajax({
+			url : "http://192.168.0.241:8086/WEBSOMIC/EDER/TV8/getDepartamentos.php",
+			dataType: "json",
+			type : "get",
+			
+			success : function(data){
+				console.log(data);
+				var barriosOpt ='<option data-tokens="" value="0">Escoja una opción</option>';
+				$('#selDep').append(barriosOpt);
+				for (var i  in data) {
+					 barriosOpt ="<option value='"+data[i].DepCod+"' data-tokens='"+data[i].DepNom+"' > "+data[i].DepNom+"</option>";
+							$('#selDep').append(barriosOpt);
+				}
+				$('#selDep').selectpicker('refresh');
+				//guardar(data);
+				
+			},error : function(data){
+				
+				console.log(data);
+				
+				
+				}
 		});
 }
 

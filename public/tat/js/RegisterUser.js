@@ -5,15 +5,61 @@ $(document).ready(function(){
 });
 
 $(document).on('click','#btnNewUser',function(e){
-	var form 		= $('#FormNewUser');
-	var nombre 		= $('#nombre').val();
-	var apellido 	= $('#apellido').val();
-	var nit 		= $('#nit').val();
-	var telefono 	= $('#telefono').val();
-	var direccion 	= $('#direccion').val();
-	var email 		= $('#email').val();
-	var password 	= $('#password').val();
+	var form 					= $('#FormNewUser');
+	var nombre 					= $('#nombre').val();
+	var apellido 				= $('#apellido').val();
+	var nit 					= $('#nit').val();
+	var telefono 				= $('#telefono').val();
+	var direccion 				= $('#direccion').val();
+	var email 					= $('#email').val();
+	var password 				= $('#password').val();
+	var password_confirmation 	= $('#password_rep').val();
 	//alert(nombre+'-'+apellido+'-'+nit+'-'+telefono+'-'+direccion+'-'+email);
+	if (nombre == "")
+	{
+		notie.alert(3, 'Ingrese un nombre valido', 4);
+		$('#nombre').addClass("errorE");
+		return false;
+	}else{
+		$('#nombre').removeClass("errorE");
+	}
+	if (apellido == "")
+	{
+		notie.alert(3, 'Ingrese un apellido valido', 4);
+		$('#apellido').addClass("errorE");
+		return false;
+	}else{
+		$('#apellido').removeClass("errorE");
+	}
+	if (nit == "")
+	{
+		notie.alert(3, 'Ingrese una cedula valida', 4);
+		$('#nit').addClass("errorE");
+		return false;
+	}else{
+		$('#nit').removeClass("errorE");
+	}
+	if (email == "")
+	{
+		notie.alert(3, 'Ingrese un email valido', 4);
+		$('#email').addClass("errorE");
+		return false;
+	}else{
+		$('#email').removeClass("errorE");
+	}
+	if (password == "" || password_confirmation == "")
+	{
+		notie.alert(3, 'Ingrese una contraseña valida', 4);
+		$('#password').addClass("errorE");
+		return false;
+	}else{
+		if(password != password_confirmation){
+			notie.alert(2, 'Las contraseñas no coinciden', 4);
+			$('#password_confirmation').addClass("errorE");
+			return false;	
+		}
+		
+	}
 	var valN = valNit(nit);
 	if( valN == 1)
 	{
@@ -44,6 +90,7 @@ $(document).on('click','#btnNewUser',function(e){
 	 saveUser();
 	}
 	return false;
+	e.preventdefault();
 
 });
 
@@ -87,7 +134,7 @@ $(document).on('change','#nit',function(e){
 
 
 		});
-	e.preventdefault(e);
+	//e.preventdefault(e);
 });
 
 function saveUser()
@@ -100,12 +147,14 @@ function saveUser()
 	var direccion 	= $('#direccion').val();
 	var email 		= $('#email').val();
 	var password 	= $('#password').val();
+	var ciucod      = $('#selCiu').val();
+	var depcod      = $('#selDep').val();
 
 	$.ajax({
 			url : "http://192.168.0.241:8086/WEBSOMIC/EDER/TV8/USER/newUser.php",
 			dataType: "json",
 			type : "get",
-			data  : { nombre:nombre, apellido:apellido, nit:nit, telefono:telefono, direccion:direccion, email:email, password:password},
+			data  : { nombre:nombre, apellido:apellido, nit:nit, telefono:telefono, direccion:direccion, email:email, password:password,ciucod:ciucod,depcod:depcod},
 			success : function(data){
 				console.log(data);
 

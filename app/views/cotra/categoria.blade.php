@@ -68,8 +68,9 @@
 	                                                        <div class="left">
 	                                                            <h3 class="name"><a href="{{URL::route('proDetalle',array('slug'=>$producto->slug))}}">{{$producto->pro_nom}}</a></h3>
 	                                                            <div class="price">
-	                                                                <span class="price-old">$1'200.000</span>
-	                                                                <span class="price-new">${{ number_format(App::make('UserController')->getPrice($producto->id_mantis), 0, '', '.') }}</span>
+	                                                                <span class="price-old"></span>
+	                                                                <span class="price-new idSync" data="{{$producto->ArtSec}}" id="pro-{{$producto->ArtSec}}">${{ number_format($producto->valIva, 0, '', '.') }}</span>
+	                                                                {{--<span class="price-new">${{ number_format(App::make('UserController')->getPrice($producto->id_mantis), 0, '', '.') }}</span>--}}
 	                                                            </div>
 	                                                        </div>
 	                                                        <div class="right">

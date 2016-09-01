@@ -399,6 +399,7 @@ class AjaxController extends BaseController {
 						'tax'=>$producto->por_iva,
 						'ArtSec'=> $producto->ArtSec,
 						'ArtCod'=> $producto->id_mantis,
+						'valIva'=>$producto->ValIva,
 						'conIva'=> $producto->precio + (($producto->precio * $producto->por_iva)/100),
 						'image' => $producto->img
 						));

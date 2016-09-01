@@ -2,6 +2,13 @@
 
 @section('content')
 	  <!-- Main Content -->
+                <style type="text/css">
+                .errorE{
+                    -webkit-box-shadow: 4px 6px 65px 3px rgba(237,0,0,1);
+-moz-box-shadow: 4px 6px 65px 3px rgba(237,0,0,1);
+box-shadow: 4px 6px 65px 3px rgba(237,0,0,1);
+                }
+                </style>
                 <input type="hidden" id="urlValMail" value="{{URL::route('urlValMail')}}">
                 <div class="content margin-top60 margin-bottom60">
                     <div class="container">
@@ -103,7 +110,35 @@
 
                                                 </div>
 
+                                                <div class="row">
+                                                    <div class="form-group">
+                                                        <div class="col-md-12">
+                                                            <select class="selectpicker form-control" id="selDep" data-live-search="true">
+                                                              
+                                                            </select>
 
+                                            {{ $errors->first('direccion','<p class="alert alert-danger">:message</p>') }}
+                                                        </div>
+                                                    </div>
+
+                                                        
+
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="form-group">
+                                                        <div class="col-md-12">
+                                                            <select class="selectpicker form-control" id="selCiu" data-live-search="true">
+                                                              
+                                                            </select>
+
+                                            {{ $errors->first('direccion','<p class="alert alert-danger">:message</p>') }}
+                                                        </div>
+                                                    </div>
+
+                                                        
+
+                                                </div>
                                                 <div class="row">
                                                     <div class="form-group">
                                                         <div class="col-md-12">
@@ -169,6 +204,7 @@
 
 @section('scripts')
     <script src="{{asset('tat/js/RegisterUser.js')}}"></script>
+    <script src="{{asset('tat/js/loadBarrios.js')}}"></script>
     
     
 
