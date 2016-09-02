@@ -48,9 +48,13 @@ function consultarPrecio(id)
 
 					if (saldo <= 0)
 					{
+						$('#btnGoCheck').hide();
 						notie.alert(3, 'Uno o más items se ha quedado sin existencias', 5000);
-						$('#item-'+artsec).addClass('error');
+						$('#item-'+id).addClass('error');
+						$('#ajaxMsg-'+id).html('<div class="alert alert-danger"><strong>Lo sentimos!</strong>Este articulo se ha quedado sin existencias, por favor remuevelo del carrito :( </div>')
 						return false;
+					}else{
+						$('#btnGoCheck').show();
 					}
 					grabarArt(oPrice,id,saldo,oPrice);
 					$('#pro-'+id).text(nPrice);

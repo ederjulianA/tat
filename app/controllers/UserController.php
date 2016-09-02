@@ -26,6 +26,26 @@ class UserController extends BaseController {
 		
 	}
 
+	public function postNewAddress()
+	{
+		//dd(Input::all());
+		if(Auth::check())
+		{
+			$ue = new UserEnv();
+			$ue->user_id 	=	Auth::user()->id;
+			$ue->dep_cod 	=  Input::get('selDep');
+			$ue->ciu_cod 	=  Input::get('selCiu');
+			$ue->dir        =  Input::get('dir');
+			$ue->tel 		=  Input::get('tel');
+			$ue->contacto   =  Input::get('contacto');
+			if($ue->save()){
+				return Redirect::back()->with("msg","Dirección agregada");
+			}else{
+				dd("ERROR! CONTACTAR A EDER");
+			}  
+		}
+	}
+
 	public function getItems()
 	{
 		$email = "ederalvarez2091057@gmail.com";

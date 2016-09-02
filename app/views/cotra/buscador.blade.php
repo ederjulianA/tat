@@ -11,7 +11,7 @@
                     <div class="container">
                         <div class="row">
                             <!-- Sidebar Start --> 
-                            <div class="sidebar col-lg-4 col-md-4 col-sm-4 col-xs-12">                           
+                            <div class="sidebar col-lg-2 col-md-2 col-sm-2 col-xs-10">                           
                                 <!-- Categorias -->
                                 <div class="widget category">
                                     <h3 class="title">Categorías</h3>
@@ -27,8 +27,7 @@
                             </div>
                             <!-- /Sidebar End --> 
                             <!-- Products Start-->
-                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-
+                            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
                                 <div class="row">
                                     <div class="col-lg-7 col-md-6 col-sm-6 col-xs-12">
                                         <div class="display">
@@ -37,7 +36,7 @@
                                             <a class="list btn-small btn-pad" onclick="display(&#39;list&#39;);"><i class="fa fa-th-list"></i></a>
                                         </div>                                       
                                     </div>
-                                    <div class="col-lg-5 col-md-6 col-sm-6 col-xs-12 ">
+                                    <div class="col-lg-4 col-md-5 col-sm-5 col-xs-11 pull-right">
                                         @include('includes.cotracolta.search')
                                        
                                     </div>
@@ -49,7 +48,7 @@
 	                                        
 												@foreach($productos as $producto)
 	                                            <!-- Product Items -->
-	                                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 product-cols first">
+	                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-11 product-cols first">
 	                                                <div class="product-block">
 	                                                    <div class="image2 ">
 	                                                        <span class="product-label product-label-special">

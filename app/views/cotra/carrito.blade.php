@@ -9,7 +9,7 @@
 <style type="text/css" media="screen">
     .error{
         
-        background-color: #EE5E5E !important;
+        border: 2px solid #EE5E5E !important;
     }
     
 </style>
@@ -62,6 +62,10 @@
 	                                                </td>
 	                                                <td class="td-name">
 	                                                    <a href="#">{{$pro->name}}---{{$pro->ArtCod}} </a>
+                                                        <div id="ajaxMsg-{{$pro->ArtSec}}" class="msgAjax" data="{{$pro->ArtSec}}">
+
+                                                            
+                                                        </div>
 	                                                </td>
 	                                                {{--<td class="td-edit">
 	                                                    <a class="edit" href="#"><i class="fa fa-pencil"></i> Editar</a>
@@ -131,7 +135,7 @@
                                         </tbody>
                                     </table>
                                     <div>
-                                        <a class="btn  btn-color" href="{{URL::route('checkout')}}">Ir al Checkout</a><br>   
+                                        <a class="btn  btn-color"id="btnGoCheck"  href="{{URL::route('checkout')}}">Ir al Checkout</a><br>   
                                     </div>
                                 </div>
                             </div>

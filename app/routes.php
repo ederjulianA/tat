@@ -33,6 +33,11 @@ Route::get(	'/converter', array(
 		'uses'=> 'HomeController@converter'
 		));
 
+Route::post('/postNewAddress', array(
+		'as'=>'postNewAddress', 
+		'uses'=> 'UserController@postNewAddress'
+		));
+
 Route::any(	'/payu/response', array(
 		'as'=>'pur', 
 		'uses'=> 'HomeController@getPayUr'
@@ -195,7 +200,7 @@ Route::any('/android/detalle', array('as' => 'androidDetalle', 'uses' => 'HomeCo
 
 //BUSCADOR
 
-Route::get('buscador/{f?}/{o?}', array('as' => 'buscador', 'uses' => 'BuscadorController@getBuscador'));
+Route::get('buscador/{f?}/', array('as' => 'buscador', 'uses' => 'BuscadorController@getBuscador'));
 
 
 //RUTAS POST

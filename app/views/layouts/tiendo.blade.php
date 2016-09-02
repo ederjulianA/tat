@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta charset="utf-8">
   <!-- Title and other stuffs -->
-  <title>Admin - TAT</title>
+  <title>Admin - Cootracolta</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
   <meta name="keywords" content="">
@@ -62,7 +62,7 @@
 			<span>Menu</span>
 		  </button>
 		  <!-- Site name for smallar screens -->
-		  <a href="/admin" class="navbar-brand hidden-lg">TAT</a>
+		  <a href="/admin" class="navbar-brand hidden-lg">Cootracolta</a>
 		</div>
       
       
@@ -136,7 +136,7 @@
         <div class="col-md-4">
           <!-- Logo. -->
           <div class="logo">
-            <h1><a href="#"><span class="bold">Admin TAT</span></a></h1>
+            <h1><a href="#"><span class="bold">Admin Cootracolta</span></a></h1>
             <p class="meta">Tienda online</p>
           </div>
           <!-- Logo ends -->

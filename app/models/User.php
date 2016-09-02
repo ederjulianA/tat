@@ -28,6 +28,11 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		return $this->hasOne('Empresa');
 	}
 
+	public function getAddress($id)
+	{
+		
+	}
+
 	public function getPedidos($iduser)
 	{
 		 $pedidos = DB::table('compra as c')->join('estados as e','c.estado_id','=','e.id')->select(

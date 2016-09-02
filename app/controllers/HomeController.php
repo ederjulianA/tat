@@ -29,6 +29,8 @@ class HomeController extends BaseController {
 		$this->urlMantis       = $this->conn->getUrlImg();
 	}
 
+	
+
 
 	public function getPayUr()
 

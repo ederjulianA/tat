@@ -17,20 +17,20 @@ class BuscadorController extends BaseController {
 		$this->grupo        = $grupo;
 	}
 
-	public function getBuscador($f,$o)
+	public function getBuscador($f)
 	{
-
+		$ord     = Input::get('ord');
 		$keyword = Input::get('keyword');
 
 		$dia     = 1;
 		
-		$productos = $this->producto->getProBuscador($keyword,$f,$o);
+		$productos = $this->producto->getProBuscador($keyword,$f,$ord);
 		$grupos 		=   $this->grupo->getAllGrupos();
 		$categorias =   $this->cat->getAllCat();
 		$promo      =   $this->promo->getPromo();
 		$menu       =   Menu::all();
 		
-		return View::make('cotra.buscador')->with('menu',$menu)->with('grupos',$grupos)->with('promo',$promo)->with('categorias',$categorias)->with('productos',$productos)->with('keyword',$keyword)->with('products', Cart::contents());
+		return View::make('cotra.buscador',compact('ord'))->with('menu',$menu)->with('grupos',$grupos)->with('promo',$promo)->with('categorias',$categorias)->with('productos',$productos)->with('keyword',$keyword)->with('products', Cart::contents());
 
 
 	}

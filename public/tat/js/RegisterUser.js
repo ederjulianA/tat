@@ -63,6 +63,7 @@ $(document).on('click','#btnNewUser',function(e){
 	var valN = valNit(nit);
 	if( valN == 1)
 	{
+		alert("hola");
 		notie.alert(3, 'Error en el formulario', 2);
 		return false;
 		$('#ajaxNit').text("El número de cedula ya se encuentra registrada");
