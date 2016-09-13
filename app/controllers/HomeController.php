@@ -418,9 +418,10 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 		$grupos 		=   $this->grupo->getAllGrupos();
 		$categorias = $this->cat->getAllCat();
 		$menu       = Menu::all();
+		$bans       = Banner::where('activo','=',1)->orderBy('activo','asc')->get();
 
 		
-		return View::make('cotra.index')->with('grupos',$grupos)->with('menu',$menu)->with('categorias',$categorias)->with('promo',$promo)->with('productos',$productos)->with('products', Cart::contents());
+		return View::make('cotra.index',compact('bans'))->with('grupos',$grupos)->with('menu',$menu)->with('categorias',$categorias)->with('promo',$promo)->with('productos',$productos)->with('products', Cart::contents());
 	}
 
 	public function getRegistger()

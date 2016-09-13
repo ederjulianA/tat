@@ -55,7 +55,8 @@ $(document).on('change','#selDep', function(e){
 	$('#selCiu').html('');
 	var id = $('#selDep').val();
 	$.ajax({
-			url : "http://192.168.0.241:8086/WEBSOMIC/EDER/TV8/getCiudadesById.php",
+			//url : "http://192.168.0.241:8086/WEBSOMIC/EDER/TV8/getCiudadesById.php",
+			url   : "http://190.156.239.253:8086/websomic/EDER/TV8/getCiudadesById.php",
 			dataType: "json",
 			type : "get",
 			data : {id:id},
@@ -120,7 +121,8 @@ function loadEnvios()
 function loadDep()
 {
 	$.ajax({
-			url : "http://192.168.0.241:8086/WEBSOMIC/EDER/TV8/getDepartamentos.php",
+			//url : "http://192.168.0.241:8086/WEBSOMIC/EDER/TV8/getDepartamentos.php",
+			url:     "http://190.156.239.253:8086/websomic/EDER/TV8/getDepartamentos.php",
 			dataType: "json",
 			type : "get",
 			

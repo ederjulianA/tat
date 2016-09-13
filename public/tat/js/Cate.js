@@ -27,8 +27,8 @@ function loadGrupos()
 
 	$.ajax({
 
-			//url : "http://somic.com.co:8086/WEBSOMIC/IVAN/GetGrupos.php",
-			url : "http://192.168.0.241:8086/WEBSOMIC/EDER/TV8/getGrupos.php",
+			url : "http://190.156.239.253:8086/websomic/EDER/TV8/GetGrupos.php",
+			//url : "http://192.168.0.241:8086/WEBSOMIC/EDER/TV8/getGrupos.php",
 
 			dataType: "json",
 			type : "get",
@@ -56,8 +56,8 @@ function loadSubGrupo()
 
 	$.ajax({
 
-			//url : "http://somic.com.co:8086/WEBSOMIC/IVAN/GetGrupos.php",
-			url : "http://192.168.0.241:8086/WEBSOMIC/EDER/TV8/getSubGrupos.php",
+			url : "http://190.156.239.253:8086/websomic/EDER/TV8/GetSubGrupos.php",
+			//url : "http://192.168.0.241:8086/WEBSOMIC/EDER/TV8/getSubGrupos.php",
 
 			dataType: "json",
 			type : "get",
@@ -72,7 +72,7 @@ function loadSubGrupo()
 				var porNum = 1;
 				var valPor = 1;
 				var NvalPor = 1;
-				swal({   title: "Esto puede tardar varios minutos...!",   text: "<div class='progress'><div class='progress-bar' role='progressbar'  aria-valuemin='0' id='pbar' aria-valuemax='100' style='width:0%;'>0%</div></div>",   html: true ,showConfirmButton: false});
+				swal({   title: "Esto puede tardar varios minutos!",   text: "<div class='progress'><div class='progress-bar' role='progressbar'  aria-valuemin='0' id='pbar' aria-valuemax='100' style='width:0%;'>0%</div></div>",   html: true ,showConfirmButton: false});
 				for (var i  in data) {
 					//console.log(data[i]);
 					ids = ids+"'"+data[i].InvSubGruCod+"',";
@@ -146,8 +146,8 @@ function loadFamilias()
 
 	$.ajax({
 
-			//url : "http://somic.com.co:8086/WEBSOMIC/EDER/TIENDO/getFamilias.php",
-			url : "http://192.168.0.241:8086/WEBSOMIC/EDER/TV8/getFamilias.php",
+			url : "http://190.156.239.253:8086/websomic/EDER/TV8/getFamilias.php",
+			//url : "http://192.168.0.241:8086/WEBSOMIC/EDER/TV8/getFamilias.php",
 			dataType: "json",
 			type : "get",
 			
@@ -202,8 +202,8 @@ function getFam(ids,NvalPor)
 
 	$.ajax({
 
-			//url : "http://somic.com.co:8086/WEBSOMIC/EDER/TIENDO/getFamiliasIds.php",
-			url : "http://192.168.0.241:8086/WEBSOMIC/EDER/TV8/getFamiliasIds.php",
+			url : "http://190.156.239.253:8086/websomic/EDER/TV8/getFamiliasIds.php",
+			//url : "http://192.168.0.241:8086/WEBSOMIC/EDER/TV8/getFamiliasIds.php",
 			dataType: "json",
 			type : "get",
 			data: {ids:ids},
@@ -235,8 +235,8 @@ function getSubGru(ids,NvalPor){
 	var urlSaveSubGrupos = $('#urlSaveSubGrupos').val();
 	$.ajax({
 
-			//url : "http://somic.com.co:8086/WEBSOMIC/EDER/TIENDO/getFamiliasIds.php",
-			url : "http://192.168.0.241:8086/WEBSOMIC/EDER/TV8/getSubGruposIds.php",
+			url : "http://190.156.239.253:8086/websomic/EDER/TV8/getSubGruposIds.php",
+			//url : "http://192.168.0.241:8086/WEBSOMIC/EDER/TV8/getSubGruposIds.php",
 			dataType: "json",
 			type : "get",
 			data: {ids:ids},

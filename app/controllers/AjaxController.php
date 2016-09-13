@@ -45,6 +45,7 @@ class AjaxController extends BaseController {
 			if($pro){
 				$pro->valIva  = round($price);
 				$pro->cantidad = $saldo;
+				$pro->precio   = round($price);
 				if($pro->save()){
 					$estado = array('estado'=>'1');
 					return Response::json(array('estado'=>$estado));

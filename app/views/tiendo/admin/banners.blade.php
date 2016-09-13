@@ -40,7 +40,7 @@
 </style>
 
 @section('titulo1')
-  HOME
+  Banners
 @stop
 
 @section('content')
@@ -63,36 +63,35 @@
       
     </div>
     @endif
-  {{--<div class="contenedor">
-    
-  
-    <div class="row">
-        <div class="col-md-4">
-          <h2>Pedidos Inmediatos</h2>
 
-          @foreach($pedidosYa as $pedido)
-          <a href="/admin/pedido/{{$pedido->id}}"><div class="pedidoItem">
-            <h4>{{$pedido->nombre}} {{$pedido->apellido}}</h4>
-            <P>Valor : ${{number_format($pedido->total_compra, 0, '', '.')}}</P>
-            
-          </div></a>
-          @endforeach
+    <div class="container">
+      <div class="row">
+
+          <div class="col-md-4">
+            <div class="container">
+                    {{ Form::open(['route'=>'addBanner','method'=>'POST','role'=>'form','files'=>true]) }}
+                      <div class="form-group">
+                          <label> Titulo: <input type="text"class="form-control" name="titulo" value=""required></label>
+                          {{ $errors->first('titulo','<p class="alert alert-danger">:message</p>') }}
+                      </div>
+                      <div class="form-group">
+                          <label> Posición: <input type="number"class="form-control" name="pos" value=""required></label>
+                      </div>
+                      <div class="form-group">
+                          <label> Activo: <input type="checkbox"class="" name="est" value=""></label>
+                      </div>
+                      <div class="form-group">
+                          <label> Imagen (1920x658): <input type="file"class="" name="img" value=""></label>
+                      </div>
+
+                      <input type="submit" class="btn btn-primary"name="btnAddBner" value="Agregar banner">
+               {{ Form::close()}}
+            </div>
+              
+          </div>
         
-          
-        </div>
-
-        <div class="col-md-4">
-          <h2>Pedidos Ruta</h2>
-          @foreach($pedidosRuta as $pruta)
-          <a href="/admin/pedido/{{$pruta->id}}"><div class="pedidoItemRuta">
-            <h4>{{$pruta->nombre}} {{$pruta->apellido}}</h4>
-            <P>Valor : ${{number_format($pruta->total_compra, 0, '', '.')}}</P>
-            
-          </div></a>
-          @endforeach
-        </div>
+      </div>
       
-  
     </div>
-  </div>  --}}
+ 
 @stop

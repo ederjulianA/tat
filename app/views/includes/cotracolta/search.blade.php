@@ -29,7 +29,7 @@
 </style>
  										<div class="input-group pull-right ed" >
  											<form method="get" action="{{URL::route('buscador',array('f'=>'p'))}}" class="sb">
-                                                <select class="selectpicker selOrd" name="ord" value="{{$ord}}">
+                                                <select class="selectpicker selOrd" name="ord" id="selSea" value="{{$ord}}">
                                                     <option value="asc" <?=$ord == 'asc' ? ' selected="selected"' : '';?>> (-) precio</option>
                                                     <option value="desc"<?=$ord == 'desc' ? ' selected="selected"' : '';?>> (+) Precio</option>
                                                 </select>

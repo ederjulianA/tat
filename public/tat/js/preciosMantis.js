@@ -1,7 +1,22 @@
 $(document).ready(function(){
 		
 		buscarPrecio();
+		addClassBanner();
 	
+});
+
+$(document).on('change','#selSea',function(e){
+	var val = $('#selSea').val();
+	URL = document.URL;
+
+if(URL.indexOf('ord=asc') != -1)
+       URL = URL.replace('ord=asc','ord=desc');
+else
+      URL = URL.replace('ord=desc','ord=asc'); 
+
+window.location = URL;
+	//window.location.search += '&ord='+val;
+	//alert(val);
 });
 
 
@@ -17,6 +32,18 @@ function buscarPrecio()
 		});
 }
 
+function addClassBanner()
+{
+
+	//$('#itemB div').addClass('active');
+	$('.itemB').each(function(i) {
+    if ( i === 0 ) {
+       $(this).addClass('active');
+       console.log("item");
+    }
+});
+}
+
 
 function consultarPrecio(id)
 {
@@ -24,8 +51,8 @@ function consultarPrecio(id)
 	$.ajax({
 
 			
-			//url : "http://somic.com.co:8086/WEBSOMIC/EDER/TIENDO/getPriceById.php",
-			url : "http://192.168.0.241:8086/WEBSOMIC/EDER/TV8/getPriceById.php",
+			url : "http://190.156.239.253:8086/websomic/EDER/TV8/getPriceById.php",
+			//url : "http://192.168.0.241:8086/WEBSOMIC/EDER/TV8/getPriceById.php",
 			dataType: "json",
 			type : "post",
 			data: {id: id},
@@ -42,7 +69,13 @@ function consultarPrecio(id)
 					var nPrice = oPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 					var nPrice2 = Math.round(nPrice);
 					var saldo  =  Math.round(data[i].saldo);
-					console.log(nPrice);
+					console.log("O price:"+oPrice);
+					if (saldo <= 0)
+					{
+						$('#pb-'+id).block({ 
+                message: null 
+            });
+					}
 					$('#pro-'+id).text('$ '+nPrice);
 					grabarArt(oPrice,id,saldo,oPrice);
 					//$('#pro-'+id).text(nPrice2);

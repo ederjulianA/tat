@@ -186,6 +186,8 @@ Route::group(['before' => 'guest'], function () {
 
 });
 
+//ANGULAR
+
 
 Route::get('cart', array('as' => 'cart', 'uses' => 'CartController@getCart'));
 Route::get('checkout', array('as' => 'checkout', 'uses' => 'CartController@getCheckout'));
@@ -259,7 +261,9 @@ Route::any('UrlLoadPro', array('as' => 'UrlLoadPro', 'uses' => 'Ajax2Controller@
  			Route::any('categorias', array('as' => 'apiCategorias', 'uses' => 'ApiController@getCategorias'));
  			Route::any('login', array('as' => 'apilogin', 'uses' => 'ApiController@apiLogin'));
  			Route::any('addFav', array('as' => 'addFav', 'uses' => 'ApiController@addFav'));
-
+ 			//angular
+ 			Route::any('pagos', array('as' => 'pagos', 'uses' => 'ApiController@getPagos'));
+ 			Route::any('pago/nuevo', array('as' => 'pagoNuevo', 'uses' => 'ApiController@pagoNuevo'));
  			Route::any('/android', array('as' => 'android', 'uses' => 'ApiController@android'));
 
 
@@ -299,8 +303,11 @@ Route::group(['before' => 'auth'], function() {
         Route::get('admin/articulo/{id}', array('as' => 'adminArticuloDetalle', 'uses' => 'EmpresaController@getAdminArticulo'));
         Route::get('admin/barrios', array('as' => 'adminBarrios', 'uses' => 'EmpresaController@getBarrios'));
         Route::get('admin/productos', array('as' => 'adminProductos', 'uses' => 'EmpresaController@getProductos'));
+        Route::get('admin/banners', array('as' => 'adminBanners', 'uses' => 'BannersController@getBanners'));
 
         Route::post('addDia', array('as' => 'addDia', 'uses' => 'EmpresaController@addDia'));
+
+        Route::post('addBanner', array('as' => 'addBanner', 'uses' => 'BannersController@addBanner'));
         Route::get('admin/searchBarrio', array('as' => 'searchBarrio', 'uses' => 'EmpresaController@searchBarrio'));
         Route::post('deleteDay', array('as' => 'deleteDay', 'uses' => 'EmpresaController@deleteDay'));
         //RUTAS PARA CONFIGURAR DATOS GENERALES. ################################

@@ -54,6 +54,25 @@
                 <input type="hidden" id="urlSaveFamilias"  value="{{URL::route('urlSaveFamilias')}}">
       </div>
   </div>
+
+   <div id="todos" ng-controller="ToDoCtrl">
+                    <h3 class="page-header">
+                        Todos
+                        <small ng-if="remaining()">(@{{remaining()}}) remaining</small>
+                    </h3>
+                    <input type="text" ng-model="search">
+                    <ul class="unstyled">
+                        <li ng-repeat="todo in todos | filter:search">
+                            <input type="checkbox" ng-model="todo.done">
+                            @{{ todo.TipPagNom }}
+                        </li>
+                    </ul>
+                    <h3 class="page-header">Add new</h3>
+                    <form ng-submit="addNew()">
+                        <input type="text" ng-model="todoText">
+                        <button type="submit" class="btn btn-primary">Add New</button>
+                    </form>
+                </div>
  
 
 @stop
@@ -62,5 +81,7 @@
   <script src="{{asset('tat/js/adminTipEnt.js')}}"></script>
   <script src="{{asset('tat/js/Sync.js')}}"></script>
   <script src="{{asset('tat/js/Cate.js')}}"></script>
+  <script src="{{asset('tat/js/angular.min.js')}}"></script> <!-- Charts & Graphs -->
+        <script src="{{asset('tat/js/app2.js')}}"></script>
 
 @stop

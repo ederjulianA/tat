@@ -5539,4 +5539,9 @@ input[type=submit].btn-block { width: 100% }
 }
 
 
-
+.p_ago{
+    width: 100px !important;
+    padding: 5px;
+    color: red;
+    border: 2px solid #f90;
+}

@@ -99,8 +99,8 @@ $(document).on('change','#nit',function(e){
 
 	var nit 		= $('#nit').val();
 	$.ajax({
-			//url : 'http://somic.com.co:8086/WEBSOMIC/EDER/TIENDO/USER/GetNit.php',
-			url : 'http://192.168.0.241:8086/WEBSOMIC/EDER/TV8/USER/GetNit.php',
+			url : 'http://190.156.239.253:8086/websomic/EDER/TV8/USER/GetNit.php',
+			//url : 'http://192.168.0.241:8086/WEBSOMIC/EDER/TV8/USER/GetNit.php',
 			dataType: "json",
 			type : "post",
 			data : { NitIde : nit},
@@ -152,7 +152,8 @@ function saveUser()
 	var depcod      = $('#selDep').val();
 
 	$.ajax({
-			url : "http://192.168.0.241:8086/WEBSOMIC/EDER/TV8/USER/newUser.php",
+			//url : "http://192.168.0.241:8086/WEBSOMIC/EDER/TV8/USER/newUser.php",
+			url   : "http://190.156.239.253:8086/websomic/EDER/TV8/USER/newUser.php",
 			dataType: "json",
 			type : "get",
 			data  : { nombre:nombre, apellido:apellido, nit:nit, telefono:telefono, direccion:direccion, email:email, password:password,ciucod:ciucod,depcod:depcod},

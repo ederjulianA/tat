@@ -30,9 +30,9 @@ function sync2()
 
 	$.ajax({
 
-			//url : "http://somic.com.co:8086/WEBSOMIC/EDER/TIENDO/GetArticulosCount2.php",
+			url : "http://190.156.239.253:8086/websomic/EDER/TV8/articulos1.php",
 			//url : "http://somic.com.co:8086/WEBSOMIC/EDER/TIENDO/articulos1.php",
-			  url : "http://192.168.0.241:8086/WEBSOMIC/EDER/TV8/articulos1.php",
+			//url : "http://192.168.0.241:8086/WEBSOMIC/EDER/TV8/articulos1.php",
 			 dataType: "json",
 			 type : "get",
 			
@@ -89,8 +89,8 @@ function sync()
 
 	$.ajax({
 
-			//url : "http://somic.com.co:8086/WEBSOMIC/EDER/getFamilias.php",
-			url : "http://192.168.0.241:8086/WEBSOMIC/EDER/TV8/getFamilias.php",
+			url : "http://190.156.239.253:8086/websomic/EDER/TV8/getFamilias.php",
+			//url : "http://192.168.0.241:8086/WEBSOMIC/EDER/TV8/getFamilias.php",
 			dataType: "json",
 			type : "get",
 			
@@ -156,9 +156,9 @@ function getArt(ids,NvalPor)
 	console.log(ids);
 	$.ajax({
 
-			//url : "http://somic.com.co:8086/WEBSOMIC/EDER/TIENDO/articulos2.php",
+			    url : "http://190.156.239.253:8086/websomic/EDER/TV8/GetArticuos2.php",
 			  //url : "http://somic.com.co:8086/WEBSOMIC/EDER/TIENDO/GetArticuos2.php",
-			  url : "http://192.168.0.241:8086/WEBSOMIC/EDER/TV8/GetArticuos2.php",
+			  //url : "http://192.168.0.241:8086/WEBSOMIC/EDER/TV8/GetArticuos2.php",
 			dataType: "json",
 			type : "get",
 			
@@ -240,8 +240,8 @@ function prodMantisAjax()
 
 	$.ajax({
 
-			//url : "http://somic.com.co:8086/WEBSOMIC/EDER/getFamilias.php",
-			url : "http://192.168.0.241:8086/WEBSOMIC/EDER/TV8/getFamilias.php",
+			url : "http://190.156.239.253:8086/websomic/EDER/TV8/getFamilias.php",
+			//url : "http://192.168.0.241:8086/WEBSOMIC/EDER/TV8/getFamilias.php",
 			dataType: "json",
 			type : "get",
 			

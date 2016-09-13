@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="todoList">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta charset="utf-8">
@@ -51,7 +51,7 @@
   <link rel="shortcut icon" href="img/favicon/favicon.png">
 </head>
 
-<body>
+<body  >
 
 <div class="navbar navbar-fixed-top bs-docs-nav" role="banner">
   
@@ -176,7 +176,8 @@
               </div>
               <div class="mcol-right">
                 <!-- Number of visitors -->
-                <p><a href="#">0</a> <em>usuarios</em></p>
+                <p><a href="#">{{App::make('AdminController')->getUsers() }}
+</a> <em>usuarios</em></p>
               </div>
               <div class="clearfix"></div>
             </div>
@@ -189,7 +190,7 @@
               </div>
               <div class="mcol-right">
                 <!-- Number of visitors -->
-                <p><a href="#">5000</a><em>orders</em></p>
+                <p><a href="#">{{App::make('AdminController')->getOrders() }}</a><em>Ordenes</em></p>
               </div>
               <div class="clearfix"></div>
             </div>                        
@@ -263,6 +264,7 @@
 <span class="totop"><a href="#"><i class="fa fa-chevron-up"></i></a></span> 
 
 <!-- JS -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
 <script src="{{asset('admin2/js/jquery.js')}}"></script> <!-- jQuery -->
 <script src="{{asset('admin2/js/bootstrap.min.js')}}"></script> <!-- Bootstrap -->
 <script src="{{asset('admin2/js/jquery-ui.min.js')}}"></script> <!-- jQuery UI -->

@@ -65,6 +65,21 @@ class ApiController extends BaseController {
 		return Response::json(array("estado"=>1));
 	}
 
+	public function getPagos()
+	{
+		$pagos = Mpagos::all();
+		return Response::json(array('pagos'=>$pagos));
+	}
+
+	public function pagoNuevo()
+	{
+		$p = new Mpagos();
+         $p->TipPagNom = Input::get('TipPagNom');
+         $p->save();
+		//dd(Input::get('text'));
+		
+	}
+
 
 
 

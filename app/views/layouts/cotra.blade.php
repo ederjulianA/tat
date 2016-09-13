@@ -2,7 +2,7 @@
 <!--[if IE 8]>          <html class="ie ie8"> <![endif]-->
 <!--[if IE 9]>          <html class="ie ie9"> <![endif]-->
 <!--[if gt IE 9]><!-->  
-<html> 
+<html lang="es" ng-app="cootra"> 
 	<!--<![endif]-->
     <head>
         <meta charset="utf-8">
@@ -262,7 +262,7 @@
         <script src="{{asset('cot/js/bootstrap.js')}}"></script>
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.0/js/bootstrap-select.min.js"></script>
-
+        <script src="{{asset('tat/js/libs/jquery.blockUI.js')}}"></script>
         <script src="{{asset('cot/js/revolution-slider/js/jquery.themepunch.plugins.min.js')}}"></script> 
         <script src="{{asset('cot/js/revolution-slider/js/jquery.themepunch.revolution.min.js')}}"></script>
         <script src="{{asset('cot/js/jquery.parallax.js')}}"></script>
@@ -294,6 +294,10 @@
     <script src="{{asset('tat/js/notie.js')}}"></script>
     <script src="{{asset('tat/js/custom.js')}}"></script>
         @yield('scripts')
+        <script src="{{asset('tat/js/tat.js')}}"></script>
+        <script src="{{asset('tat/js/angular.min.js')}}"></script> <!-- Charts & Graphs -->
+        <script src="{{asset('tat/js/app3.js')}}"></script>
+        
     </body>
 </html>
 
