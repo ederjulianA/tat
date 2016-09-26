@@ -1,5 +1,5 @@
 
-var app = angular.module('todoList', []);
+var app = angular.module('todoList',  []);
 app.controller('ToDoCtrl', function($scope,$http) {
     $http.get("/api/pagos").success(function(todos) {
         $scope.todos = todos.pagos;
@@ -39,4 +39,17 @@ app.controller('ToDoCtrl', function($scope,$http) {
     // or server returns response with an error status.
   });;
     }
+});
+
+app.controller('banCtrl', function($scope,$http){
+    $http.get("/api/banners").success(function(bans) {
+        $scope.bans = bans.banners;
+        console.log($scope.bans);
+    });
+
+    $scope.doStuff = function(item){
+        var id = angular.element(item).data('data-id');
+        console.log(id);
+    }
+
 });

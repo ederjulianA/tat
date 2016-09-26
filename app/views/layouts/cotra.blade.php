@@ -55,7 +55,7 @@
                 <div class="logo pull-left">
                      <h1>
                         <a href="/">
-                        <img class="logoE" src="{{asset('img/cootracolta.jpg')}}" alt="Cootracolta" width="160" height="60">
+                        <img class="logoE" src="{{asset('img/LogoCootracolta.png')}}" alt="Cootracolta" width="160" height="60">
                         </a>
                     </h1>
                  </div>

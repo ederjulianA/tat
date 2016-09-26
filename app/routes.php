@@ -263,6 +263,7 @@ Route::any('UrlLoadPro', array('as' => 'UrlLoadPro', 'uses' => 'Ajax2Controller@
  			Route::any('addFav', array('as' => 'addFav', 'uses' => 'ApiController@addFav'));
  			//angular
  			Route::any('pagos', array('as' => 'pagos', 'uses' => 'ApiController@getPagos'));
+ 			Route::any('banners', array('as' => 'banners', 'uses' => 'ApiController@getBans'));
  			Route::any('pago/nuevo', array('as' => 'pagoNuevo', 'uses' => 'ApiController@pagoNuevo'));
  			Route::any('/android', array('as' => 'android', 'uses' => 'ApiController@android'));
 
@@ -271,6 +272,8 @@ Route::any('UrlLoadPro', array('as' => 'UrlLoadPro', 'uses' => 'Ajax2Controller@
 
  			Route::any('/saveproducts', array('as' => 'saveproducts', 'uses' => 'Ajax2Controller@saveproducts'));
  			Route::any('/prueba', array('as' => 'android', 'uses' => 'Ajax2Controller@prueba'));
+ 			Route::any('/activo', array('as' => 'activo', 'uses' => 'ApiController@activo'));
+ 			Route::any('/banner-edit', array('as' => 'bannerEdit', 'uses' => 'ApiController@banerEdit'));
 
 
  			//GACEL

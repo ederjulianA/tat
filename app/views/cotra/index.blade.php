@@ -38,7 +38,7 @@
                             <div class="carousel-inner">
                                 @foreach($bans as $b)
                                 <div class="item itemB">
-                                    <img class="slide-image" src="{{asset($b->img)}}" alt="{{$b->titulo}}">
+                                    <img class="slide-image" height="350px" src="{{asset($b->img)}}" alt="{{$b->titulo}}">
                                 </div>
                                 @endforeach
                                 {{--<div class="item active">

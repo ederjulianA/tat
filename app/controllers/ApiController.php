@@ -2,6 +2,70 @@
 
 class ApiController extends BaseController {
 
+	public function banerEdit()
+	{
+		if( isset($_REQUEST['id']) && isset($_REQUEST['pos'])){
+			$id  = $_REQUEST['id'];
+			$pos  = $_REQUEST['pos'];
+			$ban = Banner::where('id','=',$id)->first();
+				if($ban){
+					$ban->pos = $pos;
+					if($ban->save()){
+						$estado = array('estado'=>'1','msg'=>'Editado');
+
+					}else{
+						$estado = array('estado'=>'2','msg'=>'Error guardando');
+					}
+				}else{
+					$estado = array('estado'=>'3','msg'=>'No se encontró el banner');
+				}
+
+		}else{
+			$estado = array('estado'=>'4','msg'=>'Error de parametros');
+		}
+
+		return Response::json(array('estado'=>$estado));
+
+
+	}
+
+
+	public function activo()
+	{
+		if( isset($_REQUEST['id']) && isset($_REQUEST['cb']))
+		{
+			$id  = $_REQUEST['id'];
+			$cb  = $_REQUEST['cb'];
+
+			$ban = Banner::where('id','=',$id)->first();
+			if($ban){
+					if($cb=== "true")
+						{
+							$ban->activo = 1;
+						}else
+						{
+							$ban->activo = 0;
+						}
+
+
+						if($ban->save()){
+							$estado = array('estado'=>'1','ban'=>$cb);
+						}else{
+							$estado = array('estado'=>'2','msg'=>'An error ocured saving the banner');
+						}
+
+			}else{
+				$estado = array('estado'=>'3','msg'=>"error finding the banner");
+
+			}
+
+			
+	}else{
+
+	}
+	return Response::json(array('estado'=>$estado));
+}
+
 
 	public function mail()
 	{
@@ -69,6 +133,13 @@ class ApiController extends BaseController {
 	{
 		$pagos = Mpagos::all();
 		return Response::json(array('pagos'=>$pagos));
+	}
+
+	public function getBans()
+	{
+		$b = Banner::where('id','>',0)->get();
+
+		return Response::json(array('banners'=>$b));
 	}
 
 	public function pagoNuevo()

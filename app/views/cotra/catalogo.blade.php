@@ -114,8 +114,10 @@
 @stop
 
 @section('scripts')
+		<script src="{{asset('tat/js/jquery.query-object.js')}}"></script>
 	<script src="{{asset('tat/js/preciosMantis.js')}}"></script>
 	<script src="{{asset('cot/js/product.js')}}"></script> 
+	<script src="{{asset('cot/js/productFilter.js')}}"></script> 
 	
 
 @stop  

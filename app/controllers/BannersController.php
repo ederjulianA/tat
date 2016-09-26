@@ -31,8 +31,9 @@ class 	BannersController extends BaseController {
 	public function getBanners()
 	{
 		$user = Auth::user()->id;
+		$bans = Banner::where('id','>',0)->get();
 
-		return View::make('tiendo.admin.banners',compact('user'));
+		return View::make('tiendo.admin.banners',compact('user','bans'));
 	}
 
 	public function addBanner()
@@ -59,7 +60,7 @@ class 	BannersController extends BaseController {
 						$codigoIMG = str_random(13);
 						$logo = Input::file('img');
 						$filename = date('Y-m-d-H')."-".$codigoIMG."-".$logo->getClientOriginalName();
-						Image::make($logo->getRealPath())->resize(1250,658)->save(public_path().'/cot/img/slider/'.$filename);
+						Image::make($logo->getRealPath())/*->resize(1250,658)*/->save(public_path().'/cot/img/slider/'.$filename);
 						$b->img = 'cot/img/slider/'.$filename;
 					if($b->save())
 					{

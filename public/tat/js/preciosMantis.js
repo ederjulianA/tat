@@ -1,6 +1,7 @@
 $(document).ready(function(){
-		
-		buscarPrecio();
+
+		//filter();		
+		//buscarPrecio();
 		addClassBanner();
 	
 });
@@ -19,6 +20,20 @@ window.location = URL;
 	//alert(val);
 });
 
+function filter()
+{
+
+	var url = location.search;
+	var ord = $.query.get('ord');
+	if (ord ==="")
+	{
+	 url = $.query.set("ord", "asc").toString();
+	 window.location.href = url;
+	}
+	
+	console.log(url);
+	
+}
 
 function buscarPrecio()
 {
