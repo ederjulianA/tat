@@ -1,9 +1,21 @@
 <?php
 
-
+	use Nicolaslopezj\Searchable\SearchableTrait;
 	class Producto extends Eloquent {
+		use SearchableTrait;
 
 		protected $table = 'productos';
+
+		protected $searchable = [
+        'columns' => [
+            'productos.pro_nom' => 10,
+            'productos.descripcion'=>2,
+            'productos.precio'=>3,
+            'productos.slug'=>4,
+            
+          
+        ]
+    ];
 
 		public function category()
 		{
@@ -123,9 +135,10 @@ public function limpiar($String){
 			return Producto::where('slug','=',$slug)->first();
 		}
 
-		public function getAllPro()
+		public function getAllPro($ord)
 		{
-			$productos = Producto::where('Estado','=',1)->paginate(18);
+
+			$productos = Producto::where('Estado','=',1)->orderBy('precio',$ord)->paginate(18);
 
 			//PRODUCTOS CON QUERY BUILDER
 

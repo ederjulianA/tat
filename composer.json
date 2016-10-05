@@ -10,6 +10,7 @@
 		"goodby/csv": "*",
 		"moltin/laravel-cart": "*",
 		"thujohn/pdf": "dev-master",
+		"nicolaslopezj/searchable": "1.*",
 		"paypal/rest-api-sdk-php": "*"
 	},
 	"autoload": {

@@ -401,7 +401,7 @@ class AjaxController extends BaseController {
 						'ArtSec'=> $producto->ArtSec,
 						'ArtCod'=> $producto->id_mantis,
 						'valIva'=>$producto->ValIva,
-						'conIva'=> $producto->precio + (($producto->precio * $producto->por_iva)/100),
+						'conIva'=> $producto->ValIva,//precio + (($producto->precio * $producto->por_iva)/100),
 						'image' => $producto->img
 						));
 						$estado = array('estado'=>1,'mensaje'=>'Producto agregado','totalCart'=>Cart::total());

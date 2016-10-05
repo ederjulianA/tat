@@ -35,6 +35,7 @@
                                                 </select>
                             				    <input type="text" class="search" name="keyword" placeholder="Qué estas buscando ?" required value="{{$keyword}}">
                                 				<input type="submit"class="buttonE" value="Buscar">
+                                                
 											</form>
 
  										{{--<form method="get" action="{{URL::route('buscador',array('f'=>'p','o'=>'asc'))}}" class="">

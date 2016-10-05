@@ -392,7 +392,7 @@ public function postPaymentAgain()
 
 
             /*$cont = file_get_contents("http://somic.com.co:8086/WEBSOMIC/EDER/TIENDO/setPrueba2.php?NitIde=$NitIde&id_pedido=$id_pedido&totalCompra=$totalCompra&CotFecEd=$CotFecEd");*/
-            $cont = file_get_contents("http://192.168.0.241:8086/WEBSOMIC/EDER/TV8/setPrueba2.php?NitIde=$NitIde&id_pedido=$id_pedido&totalCompra=$totalCompra&CotFecEd=$CotFecEd");
+            $cont = file_get_contents("http://190.156.239.253:8086/websomic/EDER/TV8/setPrueba2.php?NitIde=$NitIde&id_pedido=$id_pedido&totalCompra=$totalCompra&CotFecEd=$CotFecEd");
             
             if($cont == true)
             {
@@ -413,7 +413,7 @@ public function postPaymentAgain()
                   $SecNum2 = urlencode($SecNum2);
 
                   /*$cont2 = file_get_contents("http://somic.com.co:8086/WEBSOMIC/EDER/TIENDO/setPruebaDetalle.php?artsec=$artsec&price=$price&CotArtNom=$CotArtNom&uni=$uni&CotSubPrecio=$CotSubPrecio&num=$num&SecNum=$SecNum2&NitIde=$NitIde"); */
-                  $cont2 = file_get_contents("http://192.168.0.241:8086/WEBSOMIC/EDER/TV8/setPruebaDetalle.php?artsec=$artsec&price=$price&CotArtNom=$CotArtNom&uni=$uni&CotSubPrecio=$CotSubPrecio&num=$num&SecNum=$SecNum2&NitIde=$NitIde"); 
+                  $cont2 = file_get_contents("http://190.156.239.253:8086/websomic/EDER/TV8/setPruebaDetalle.php?artsec=$artsec&price=$price&CotArtNom=$CotArtNom&uni=$uni&CotSubPrecio=$CotSubPrecio&num=$num&SecNum=$SecNum2&NitIde=$NitIde"); 
                   $num++;
 
                   
@@ -498,7 +498,7 @@ public function postPaymentAgain()
 
 
             /*$cont = file_get_contents("http://somic.com.co:8086/WEBSOMIC/EDER/TIENDO/setPrueba2.php?NitIde=$NitIde&id_pedido=$id_pedido&totalCompra=$totalCompra&CotFecEd=$CotFecEd");*/
-            $cont = file_get_contents("http://192.168.0.241:8086/WEBSOMIC/EDER/TV8/setPrueba2.php?NitIde=$NitIde&id_pedido=$id_pedido&totalCompra=$totalCompra&CotFecEd=$CotFecEd");
+            $cont = file_get_contents("http://190.156.239.253:8086/websomic/EDER/TV8/setPrueba2.php?NitIde=$NitIde&id_pedido=$id_pedido&totalCompra=$totalCompra&CotFecEd=$CotFecEd");
 
             
             if($cont == true)
@@ -518,7 +518,7 @@ public function postPaymentAgain()
                   $SecNum2 = urlencode($SecNum2);
 
                  /* $cont2 = file_get_contents("http://somic.com.co:8086/WEBSOMIC/EDER/TIENDO/setPruebaDetalle.php?artsec=$artsec&price=$price&CotArtNom=$CotArtNom&uni=$uni&CotSubPrecio=$CotSubPrecio&num=$num&SecNum=$SecNum2&NitIde=$NitIde"); */
-                 $cont2 = file_get_contents("http://192.168.0.241:8086/WEBSOMIC/EDER/TV8/setPruebaDetalle.php?artsec=$artsec&price=$price&CotArtNom=$CotArtNom&uni=$uni&CotSubPrecio=$CotSubPrecio&num=$num&SecNum=$SecNum2&NitIde=$NitIde");
+                 $cont2 = file_get_contents("http://190.156.239.253:8086/websomic/EDER/TV8/setPruebaDetalle.php?artsec=$artsec&price=$price&CotArtNom=$CotArtNom&uni=$uni&CotSubPrecio=$CotSubPrecio&num=$num&SecNum=$SecNum2&NitIde=$NitIde");
                   $num++;
 
                   

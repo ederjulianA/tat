@@ -19,8 +19,9 @@ class CatalogoController extends BaseController {
 	{
 
 		$ord        =   Input::get('ord');
+
 		$keyword    =   Input::get('keyword');
-		$productos 	=	$this->pro->getAllPro();
+		$productos 	=	$this->pro->getAllPro($ord);
 		$promo      =   $this->promo->getPromo();
 		$grupos 		=   $this->grupo->getAllGrupos();
 		$menu       = Menu::all();
@@ -42,4 +43,7 @@ class CatalogoController extends BaseController {
 		$menu       =   Menu::all();
 		return View::make('cotra.categoria',compact('ord','keyword'))->with('menu',$menu)->with('grupos',$grupos)->with('categorias',$categorias)->with('productos',$productos)->with('products', Cart::contents());
 	}
+
+
+
 }

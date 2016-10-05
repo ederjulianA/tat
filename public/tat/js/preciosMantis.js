@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
-		//filter();		
-		//buscarPrecio();
+		filter();		
+		buscarPrecio();
 		addClassBanner();
 	
 });

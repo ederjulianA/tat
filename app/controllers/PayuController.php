@@ -47,21 +47,55 @@
 
 				if($compra->save())
 				{
-					$items = Ite::where('compra_id','=',$compra->id)->get();
 					$user = User::where('id','=',$user_id)->first();
-					$datos = Shipping::where('user_id','=',$user->id)->first();
-                        $destinatario = $datos->nombre." ".$datos->apellido;
-					Mail::send('emails.compras.c1', array('aliado'=>$aliado, 'asesor'=>$asesor, 'empresa' => $empresa,"email"=>$email,"compra"=>$compra,"items"=>$items,"user"=>$user,"destinatario"=>$destinatario/*URL::route('mega-perfil')*/), function($message) use ($email,$empresa,$compra,$asesor,$aliado,$items,$user,$destinatario){
-						$message->to($email, $destinatario)->subject('Compra cotracolta');
-					});
-						/*$items = Ite::where('compra_id','=',$compra->id)->get();
-                        $user = User::where('id','=',Auth::user()->id)->first();
-                        $email = $user->email;
-                        $datos = Shipping::where('user_id','=',$user->id)->first();
-                        $destinatario = $datos->nombre." ".$datos->apellido;
-                        Mail::send('emails.compras.c1', array('compra'=>$compra, 'items'=>$items,'email'=>$email,'destinatario'=>$destinatario), function($message) use ($compra,$items,$destinatario,$email){
-                        $message->to($email, $destinatario)->subject('Compra en Cootracolta');
-                    });*/
+					$NitIde = urlencode($user->NitSec);
+		            $id_pedido = urlencode('PED-WEB-'.date('Ymd-Hms'));
+		                                                //dd($id_pedido,$SecNum,$NitSec);
+		            $totalCompra =  urlencode($compra->total_compra);
+		            $CotFecEd = urlencode(date("d-m-y"));
+					$cont = file_get_contents("http://190.156.239.253:8086/websomic/EDER/TV8/setPrueba2.php?NitIde=$NitIde&id_pedido=$id_pedido&totalCompra=$totalCompra&CotFecEd=$CotFecEd");
+					$items = Ite::where('compra_id','=',$compra->id)->get();
+					
+						if($cont == true)
+				            {
+
+				                $num = 1;
+				                foreach ($items as $item) {   
+				                                                                            
+				                  $artsec = urlencode($item->ArtSec);
+
+				                  $price  = urlencode($item->valor_unitario);
+				                  $CotArtNom = urlencode($item->nombre);
+				                  $uni    = urlencode($item->cantidad);
+				                  $CotSubPrecio = urlencode($item->valor_total);  
+				                  $SecNum      = trim($cont);
+				                  $SecNum2 = str_replace('"', '', $SecNum);
+				                  $SecNum2 = urlencode($SecNum2);
+
+				                 /* $cont2 = file_get_contents("http://somic.com.co:8086/WEBSOMIC/EDER/TIENDO/setPruebaDetalle.php?artsec=$artsec&price=$price&CotArtNom=$CotArtNom&uni=$uni&CotSubPrecio=$CotSubPrecio&num=$num&SecNum=$SecNum2&NitIde=$NitIde"); */
+				                 $cont2 = file_get_contents("http://190.156.239.253:8086/websomic/EDER/TV8/setPruebaDetalle.php?artsec=$artsec&price=$price&CotArtNom=$CotArtNom&uni=$uni&CotSubPrecio=$CotSubPrecio&num=$num&SecNum=$SecNum2&NitIde=$NitIde");
+				                  $num++;
+
+				                  
+				                
+				                }
+				            }else{
+				            	dd("ERROR CONECTANDO ERP");
+				            }
+
+							$datos = Shipping::where('user_id','=',$user->id)->first();
+                        	$destinatario = $datos->nombre." ".$datos->apellido;
+							Mail::send('emails.compras.c1', array('aliado'=>$aliado, 'asesor'=>$asesor, 'empresa' => $empresa,"email"=>$email,"compra"=>$compra,"items"=>$items,"user"=>$user,"destinatario"=>$destinatario/*URL::route('mega-perfil')*/), function($message) use ($email,$empresa,$compra,$asesor,$aliado,$items,$user,$destinatario){
+								$message->to($email, $destinatario)->subject('Compra cotracolta');
+							});
+								/*$items = Ite::where('compra_id','=',$compra->id)->get();
+		                        $user = User::where('id','=',Auth::user()->id)->first();
+		                        $email = $user->email;
+		                        $datos = Shipping::where('user_id','=',$user->id)->first();
+		                        $destinatario = $datos->nombre." ".$datos->apellido;
+		                        Mail::send('emails.compras.c1', array('compra'=>$compra, 'items'=>$items,'email'=>$email,'destinatario'=>$destinatario), function($message) use ($compra,$items,$destinatario,$email){
+		                        $message->to($email, $destinatario)->subject('Compra en Cootracolta');
+		                    });*/
 				}else
 				{
 					Mail::send('emails.auth.noti', array('aliado'=>$aliado, 'asesor'=>$asesor, 'empresa' => $empresa,"email"=>$email,"valor"=>$valor/*URL::route('mega-perfil')*/), function($message) use ($email,$empresa,$valor,$asesor,$aliado){

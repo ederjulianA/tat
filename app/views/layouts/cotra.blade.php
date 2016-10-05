@@ -293,6 +293,7 @@
     
     <script src="{{asset('tat/js/notie.js')}}"></script>
     <script src="{{asset('tat/js/custom.js')}}"></script>
+    <script src="{{asset('tat/js/jquery.query-object.js')}}"></script>
         @yield('scripts')
         <script src="{{asset('tat/js/tat.js')}}"></script>
         <script src="{{asset('tat/js/angular.min.js')}}"></script> <!-- Charts & Graphs -->
