@@ -112,7 +112,7 @@
       </div>--}}
       <div class="row">
 
-      <div class="col-md-6">
+      <div class="col-md-4">
 
               <div class="widget wred">
                 <div class="widget-head">
@@ -137,9 +137,9 @@
                       <div class="form-group">
                           <label> Posición: <input type="number"class="form-control" name="pos" value=""required></label>
                       </div>
-                      <div class="form-group">
+                      {{--<div class="form-group">
                           <label> Activo: <input type="checkbox"class="" name="est" value=""></label>
-                      </div>
+                      </div>--}}
                       <div class="form-group">
                           <label> Imagen (1920x658): <input type="file"class="" name="img" value=""></label>
                       </div>
@@ -155,12 +155,12 @@
                     <hr />
 
 
-                    <h5>Modal</h5>
-                    <!-- Button to trigger modal -->
-                    <a href="#myModal" class="btn btn-info" data-toggle="modal">Launch demo modal</a>
+                   {{--}} <h5>Modal</h5>
+                   
+                    <a href="#myModal" class="btn btn-info" data-toggle="modal">Launch demo modal</a>--}}
                      
                     <!-- Modal -->
-                    <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    {{--<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
                       <div class="modal-header">
@@ -176,7 +176,7 @@
                       </div>
                     </div>
           </div>
-          </div>
+          </div>--}}
                     <hr />
 
 
@@ -188,7 +188,7 @@
               </div>  
 
             </div>
-            <div class="col-md-6">
+            <div class="col-md-8">
 
               <div class="widget wviolet">
                 <div class="widget-head">
@@ -222,12 +222,35 @@
                              <br>
                               <input type="number" value="{{$b->pos}}" class="pos-act" id="pos-{{$b->id}}" data="{{$b->id}}">
                             </p>
-                            <p><a href="#" class="btn btn-primary btnActBan"data="{{$b->id}}" role="button">Actualizar</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+                            <p><a href="#" class="btn btn-primary btnActBan"data="{{$b->id}}" role="button">Actualizar</a> <a href="#modal-{{$b->id}}" class="btn btn-default"data-toggle="modal" role="button">Button</a></p>
                           </div>
                         </div>
                      
                     <hr />
                   </div>
+
+
+
+                  <div id="modal-{{$b->id}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">{{$b->titulo}}</h4>
+                      </div>
+                      <div class="modal-body">
+                        <p> Desea eliminar este banner de la tienda ?</p>
+                      </div>
+                      <div class="modal-footer">
+                        <form action="{{URL::route('delBan')}}" method="post">
+                        <input type="hidden" name="id" value="{{$b->id}}">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        </form>
+                      </div>
+                    </div>
+          </div>
+          </div>
 
                   @endforeach
                     

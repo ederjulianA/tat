@@ -114,5 +114,6 @@
 
 @section('scripts')
 	<script src="{{asset('tat/js/preciosMantis.js')}}"></script>
+	<script src="{{asset('tat/js/grilla.js')}}"></script>
 	<script src="{{asset('cot/js/product.js')}}"></script>
 @stop

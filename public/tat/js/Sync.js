@@ -166,8 +166,9 @@ function getArt(ids,NvalPor)
 			success : function(data){
 
 				//var html = '<div class="alert alert-warning alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><strong>Actualización terminada</strong></div>';
+				console.log("LLegaron:");
 				console.log(data);
-				console.log(NvalPor);
+				//console.log(NvalPor);
 				guardar(data,NvalPor);
 				
 

@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-		filter();		
+		//filter();		
 		buscarPrecio();
 		addClassBanner();
 	

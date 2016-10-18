@@ -10,6 +10,22 @@ class EmpresaController extends BaseController {
 		$this->pro 	   = $pro;	
 	}
 
+
+	public function delBan()
+	{
+		if(isset($_POST['id'])){
+			$id = Input::get('id');
+			$b = Banner::where('id','=',$id)->first();
+			if ($b->delete())
+			{
+				File::delete($b->img);
+				return Redirect::back()->with('msg-alert','Banner eliminado');
+			}
+		}else{
+			dd("ERROR ID");
+		}
+	}
+
 	public function getPdfPedido($id)
 	{
 		$pedido = $this->empresa->getPedidoDetalle($id);

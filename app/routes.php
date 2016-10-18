@@ -314,6 +314,7 @@ Route::group(['before' => 'auth'], function() {
         Route::post('addBanner', array('as' => 'addBanner', 'uses' => 'BannersController@addBanner'));
         Route::get('admin/searchBarrio', array('as' => 'searchBarrio', 'uses' => 'EmpresaController@searchBarrio'));
         Route::post('deleteDay', array('as' => 'deleteDay', 'uses' => 'EmpresaController@deleteDay'));
+        Route::post('delBan', array('as' => 'delBan', 'uses' => 'EmpresaController@delBan'));
         //RUTAS PARA CONFIGURAR DATOS GENERALES. ################################
 
         	require (__DIR__ . '/routes/rut_generales.php');
