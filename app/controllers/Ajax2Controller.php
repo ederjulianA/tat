@@ -460,7 +460,7 @@ class Ajax2Controller extends BaseController {
 										if($prod->dt != $pro->dt){
 
 												//File::delete($prod->img);
-										if($pro->ArtImg_GXI != NULL && $pro->ArtImg_GXI != '0')
+										if($pro->ArtImg_GXI != NULL /*&& $pro->ArtImg_GXI != '0'*/)
 								   			{
 								   				$nombre = Str_replace('gxdbfile:','',$pro->ArtImg_GXI);
 								   				$urlImg = "http://190.156.239.253:8080/Tiendo/PublicTempStorage/multimedia/".$nombre;
@@ -548,7 +548,7 @@ class Ajax2Controller extends BaseController {
 									else{
 										
 										$producto = new Producto;
-											if($pro->ArtImg_GXI != NULL && $pro->ArtImg_GXI != '0')
+											if($pro->ArtImg_GXI != NULL /*&& $pro->ArtImg_GXI != '0'*/)
 								   			{
 								   				$nombre = Str_replace('gxdbfile:','',$pro->ArtImg_GXI);
 								   				$urlImg = "http://190.156.239.253:8080/Tiendo/PublicTempStorage/multimedia/".$nombre;
