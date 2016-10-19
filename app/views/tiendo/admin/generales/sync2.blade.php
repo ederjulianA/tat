@@ -9,7 +9,7 @@
 
 
 @section('titulo1')
-  TIPOS DE ENTREGA
+ Sincronización ERP
 @stop
 
 @section('content')
@@ -55,7 +55,7 @@
       </div>
   </div>
 
-   <div id="todos" ng-controller="ToDoCtrl">
+  {{--<div id="todos" ng-controller="ToDoCtrl">
                     <h3 class="page-header">
                         Todos
                         <small ng-if="remaining()">(@{{remaining()}}) remaining</small>
@@ -72,7 +72,7 @@
                         <input type="text" ng-model="todoText">
                         <button type="submit" class="btn btn-primary">Add New</button>
                     </form>
-                </div>
+                </div>--}}
  
 
 @stop

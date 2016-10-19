@@ -210,7 +210,7 @@ Route::get('buscador/{f?}/', array('as' => 'buscador', 'uses' => 'BuscadorContro
 
 Route::post('addToCart', array('as' => 'addToCart', 'uses' => 'CartController@addToCart'));
 Route::post('updateItem', array('as' => 'updateItem', 'uses' => 'CartController@updateItem'));
-Route::post('register/new/user', array('as' => 'newUser', 'uses' => 'UserController@postNewUser'));
+Route::any('register/new/user', array('as' => 'newUser', 'uses' => 'UserController@postNewUser2'));
 Route::any('postlogin', array('as' => 'postlogin', 'uses' => 'HomeController@postLogin'));
 Route::post('postLoginCheckout', array('as' => 'postLoginCheckout', 'uses' => 'UserController@postLoginCheckout'));
 Route::post('postUpdateData', array('as' => 'postUpdateData', 'uses' => 'UserController@postUpdateData'));
