@@ -182,7 +182,7 @@ ol li {
       <tr>
         <td>{{$item->nombre}}</td>
         <td>{{$item->cantidad}}</td>
-        <td>${{ number_format($item->valIva, 0, '', '.') }}</td>
+        <td>${{ number_format($item->valor_unitario, 0, '', '.') }}</td>
         <td>${{ number_format($item->valor_total, 0, '', '.') }}</td>
       </tr>
       @endforeach
