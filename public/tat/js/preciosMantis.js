@@ -80,11 +80,14 @@ function consultarPrecio(id)
 					//var oPrice = data[i].precio3;
 					//var nPrice = data[i].precio3.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 					var oPrice = Math.round(data[i].valIva);
+					var pre = Math.round(data[i].precio3);
 					//var new_number = Math.round(oPrice);
 					var nPrice = oPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+					var nPre = pre.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 					var nPrice2 = Math.round(nPrice);
+					var nPre2 = Math.round(nPre);
 					var saldo  =  Math.round(data[i].saldo);
-					console.log("O price:"+oPrice);
+					console.log("nPre2 price:"+pre);
 					if (saldo <= 0)
 					{
 						$('#pb-'+id).block({ 
@@ -92,7 +95,7 @@ function consultarPrecio(id)
             });
 					}
 					$('#pro-'+id).text('$ '+nPrice);
-					grabarArt(oPrice,id,saldo,oPrice);
+					grabarArt(oPrice,id,saldo,pre);
 					//$('#pro-'+id).text(nPrice2);
 
 						
@@ -109,7 +112,7 @@ function consultarPrecio(id)
 		});
 }
 
-function grabarArt(	oPrice,id,saldo,oPrice)
+function grabarArt(	oPrice,id,saldo,pre)
 {
 	var url = $('#urlSaveArt').val();
 	
@@ -119,7 +122,7 @@ function grabarArt(	oPrice,id,saldo,oPrice)
 			url : url,
 			dataType: "json",
 			type : "post",
-			data: {id: id, oPrice:oPrice,saldo:saldo,oPrice:oPrice},
+			data: {id: id, oPrice:oPrice,saldo:saldo,nPre2:pre},
 			success : function(data){
 				
 				console.log(data);

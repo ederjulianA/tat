@@ -213,6 +213,12 @@
                                                         Pantalla Retina 4K
                                                         Pantalla Retina 4K de 21,5 pulgadas (diagonal) con tecnología IPS; resolución de 4096 x 2304 compatible con millones de colores. 
                                                     </p>
+                                                    <p>
+                                                        DETALLE DEL PRODUCTO
+
+Portátil HP 14-af106la AMD A6-5200, 4GB RAM DDR3L de SDRAM (1 DIMM), DD 500 GB 5400 RPM , Sist. Windows 10 - Color Gris
+Esta Portátil HP presenta la combinación perfecta de diseño, confiabilidad y recursos. Estilo y productividad, al tiempo que piensas en tu presupuesto, algo que te encantará
+                                                    </p>
                                                 </div>
                                                 <div class="tabscontent" id="content2">
                                                     <p>

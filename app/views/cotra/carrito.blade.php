@@ -72,7 +72,7 @@
 	                                                </td>--}}
 	                                                <td class="td-price">
 	                                                    <div class="price idSync" data="{{$pro->ArtSec}}"><span id="precio-{{$pro->id}}">${{--{{number_format(Funciones::getPriceIva($pro->price,$pro->tax), 0, '', '.')}}--}}
-                                                        {{number_format($pro->price,0,'','.')}}</span></div>
+                                                        {{number_format($pro->valIva,0,'','.')}}</span></div>
 	                                                </td>
 	                                                <td class="td-qty">
 	                                                   <input type="number" name="cantidad"  width="100px" class="cant input-quantity" togle="{{$pro->identifier}}" id="can-{{rtrim($pro->ArtSec)}}" data="{{rtrim($pro->ArtSec)}}" value="{{$pro->quantity}}" size="1" class="form-control" />
