@@ -62,13 +62,14 @@
                                 @foreach($menu as $m)
                                     <li>
                                         <a href="#" class="sf-with-ul">
-                                    {{$m->men_nom}}
+                                    <!--{{$m->men_nom}}-->
+                                        {{$m->InvGruNom}}
                                         <span class="sf-sub-indicator">
                                         <i class="fa fa-angle-down "></i>
                                         </span>
                                         </a>
                                         <ul>
-                                            {{--<li>
+                                           <li>
                                                 <a href="#" class="sf-with-ul"> 
                                                 Productos
                                                 <span class="sf-sub-indicator pull-right">
@@ -80,7 +81,7 @@
                                                     <li><a href="" class="sf-with-ul">Producto2</a></li>
                                                     <li><a href="" class="sf-with-ul">Producto3</a></li>
                                                 </ul>
-                                            </li>--}}
+                                            </li>
 
                                             {{Funciones::getSubmenu($m->id)}}
                                            

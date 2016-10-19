@@ -417,7 +417,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 		$promo      =   $this->promo->getPromo();
 		$grupos 		=   $this->grupo->getAllGrupos();
 		$categorias = $this->cat->getAllCat();
-		$menu       = Menu::all();
+		$menu       = $this->grupo->getAllGrupos();//Menu::all();
 		$bans       = Banner::where('activo','=',1)->orderBy('pos','asc')->get();
 
 		
