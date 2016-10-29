@@ -104,7 +104,16 @@ class UserController extends BaseController {
 
 		if($validator->fails())
 		{
-			return Redirect::back()->withInput()->with('message-alert','Errores en el formulario')->withErrors($validator->messages());
+			if(Request::ajax())
+			{
+				return Response::json([
+						'success' => false,
+						'errors'  => $validator->getMessageBag()->toArray()
+					]);
+			}else{
+				return Redirect::back()->withInput()->with('message-alert','Errores en el formulario')->withErrors($validator->messages());
+			}
+			
 		}
 
 

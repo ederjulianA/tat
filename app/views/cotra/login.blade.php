@@ -76,7 +76,9 @@ box-shadow: 4px 6px 65px 3px rgba(237,0,0,1);
                                     <div class="featured-box featured-box-secundary default info-content">
                                         <h2 class="form-signin-heading">Crear una cuenta</h2>
                                         <div class="box-content">
-                                            <form  id="FormNewUser" method="post" action="/register/new/user">
+                                            {{--<form  id="FormNewUser" method="post" action="/register/new/user">--}}
+                                            <form  id="FormNewUser" method="post" >
+                                            <input type="hidden" id="newUserAjax" value="{{URL::route('newUserAjax')}}">
                                                 <div class="row">
                                                     <div class="form-group">
                                                         <div class="col-md-6">
@@ -177,7 +179,7 @@ box-shadow: 4px 6px 65px 3px rgba(237,0,0,1);
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-3 pull-right">
-                                                        <input type="submit" value="Registrarse" id="btnNewUser" class="btn btn-color push-bottom" data-loading-text="Loading...">
+                                                        <input type="submit" value="Registrarse" id="btnNewUser2" class="btn btn-color push-bottom" data-loading-text="Loading...">
                                                     </div>
                                                 </div>
                                             </form>

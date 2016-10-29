@@ -4,6 +4,43 @@ $(document).ready(function(){
 
 });
 
+$(document).on('click','#btnNewUser2',function(e){
+	e.preventdefault();
+	alert("New User 2");
+	var url = $('#newUserAjax').valN();
+	$.ajax({
+			url : url,
+			dataType: "json",
+			type : "post",
+			async: true,
+			data : $('#FormNewUser').serialize(),
+			success : function(data){
+				console.log(data);
+				return false;
+
+				/*if(data.estado.estado == '2')
+				{
+					
+					
+				}else{
+					
+					return false;
+
+				}*/
+				
+			},error : function(data){
+				
+				console.log(data);
+				
+				return false;
+
+				}
+		});
+	
+
+	return false;
+});
+
 $(document).on('click','#btnNewUser',function(e){
 	var form 					= $('#FormNewUser');
 	var nombre 					= $('#nombre').val();
@@ -150,6 +187,7 @@ function saveUser()
 	var password 	= $('#password').val();
 	var ciucod      = $('#selCiu').val();
 	var depcod      = $('#selDep').val();
+	var url2        = $('#urlValDatos').val();
 
 	$.ajax({
 			//url : "http://192.168.0.241:8086/WEBSOMIC/EDER/TV8/USER/newUser.php",

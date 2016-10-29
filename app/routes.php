@@ -168,7 +168,7 @@ Route::group(['before' => 'guest'], function () {
 		'uses'=> 'HomeController@getRegistger'
 		));
 
-		Route::get(	'/login', array(
+		Route::any(	'/login', array(
 		'as'=>'login', 
 		'uses'=> 'HomeController@getLogin'
 		));
@@ -210,7 +210,10 @@ Route::get('buscador/{f?}/', array('as' => 'buscador', 'uses' => 'BuscadorContro
 
 Route::post('addToCart', array('as' => 'addToCart', 'uses' => 'CartController@addToCart'));
 Route::post('updateItem', array('as' => 'updateItem', 'uses' => 'CartController@updateItem'));
+
 Route::any('register/new/user', array('as' => 'newUser', 'uses' => 'UserController@postNewUser2'));
+Route::any('register/new/user/ajax', array('as' => 'newUserAjax', 'uses' => 'UserController@postNewUser2'));
+
 Route::any('postlogin', array('as' => 'postlogin', 'uses' => 'HomeController@postLogin'));
 Route::post('postLoginCheckout', array('as' => 'postLoginCheckout', 'uses' => 'UserController@postLoginCheckout'));
 Route::post('postUpdateData', array('as' => 'postUpdateData', 'uses' => 'UserController@postUpdateData'));

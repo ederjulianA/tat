@@ -50,6 +50,7 @@
 							<div class="panel-body">
 							<!-- Registration Form Starts -->
 								<form class="form-horizontal" role="form" method="post" action="/register/new/user">
+								<input type="hidden" name="newUserAjax" value="{{URL::route('newUserAjax')}}">
 								<!-- Personal Information Starts -->
 								<div class="row">
 									<div class="col-md-6 form-group">
