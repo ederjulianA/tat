@@ -5,9 +5,8 @@ $(document).ready(function(){
 });
 
 $(document).on('click','#btnNewUser2',function(e){
-	e.preventdefault();
-	alert("New User 2");
-	var url = $('#newUserAjax').valN();
+	$("#_nombre, #_apellido, #_apellido, #_NitSec, #_telefono, #_selDep, #_selCiu, #_direccion, #_email, #_password, #_password_rep, #_terminos").html("");
+	var url = $('#newUserAjax').val();
 	$.ajax({
 			url : url,
 			dataType: "json",
@@ -16,30 +15,53 @@ $(document).on('click','#btnNewUser2',function(e){
 			data : $('#FormNewUser').serialize(),
 			success : function(data){
 				console.log(data);
-				return false;
-
-				/*if(data.estado.estado == '2')
+				if (data.success == false)
 				{
-					
-					
+					notie.alert(3, 'Errores en el formulario', 4);
+					$.each(data.errors, function(index,value){
+						$("#_"+index).html("<p class='alert alert-danger'>"+value+"</p>");
+					});
 				}else{
-					
-					return false;
+					saveUser()
+				}
 
-				}*/
 				
+
 			},error : function(data){
 				
 				console.log(data);
 				
-				return false;
+				
+				}
+		});
+	e.preventDefault();
+});
 
+/*$(document).on('click','#btnNewUser2',function(e){
+	e.preventdefault();
+	alert("New User 2");
+	var url = $('#newUserAjax').val();
+	$.ajax({
+			url : url,
+			dataType: "json",
+			type : "post",
+			async: true,
+			data : $('#FormNewUser').serialize(),
+			success : function(data){
+				console.log(data);
+				
+
+			},error : function(data){
+				
+				console.log(data);
+				
+				
 				}
 		});
 	
 
-	return false;
-});
+	return false; 
+});*/
 
 $(document).on('click','#btnNewUser',function(e){
 	var form 					= $('#FormNewUser');
@@ -195,15 +217,19 @@ function saveUser()
 			dataType: "json",
 			type : "get",
 			data  : { nombre:nombre, apellido:apellido, nit:nit, telefono:telefono, direccion:direccion, email:email, password:password,ciucod:ciucod,depcod:depcod},
+			//data : $('#FormNewUser').serialize(),
 			success : function(data){
 				console.log(data);
 
 				if(data.estado == 1)
 				{
+					notie.alert(1, 'Usuario Creado', 4);
+					location.reload();
 					//saveUserStore();
-					form.submit();
+					//form.submit();
 				}else{
-					console.log("error");
+					console.log("error guardando");
+					notie.alert(3, 'Error creando usuario', 4);
 				}
 				
 			},error : function(data){

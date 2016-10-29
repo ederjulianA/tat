@@ -91,12 +91,13 @@ class UserController extends BaseController {
 		$validator = Validator::make(Input::all(),
 				array(
 						'email' 		    => 'required|email|unique:users',
-						//'password'		    => 'required|alpha_num|min:6|confirmed',
+						'password'		    => 'required|alpha_num|min:6|confirmed',
 						'telefono'			=> 'required|numeric|min:7',
 						'nombre'			=> 'required',
 						'apellido'			=> 'required',
 						'NitSec'			=> 'required|unique:users',
 						'terminos'			=> 'accepted',
+						'direccion'         => 'required'
 					
 
 					)
@@ -163,10 +164,24 @@ class UserController extends BaseController {
 					if(Auth::user()->admin != 1)
 
 						{
-						return Redirect::back();
+								if(Request::ajax())
+								{
+									return Response::json([
+											'success' => true,
+											'admin'  => true
+										]);
+								}
+								return Redirect::back();
 
 						}
 						else {
+							if(Request::ajax())
+								{
+									return Response::json([
+											'success' => true,
+											'admin'  => false
+										]);
+								}
 							return Redirect::intended('/');
 						}
 				}else{

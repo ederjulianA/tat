@@ -90,33 +90,41 @@ box-shadow: 4px 6px 65px 3px rgba(237,0,0,1);
                                         </a>
                                         <div id="step-2" class="collapse">
                                             <div class="step-content">
-                                            <form  id="FormNewUser" method="post" action="/register/new/user">
+                                            <form  id="FormNewUser" method="post" >
+                                            <input type="hidden" id="newUserAjax" value="{{URL::route('newUserAjax')}}">
                                                 <div class="row">
                                                     <div class="form-group">
                                                         <div class="col-md-6">
+                                                            <label>Nombre:</label>
                                                             {{ Form::text('nombre','',array('class'=>'form-control','id'=>'nombre','name'=>'nombre','placeholder'=>'nombre')) }}
                                             {{ $errors->first('nombre','<p class="alert alert-danger">:message</p>') }}
+                                             <p id="_nombre" class=""></p>
                                                         </div>
                                                         <div class="col-md-6">
+                                                        <label>Apellido:</label>
                                                             {{ Form::text('apellido','',array('class'=>'form-control','id'=>'apellido','name'=>'apellido','placeholder'=>'apellido')) }}
                                             {{ $errors->first('apellido','<p class="alert alert-danger">:message</p>') }}
+                                             <p id="_apellido" class=""></p>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="form-group">
                                                         <div class="col-md-12">
+                                                        <label>Cédula:</label>
                                                             {{ Form::text('NitSec','',array('class'=>'form-control','name'=>'NitSec','id'=>'nit','placeholder'=>'Cedula')) }}
                                             {{ $errors->first('NitSec','<p class="alert alert-danger">:message</p>') }}
-                                                    <p id="ajaxNit"></p>
+                                                    <p id="_NitSec" class=""></p>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="form-group">
                                                         <div class="col-md-12">
+                                                        <label>Telefono:</label>
                                                             {{ Form::text('telefono','',array('class'=>'form-control','name'=>'telefono','placeholder'=>'telefono','id'=>'telefono')) }}
                                             {{ $errors->first('telefono','<p class="alert alert-danger">:message</p>') }}
+                                            <p id="_telefono" class=""></p>
                                                         </div>
                                                     </div>
 
@@ -127,11 +135,13 @@ box-shadow: 4px 6px 65px 3px rgba(237,0,0,1);
                                                 <div class="row">
                                                     <div class="form-group">
                                                         <div class="col-md-12">
+                                                        <label>Departamento:</label>
                                                             <select class="selectpicker form-control" id="selDep" data-live-search="true">
                                                               
                                                             </select>
 
-                                            {{ $errors->first('direccion','<p class="alert alert-danger">:message</p>') }}
+                                            {{ $errors->first('selDep','<p class="alert alert-danger">:message</p>') }}
+                                            <p id="_selDep" class=""></p>
                                                         </div>
                                                     </div>
 
@@ -142,11 +152,13 @@ box-shadow: 4px 6px 65px 3px rgba(237,0,0,1);
                                                 <div class="row">
                                                     <div class="form-group">
                                                         <div class="col-md-12">
+                                                            <label>Ciudad:</label>
                                                             <select class="selectpicker form-control" id="selCiu" data-live-search="true">
                                                               
                                                             </select>
 
                                             {{ $errors->first('direccion','<p class="alert alert-danger">:message</p>') }}
+                                                            <p id="_selCiu" class=""></p>
                                                         </div>
                                                     </div>
 
@@ -156,8 +168,11 @@ box-shadow: 4px 6px 65px 3px rgba(237,0,0,1);
                                                 <div class="row">
                                                     <div class="form-group">
                                                         <div class="col-md-12">
+                                                        <label>Dirección:</label>
                                                             {{ Form::text('direccion','',array('class'=>'form-control','name'=>'direccion','placeholder'=>'direccion','id'=>'direccion')) }}
                                             {{ $errors->first('direccion','<p class="alert alert-danger">:message</p>') }}
+                                             <p id="_direccion" class=""></p>
+
                                                         </div>
                                                     </div>
 
@@ -167,31 +182,38 @@ box-shadow: 4px 6px 65px 3px rgba(237,0,0,1);
                                                 <div class="row">
                                                     <div class="form-group">
                                                         <div class="col-md-12">
+                                                        <label>Email:</label>
                                                             {{ Form::email('email','',array('class'=>'form-control','name'=>'email','placeholder'=>'Email','id'=>'email')) }}
                                             {{ $errors->first('email','<p class="alert alert-danger">:message</p>') }}
-                                            <p id="ajaxEmail"></p>
+                                             <p id="_email" class=""></p>
+                                           
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="form-group">
                                                         <div class="col-md-6">
+                                                            <label>Contraseña:</label>
                                                             <input type="password" class="form-control" name="password" id="password" placeholder="******">
                                             {{ $errors->first('password','<p class="alert alert-danger">:message</p>') }}
+                                            <p id="_password" class=""></p>
                                                         </div>
                                                         <div class="col-md-6">
+                                                        <label>Confirmar contraseña:</label>
                                                             <input type="password" class="form-control" name="password_confirmation" id="password_rep" placeholder="******">
                                             {{ $errors->first('password_confirmation','<p class="alert alert-danger">:message</p>') }}
+                                             <p id="_password_rep" class=""></p>
                                                         </div>
                                                     </div>
 
                                                     <input type="checkbox" name="terminos" id="terminos"> He leído y acepto los términos y condiciones de servicio 
 
                                                     {{ $errors->first('terminos','<p class="alert alert-danger">:message</p>') }}
+                                                    <p id="_terminos" class=""></p>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-3 pull-right">
-                                                        <input type="submit" value="Registrarse" id="btnNewUser" class="btn btn-color push-bottom" data-loading-text="Loading...">
+                                                        <input type="button" value="Registrarse" id="btnNewUser2" class="btn btn-color push-bottom" data-loading-text="Loading...">
                                                     </div>
                                                 </div>
                                             </form>
