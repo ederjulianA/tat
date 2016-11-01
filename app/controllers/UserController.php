@@ -120,6 +120,7 @@ class UserController extends BaseController {
 
 		$NitIde = Input::get('NitSec');
 		$Nom    = Input::get('nombre');
+		$nombre    = Input::get('nombre');
 		$Ape    = Input::get('apellido');
 		$dir    = Input::get('dir');
 		$FullNom = $Nom.' '.$Ape;
@@ -138,6 +139,11 @@ class UserController extends BaseController {
 
 				if($user->save())
 				{
+					/*ENVIAMOS MAIL DE BIENVENIDA AL USUARIO*/
+						Mail::send('emails.compras.re', array('nombre'=>$nombre,"email"=>$email/*URL::route('mega-perfil')*/), function($message) use ($email,$nombre){
+								$message->to($email, $nombre)->subject('Registro Cootracolta');
+							});
+					/*FIN DE ENVIO DE MAIL*/
 					$ship = new Shipping;
 					$ship->user_id = $user->id;
 					$ship->barrio_id = 1;
