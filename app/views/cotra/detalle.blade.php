@@ -148,6 +148,13 @@
                                     <div class="product-details">
                                         <p class="short-description">{{$producto->descripcion}}</p>
                                         <p><b>Código del producto :</b> {{$producto->id_mantis}}-</p>
+                                        <p> 
+                                            <ul>
+                                                @foreach($caract as $c)
+                                                    <li>{{$c->ArtCarDetDes}}</li>
+                                                @endforeach        
+                                            </ul>
+                                        </p>
                                         <input type="hidden" name="id_producto" id="id_producto" value="{{$producto->id}}">
                                         @if($producto->cantidad > 0)
                                             <p><b>Stock : </b><span class="label label-success">Disponible</span></p>

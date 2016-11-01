@@ -290,6 +290,11 @@ Route::any('UrlLoadPro', array('as' => 'UrlLoadPro', 'uses' => 'Ajax2Controller@
     });
 
 
+    /*RUTAS ACTUALIZAR CON ERP EN LINEA*/
+    Route::any('/erp/articulo', array('as' => 'erparticulo', 'uses' => 'ErpController@erpArticulo'));
+    Route::any('/erp/articulo/caracteristicas', array('as' => 'erparticulo/caracteristicas', 'uses' => 'ErpController@erpArticuloCar'));
+
+
 
 
 
