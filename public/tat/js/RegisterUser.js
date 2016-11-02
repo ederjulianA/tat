@@ -4,6 +4,28 @@ $(document).ready(function(){
 
 });
 
+$(document).on('click','#btnMan',function(e){
+	$.ajax({
+			url : 'http://localhost:8080/VERSION8JavaEnvironment/rest/getCar',
+			dataType: "json",
+			type : "get",
+			//data : $('#FormNewUser').serialize(),
+			success : function(data){
+				console.log(data);
+			
+
+				
+
+			},error : function(data){
+				
+				console.log(data);
+				
+				
+				}
+		});
+	e.preventDefault();
+});
+
 $(document).on('click','#btnNewUser2',function(e){
 	$("#_nombre, #_apellido, #_apellido, #_NitSec, #_telefono, #_selDep, #_selCiu, #_direccion, #_email, #_password, #_password_rep, #_terminos").html("");
 	var url = $('#newUserAjax').val();

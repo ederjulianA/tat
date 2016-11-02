@@ -203,6 +203,7 @@ box-shadow: 4px 6px 65px 3px rgba(237,0,0,1);
                                                 <div class="row">
                                                     <div class="col-md-3 pull-right">
                                                         <input type="button" value="Registrarse" id="btnNewUser2" class="btn btn-color push-bottom" data-loading-text="Loading...">
+                                                        <a href="" id="btnMan">Mantis </a>
                                                     </div>
                                                 </div>
                                             </form>
