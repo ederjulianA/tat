@@ -27,6 +27,25 @@ class 	ErpController extends BaseController {
 		
 	}
 
+	public function erpArticuloDet()
+	{
+		if(isset($_REQUEST['ArtSec'])){
+			$artsec  =  $_REQUEST['ArtSec'];
+			$artdes  =  $_REQUEST['ArtFicTec'];
+
+			$pro = Producto::where('ArtSec','=',$artsec)->first();
+			if($pro){
+				$pro->descripcion = $artdes;
+				if($pro->save()){
+					dd("producto editado");
+				}else{
+					dd("error guardando");
+				}
+			}
+
+		}
+	}
+
 
 	public function erpArticulo()
 	{

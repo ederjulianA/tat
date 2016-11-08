@@ -78,6 +78,7 @@
         
     </style>
     <input type="hidden" id="urlSaveArt" value="{{URL::route('urlSaveArt')}}">
+    <input type="hidden" id="urlActDes" value="{{URL::route('urlActDes')}}">
 	 <!-- Main Content -->
                 <div class="content margin-top60 margin-bottom60">
                     <div class="product-item">
@@ -166,6 +167,7 @@
                                         <div class="cont-pro-det">
                                             <div class="precio-t">
                                                 <input type="hidden" id="cant-dis" value="{{ round($producto->cantidad)}}">
+                                                <input type="hidden" id="ArtSec" value="{{$producto->ArtSec}}">
                                                 <h2 data="{{$producto->ArtSec}}" id="pro-{{$producto->ArtSec}}" class="idSync">${{ number_format($producto->valIva, 0, '', '.') }}</h2>
                                             </div>
 
@@ -288,4 +290,5 @@ Esta Portátil HP presenta la combinación perfecta de diseño, confiabilidad y 
         <script src="{{asset('js/jquery.knob.js')}}"></script>
         <!--<script src="{{asset('tat/js/payu.js')}}"></script>-->
          <script src="{{asset('tat/js/preciosMantis.js')}}"></script>
+         <script src="{{asset('tat/js/producto.js')}}"></script>
 @stop

@@ -13,6 +13,23 @@ class Ajax2Controller extends BaseController {
 			$this->envio 	= $envio;
 	}
 
+	public function urlActDes()
+	{
+		if (isset($_REQUEST['ArtSec'])){
+			$artsec 	= $_REQUEST['ArtSec'];
+			$artfictec 	= $_REQUEST['ArtFicTec'];
+
+			$pro = Producto::where('ArtSec','=',$artsec)->first();
+			if($pro){
+				$pro->descripcion = $artfictec;
+				if($pro->save()){
+					$estado = array('estado'=>1,'msg'=>'Producto editado');
+					return Response::json(array('estado'=>$estado,'pro'=>$pro));
+				}
+			}
+		}
+	}
+
 
 	public function setPostPrueba()
 	{

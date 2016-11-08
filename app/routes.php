@@ -240,7 +240,7 @@ Route::post('urlReparto', array('as' => 'urlReparto', 'uses' => 'Ajax2Controller
 Route::any('urlSync', array('as' => 'urlSync', 'uses' => 'Ajax2Controller@urlSync'));
 Route::any('urlTestPro', array('as' => 'urlTestPro', 'uses' => 'Ajax2Controller@urlTestPro'));
 Route::any('urlTestSavePro', array('as' => 'urlTestSavePro', 'uses' => 'Ajax2Controller@urlTestSavePro'));
-
+Route::any('urlActDes', array('as' => 'urlActDes', 'uses' => 'Ajax2Controller@urlActDes'));
 
 Route::any('urlSaveGrupos', array('as' => 'urlSaveGrupos', 'uses' => 'Ajax2Controller@urlSaveGrupos'));
 Route::any('urlSaveSubGrupos', array('as' => 'urlSaveSubGrupos', 'uses' => 'Ajax2Controller@urlSaveSubGrupos'));
@@ -292,6 +292,7 @@ Route::any('UrlLoadPro', array('as' => 'UrlLoadPro', 'uses' => 'Ajax2Controller@
 
     /*RUTAS ACTUALIZAR CON ERP EN LINEA*/
     Route::any('/erp/articulo', array('as' => 'erparticulo', 'uses' => 'ErpController@erpArticulo'));
+    Route::any('/erp/articulodet', array('as' => 'erparticulodet', 'uses' => 'ErpController@erpArticuloDet'));
     Route::any('/erp/articulo/caracteristicas', array('as' => 'erparticulo/caracteristicas', 'uses' => 'ErpController@erpArticuloCar'));
 
 
