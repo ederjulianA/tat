@@ -116,13 +116,13 @@ function grabarArt(	oPrice,id,saldo,pre)
 {
 	var url = $('#urlSaveArt').val();
 	
-	
+	console.log(pre);
 	$.ajax({
 
 			url : url,
 			dataType: "json",
 			type : "post",
-			data: {id: id, oPrice:oPrice,saldo:saldo,nPre2:pre},
+			data: {id: id, oPrice:oPrice,saldo:saldo,oPrice:oPrice},
 			success : function(data){
 				
 				console.log(data);

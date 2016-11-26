@@ -430,7 +430,7 @@ public function postPaymentAgain()
                         $email = $user->email;
                         $datos = Shipping::where('user_id','=',$user->id)->first();
                         $destinatario = $datos->nombre." ".$datos->apellido;
-                        Mail::send('emails.compras.c1', array('compra'=>$compra, 'items'=>$items,'email'=>$email,'destinatario'=>$destinatario), function($message) use ($compra,$items,$destinatario,$email){
+                        Mail::send('emails.compras.com', array('compra'=>$compra, 'items'=>$items,'email'=>$email,'destinatario'=>$destinatario), function($message) use ($compra,$items,$destinatario,$email){
                         $message->to($email, $destinatario)->subject('Compra en Cootracolta');
                     });
                         Cart::destroy();
@@ -498,7 +498,8 @@ public function postPaymentAgain()
 
 
             /*$cont = file_get_contents("http://somic.com.co:8086/WEBSOMIC/EDER/TIENDO/setPrueba2.php?NitIde=$NitIde&id_pedido=$id_pedido&totalCompra=$totalCompra&CotFecEd=$CotFecEd");*/
-            $cont = file_get_contents("http://190.156.239.253:8086/websomic/EDER/TV8/setPrueba2.php?NitIde=$NitIde&id_pedido=$id_pedido&totalCompra=$totalCompra&CotFecEd=$CotFecEd");
+            /*$cont = file_get_contents("http://190.156.239.253:8086/websomic/EDER/TV8/setPrueba2.php?NitIde=$NitIde&id_pedido=$id_pedido&totalCompra=$totalCompra&CotFecEd=$CotFecEd");*/
+            $cont = file_get_contents("http://190.156.239.253:8086/websomic/EDER/TV8/Factura.php?NitIde=$NitIde&id_pedido=$id_pedido&totalCompra=$totalCompra&CotFecEd=$CotFecEd");
 
             
             if($cont == true)
@@ -515,10 +516,11 @@ public function postPaymentAgain()
                   $CotSubPrecio = urlencode(Cart::total(false));  
                   $SecNum      = trim($cont);
                   $SecNum2 = str_replace('"', '', $SecNum);
-                  $SecNum2 = urlencode($SecNum2);
+                  $FacSec = urlencode($SecNum2);
 
                  /* $cont2 = file_get_contents("http://somic.com.co:8086/WEBSOMIC/EDER/TIENDO/setPruebaDetalle.php?artsec=$artsec&price=$price&CotArtNom=$CotArtNom&uni=$uni&CotSubPrecio=$CotSubPrecio&num=$num&SecNum=$SecNum2&NitIde=$NitIde"); */
-                 $cont2 = file_get_contents("http://190.156.239.253:8086/websomic/EDER/TV8/setPruebaDetalle.php?artsec=$artsec&price=$price&CotArtNom=$CotArtNom&uni=$uni&CotSubPrecio=$CotSubPrecio&num=$num&SecNum=$SecNum2&NitIde=$NitIde");
+                 /*$cont2 = file_get_contents("http://190.156.239.253:8086/websomic/EDER/TV8/setPruebaDetalle.php?artsec=$artsec&price=$price&CotArtNom=$CotArtNom&uni=$uni&CotSubPrecio=$CotSubPrecio&num=$num&SecNum=$SecNum2&NitIde=$NitIde");*/
+                 $cont2 = file_get_contents("http://190.156.239.253:8086/websomic/EDER/TV8/Kardex.php?artsec=$artsec&price=$price&CotArtNom=$CotArtNom&uni=$uni&CotSubPrecio=$CotSubPrecio&num=$num&FacSec=$FacSec&NitIde=$NitIde");
                   $num++;
 
                   
@@ -562,7 +564,7 @@ public function postPaymentAgain()
                         $email = $user->email;
                         $datos = Shipping::where('user_id','=',$user->id)->first();
                         $destinatario = $datos->nombre." ".$datos->apellido;
-                        Mail::send('emails.compras.c1', array('compra'=>$compra, 'items'=>$items,'email'=>$email,'destinatario'=>$destinatario), function($message) use ($compra,$items,$destinatario,$email){
+                        Mail::send('emails.compras.com', array('compra'=>$compra, 'items'=>$items,'email'=>$email,'destinatario'=>$destinatario), function($message) use ($compra,$items,$destinatario,$email){
                         $message->to($email, $destinatario)->subject('Compra en Cootracolta');
                     });
                         Cart::destroy();
@@ -667,7 +669,7 @@ public function paymentNoMantis()
                         $email = $user->email;
                         $datos = Shipping::where('user_id','=',$user->id)->first();
                         $destinatario = $datos->nombre." ".$datos->apellido;
-                        Mail::send('emails.compras.c1', array('compra'=>$compra, 'items'=>$items,'email'=>$email,'destinatario'=>$destinatario), function($message) use ($compra,$items,$destinatario,$email){
+                        Mail::send('emails.compras.com', array('compra'=>$compra, 'items'=>$items,'email'=>$email,'destinatario'=>$destinatario), function($message) use ($compra,$items,$destinatario,$email){
                         $message->to($email, $destinatario)->subject('Compra en contracolta');
                     });
 				Cart::destroy();

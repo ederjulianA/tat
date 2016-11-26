@@ -42,11 +42,13 @@ Route::any(	'/payu/response', array(
 		'as'=>'pur', 
 		'uses'=> 'HomeController@getPayUr'
 		));
-
+/******************RUTA PAYU PEDIDO FACTURA*****************************/
 Route::any('/payu/confirmation', array(
 		'as'=>'purconfirmation', 
-		'uses'=> 'PayuController@conf3'
+		'uses'=> 'PayuController@conFac'
 		));
+
+
 
 Route::post('/UrlPedTem', array(
 		'as'=>'UrlPedTem', 
