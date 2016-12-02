@@ -1,7 +1,7 @@
 @extends('layouts.cotra')
 
 @section('menu')
-	@include('includes.cotracolta.pri.menu')
+	@include('includes.cotracolta.pri.menu2')
 @stop
 
 
@@ -17,7 +17,7 @@
                                     <h3 class="title">Categorías</h3>
                                     <ul class="category-list slide">
                                     	@foreach($categorias as $cat)
-                                        	<li><a href="/categoria/{{$cat->InvGruCod}}">{{$cat->cat_nom}} 1</a></li>
+                                        	<li><a href="/categoria/{{$cat->InvGruCod}}">{{$cat->cat_nom}} </a></li>
                                         @endforeach
                                         
                                     </ul>                                    
@@ -49,7 +49,7 @@
 												@foreach($productos as $producto)
 	                                            <!-- Product Items -->
 	                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-11 product-cols first">
-	                                                <div class="product-block">
+	                                                <div class="product-block" id="pb-{{$producto->ArtSec}}">
 	                                                    <div class="image2 ">
 	                                                        <span class="product-label product-label-special">
 	                                                        <span>50%</span>
@@ -61,7 +61,7 @@
 	                                                            </a>
 	                                                        </div>
 	                                                        <!-- /Swap image -->
-	                                                        <a href="{{URL::route('proDetalle',array('slug'=>$producto->slug))}}" class="pav-colorbox btn btn-theme-default cboxElement"><em class="fa fa-plus"></em><span>Ver producto</span></a>
+	                                                        <!--<a href="{{URL::route('proDetalle',array('slug'=>$producto->slug))}}" class="pav-colorbox btn btn-theme-default cboxElement"><em class="fa fa-plus"></em><span>Ver producto</span></a>-->
 	                                                    </div>
 	                                                    <div class="product-meta">
 	                                                        <div class="left">
@@ -81,7 +81,7 @@
 	                                                                    <!-- <input type="button" value="" onclick="addToCart('');" class="product-icon fa fa-shopping-cart shopping-cart" /> -->
 	                                                                    <button class="btn btn-shopping-cart">
 	                                                                    <span class="fa fa-shopping-cart product-icon hidden-sm">&nbsp;</span>
-	                                                                    <span>Agregar al carro</span>
+	                                                                    <span> <a {{URL::route('proDetalle',array('slug'=>$producto->slug))}}>Agregar al carro</a></span>
 	                                                                    </button>
 	                                                                </div>
 	                                                            </div>
@@ -116,4 +116,5 @@
 	<script src="{{asset('tat/js/preciosMantis.js')}}"></script>
 	<script src="{{asset('tat/js/grilla.js')}}"></script>
 	<script src="{{asset('cot/js/product.js')}}"></script>
+	<script src="{{asset('cot/js/productFilter.js')}}"></script> 
 @stop

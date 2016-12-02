@@ -24,7 +24,8 @@ class CatalogoController extends BaseController {
 		$productos 	=	$this->pro->getAllPro($ord);
 		$promo      =   $this->promo->getPromo();
 		$grupos 		=   $this->grupo->getAllGrupos();
-		$menu       = Menu::all();
+		//$menu       = Menu::all();
+		$menu       = $this->grupo->getAllGrupos();//Menu::all();
 		$categorias = $this->cat->getAllCat();
 		
 		return View::make('cotra.catalogo',compact('ord','keyword'))->with('menu',$menu)->with('grupos',$grupos)->with('categorias',$categorias)->with('promo',$promo)->with('productos',$productos)->with('products', Cart::contents());
@@ -37,10 +38,10 @@ class CatalogoController extends BaseController {
 		$keyword    =   Input::get('keyword');
 		$categorias = $this->cat->getAllCat();
 		//$productos 	= $this->pro->getProCategorias($id);
-		$productos 	= $this->pro->getProCats($id);
+		$productos 	= $this->pro->getProCats($id,$ord);
 		//$promo      =   $this->promo->getPromo();
 		$grupos		=   $this->grupo->getAllGrupos();
-		$menu       =   Menu::all();
+		$menu       =  $this->grupo->getAllGrupos();// Menu::all();
 		return View::make('cotra.categoria',compact('ord','keyword'))->with('menu',$menu)->with('grupos',$grupos)->with('categorias',$categorias)->with('productos',$productos)->with('products', Cart::contents());
 	}
 

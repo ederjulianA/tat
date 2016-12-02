@@ -24,11 +24,16 @@ class BuscadorController extends BaseController {
 
 		$dia     = 1;
 		
-		$productos = $this->producto->getProBuscador($keyword,$f,$ord);
+		$productos 		= 	$this->producto->getProBuscador($keyword,$f,$ord);
 		$grupos 		=   $this->grupo->getAllGrupos();
-		$categorias =   $this->cat->getAllCat();
-		$promo      =   $this->promo->getPromo();
-		$menu       =   Menu::all();
+		$categorias 	=   $this->cat->getAllCat();
+		$promo     		=  $this->promo->getPromo();
+		
+		$menu      		= $this->grupo->getAllGrupos();
+		
+		
+		
+		$categorias = $this->cat->getAllCat();
 		
 		return View::make('cotra.buscador',compact('ord'))->with('menu',$menu)->with('grupos',$grupos)->with('promo',$promo)->with('categorias',$categorias)->with('productos',$productos)->with('keyword',$keyword)->with('products', Cart::contents());
 
@@ -70,7 +75,7 @@ class BuscadorController extends BaseController {
 		$grupos 		=   $this->grupo->getAllGrupos();
 		$categorias =   $this->cat->getAllCat();
 		$promo      =   $this->promo->getPromo();
-		$menu       =   Menu::all();
+		$menu       = $this->grupo->getAllGrupos();
 		
 		return View::make('cotra.buscador',compact('ord'))->with('menu',$menu)->with('grupos',$grupos)->with('promo',$promo)->with('categorias',$categorias)->with('productos',$productos)->with('keyword',$keyword)->with('products', Cart::contents());
     	//$articles = Question::search($query)->get();

@@ -87,7 +87,7 @@ public function limpiar($String){
 			return $producto;
 		}
 
-		public function getProCats($id)
+		public function getProCats($id,$ord)
 		{
 			$productos = DB::table('productos as p')->join('inventariofamilia as f','f.InvFamCod','=','p.categoria_id')
 													->join('categorias as c','c.InvSubGruCod','=','f.fam_InvSubGruCod')
@@ -103,7 +103,7 @@ public function limpiar($String){
 															 'p.id',
 															 'p.precio',
 															 'p.descripcion AS producto_descripcion'
-														)->where('g.InvGruCod','=',$id)->paginate(18);
+														)->where('g.InvGruCod','=',$id)->orderBy('p.precio',$ord)->paginate(18);
 													$num = count($productos);
 													return $productos;
 

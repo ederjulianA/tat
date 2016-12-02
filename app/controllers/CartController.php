@@ -72,7 +72,8 @@ class CartController extends BaseController {
 		$categorias =   $this->cat->getAllCat();
 		$grupos 		=   $this->grupo->getAllGrupos();
 
-		$menu       = Menu::all();
+		//$menu       = Menu::all();
+		$menu       = $this->grupo->getAllGrupos();
 		return View::make('cotra.carrito')->with('menu',$menu)->with('grupos',$grupos)->with('categorias',$categorias)->with('products', Cart::contents());
 	}
 

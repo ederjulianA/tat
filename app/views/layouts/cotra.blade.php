@@ -34,6 +34,7 @@
         <!-- Switcher CSS -->
         <link href="{{asset('cot/css/switcher.css')}}" rel="stylesheet">
         <link href="{{asset('cot/css/spectrum.css')}}" rel="stylesheet">
+        <link href="{{asset('tat/css/megam.css')}}" rel="stylesheet">
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.0/css/bootstrap-select.min.css">
 
@@ -55,7 +56,7 @@
                 <div class="logo pull-left">
                      <h1>
                         <a href="/">
-                        <img class="logoE" src="{{asset('img/cootracolta.jpg')}}" alt="Cootracolta" width="160" height="60">
+                        <img class="logoE" src="{{asset('img/cootracolta.jpg')}}" alt="Cootracolta" width="160" height="58">
                         </a>
                     </h1>
                  </div>
@@ -298,6 +299,7 @@
         <script src="{{asset('tat/js/tat.js')}}"></script>
         <script src="{{asset('tat/js/angular.min.js')}}"></script> <!-- Charts & Graphs -->
         <script src="{{asset('tat/js/app3.js')}}"></script>
+        <script src="{{asset('tat/js/megam.js')}}"></script>
         
     </body>
 </html>

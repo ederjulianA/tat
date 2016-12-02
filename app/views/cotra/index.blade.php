@@ -1,7 +1,7 @@
 @extends('layouts.cotra')
 
 @section('menu')
-	@include('includes.cotracolta.pri.menu')
+	@include('includes.cotracolta.pri.menu2')
 @stop
 
 @section('content')
@@ -25,6 +25,7 @@
                 </div>
             @endif
 
+                    <!--banner-->
                     <div class="col-md-12">
                         <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                             <ol class="carousel-indicators">
@@ -59,6 +60,7 @@
                             </a>
                         </div>
                     </div>
+                    <!--end banner-->
 
                 </div>
 

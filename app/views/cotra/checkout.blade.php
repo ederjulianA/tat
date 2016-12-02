@@ -48,16 +48,16 @@ box-shadow: 4px 6px 65px 3px rgba(237,0,0,1);
                                         <div id="step-1" class="collapse in">
                                             <div class="step-content">
                                                 <div class="row">
-                                                    <div class="col-sm-12 col-md-12 bottom-padding-mobile">
+                                                    <!--<div class="col-sm-12 col-md-12 bottom-padding-mobile">
                                                         <h3 class="title">Registro o login</h3>
                                                         <p>Regístrate</p>
                                                         <div class="register-radio">
                                                             <label class="radio"><input type="radio" name="register">Checkout como invitado</label>
                                                             <label class="radio"><input type="radio" name="register"> Registro</label>
                                                         </div>
-                                                    </div>
+                                                    </div>-->
                                                     <div class="col-sm-12 col-md-12">
-                                                        <h3 class="title">Login</h3>
+                                                        <!--<h3 class="title">Login</h3>-->
                                                         <p>Si ya tienes cuenta con nosotros, loguéate.</p>
                                                         <form class="checkout-login" action="{{URL::route('postLogin')}}" method="post">
                                                             <input class="form-control" placeholder="Email" type="email" name="email" required>    
@@ -280,27 +280,32 @@ box-shadow: 4px 6px 65px 3px rgba(237,0,0,1);
                                             <div class="step-content">
                                                 <form class="row no-margin" method="post" action="{{URL::route('postUpdateData')}}">
                                                     <div class="col-sm-6 col-md-6">
+                                                        <label>Nombre :</label>
                                                         <input class="form-control" placeholder="Nombre" type="text" name="nombre" value="{{$datos->nombre}}">
                                                         {{ $errors->first('nombre','<p class="alert alert-danger">:message</p>') }}
                                                         <input type="hidden" id="NitSec" value="{{Auth::user()->NitSec}}">
                                                     </div>
                                                     <div class="col-sm-6 col-md-6">
+                                                        <label>Apellido: </label>
                                                         <input class="form-control" placeholder="Apellido" type="text" value="{{$datos->apellido}}" name="apellido">
                                                         {{ $errors->first('apellido','<p class="alert alert-danger">:message</p>') }}
                                                     </div>
                                                     <div class="clearfix"></div>
                                                     
                                                     <div class="col-sm-6 col-md-6">
+                                                        <label>Teléfono</label>
                                                         {{ Form::text('telefono',$datos->telefono,array('class'=>'form-control','name'=>'telefono','placeholder'=>'')) }}
 												{{ $errors->first('telefono','<p class="alert alert-danger">:message</p>') }}
                                                     </div>
                                                     <div class="clearfix"></div>
                                                     <div class="col-sm-6 col-md-6">
+                                                        <label>Dirección</label>
                                                         {{ Form::text('direccion',$datos->direccion,array('class'=>'form-control','name'=>'direccion','placeholder'=>'')) }}
 												{{ $errors->first('direccion','<p class="alert alert-danger">:message</p>') }}
                                                     </div>
                                                     <div class="col-sm-6 col-md-6">
-                                                        {{ Form::text('nit',$datos->cedula,array('class'=>'form-control','name'=>'nit','placeholder'=>'')) }}
+                                                    <label>Cédula:</label>
+                                                        {{ Form::text('nit',$datos->cedula,array('class'=>'form-control','name'=>'nit','placeholder'=>'','disabled')) }}
 												{{ $errors->first('nit','<p class="alert alert-danger">:message</p>') }}
                                                     </div>
                                                     <div class="clearfix"></div>

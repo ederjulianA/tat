@@ -122,7 +122,7 @@ function grabarArt(	oPrice,id,saldo,pre)
 			url : url,
 			dataType: "json",
 			type : "post",
-			data: {id: id, oPrice:oPrice,saldo:saldo,oPrice:oPrice},
+			data: {id: id, oPrice:oPrice,saldo:saldo,pre:pre},
 			success : function(data){
 				
 				console.log(data);

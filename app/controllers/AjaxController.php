@@ -41,7 +41,7 @@ class AjaxController extends BaseController {
 			//$val = $_POST['nPrice'];
 			$saldo = $_POST['saldo'];
 			$price = $_POST['oPrice'];
-			$pre2  = $_POST['oPrice'];
+			$pre2  = $_POST['pre'];
 			$pro = Producto::where('ArtSec','=',$id)->first();
 			if($pro){
 				$pro->valIva  = round($price);

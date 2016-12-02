@@ -1,7 +1,7 @@
 @extends('layouts.cotra')
 
 @section('menu')
-	@include('includes.cotracolta.pri.menu')
+	@include('includes.cotracolta.pri.menu2')
 @stop
 
 @section('meta-data')
