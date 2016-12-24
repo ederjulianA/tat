@@ -6,6 +6,16 @@
 
 
 @section('content')
+		<style type="text/css">
+			.fav{
+				background: #f90 !important;
+				
+				color: red !important;
+			}
+			.noFav{
+
+			}
+		</style>
 
 		    <div class="content margin-top60 margin-bottom60">
 		    <input type="hidden" id="urlSaveArt" value="{{URL::route('urlSaveArt')}}">
@@ -83,7 +93,13 @@
 	                                                                    <button class="btn btn-shopping-cart">
 	                                                                    <span class="fa fa-shopping-cart product-icon hidden-sm">&nbsp;</span>
 	                                                                    <span><a href="{{URL::route('proDetalle',array('slug'=>$producto->slug))}}">Agregar al carro</a></span>
+
 	                                                                    </button>
+	                                                                    @if(Auth::check())
+	                                                                    <a href="#" class="" ><span class="fa fa-heart product-icon hidden-sm noFav" id="f-{{$producto->ArtSec}}" data="{{$producto->ArtSec}}">&nbsp;</span></a>
+	                                                                    @else
+	                                                                    	 <a href="#" class="" ><span class="fa fa-heart product-icon hidden-sm noSes" id="f-{{$producto->ArtSec}}" data="{{$producto->ArtSec}}">&nbsp;</span></a>
+	                                                                    @endif
 	                                                                </div>
 	                                                            </div>
 	                                                        </div>
@@ -109,7 +125,7 @@
                 </div>
             </section>
             <!-- /Main Section -->
-           <!-- Footer -->
+           <!-- Footer --> 
 
 @stop
 
@@ -118,7 +134,8 @@
 	<script src="{{asset('tat/js/preciosMantis.js')}}"></script>
 	<script src="{{asset('tat/js/grilla.js')}}"></script>
 	<script src="{{asset('cot/js/product.js')}}"></script> 
-	<script src="{{asset('cot/js/productFilter.js')}}"></script> 
+	<script src="{{asset('cot/js/productFilter.js')}}"></script>
+	<script src="{{asset('cot/js/favs.js')}}"></script> 
 	
 
 @stop  

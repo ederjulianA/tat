@@ -6,7 +6,11 @@
 @stop
 
 @section('content')
-		 
+		 <style type="text/css">
+		 	.pr{
+		 		min-height: 550px !important;
+		 	}
+		 </style>
 
 
 		<!-- Latest Products Starts -->
@@ -39,7 +43,7 @@
 				
 				@foreach($productos as $pro)
 					<!-- Product #1 Starts -->
-						<div class="col-md-3 col-sm-6">
+						<div class="col-md-3 col-sm-6 pr">
 							<div class="product-col">
 								<div class="image">
 									<img src="{{asset($pro->img)}}" alt="product" class="" height="150px" width="auto" />
